@@ -182,8 +182,8 @@ If you find any issues or ideas of new features/improvements, you can submit an 
 
 We also welcome you to contribute by submitting a pull request.
 
-For more information, see [CONTRIBUTING]().
+For more information, see [CONTRIBUTING](./CONTRIBUTING.md).
 
 ## License
 
-MIT license. You can read the [LICENSE]() for more details.
+MIT license. You can read the [LICENSE](./LICENSE) for more details.
