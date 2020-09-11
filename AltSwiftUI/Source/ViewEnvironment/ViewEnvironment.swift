@@ -1,0 +1,147 @@
+//
+//  Environment.swift
+//  AltSwiftUI
+//
+//  Created by Wong, Kevin a on 2019/10/07.
+//  Copyright © 2019 Rakuten Travel. All rights reserved.
+//
+
+import UIKit
+
+// MARK: - Environment
+
+/// Main container for global environment properties
+class EnvironmentHolder {
+    static var currentBodyViewBinderStack: [ViewBinder] = []
+    static var environmentObjects: [String: ObservableObject] = [:]
+    static var globalAnimation: Animation?
+    static var coordinateSpaceNames = [String: WeakObject<UIView>]()
+    static var highPerformanceMode: Bool = false
+    
+    static var notificationUserInfo: [AnyHashable: Any] {
+        var transaction = Transaction()
+        if let animation = Self.globalAnimation {
+            transaction.animation = animation
+        }
+        if Self.highPerformanceMode {
+            transaction.isHighPerformance = true
+        }
+        return [ViewBinder.StateNotification.transactionKey: transaction]
+    }
+}
+
+/// Contains the Environment values set by the framework.
+public struct EnvironmentValues {
+    weak var rootController: ScreenViewController?
+    
+    public var presentationMode: Binding<PresentationMode> {
+        Binding(get: {
+            PresentationMode(controller: self.rootController, isPresented: self.rootController?.presentingViewController != nil)
+        }, set: { _ in })
+    }
+}
+
+// MARK: - Context
+
+/// Contains merged view values and contextual information while traversing
+/// a view hierarchy.
+public struct Context {
+    // When you add new properties, be sure to add them to `merge` methods
+    // to transfer context information when merging contexts.
+    
+    var viewValues: ViewValues? = nil
+    weak var rootController: ScreenViewController?
+    // Currently used for Tab controller
+    weak var overwriteRootController: UIViewController?
+    var transaction: Transaction?
+    var viewOperationQueue: ViewOperationQueue = ViewOperationQueue()
+    
+    /// True when the current view context is inside a button. Use this
+    /// to handle special View behavior when inside buttons.
+    var isInsideButton = false
+}
+
+extension Context {
+    /// Merges values that can be inherited and takes priority from `viewValues`.
+    func merge(viewValues: ViewValues?) -> Context {
+        if let viewValues = viewValues {
+            return Context(viewValues: viewValues.merge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, isInsideButton: isInsideButton)
+        } else {
+            return self
+        }
+    }
+    
+    /// Merges all values and takes priority from `viewValues`.
+    func completeMerge(viewValues: ViewValues?) -> Context {
+        if let viewValues = viewValues {
+            return Context(viewValues: viewValues.completeMerge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController,  transaction: transaction, viewOperationQueue: viewOperationQueue, isInsideButton: isInsideButton)
+        } else {
+            return self
+        }
+    }
+}
+
+class ViewOperation {
+    let operation: () -> Void
+    let viewBinder: ViewBinder?
+    
+    init(_ operation: @escaping () -> Void) {
+        self.operation = operation
+        self.viewBinder = EnvironmentHolder.currentBodyViewBinderStack.last
+    }
+}
+
+/// A queue for storing operations to be done while traversing a view hierarchy.
+class ViewOperationQueue {
+    private var operations: [ViewOperation] = []
+    
+    func addOperation(_ operation: @escaping () -> Void) {
+        operations.append(ViewOperation(operation))
+    }
+    
+    // Executes all queued operations. If any operation adds more
+    // operations, traversing follows a Breadth First Search approach.
+    func drainRecursively() {
+        while operations.count > 0 {
+           let operationsCopy = operations
+           operations.removeAll()
+           for operation in operationsCopy {
+                if let viewBinder = operation.viewBinder {
+                    EnvironmentHolder.currentBodyViewBinderStack.append(viewBinder)
+                    operation.operation()
+                    EnvironmentHolder.currentBodyViewBinderStack.removeLast()
+                }
+                else {
+                    operation.operation()
+                }
+           }
+        }
+    }
+}
+
+/// Contains originating attributes of a view update transaction
+public struct Transaction {
+    init() {
+        animation = nil
+    }
+    public init(animation: Animation?) {
+        self.animation = animation
+    }
+    var animation: Animation?
+
+    var disablesAnimations: Bool = false
+    
+    var isHighPerformance: Bool = false
+}
+
+extension Transaction: Hashable {
+    public static func == (lhs: Transaction, rhs: Transaction) -> Bool {
+        lhs.disablesAnimations == rhs.disablesAnimations &&
+            lhs.animation == rhs.animation
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(animation)
+        hasher.combine(disablesAnimations)
+    }
+}
