@@ -7,6 +7,7 @@ Open Source UI framework based on SwiftUI syntax and features, adding backwards 
 - __Minimum iOS version__: iOS 11.0
 - __SwiftUI__: Not interchangeable, but easy to share knowledge and migrate code both ways because of the high similarity in syntax.
 - __UIKit__: Compatible
+- __Xcode__: From Xcode 12
 
 ## Features
 
