@@ -5,7 +5,8 @@ Pod::Spec.new do |s|
   s.swift_version = "5.3"
   s.summary      = "Open Source UI framework based on SwiftUI syntax and features, adding backwards compatibility."
   s.description  = <<-DESC
-                  Open Source UI framework based on SwiftUI syntax and features, adding backwards compatibility.
+                  Available from iOS 11 using Xcode 12. AltSwiftUI has some small differences to SwiftUI, where it 
+                  handles certain features slightly differently and adds some missing features as well.
                    DESC
   s.homepage     = "https://github.com/rakutentech/AltSwiftUI"
   s.license      = "MIT"
