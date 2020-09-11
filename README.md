@@ -106,7 +106,7 @@ To work with previews, there are 2 steps that need to be done:
 #if DEBUG && canImport(SwiftUI)
 
 import protocol SwiftUI.PreviewProvider
-import protocol RakutenTravelCore.View
+import protocol AltSwiftUI.View
 
 struct MyTextPreview : RPreviewProvider, PreviewProvider {
     static var previewView: View {
