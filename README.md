@@ -39,7 +39,11 @@ Coming soon
 
 ### Cocoapods
 
-Comming soon
+Add the following to your Podfile:
+
+```
+pod 'AltSwiftUI'
+```
 
 ## Usage and Documentation
 
