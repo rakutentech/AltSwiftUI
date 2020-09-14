@@ -1,6 +1,6 @@
 //
-//  AltSwiftUIUITests.swift
-//  AltSwiftUIUITests
+//  AltSwiftUIExampleUITests.swift
+//  AltSwiftUIExampleUITests
 //
 //  Created by Wong, Kevin a on 2019/08/26.
 //  Copyright © 2019 Rakuten Travel. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class AltSwiftUIUITests: XCTestCase {
+class AltSwiftUIExampleUITests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

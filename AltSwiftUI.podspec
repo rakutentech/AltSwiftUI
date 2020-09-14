@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author       = { "Kevin Wong" => "kevin.a.wong@rakuten.com" }
   s.source       = { :git => "https://github.com/rakutentech/AltSwiftUI.git", :tag => "#{s.version}" }
-  s.source_files = ["AltSwiftUI/Source/*/*.swift", "AltSwiftUI/Source/*/*/*.swift"]
+  s.source_files = ["AltSwiftUI/AltSwiftUI/Source/*/*.swift", "AltSwiftUI/AltSwiftUI/Source/*/*/*.swift"]
 end

@@ -71,5 +71,7 @@ fastlane/test_output
 
 # userstate
 
-AltSwiftUI.xcodeproj/xcuserdata/
-AltSwiftUI.xcodeproj/project.xcworkspace/xcuserdata/
+AltSwiftUI/AltSwiftUI.xcodeproj/xcuserdata/
+AltSwiftUI/AltSwiftUI.xcodeproj/project.xcworkspace/xcuserdata/
+Example/AltSwiftUIExample.xcodeproj/xcshareddata/
+Example/AltSwiftUIExample.xcodeproj/project.xcworkspace/xcuserdata/

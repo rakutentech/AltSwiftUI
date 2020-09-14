@@ -1,12 +1,13 @@
 //
 //  AppDelegate.swift
-//  AltSwiftUI
+//  AltSwiftUIExample
 //
 //  Created by Wong, Kevin a on 2019/08/26.
 //  Copyright © 2019 Rakuten Travel. All rights reserved.
 //
 
 import UIKit
+import AltSwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
