@@ -39,14 +39,15 @@ class ScreenViewController: UIViewController {
         isNavigationController: Bool = false,
         onDismiss: (() -> Void)? = nil,
         onPop: (() -> Void)? = nil,
-        background: UIColor? = nil) {
+        background: UIColor? = nil,
+        isNavigating: Bool = false) {
         self.contentView = contentView
         self.isNavigationController = isNavigationController
         self.onDismiss = onDismiss
         self.onPop = onPop
         self.background = background
         super.init(nibName: nil, bundle: nil)
-        initViewData(parentContext: parentContext)
+        initViewData(parentContext: parentContext, isNavigating: isNavigating)
         setupTab()
     }
     required init?(coder: NSCoder) {
@@ -149,7 +150,12 @@ class ScreenViewController: UIViewController {
     // MARK: - Public methods: Navigation
     
     func navigateToView(_ view: View, context: Context, onPop: (()->Void)? = nil) {
-        let vc = ScreenViewController(contentView: view, parentContext: context,  isNavigationController: true, onPop: onPop)
+        let vc = ScreenViewController(
+            contentView: view,
+            parentContext: context,
+            isNavigationController: true,
+            onPop: onPop,
+            isNavigating: true)
         vc.isPushed = true
         
         if view.viewStore.tabBarHidden == true {
@@ -199,12 +205,12 @@ class ScreenViewController: UIViewController {
             }
         }
     }
-    private func initViewData(parentContext: Context?) {
+    private func initViewData(parentContext: Context?, isNavigating: Bool) {
         guard let parentContext = parentContext else {
             return
         }
         
-        contentView.viewStore = contentView.viewStore.screenTransferMerge(defaultValues: parentContext.viewValues)
+        contentView.viewStore = contentView.viewStore.screenTransferMerge(defaultValues: parentContext.viewValues, isNavigating: isNavigating)
         if let accentColor = parentContext.viewValues?.accentColor {
             setNavigationBarTint(accentColor)
         }
@@ -238,7 +244,8 @@ extension UIViewController {
         let vc = ScreenViewController(contentView: sheetPresentation.sheetView,
                                       parentContext: Context(viewValues: viewValues),
                                       isNavigationController: false,
-                                      onDismiss: sheetPresentation.onDismiss)
+                                      onDismiss: sheetPresentation.onDismiss,
+                                      isNavigating: true)
         vc.sheetPresentation = sheetPresentation
         let hostingVc = UIHostingController(rootViewController: vc)
         if sheetPresentation.isFullScreen {

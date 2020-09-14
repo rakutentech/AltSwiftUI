@@ -40,8 +40,12 @@ extension TabView: Renderable {
     public func createView(context: Context) -> UIView {
         let controller = UIHostingController.customRootTabBarController
         var viewControllers = [UIViewController]()
-        for view in content {
-            let screenController = ScreenViewController(contentView: view, parentContext: context)
+        for (index, view) in content.enumerated() {
+            var modifiedView = view
+            if view.viewStore.tag == nil {
+                modifiedView.viewStore.tag = index
+            }
+            let screenController = ScreenViewController(contentView: modifiedView, parentContext: context)
             viewControllers.append(UIHostingController(rootViewController: screenController))
         }
         controller.viewControllers = viewControllers
