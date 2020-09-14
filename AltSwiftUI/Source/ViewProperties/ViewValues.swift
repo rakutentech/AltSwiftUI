@@ -107,14 +107,16 @@ public struct ViewValues: AnimatedViewValuesHolder {
 extension ViewValues {
     
     /// Merges values when navigating to a different view.
-    func screenTransferMerge(defaultValues: ViewValues?) -> ViewValues {
+    func screenTransferMerge(defaultValues: ViewValues?, isNavigating: Bool) -> ViewValues {
         guard let defaultValues = defaultValues else {
             return self
         }
         var mergedValues = self
         
-        // Accent color for navigated views come from the navigation view
-        if accentColor == nil { mergedValues.accentColor = defaultValues.navigationAccentColor }
+        if accentColor == nil {
+            // Accent color for navigated views come from the NavigationView
+            mergedValues.accentColor = isNavigating ? defaultValues.navigationAccentColor : defaultValues.accentColor
+        }
         if navigationAccentColor == nil { mergedValues.navigationAccentColor = defaultValues.navigationAccentColor }
         
         return mergedValues
