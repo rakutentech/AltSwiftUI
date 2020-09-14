@@ -97,6 +97,7 @@ struct ExampleView: View {
             .accentColor(Color.white)
             .padding(.top, 20)
         }
+        .border(Color.red, width: 1)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 50)
         .background(Color(white: 0.9))

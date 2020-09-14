@@ -74,7 +74,7 @@ extension HStack: Renderable {
         let stack = SwiftUIStackView().noAutoresizingMask()
         setupView(stack, context: context)
         stack.addViews(viewContent, context: context, isEquallySpaced: subviewIsEquallySpaced, setEqualDimension: setSubviewEqualDimension)
-        if context.viewValues?.background != nil {
+        if context.viewValues?.background != nil || context.viewValues?.border != nil {
             return BackgroundView(content: stack).noAutoresizingMask()
         } else {
             return stack
