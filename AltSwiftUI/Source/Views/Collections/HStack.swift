@@ -54,9 +54,6 @@ extension HStack: Renderable {
         var stackView = view
         if let bgView = view as? BackgroundView {
             stackView = bgView.content
-            if let background = context.viewValues?.background {
-                bgView.backgroundColor = background
-            }
         }
         
         guard let concreteStackView = stackView as? UIStackView else { return }
