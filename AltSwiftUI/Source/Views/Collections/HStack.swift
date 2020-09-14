@@ -54,9 +54,6 @@ extension HStack: Renderable {
         var stackView = view
         if let bgView = view as? BackgroundView {
             stackView = bgView.content
-            if let background = context.viewValues?.background {
-                bgView.backgroundColor = background
-            }
         }
         
         guard let concreteStackView = stackView as? UIStackView else { return }
@@ -74,7 +71,7 @@ extension HStack: Renderable {
         let stack = SwiftUIStackView().noAutoresizingMask()
         setupView(stack, context: context)
         stack.addViews(viewContent, context: context, isEquallySpaced: subviewIsEquallySpaced, setEqualDimension: setSubviewEqualDimension)
-        if context.viewValues?.background != nil {
+        if context.viewValues?.background != nil || context.viewValues?.border != nil {
             return BackgroundView(content: stack).noAutoresizingMask()
         } else {
             return stack
