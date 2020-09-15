@@ -18,7 +18,7 @@
 		2C7A7CA4250F2B42001A8613 /* UIKitReadOnlyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C59250F2B42001A8613 /* UIKitReadOnlyViews.swift */; };
 		2C7A7CA5250F2B42001A8613 /* ViewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C5B250F2B42001A8613 /* ViewEnvironment.swift */; };
 		2C7A7CA6250F2B42001A8613 /* ViewPropertyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C5D250F2B42001A8613 /* ViewPropertyBuilder.swift */; };
-		2C7A7CA7250F2B42001A8613 /* ViewPropertyInteractionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C5F250F2B42001A8613 /* ViewPropertyInteractionTypes.swift */; };
+		2C7A7CA7250F2B42001A8613 /* ViewPropertyGestureTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C5F250F2B42001A8613 /* ViewPropertyGestureTypes.swift */; };
 		2C7A7CA8250F2B42001A8613 /* ViewPropertyNavigationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C60250F2B42001A8613 /* ViewPropertyNavigationTypes.swift */; };
 		2C7A7CA9250F2B42001A8613 /* ViewPropertyViewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C61250F2B42001A8613 /* ViewPropertyViewTypes.swift */; };
 		2C7A7CAA250F2B42001A8613 /* ViewPropertyRenderingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C62250F2B42001A8613 /* ViewPropertyRenderingTypes.swift */; };
@@ -99,7 +99,7 @@
 		2C7A7C59250F2B42001A8613 /* UIKitReadOnlyViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitReadOnlyViews.swift; sourceTree = "<group>"; };
 		2C7A7C5B250F2B42001A8613 /* ViewEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEnvironment.swift; sourceTree = "<group>"; };
 		2C7A7C5D250F2B42001A8613 /* ViewPropertyBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPropertyBuilder.swift; sourceTree = "<group>"; };
-		2C7A7C5F250F2B42001A8613 /* ViewPropertyInteractionTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPropertyInteractionTypes.swift; sourceTree = "<group>"; };
+		2C7A7C5F250F2B42001A8613 /* ViewPropertyGestureTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPropertyGestureTypes.swift; sourceTree = "<group>"; };
 		2C7A7C60250F2B42001A8613 /* ViewPropertyNavigationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPropertyNavigationTypes.swift; sourceTree = "<group>"; };
 		2C7A7C61250F2B42001A8613 /* ViewPropertyViewTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPropertyViewTypes.swift; sourceTree = "<group>"; };
 		2C7A7C62250F2B42001A8613 /* ViewPropertyRenderingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPropertyRenderingTypes.swift; sourceTree = "<group>"; };
@@ -271,7 +271,7 @@
 		2C7A7C5E250F2B42001A8613 /* ViewPropertyTypes */ = {
 			isa = PBXGroup;
 			children = (
-				2C7A7C5F250F2B42001A8613 /* ViewPropertyInteractionTypes.swift */,
+				2C7A7C5F250F2B42001A8613 /* ViewPropertyGestureTypes.swift */,
 				2C7A7C60250F2B42001A8613 /* ViewPropertyNavigationTypes.swift */,
 				2C7A7C61250F2B42001A8613 /* ViewPropertyViewTypes.swift */,
 				2C7A7C62250F2B42001A8613 /* ViewPropertyRenderingTypes.swift */,
@@ -519,7 +519,7 @@
 				2C7A7CB1250F2B42001A8613 /* StateTypes.swift in Sources */,
 				2C7A7CD5250F2B42001A8613 /* LayoutSolver.swift in Sources */,
 				2C7A7CA5250F2B42001A8613 /* ViewEnvironment.swift in Sources */,
-				2C7A7CA7250F2B42001A8613 /* ViewPropertyInteractionTypes.swift in Sources */,
+				2C7A7CA7250F2B42001A8613 /* ViewPropertyGestureTypes.swift in Sources */,
 				2C7A7CAB250F2B42001A8613 /* ViewPropertyAnimationTypes.swift in Sources */,
 				2C7A7CAF250F2B42001A8613 /* ViewBuilder.swift in Sources */,
 				2C7A7CB0250F2B42001A8613 /* CoreTypes.swift in Sources */,

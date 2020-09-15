@@ -38,7 +38,7 @@ public struct Picker : View {
     }
     
     /// Sets the picker style. By setting nil or not setting it,
-    /// the picker will use a picker view style.
+    /// the picker will use the default view style.
     public func pickerStyle(_ style: PickerStyle?) -> Self {
         var view = self
         if let style = style {
@@ -51,7 +51,7 @@ public struct Picker : View {
 extension Picker: Renderable {
     public func createView(context: Context) -> UIView {
         if style is SegmentedPickerStyle {
-            let items: [String] = views.compactMap { ($0 as? Text)?.string }
+            let items = segmentItems()
             let picker = SwiftUISegmentedControl(items:items).noAutoresizingMask()
             
             updateView(picker, context: context)
@@ -78,9 +78,62 @@ extension Picker: Renderable {
         } else if let view = view as? SwiftUISegmentedControl {
             view.selectionBinding = selection
             view.selectedSegmentIndex = selection.wrappedValue
+            updateSegmentedPickerContent(view: view, context: context)
+        }
+    }
+    
+    func segmentItems() -> [Any] {
+        let items: [Any] = views.compactMap { view in
+            if let view = view as? Text {
+                return view.string
+            } else if let view = view as? Image {
+                return view.image
+            }
+            return nil
+        }
+        return items
+    }
+    
+    private func updateSegmentedPickerContent(view: SwiftUISegmentedControl, context: Context) {
+        let oldPicker = view.lastRenderableView?.view as? Picker
+        guard views.count != oldPicker?.views.count else { return }
+        
+        let items = segmentItems()
+        let oldItems = oldPicker?.segmentItems()
+        let animate = context.transaction?.animation != nil
+        for (index, item) in items.enumerated() {
+            if let string = item as? String {
+                if string == (oldItems?[safe: index] as? String) {
+                    continue
+                }
+                
+                if view.numberOfSegments <= index {
+                    view.insertSegment(withTitle: string, at: index, animated: animate)
+                } else {
+                    view.setTitle(string, forSegmentAt: index)
+                }
+            } else if let image = item as? UIImage {
+                if image == (oldItems?[safe: index] as? UIImage) {
+                    continue
+                }
+                
+                if view.numberOfSegments <= index {
+                    view.insertSegment(with: image, at: index, animated: animate)
+                } else {
+                    view.setImage(image, forSegmentAt: index)
+                }
+            }
+        }
+        if items.count < view.numberOfSegments {
+            for i in items.count..<view.numberOfSegments {
+                view.removeSegment(at: i, animated: animate)
+            }
         }
     }
 }
+
+/// Type that represents the appearance and functionality of a Picker.
+public protocol PickerStyle {}
 
 /// A `Picker` style that renders a segmented control view.
 public struct SegmentedPickerStyle: PickerStyle {

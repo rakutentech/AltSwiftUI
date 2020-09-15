@@ -37,6 +37,7 @@ public class ObservedObject<ObjectType: ObservableObject> {
         value.setupPublishedValues()
     }
     
+    /// The internal value of this wrapper type.
     public var wrappedValue: ObjectType {
         get {
             EnvironmentHolder.currentBodyViewBinderStack.last?.registerStateNotification(origin: _wrappedValue)
@@ -47,6 +48,7 @@ public class ObservedObject<ObjectType: ObservableObject> {
         }
     }
     
+    /// The direct value of this wrapper, as accessing $foo on a @EnvironmentObject property.
     public var projectedValue: ObservedObject<ObjectType>.Wrapper {
         Wrapper(parent: self)
     }

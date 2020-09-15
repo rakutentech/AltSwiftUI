@@ -29,6 +29,7 @@ class LastRenderableView {
     }
 }
 
+/// A type that represents a view.
 public protocol View {
     var viewStore: ViewValues { get set }
     var body: View { get }
@@ -206,7 +207,8 @@ extension View {
         let oldChildren = Mirror(reflecting: oldView).children
         let updatedChildren = Mirror(reflecting: self).children
         
-        if oldChildren.count == updatedChildren.count {
+        if oldChildren.count == updatedChildren.count,
+           oldChildren.count > 0 {
             let oldIterator = oldChildren.makeIterator()
             let updatedIterator = updatedChildren.makeIterator()
             

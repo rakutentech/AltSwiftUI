@@ -8,6 +8,11 @@
 
 import Foundation
 
+/// A parameter and function attribute that can specify multiple views in the
+/// form of a closure.
+///
+/// ViewBuilder is used when passing children views as parameter to a parent
+/// view.
 @_functionBuilder
 public struct ViewBuilder {
     public static func buildBlock() -> EmptyView {

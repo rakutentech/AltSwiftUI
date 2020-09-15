@@ -10,6 +10,7 @@ import UIKit
 
 // MARK: - Public Types
 
+/// The display mode for the title in a navigation bar.
 public enum NavigationBarTitleDisplayMode {
     /// Displays large title on the first view, while using
     /// inline title for the subsequent views in a navigation stack.
@@ -19,6 +20,7 @@ public enum NavigationBarTitleDisplayMode {
     case large
 }
 
+/// A type that represents the presentation mode of a view.
 public struct PresentationMode {
 
     weak var controller: ScreenViewController?

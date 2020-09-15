@@ -1,0 +1,17 @@
+readme: README.md
+theme: fullwidth
+source_directory: AltSwiftUI
+github_url: https://github.com/rakutentech/AltSwiftUI
+hide_documentation_coverage: true
+undocumented_text: ""
+custom_categories_unlisted_prefix: ""
+custom_categories:
+  - name: State
+    children:
+    - Binding
+    - Environment
+    - EnvironmentObject
+    - ObservedObject
+    - Published
+    - State
+    - StateObject

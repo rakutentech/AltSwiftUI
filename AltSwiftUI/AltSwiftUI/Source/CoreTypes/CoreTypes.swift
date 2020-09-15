@@ -10,6 +10,7 @@ import UIKit
 
 // MARK: - Data
 
+/// A type that can be uniquely identified.
 public protocol Identifiable {
 
     /// A type representing the stable identity of the entity associated with `self`.

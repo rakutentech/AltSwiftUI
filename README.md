@@ -1,6 +1,22 @@
-# AltSwiftUI
+![logo](docResources/altswiftui.svg)
 
 Open Source UI framework based on SwiftUI syntax and features, adding backwards compatibility.
+
+- [Compatibility](#compatibility)
+- [Features](#features)
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Usage](#usage)
+	- [Getting Started](#getting-started)
+	- [View Structure](#view-structure)
+	- [State and Rendering](#state-and-rendering)
+	- [HStack and Multiline Texts](#hstack-and-multiline-texts)
+	- [Previews](#previews)
+	- [Name conflicts for ObservableObject and Published](#name-conflicts-for-observableobject-and-published)
+	- [High Performance](#high-performance)
+- [Additional Features](#additional-features)
+- [Get Involved](#get-involved)
+- [License](#license)
 
 ## Compatibility
 
@@ -15,21 +31,26 @@ Open Source UI framework based on SwiftUI syntax and features, adding backwards 
 - [x] Navigation
 - [x] Collections
 - [x] Essential UI components (Button, TextField, Picker, etc.)
+- [x] Gestures
+- [x] Drag and Drop
 - [x] State property wrappers
 - [x] @StateObject
 - [x] Animations and transitions
 - [x] UIKit representables
-- [x] Geometry proxy (as a binding)
+- [x] Geometry proxy
 - [x] Xcode previews
 
 ### Roadmap
 
 - [ ] Lazy grids
-- [ ] Environment object sub hierarchies
+- [ ] EnvironmentObject sub hierarchies
 - [ ] Sidebar
-- [ ] Shapes and paths
+- [ ] Shapes
+- [ ] Paths
 - [ ] @main App initializer
 - [ ] @AppStorage
+- [ ] Extended Environment properties
+- [ ] Lazy stacks
 
 ## Installation
 
@@ -41,11 +62,15 @@ Coming soon
 
 Add the following to your Podfile:
 
-```
+```ruby
 pod 'AltSwiftUI'
 ```
 
-## Usage and Documentation
+## Documentation
+
+The complete source [documentation]()(coming soon) contains functionality covered by AltSwiftUI including its unique features.
+
+## Usage
 
 AltSwiftUI has some small differences to SwiftUI, where it handles certain features slightly differently and adds some missing features as well.
 
@@ -53,7 +78,7 @@ AltSwiftUI has some small differences to SwiftUI, where it handles certain featu
 
 You can use a AltSwiftUI view hierarchy the same as in SwiftUI with `AppDelegate` or `SceneDelegate`.
 
-Create a `HostViewController` with a root `View`, and add it to the `Window`. Even though the names are similar, don't forget you should import AltSwiftUI instead of SwiftUI.
+Create a `UIHostingController` with a root `View`, and add it to the `Window`. Even though the names are similar, don't forget you should import AltSwiftUI instead of SwiftUI.
 
 ### View Structure
 
@@ -144,8 +169,8 @@ class MyClass: ObservableObject {
 
 In AltSwiftUI, certain view modifiers can cause views to update with __high performance__. Modifiers in this category will indicate it in their function documentation. You can also refer to the list below:
 
-- `List.contentOffset()`: When the list updates the value of the binding
-- `ScrollView.contentOffset()`: When the scroll view updates the value of the binding
+- `List.contentOffset(_:)`: When the list updates the value of the binding
+- `ScrollView.contentOffset(_:)`: When the scroll view updates the value of the binding
 - State changes that happen inside the closure of a `DragGesture.onChanged()`.
 
 High performance updates __won't__ update _children views_ of `List` or `ScrollView` types. It's generally recommended for view subhierarchies that you want to modify by high performance updates to be moved to a separate `View` while passing the _state_ that causes the update as a `Binding`.
@@ -154,9 +179,11 @@ There are also a couple of modifiers you can use to alter the default behavior o
 
 ## Additional Features
 
+Some of AltSwiftUI additional features are listed in this section.
+
 ### Geometry Listener
 
-In addition to the `GeometryReader` view, AltSwiftUI also offers a `geometryListener` property. This property records changes in a view's frame and stores it in a binding, which can then be referenced in any part of the hierarchy.
+In addition to the `GeometryReader` view, AltSwiftUI also offers a `View.geometryListener(_:)` property. This property records changes in a view's frame and stores it in a binding, which can then be referenced in any part of the hierarchy.
 
 Unlike `GeometryReader`, `geometryListener` doesn't generate a new view.
 
@@ -177,18 +204,14 @@ VStack {
 
 Interactive pop gesture is also enabled by default for navigation views that have custom _left bar button items_ and regardless if they show the _navigation bar_ or not. To set this behavior to false in all cases, set `UIHostingController.isInteractivePopGestureEnabled` to `false`.
 
-### Source documentation
-
-AltSwiftUI doesn't cover 100% of SwiftUI functionality, but at the same time it also adds extra features. You can see the complete source reference [here]()(Coming soon).
-
 ## Get Involved
 
 If you find any issues or ideas of new features/improvements, you can submit an issue in GitHub.
 
 We also welcome you to contribute by submitting a pull request.
 
-For more information, see [CONTRIBUTING](./CONTRIBUTING.md).
+For more information, see [CONTRIBUTING](https://github.com/rakutentech/AltSwiftUI/blob/master/CONTRIBUTING.md).
 
 ## License
 
-MIT license. You can read the [LICENSE](./LICENSE) for more details.
+MIT license. You can read the [LICENSE](https://github.com/rakutentech/AltSwiftUI/blob/master/LICENSE) for more details.

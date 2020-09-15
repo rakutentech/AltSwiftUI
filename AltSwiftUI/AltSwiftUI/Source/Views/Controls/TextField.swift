@@ -54,7 +54,7 @@ public struct TextField<T>: View {
     /// Setting a value of `false` will make this view resign beign first
     /// responder if it is the first responder.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func firstResponder(_ firstResponder: Bool) -> Self {
         var view = self
         view.isFirstResponder = firstResponder

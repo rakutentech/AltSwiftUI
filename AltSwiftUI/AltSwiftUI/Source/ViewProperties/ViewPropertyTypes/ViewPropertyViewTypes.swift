@@ -11,6 +11,8 @@ import StoreKit
 
 // MARK: - Public Types
 
+/// Type that represents a system alert. Use it to customize the
+/// texts and actions that will be shown in the alert.
 public struct Alert {
     let title: String
     let message: String?
@@ -65,6 +67,8 @@ public struct Alert {
     }
 }
 
+/// Type that represents a system action sheet. Use it to customize the
+/// texts and actions that will be shown in the action sheet.
 @available(OSX, unavailable)
 public struct ActionSheet {
     let title: String?
@@ -118,12 +122,14 @@ public struct ContextMenu {
     }
 }
 
+// MARK: - Internal Types
+
 @available(iOS 14.0, *)
 @available(macCatalyst, unavailable)
 @available(OSX, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct SKOverlayPresentation {
+struct SKOverlayPresentation {
     let isPresented: Binding<Bool>
     let configuration: () -> SKOverlay.Configuration
 }

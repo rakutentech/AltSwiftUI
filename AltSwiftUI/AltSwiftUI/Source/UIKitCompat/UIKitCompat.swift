@@ -10,6 +10,7 @@ import UIKit
 
 // MARK: - UIViewControllerRepresentable
 
+/// The context used in a `UIViewControllerRepresentable` type.
 public struct UIViewControllerRepresentableContext<Representable> where Representable : UIViewControllerRepresentable {
 
     /// The view's associated coordinator.
@@ -74,6 +75,7 @@ extension UIViewControllerRepresentable {
 
 // MARK: - UIViewRepresentable
 
+/// The context used in a `UIViewRepresentable` type.
 public struct UIViewRepresentableContext<Representable> where Representable : UIViewRepresentable {
 
     /// The view's associated coordinator.

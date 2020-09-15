@@ -138,10 +138,12 @@ extension Array where Element == View {
             // Optional insert / update
             let oldOptionalView = oldView as? OptionalView
             let maxCount = Swift.max(optionalViewContent.count, oldOptionalView?.content?.count ?? 0)
-            for i in 0..<maxCount {
-                let subView = optionalViewContent[safe: i]
-                let oldSubView = oldOptionalView?.content?[safe: i]
-                iterateFullSubviewDiff(subView: subView, oldView: oldSubView, iteration: iteration, displayIndex: &displayIndex)
+            if maxCount > 0 {
+                for i in 0..<maxCount {
+                    let subView = optionalViewContent[safe: i]
+                    let oldSubView = oldOptionalView?.content?[safe: i]
+                    iterateFullSubviewDiff(subView: subView, oldView: oldSubView, iteration: iteration, displayIndex: &displayIndex)
+                }
             }
             // Normal delete
             if let oldView = oldView, oldOptionalView == nil {

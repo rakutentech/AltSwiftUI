@@ -31,14 +31,17 @@ public struct ScrollView: View {
     
     /// Listen to changes in the ScrollView's content offset.
     ///
-    /// __Important__: Updates to the value of this binding
+    /// - warning:
+    /// Updates to the value of this binding
     /// triggers _high performance_ rendering when updating views.
-    /// High performance updates do not update the content of views
-    /// that have changes in their `opacity` or `transform`. Instead,
-    /// only `opacity` and `transform` will be updated.
+    /// High performance updates don't update children views of
+    /// ScrollView and List.
+    /// See __High Performance__ in the documentation for more information.
     ///
+    /// - important:
     /// Not SwiftUI compatible.
     ///
+    /// - Note:
     /// Also see: ```View.ignoreHighPerformance``` and ```View.skipHighPerformanceUpdate```.
     public func contentOffset(_ offset: Binding<CGPoint>) -> Self {
         var view = self
@@ -48,7 +51,7 @@ public struct ScrollView: View {
     
     /// Determines if the scroll view can bounce.
     /// 
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func bounces(_ bounces: Bool) -> Self {
         var list = self
         list.isBounceEnabled = bounces
@@ -60,7 +63,7 @@ public struct ScrollView: View {
     /// See `High Performance Updates` in the documentation for more
     /// information.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func ignoreHighPerformance() -> Self {
         var list = self
         list.ignoresHighPerformance = true

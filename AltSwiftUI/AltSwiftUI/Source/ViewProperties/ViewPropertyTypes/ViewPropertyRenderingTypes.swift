@@ -10,6 +10,7 @@ import UIKit
 
 // MARK: - Public Types
 
+/// A type that represents a font and its configuration.
 public struct Font {
     public enum Weight {
         case ultraLight
@@ -81,16 +82,20 @@ public struct Font {
         self.weight = weight
     }
     
+    /// Returns a bold version of the font.
     public func bold() -> Self {
         weight(.bold)
     }
     
+    /// Returns a version of the font with the specified font weight.
     public func weight(_ weight: Font.Weight) -> Font {
         var font = self
         font.weight = weight
         font.font = fontWithWeight(font: font.font, weight: weight)
         return font
     }
+    
+    // MARK: Internal methods
     
     func fontWithWeight(font: UIFont, weight: Font.Weight) -> UIFont {
         let descriptor = font.fontDescriptor.addingAttributes([
@@ -123,6 +128,7 @@ public struct Font {
     }
 }
 
+/// A type that contains the configuration of a button style.
 public struct ButtonStyleConfiguration {
     /// A view that describes the effect of toggling `isPressed`.
     public let label: View
@@ -131,17 +137,16 @@ public struct ButtonStyleConfiguration {
     public let isPressed: Bool
 }
 
+/// A type that specifies how the style of a button is changed.
 public protocol ButtonStyle {
+    /// Returns a modified version of the Button's label
     func makeBody(configuration: Self.Configuration) -> View
 
     /// The properties of a `Button` instance being created.
     typealias Configuration = ButtonStyleConfiguration
 }
 
-public protocol PickerStyle {
-    
-}
-
+/// A type that can create a modified version of a view.
 public protocol ViewModifier {
     /// Returns the current body of `self`. `content` is a proxy for
     /// the view that will have the modifier represented by `Self`
@@ -151,24 +156,32 @@ public protocol ViewModifier {
     typealias Content = View
 }
 
+/// A type representing a geometry angle.
 public struct Angle {
+    /// The value of the angle in radians.
     public var radians: Double
+    
+    /// The value of the angle in degrees.
     public var degrees: Double
 
+    /// Initializes an angle with a value in radians.
     public init(radians: Double) {
         self.radians = radians
         degrees = radians / Double.pi * 180
     }
 
+    /// Initializes an angle with a value in degrees.
     public init(degrees: Double) {
         self.degrees = degrees
         radians = degrees / 180 * Double.pi
     }
 
+    /// Returns an angle initialized with a value in radians.
     public static func radians(_ radians: Double) -> Angle {
         Angle(radians: radians)
     }
 
+    /// Returns an angle initialized with a value in degrees.
     public static func degrees(_ degrees: Double) -> Angle {
         Angle(degrees: degrees)
     }

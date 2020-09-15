@@ -10,12 +10,14 @@ import UIKit
 
 // MARK: - Public Types
 
+/// The inset distances for the sides of a rectangle.
 public struct EdgeInsets : Equatable {
     public var top: CGFloat
     public var leading: CGFloat
     public var bottom: CGFloat
     public var trailing: CGFloat
     
+    /// Initializes an EdgeInsets instance with the specified insets of each side.
     public init(top: CGFloat, leading: CGFloat, bottom: CGFloat, trailing: CGFloat) {
         self.top = top
         self.leading = leading
@@ -39,14 +41,20 @@ public struct EdgeInsets : Equatable {
     }
 }
 
+/// A type that specifies the horizontal alignment of the
+/// content inside its container.
 public enum HorizontalAlignment {
     case leading, center, trailing
 }
 
+/// A type that specifies the vertical alignment of the
+/// content inside its container.
 public enum VerticalAlignment {
     case top, center, bottom
 }
 
+/// A type that specifies the alignment of the
+/// content inside its container.
 public struct Alignment : Equatable {
     public var horizontal: HorizontalAlignment
     public var vertical: VerticalAlignment
@@ -78,10 +86,13 @@ public extension CGFloat {
     }
 }
 
+/// A type that specifies how the content scales to
+/// its container's size.
 public enum ContentMode {
     case fit, fill
 }
 
+/// A type representing an edge in a rectangle.
 public enum Edge: Int8 {
     case top, leading, bottom, trailing
     
@@ -168,14 +179,17 @@ public enum Edge: Int8 {
     }
 }
 
+/// A visual axis
 public enum Axis {
     case horizontal, vertical
 }
 
+/// A type that represents the alignment position of text
 public enum TextAlignment {
     case leading, center, trailing
 }
 
+/// Represents a coordinate space.
 public enum CoordinateSpace {
     /// Coordinate space in terms of the parent view
     case global
@@ -188,6 +202,8 @@ public enum CoordinateSpace {
     case named(String)
 }
 
+/// A proxy for access to the size and coordinate space (for anchor resolution)
+/// of the container view.
 public struct GeometryProxy {
     let frame: CGRect
     weak var view: UIView?

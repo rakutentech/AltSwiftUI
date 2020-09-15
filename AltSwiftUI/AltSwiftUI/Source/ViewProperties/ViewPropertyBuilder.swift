@@ -589,7 +589,10 @@ extension View {
     /// than gestures defined by `self`.
     public func highPriorityGesture<T>(_ gesture: T) -> Self where T : Gesture {
         var view = self
-        var priorityGesture = gesture
+        guard var priorityGesture = gesture.firstExecutableGesture() else {
+            return view
+        }
+        
         priorityGesture.priority = .high
         if var gestures = view.viewStore.gestures {
             gestures.append(priorityGesture)
@@ -604,7 +607,10 @@ extension View {
     /// simultaneously with gestures defined by `self`.
     public func simultaneousGesture<T>(_ gesture: T) -> Self where T : Gesture {
         var view = self
-        var priorityGesture = gesture
+        guard var priorityGesture = gesture.firstExecutableGesture() else {
+            return view
+        }
+        
         priorityGesture.priority = .simultaneous
         if var gestures = view.viewStore.gestures {
             gestures.append(priorityGesture)
@@ -727,7 +733,7 @@ extension View {
     ///
     /// See `High Performance Updates` in the documentation for more information.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func strictHighPerformanceUpdate() -> Self {
         var view = self
         view.viewStore.strictOnHighPerformance = true
@@ -739,7 +745,7 @@ extension View {
     ///
     /// See `High Performance Updates` in the documentation for more information.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func skipHighPerformanceUpdate() -> Self {
         var view = self
         view.viewStore.skipOnHighPerformance = true

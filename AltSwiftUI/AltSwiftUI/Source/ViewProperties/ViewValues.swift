@@ -8,6 +8,8 @@
 
 import UIKit
 
+/// Represents the values of a view, which can be customized
+/// by view modifiers. For internal use only.
 public struct ViewValues: AnimatedViewValuesHolder {
     var animatedValues: [AnimatedViewValues]?
     var animationShieldedValues: AnimatedViewValues?
