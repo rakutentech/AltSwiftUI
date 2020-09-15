@@ -12,7 +12,7 @@ import Foundation
 /// objects are identified by their __type__, meaning only one of the same type can
 /// exist at a time as an environment object.
 ///
-/// __Important__: Referencing an environment object not previously set
+/// - Important: Referencing an environment object not previously set
 /// will trigger an exception.
 @propertyWrapper public class EnvironmentObject<ObjectType>: DynamicProperty where ObjectType : ObservableObject {
     /// A wrapper of the underlying `ObservableObject` that can create
@@ -38,6 +38,7 @@ import Foundation
     public init() {
     }
     
+    /// The internal value of this wrapper type.
     public var wrappedValue: ObjectType {
         get {
             assert(_wrappedValue != nil, "EnvironmentObject being called outside of body")
@@ -48,6 +49,7 @@ import Foundation
         }
     }
     
+    /// The direct value of this wrapper, as accessing $foo on a @EnvironmentObject property.
     public var projectedValue: EnvironmentObject<ObjectType>.Wrapper {
         Wrapper(parent: self)
     }

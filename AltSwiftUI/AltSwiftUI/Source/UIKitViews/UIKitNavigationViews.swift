@@ -10,7 +10,10 @@ import UIKit
 
 // MARK: - Public Types
 
-/// The default TabBarController used by AltSwiftUI
+/// The default TabBarController used by AltSwiftUI.
+///
+/// Subclass this class if you want to add custom behavior to
+/// the `UITabBarController` and add it to `UIHostingController.customRootTabBarController`.
 open class SwiftUITabBarController: UITabBarController, UITabBarControllerDelegate {
     var selectionChanged: ((Int) -> Void)?
     var currentSelectedIndex: Int = 0

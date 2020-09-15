@@ -107,7 +107,7 @@ public struct NavigationLink: View {
     /// Setting this method to `true` will hide the tab bar every time
     /// the `destination` view is navigated to.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func hidesTabBar(_ hidden: Bool) -> Self {
         var view = self
         view.destination.viewStore.tabBarHidden = hidden

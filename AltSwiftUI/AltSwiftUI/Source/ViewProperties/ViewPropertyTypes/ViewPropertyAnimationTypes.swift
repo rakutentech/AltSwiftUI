@@ -10,6 +10,7 @@ import UIKit
 
 // MARK: - Public Types
 
+/// A type that describes properties of an animation
 public struct Animation {
     static let defaultDuration: Double = 0.25
     enum Curve: Hashable {
@@ -121,57 +122,72 @@ extension Animation {
 
 extension Animation {
 
+    /// The default animation of the system.
     public static let `default`: Animation = Animation.easeInOut
 }
 
 extension Animation {
 
+    /// Returns an Ease in out animation with the specified duration.
     public static func easeInOut(duration: Double) -> Animation {
         Animation(curve: .easeInOut(duration: duration))
     }
 
+    /// Returns an Ease in out animation.
     public static var easeInOut: Animation {
         Animation(curve: .easeInOut(duration: Self.defaultDuration))
     }
 
+    /// Returns an Ease in animation with the specified duration.
     public static func easeIn(duration: Double) -> Animation {
         Animation(curve: .easeIn(duration: duration))
     }
 
+    /// Returns an Ease in animation.
     public static var easeIn: Animation {
         Animation(curve: .easeIn(duration: Self.defaultDuration))
     }
 
+    /// Returns an Ease out animation with the specified duration.
     public static func easeOut(duration: Double) -> Animation {
         Animation(curve: .easeOut(duration: duration))
     }
 
+    /// Returns an Ease out animation.
     public static var easeOut: Animation {
         Animation(curve: .easeOut(duration: Self.defaultDuration))
     }
 
+    /// Returns a linear animation with the specified duration.
     public static func linear(duration: Double) -> Animation {
         Animation(curve: .linear(duration: duration))
     }
 
+    /// Returns a linear animation.
     public static var linear: Animation {
         Animation(curve: .linear(duration: Self.defaultDuration))
     }
 }
 
 extension Animation {
+    /// Returns a modified version of the animation with the
+    /// specified delay.
     public func delay(_ delay: Double) -> Animation {
         var animation = self
         animation.delay = delay
         return animation
     }
     
+    /// Returns a modified version of the animation with the
+    /// specified repeat count.
     public func repeatCount(_ repeatCount: Int, autoreverses: Bool = true) -> Animation {
         var animation = self
         animation.repeatCount = (repeatCount, autoreverses)
         return animation
     }
 
+    /// Returns a modified version of the animation with the
+    /// specified value of `repeatForever`.
     public func repeatForever(autoreverses: Bool = true) -> Animation {
         var animation = self
         animation.repeatCount = (nil, autoreverses)

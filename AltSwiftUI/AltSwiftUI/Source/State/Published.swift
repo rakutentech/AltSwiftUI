@@ -12,14 +12,22 @@ protocol ChildWrapper {
     func setParent(_ parent: AnyObject)
 }
 
+/// A type that publishes a property.
+///
+/// When the wrapped value of a published type changes, views that have
+/// accessed to its parent `ObservableObject` through a `@ObservedObject`
+/// property, will receive render updates.
+///
+/// - Important: Published types should be used only in `ObservableObject` classes.
 @propertyWrapper public class Published<Value>: ChildWrapper {
-    public var _wrappedValue: Value
+    var _wrappedValue: Value
     private weak var parent: AnyObject?
     
     public init(wrappedValue value: Value) {
         _wrappedValue = value
     }
     
+    /// The internal value of this wrapper type.
     public var wrappedValue: Value {
         get {
             _wrappedValue
@@ -33,11 +41,12 @@ protocol ChildWrapper {
         }
     }
 
+    /// The value as accessing $foo on a @Published property.
     public var projectedValue: Published<Value> {
         self
     }
     
-    public func setParent(_ parent: AnyObject) {
+    func setParent(_ parent: AnyObject) {
         self.parent = parent
     }
     

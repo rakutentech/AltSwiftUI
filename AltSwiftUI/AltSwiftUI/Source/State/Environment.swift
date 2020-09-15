@@ -20,6 +20,7 @@ import Foundation
         self.keyPath = keyPath
     }
     
+    /// The internal value of this wrapper type.
     public var wrappedValue: Value {
         get {
             assert(_wrappedValue != nil, "Environment being called outside of body")

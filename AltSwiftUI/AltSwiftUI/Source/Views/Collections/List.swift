@@ -43,11 +43,12 @@ public struct List<Content: View, Data>: View {
     
     /// Listen to changes in the List's content offset.
     ///
-    /// __Important__: Updates to the value of this binding
+    /// - warning:
+    /// Updates to the value of this binding
     /// triggers _high performance_ rendering when updating views.
-    /// High performance updates do not update the content of views
-    /// that have changes in their `opacity` or `transform`. Instead,
-    /// only `opacity` and `transform` will be updated.
+    /// High performance updates don't update children views of
+    /// ScrollView and List.
+    /// See __High Performance__ in the documentation for more information.
     ///
     /// Not SiwftUI compatible.
     ///
@@ -68,7 +69,7 @@ public struct List<Content: View, Data>: View {
     /// Will always reload the whole list on rendering updates instead of
     /// doing individual cell updates.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func alwaysReloadData() -> Self {
         var list = self
         list.isAlwaysReloadData = true
@@ -78,7 +79,7 @@ public struct List<Content: View, Data>: View {
     
     /// Determines if the list can bounce.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func bounces(_ bounces: Bool) -> Self {
         var list = self
         list.isBounceEnabled = bounces
@@ -87,7 +88,7 @@ public struct List<Content: View, Data>: View {
     
     /// Sets the separatorStyle for the list.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func separatorStyle(_ separatorStyle: UITableViewCell.SeparatorStyle) -> Self {
         var list = self
         list.separatorStyle = separatorStyle
@@ -96,7 +97,7 @@ public struct List<Content: View, Data>: View {
     
     /// Sets the content insets for the list.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func contentInsets(_ insets: EdgeInsets, animated: Bool = false) -> Self {
         var list = self
         list.insets = (insets: insets, animated: animated)
@@ -105,7 +106,7 @@ public struct List<Content: View, Data>: View {
     
     /// Fires when a drag is started by the user.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func onDragStarted(_ dragStarted: @escaping () -> Void) -> Self {
         var list = self
         list.dragStarted = dragStarted
@@ -114,7 +115,7 @@ public struct List<Content: View, Data>: View {
     
     /// Fires when a drag is ended by the user.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func onDragEnded(_ dragEnded: @escaping () -> Void) -> Self {
         var list = self
         list.dragEnded = dragEnded
@@ -126,7 +127,7 @@ public struct List<Content: View, Data>: View {
     /// See `High Performance Updates` in the documentation for more
     /// information.
     ///
-    /// Not SwiftUI compatible.
+    /// - important: Not SwiftUI compatible.
     public func ignoreHighPerformance() -> Self {
         var list = self
         list.ignoresHighPerformance = true

@@ -29,6 +29,7 @@ class LastRenderableView {
     }
 }
 
+/// A type that represents a view.
 public protocol View {
     var viewStore: ViewValues { get set }
     var body: View { get }

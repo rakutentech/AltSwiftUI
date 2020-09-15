@@ -10,6 +10,8 @@ import UIKit
 
 // MARK: - Public Types
 
+/// A type that represents a transition used by a view
+/// when being added or removed from a hierarchy.
 public struct AnyTransition {
     struct InternalTransition {
         var transform: CGAffineTransform?
@@ -60,18 +62,22 @@ public struct AnyTransition {
     
     // MARK: Public methods
     
+    /// Transitions from a specified offset
     public static func offset(_ offset: CGSize) -> AnyTransition {
         AnyTransition(InternalTransition(transform: CGAffineTransform(translationX: offset.width, y: offset.height)))
     }
 
+    /// Transitions from a specified offset
     public static func offset(x: CGFloat = 0, y: CGFloat = 0) -> AnyTransition {
         AnyTransition(InternalTransition(transform: CGAffineTransform(translationX: x, y: y)))
     }
     
+    /// Transitions by scaling from 0.01
     public static var scale: AnyTransition {
         AnyTransition(InternalTransition(transform: CGAffineTransform(scaleX: 0.01, y: 0.01)))
     }
 
+    /// Transitions by scaling from the specified offset
     public static func scale(scale: CGFloat) -> AnyTransition {
         AnyTransition(InternalTransition(transform: CGAffineTransform(scaleX: scale, y: scale)))
     }
@@ -107,6 +113,7 @@ public struct AnyTransition {
         AnyTransition(insert: insertion.insertTransition, remove: removal.insertTransition)
     }
     
+    /// A transition that has no change in state.
     public static var identity: AnyTransition {
         AnyTransition(InternalTransition())
     }
