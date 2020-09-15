@@ -1,8 +1,9 @@
 //
 //  DatePicker.swift
-//  RakutenTravelCore-c960a1ef
+//  AltSwiftUI
 //
 //  Created by Chan, Chengwei on 2020/09/14.
+//  Copyright © 2020 Rakuten Travel. All rights reserved.
 //
 
 import UIKit
