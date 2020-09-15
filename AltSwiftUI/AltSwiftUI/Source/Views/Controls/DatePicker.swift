@@ -19,7 +19,11 @@ public struct DatePicker: View {
     var components: Components
     
     public enum DatePickerComponent {
-        case date, hourAndMinute
+        /// show date picker component
+        case date
+        
+        /// show time picker component
+        case hourAndMinute
     }
     
     public typealias Components = [DatePickerComponent]
