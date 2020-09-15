@@ -207,8 +207,7 @@ extension View {
         let oldChildren = Mirror(reflecting: oldView).children
         let updatedChildren = Mirror(reflecting: self).children
         
-        if oldChildren.count == updatedChildren.count,
-           oldChildren.count > 0 {
+        if oldChildren.count == updatedChildren.count {
             let oldIterator = oldChildren.makeIterator()
             let updatedIterator = updatedChildren.makeIterator()
             
