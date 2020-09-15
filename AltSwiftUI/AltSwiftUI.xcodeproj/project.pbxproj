@@ -72,6 +72,7 @@
 		2C7A7CDA250F2B42001A8613 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C9C250F2B42001A8613 /* FoundationExtensions.swift */; };
 		2C7A7CDB250F2B42001A8613 /* AutolayoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C9D250F2B42001A8613 /* AutolayoutExtensions.swift */; };
 		2C7A7CDC250F2B42001A8613 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A7C9E250F2B42001A8613 /* UIApplicationExtensions.swift */; };
+		EA0BC835251086BE00BB0241 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0BC834251086BE00BB0241 /* DatePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +154,7 @@
 		2C7A7C9C250F2B42001A8613 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		2C7A7C9D250F2B42001A8613 /* AutolayoutExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutolayoutExtensions.swift; sourceTree = "<group>"; };
 		2C7A7C9E250F2B42001A8613 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
+		EA0BC834251086BE00BB0241 /* DatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +346,7 @@
 		2C7A7C80250F2B42001A8613 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				EA0BC834251086BE00BB0241 /* DatePicker.swift */,
 				2C7A7C81250F2B42001A8613 /* Toggle.swift */,
 				2C7A7C82250F2B42001A8613 /* TextField.swift */,
 				2C7A7C83250F2B42001A8613 /* Slider.swift */,
@@ -516,6 +519,7 @@
 				2C7A7CCE250F2B42001A8613 /* Group.swift in Sources */,
 				2C7A7CCB250F2B42001A8613 /* ZStack.swift in Sources */,
 				2C7A7CAD250F2B42001A8613 /* ViewPropertyTransitionTypes.swift in Sources */,
+				EA0BC835251086BE00BB0241 /* DatePicker.swift in Sources */,
 				2C7A7CB1250F2B42001A8613 /* StateTypes.swift in Sources */,
 				2C7A7CD5250F2B42001A8613 /* LayoutSolver.swift in Sources */,
 				2C7A7CA5250F2B42001A8613 /* ViewEnvironment.swift in Sources */,
