@@ -34,7 +34,7 @@ An overview of supported features can be seen [here](https://github.com/rakutent
 
 ### Swift Package Manager
 
-Coming soon
+Add Package url: https://github.com/rakutentech/AltSwiftUI
 
 ### Cocoapods
 
