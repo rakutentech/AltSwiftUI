@@ -24,33 +24,11 @@ Open Source UI framework based on SwiftUI syntax and features, adding backwards 
 - __SwiftUI__: Not interchangeable, but easy to share knowledge and migrate code both ways because of the high similarity in syntax.
 - __UIKit__: Compatible
 - __Xcode__: From Xcode 12
+- __Platforms__: iOS, iPadOS
 
 ## Features
 
-- [x] View rendering and automatic updates
-- [x] Navigation
-- [x] Collections
-- [x] Essential UI components (Button, TextField, Picker, etc.)
-- [x] Gestures
-- [x] Drag and Drop
-- [x] State property wrappers
-- [x] @StateObject
-- [x] Animations and transitions
-- [x] UIKit representables
-- [x] Geometry proxy
-- [x] Xcode previews
-
-### Roadmap
-
-- [ ] Lazy grids
-- [ ] EnvironmentObject sub hierarchies
-- [ ] Sidebar
-- [ ] Shapes
-- [ ] Paths
-- [ ] @main App initializer
-- [ ] @AppStorage
-- [ ] Extended Environment properties
-- [ ] Lazy stacks
+An overview of supported features can be seen [here](https://github.com/rakutentech/AltSwiftUI/blob/master/docResources/Features.md).
 
 ## Installation
 
