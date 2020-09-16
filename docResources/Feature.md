@@ -1,8 +1,6 @@
 # AltSwiftUI Features
 
-- [x] View rendering and automatic updates
-- [x] Navigation
-	<details><summary>See all</summary>
+- <details><summary>Navigation</summary>
 	<p> 
 
 	| Component | Supported |
@@ -15,8 +13,7 @@
 
 	</p> 
 	</details>
-- [x] Collections
-	<details><summary>See all</summary>
+- <details><summary>Collections</summary>
 	<p> 
 
 	| Component | Supported |
@@ -30,8 +27,7 @@
 
 	</p>
 	</details>
-- [x] Layout
-	<details><summary>See all</summary>
+- <details><summary>Layout</summary>
 	<p> 
 
 	| Component | Supported |
@@ -46,8 +42,7 @@
 
 	</p>
 	</details>
-- [x] Controls and Display Views
-	<details><summary>See all</summary>
+- <details><summary>Controls and Display Views</summary>
 	<p> 
 
 	| Component | Supported |
@@ -73,8 +68,7 @@
 
 	</p>
 	</details>
-- [x] Overlays and Menus
-	<details><summary>See all</summary>
+- <details><summary>Overlays and Menus</summary>
 	<p> 
 
 	| Component | Supported |
@@ -87,8 +81,7 @@
 
 	</p>
 	</details>
-- [x] State property wrappers
-	<details><summary>See all</summary>
+- <details><summary>State property wrappers</summary>
 	<p> 
 
 	| Component | Supported |
@@ -103,17 +96,19 @@
 
 	</p>
 	</details>
-- [x] Gestures
-- [x] Drag and Drop
-- [x] Animations and transitions
-- [x] UIKit representables
-- [x] Xcode previews
+- Data Binding and Automatic View Updates
+- Gestures
+- Drag and Drop
+- Animations and transitions
+- UIKit representables
+- Xcode previews
 
 ## Roadmap
 
+- [ ] Shapes
+- [ ] TextEditor
 - [ ] LazyGrid
 - [ ] EnvironmentObject sub hierarchies
-- [ ] Shapes
 - [ ] Paths
 - [ ] Gradients
 - [ ] SecureField
