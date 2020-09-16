@@ -231,3 +231,33 @@ class SwiftUISegmentedControl: UISegmentedControl, UIKitViewHandler {
         selectionBinding.wrappedValue = selectedSegmentIndex
     } 
 }
+
+class SwiftUIDatePicker: UIDatePicker, UIKitViewHandler {
+    var dateBinding: Binding<Date>?
+    init() {
+        super.init(frame: .zero)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: CGFloat.limitForUI, height: size.height)
+    }
+    
+    private func setupView() {
+        setContentHuggingPriority(.defaultLow, for: .horizontal)
+        setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+    }
+    
+    @objc func valueChanged(_ datePicker: UIDatePicker) {
+        if let dateBinding = dateBinding {
+            dateBinding.wrappedValue = datePicker.date
+        }
+    }
+}
+
