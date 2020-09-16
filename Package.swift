@@ -23,9 +23,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "AltSwiftUI",
-            dependencies: []),
+            dependencies: [],
+            exclude: ["AltSwiftUI.h", "Info.plist"]),
         .testTarget(
             name: "AltSwiftUITests",
             dependencies: ["AltSwiftUI"]),
-    ]
+    ],
+    swiftLanguageVersions: [SwiftVersion.v5]
 )
