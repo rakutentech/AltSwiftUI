@@ -24,7 +24,7 @@ let package = Package(
         .target(
             name: "AltSwiftUI",
             dependencies: [],
-            exclude: ["AltSwiftUI.h", "Info.plist"]),
+            sources: ["Source"]),
         .testTarget(
             name: "AltSwiftUITests",
             dependencies: ["AltSwiftUI"]),
