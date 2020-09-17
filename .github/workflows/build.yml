@@ -1,10 +1,13 @@
-name: BuildTest
+name: Build
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_12_beta.app/Contents/Developer
 
 jobs:
   build:
@@ -13,7 +16,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: xcodebuild -project AltSwiftUI.xcodeproj -scheme AltSwiftUI -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 8,OS=latest"
     - name: Run tests
       run: xcodebuild test -project AltSwiftUI.xcodeproj -scheme AltSwiftUITests -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 8,OS=latest"
