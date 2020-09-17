@@ -1,5 +1,12 @@
 ![logo](https://raw.githubusercontent.com/rakutentech/AltSwiftUI/master/docResources/altswiftui.svg)
 
+[![Build](https://github.com/rakutentech/AltSwiftUI/workflows/Build/badge.svg?event=push)](https://github.com/rakutentech/AltSwiftUI/actions?query=workflow%3ABuild) 
+[![Pod](http://img.shields.io/cocoapods/v/AltSwiftUI.svg)](https://cocoapods.org/pods/AltSwiftUI)
+![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)
+![Xcode](https://img.shields.io/badge/Xcode-12.0+-blue.svg)
+![iOS](https://img.shields.io/badge/iOS-11.0+-blue.svg)
+![Swift](https://img.shields.io/badge/Swift-5.1+-orange.svg)
+
 Open Source UI framework based on SwiftUI syntax and features, adding backwards compatibility.
 
 - [Compatibility](#compatibility)
