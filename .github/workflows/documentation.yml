@@ -3,6 +3,9 @@ name: Documentation
 on:
   release:
     types: [published]
+    
+env:
+  DEVELOPER_DIR: /Applications/Xcode_12_beta.app/Contents/Developer
 
 jobs:
   deploy_docs:
