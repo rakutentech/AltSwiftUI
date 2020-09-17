@@ -21,7 +21,7 @@ public struct Color: View {
     
     /// Calculates the color of this view based on its properties,
     /// like opacity.
-    var color: UIColor {
+    public var color: UIColor {
         if let opacity = viewStore.opacity {
             var alpha: CGFloat = 0
             rawColor.getRed(nil, green: nil, blue: nil, alpha: &alpha)

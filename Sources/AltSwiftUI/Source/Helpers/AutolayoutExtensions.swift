@@ -31,7 +31,7 @@ extension AutolayoutHelperProtocol where Self: UIView {
     }
 }
 
-extension Array where Element: NSLayoutConstraint {
+public extension Array where Element: NSLayoutConstraint {
     /**
      Activates all layout constraints inside the array.
      */
@@ -41,7 +41,7 @@ extension Array where Element: NSLayoutConstraint {
     }
 }
 
-extension UIView {
+public extension UIView {
     /**
      Enum that defines the index of layout constraints returned
      by edgesAnchor functions.
@@ -236,7 +236,7 @@ extension UIView {
     }
 }
 
-extension NSLayoutConstraint {
+public extension NSLayoutConstraint {
     func withPriority(_ priority: UILayoutPriority) -> NSLayoutConstraint {
         self.priority = priority
         return self
