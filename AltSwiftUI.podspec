@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AltSwiftUI"
-  s.version      = "1.0.0"
+  s.version      = "1.1.0"
   s.ios.deployment_target = "11.0"
   s.swift_version = "5.3"
   s.summary      = "Open Source UI framework based on SwiftUI syntax and features, adding backwards compatibility."
@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author       = { "Kevin Wong" => "kevin.a.wong@rakuten.com" }
   s.source       = { :git => "https://github.com/rakutentech/AltSwiftUI.git", :tag => "#{s.version}" }
-  s.source_files = ["AltSwiftUI/AltSwiftUI/Source/*/*.swift", "AltSwiftUI/AltSwiftUI/Source/*/*/*.swift"]
+  s.source_files = ["Sources/AltSwiftUI/Source/*/*.swift", "Sources/AltSwiftUI/Source/*/*/*.swift"]
 end

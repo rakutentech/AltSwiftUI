@@ -1,6 +1,6 @@
 readme: README.md
 theme: fullwidth
-source_directory: AltSwiftUI
+source_directory: ./
 github_url: https://github.com/rakutentech/AltSwiftUI
 hide_documentation_coverage: true
 undocumented_text: ""
