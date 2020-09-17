@@ -516,7 +516,7 @@ extension UIEdgeInsets {
     }
 }
 
-extension UILabel {
+public extension UILabel {
     func alignText(alignment: TextAlignment) {
         let layoutDirection = UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
         switch alignment {
