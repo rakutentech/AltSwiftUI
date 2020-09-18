@@ -1,5 +1,5 @@
 //
-//  RTPreviewProvider.swift
+//  AltPreviewProvider.swift
 //  AltSwiftUI
 //
 //  Created by Wong, Kevin a on 2020/01/15.
@@ -21,7 +21,7 @@ import SwiftUI
 /// whose canvas is properly showing, and then pin it so that it is visible
 /// in all files.
 @available(iOS 13.0.0, *)
-public protocol RPreviewProvider: PreviewProvider {
+public protocol AltPreviewProvider: PreviewProvider {
     /// Generates a preview of one view.
     ///
     /// The following code shows how to create a preview provider for previewing
@@ -43,7 +43,7 @@ public protocol RPreviewProvider: PreviewProvider {
 }
 
 @available(iOS 13.0.0, *)
-public extension RPreviewProvider {
+public extension AltPreviewProvider {
     static var previews: some SwiftUI.View {
         PreviewProviderViewCRepresentable(contentView: previewView)
     }
