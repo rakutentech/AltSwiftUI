@@ -35,7 +35,7 @@ Open Source UI framework based on SwiftUI syntax and features, adding backwards 
 
 ## Features
 
-An overview of supported features can be seen [here](https://github.com/rakutentech/AltSwiftUI/blob/master/docResources/Features.md).
+An overview of [supported features can be seen here](https://github.com/rakutentech/AltSwiftUI/blob/master/docResources/Features.md).
 
 ## Installation
 
@@ -53,7 +53,7 @@ pod 'AltSwiftUI'
 
 ## Documentation
 
-The complete source [documentation](https://rakutentech.github.io/AltSwiftUI/index.html) contains functionality covered by AltSwiftUI including its unique features.
+The [complete source documentation](https://rakutentech.github.io/AltSwiftUI/index.html) contains functionality covered by AltSwiftUI including its unique features.
 
 ## Usage
 

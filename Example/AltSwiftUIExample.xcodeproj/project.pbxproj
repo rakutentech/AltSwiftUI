@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C7A7CF9250F2C4C001A8613 /* AltSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7A7CF5250F2C1E001A8613 /* AltSwiftUI.framework */; };
-		2C7A7CFA250F2C4C001A8613 /* AltSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7A7CF5250F2C1E001A8613 /* AltSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2CD1A094251485CB00E2CCBA /* AltSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD1A08D251485AC00E2CCBA /* AltSwiftUI.framework */; };
+		2CD1A095251485CB00E2CCBA /* AltSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD1A08D251485AC00E2CCBA /* AltSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2CE5E28B231398D70072F907 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5E28A231398D70072F907 /* AppDelegate.swift */; };
 		2CE5E28F231398D70072F907 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5E28E231398D70072F907 /* ViewController.swift */; };
 		2CE5E292231398D70072F907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE5E290231398D70072F907 /* Main.storyboard */; };
@@ -19,16 +19,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2C7A7CF4250F2C1E001A8613 /* PBXContainerItemProxy */ = {
+		2CD1A08C251485AC00E2CCBA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2C7A7CEF250F2C1D001A8613 /* AltSwiftUI.xcodeproj */;
+			containerPortal = 2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2C7A7C37250F2AE5001A8613;
 			remoteInfo = AltSwiftUI;
 		};
-		2C7A7CF6250F2C1E001A8613 /* PBXContainerItemProxy */ = {
+		2CD1A08E251485AC00E2CCBA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2C7A7CEF250F2C1D001A8613 /* AltSwiftUI.xcodeproj */;
+			containerPortal = 2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2C7A7C40250F2AE5001A8613;
 			remoteInfo = AltSwiftUITests;
@@ -56,7 +56,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2C7A7CFA250F2C4C001A8613 /* AltSwiftUI.framework in Embed Frameworks */,
+				2CD1A095251485CB00E2CCBA /* AltSwiftUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,7 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2C7A7CEF250F2C1D001A8613 /* AltSwiftUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AltSwiftUI.xcodeproj; path = ../AltSwiftUI/AltSwiftUI.xcodeproj; sourceTree = "<group>"; };
+		2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AltSwiftUI.xcodeproj; path = ../../AltSwiftUI.xcodeproj; sourceTree = "<group>"; };
 		2CE5E287231398D70072F907 /* AltSwiftUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AltSwiftUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE5E28A231398D70072F907 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CE5E28E231398D70072F907 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C7A7CF9250F2C4C001A8613 /* AltSwiftUI.framework in Frameworks */,
+				2CD1A094251485CB00E2CCBA /* AltSwiftUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,15 +106,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C7A7CF0250F2C1D001A8613 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2C7A7CF5250F2C1E001A8613 /* AltSwiftUI.framework */,
-				2C7A7CF7250F2C1E001A8613 /* AltSwiftUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		2C7A7CF8250F2C4C001A8613 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,10 +113,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2CD1A088251485AC00E2CCBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2CD1A08D251485AC00E2CCBA /* AltSwiftUI.framework */,
+				2CD1A08F251485AC00E2CCBA /* AltSwiftUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2CE5E27E231398D70072F907 = {
 			isa = PBXGroup;
 			children = (
-				2C7A7CEF250F2C1D001A8613 /* AltSwiftUI.xcodeproj */,
 				2CE5E289231398D70072F907 /* AltSwiftUIExample */,
 				2CE5E2A0231398DA0072F907 /* AltSwiftUIExampleTests */,
 				2CE5E2AB231398DA0072F907 /* AltSwiftUIExampleUITests */,
@@ -147,6 +146,7 @@
 		2CE5E289231398D70072F907 /* AltSwiftUIExample */ = {
 			isa = PBXGroup;
 			children = (
+				2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */,
 				2CE5E28A231398D70072F907 /* AppDelegate.swift */,
 				2CE5E28E231398D70072F907 /* ViewController.swift */,
 				2CE5E290231398D70072F907 /* Main.storyboard */,
@@ -268,8 +268,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2C7A7CF0250F2C1D001A8613 /* Products */;
-					ProjectRef = 2C7A7CEF250F2C1D001A8613 /* AltSwiftUI.xcodeproj */;
+					ProductGroup = 2CD1A088251485AC00E2CCBA /* Products */;
+					ProjectRef = 2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -282,18 +282,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2C7A7CF5250F2C1E001A8613 /* AltSwiftUI.framework */ = {
+		2CD1A08D251485AC00E2CCBA /* AltSwiftUI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = AltSwiftUI.framework;
-			remoteRef = 2C7A7CF4250F2C1E001A8613 /* PBXContainerItemProxy */;
+			remoteRef = 2CD1A08C251485AC00E2CCBA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2C7A7CF7250F2C1E001A8613 /* AltSwiftUITests.xctest */ = {
+		2CD1A08F251485AC00E2CCBA /* AltSwiftUITests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = AltSwiftUITests.xctest;
-			remoteRef = 2C7A7CF6250F2C1E001A8613 /* PBXContainerItemProxy */;
+			remoteRef = 2CD1A08E251485AC00E2CCBA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
