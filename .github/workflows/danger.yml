@@ -1,22 +1,17 @@
 name: Danger CI
 
-on: [pull_request]
-
+on:
+  pull_request:
+    paths:
+      - '.swiftlint-danger.yml'
+      - '**/*.swift'
 jobs:
-  danger:
-    name: Danger
+  Danger:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-        
-      - name: Install Swiftlint
-        run: brew install swiftlint
-          
+      - uses: actions/checkout@v1
       - name: Danger
-        uses: danger/swift@3.5.0
+        uses: 417-72KI/danger-swiftlint@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
