@@ -8,8 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+        
       - name: Install Swiftlint
-        run: npm install -g swiftlint
+        run:
+          shell: brew install swiftlint
+          
       - name: Danger
         uses: danger/swift@3.5.0
         env:
