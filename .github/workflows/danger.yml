@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install Swiftlint
+        run: npm install -g swiftlint
       - name: Danger
         uses: danger/swift@3.5.0
         env:
