@@ -1,0 +1,48 @@
+opt_in_rules:
+  - function_default_parameter_at_end
+  - implicit_return
+  - modifier_order
+  - first_where
+  - fatal_error_message
+  - empty_string
+  - empty_count
+  - convenience_type
+  - toggle_bool
+  - redundant_nil_coalescing
+  - sorted_first_last
+  - contains_over_first_not_nil
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - last_where
+  - redundant_type_annotation
+  - enum_case_associated_values_count
+disabled_rules:
+  - trailing_whitespace
+  - identifier_name
+  - file_length
+  - multiple_closures_with_trailing_closure
+  - type_name
+  - unused_setter_value
+  - type_body_length
+  - weak_delegate
+  - function_parameter_count
+  - cyclomatic_complexity
+  - nesting
+  - todo
+excluded:
+- Pods
+- R.generated.swift
+included:
+- Inbound
+function_body_length:
+  warning: 60
+  error: 100
+line_length:
+  warning: 400
+  error: 600
+custom_rules:
+  travel_verb_getter_function:
+    name: "TID: Verb Prefixed Getter Function" 
+    regex: '(?<=func\s)(get|calculate|fetch|retrieve|generate)\w+\([^\)]*\)[\n\t\s]+\-\>[\n\t\s]+\w+\??[\n\t\s]+\{'
+    message: "Avoid the use of verbs on getter methods unless its a mutating/nonmutating method pair or a factory method."
+  
