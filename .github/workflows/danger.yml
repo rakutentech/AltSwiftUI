@@ -14,8 +14,7 @@ jobs:
         uses: Homebrew/actions/setup-homebrew@master
         
       - name: Install Swiftlint
-        run:
-          shell: brew install swiftlint
+        shell: brew install swiftlint
           
       - name: Danger
         uses: danger/swift@3.5.0
