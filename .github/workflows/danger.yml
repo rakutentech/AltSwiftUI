@@ -5,7 +5,7 @@ on: [pull_request]
 jobs:
   danger:
     name: Danger
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Danger
