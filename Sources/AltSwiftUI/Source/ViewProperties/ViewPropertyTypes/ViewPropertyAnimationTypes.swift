@@ -37,7 +37,7 @@ extension Animation {
             case .linear(let duration):
                 performCurveAnimation(duration: duration, options: .curveLinear, animationCode: animationCode, completion: completion)
             case .spring(let response, let dampingFraction, _):
-                let timingCurve = sprintTimingParameter(dampingRatio: CGFloat(dampingFraction), response: CGFloat(response))
+                let timingCurve = springTimingParameter(dampingRatio: CGFloat(dampingFraction), response: CGFloat(response))
                 let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timingCurve)
                 animator.addAnimations {
                     animationCode()
@@ -54,6 +54,67 @@ extension Animation {
                 }
             }
     }
+    
+    func performCALayerAnimation(layer: CALayer, keyPath: String, newValue: Any?) {
+        var animation: CABasicAnimation?
+        switch curve {
+        case .easeInOut(duration: let duration):
+            let anim = CABasicAnimation(keyPath: keyPath)
+            anim.duration = duration
+            anim.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            animation = anim
+        case .easeIn(duration: let duration):
+            let anim = CABasicAnimation(keyPath: keyPath)
+            anim.duration = duration
+            anim.timingFunction = CAMediaTimingFunction(name: .easeIn)
+            animation = anim
+        case .easeOut(duration: let duration):
+            let anim = CABasicAnimation(keyPath: keyPath)
+            anim.duration = duration
+            anim.timingFunction = CAMediaTimingFunction(name: .easeOut)
+            animation = anim
+        case .linear(duration: let duration):
+            let anim = CABasicAnimation(keyPath: keyPath)
+            anim.duration = duration
+            anim.timingFunction = CAMediaTimingFunction(name: .linear)
+            animation = anim
+        case .spring(response: let response, dampingFraction: let dampingFraction, _):
+            let anim = CASpringAnimation(keyPath: keyPath)
+            let springParams = springParameters(dampingRatio: CGFloat(dampingFraction), response: CGFloat(response))
+            anim.mass = springParams.mass
+            anim.stiffness = springParams.stiffness
+            anim.damping = springParams.damping
+            anim.initialVelocity = 0
+            anim.duration = 0.4
+            animation = anim
+        }
+        
+        if let animation = animation {
+            animation.fillMode = .forwards
+            animation.toValue = newValue
+            animation.isRemovedOnCompletion = false
+            if delay != 0 {
+                animation.beginTime = CACurrentMediaTime() + delay
+            }
+            if let count = repeatCount?.count {
+                animation.repeatCount = Float(count)
+            }
+            if repeatCount?.autoReverse == true {
+                animation.autoreverses = true
+            }
+            
+            CATransaction.begin()
+            CATransaction.setCompletionBlock {
+                layer.setValue(newValue, forKey: keyPath)
+                layer.removeAnimation(forKey: keyPath)
+            }
+            layer.add(animation, forKey: keyPath)
+            CATransaction.commit()
+        }
+    }
+    
+    // MARK: Private methods
+    
     private func performCurveAnimation(duration: Double, options: UIView.AnimationOptions, animationCode: @escaping () -> Void, completion: (() -> Void)?) {
         var animationOptions = options
         var numberOfRepetitions: Int? = nil
@@ -73,11 +134,15 @@ extension Animation {
             completion?()
         })
     }
-    private func sprintTimingParameter(dampingRatio: CGFloat, response: CGFloat) -> UISpringTimingParameters {
+    private func springTimingParameter(dampingRatio: CGFloat, response: CGFloat) -> UISpringTimingParameters {
+        let params = springParameters(dampingRatio: dampingRatio, response: response)
+        return UISpringTimingParameters(mass: params.mass, stiffness: params.stiffness, damping: params.damping, initialVelocity: .zero)
+    }
+    private func springParameters(dampingRatio: CGFloat, response: CGFloat) -> (mass: CGFloat, stiffness: CGFloat, damping: CGFloat) {
         let mass: CGFloat = 1
         let stiffness = pow(2 * .pi / response, 2)
         let damping = 4 * .pi * dampingRatio * mass / response
-        return UISpringTimingParameters(mass: mass, stiffness: stiffness, damping: damping, initialVelocity: .zero)
+        return (mass: mass, stiffness: stiffness, damping: damping)
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CADC30F251CA0DF00EA3F17 /* RamenExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */; };
+		2CADC317251CA15400EA3F17 /* ShapesExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */; };
 		2CD1A094251485CB00E2CCBA /* AltSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD1A08D251485AC00E2CCBA /* AltSwiftUI.framework */; };
 		2CD1A095251485CB00E2CCBA /* AltSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD1A08D251485AC00E2CCBA /* AltSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2CE5E28B231398D70072F907 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5E28A231398D70072F907 /* AppDelegate.swift */; };
@@ -64,6 +66,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamenExampleView.swift; sourceTree = "<group>"; };
+		2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesExampleView.swift; sourceTree = "<group>"; };
 		2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AltSwiftUI.xcodeproj; path = ../../AltSwiftUI.xcodeproj; sourceTree = "<group>"; };
 		2CE5E287231398D70072F907 /* AltSwiftUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AltSwiftUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE5E28A231398D70072F907 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +117,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2CADC30B251CA0C900EA3F17 /* ExampleViews */ = {
+			isa = PBXGroup;
+			children = (
+				2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */,
+				2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */,
+			);
+			path = ExampleViews;
+			sourceTree = "<group>";
+		};
 		2CD1A088251485AC00E2CCBA /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +162,7 @@
 				2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */,
 				2CE5E28A231398D70072F907 /* AppDelegate.swift */,
 				2CE5E28E231398D70072F907 /* ViewController.swift */,
+				2CADC30B251CA0C900EA3F17 /* ExampleViews */,
 				2CE5E290231398D70072F907 /* Main.storyboard */,
 				2CE5E293231398DA0072F907 /* Assets.xcassets */,
 				2CE5E295231398DA0072F907 /* LaunchScreen.storyboard */,
@@ -330,6 +344,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CADC30F251CA0DF00EA3F17 /* RamenExampleView.swift in Sources */,
+				2CADC317251CA15400EA3F17 /* ShapesExampleView.swift in Sources */,
 				2CE5E28F231398D70072F907 /* ViewController.swift in Sources */,
 				2CE5E28B231398D70072F907 /* AppDelegate.swift in Sources */,
 			);
