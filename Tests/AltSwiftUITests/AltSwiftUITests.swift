@@ -41,7 +41,7 @@ class AltSwiftUITests: XCTestCase {
     }
     
     var exampleView: View {
-        return NestView {
+        NestView {
             NestView {
                 Text("First")
             }
@@ -84,10 +84,8 @@ class AltSwiftUITests: XCTestCase {
     func testMappedSubviews() {
         let views = exampleSubviews.mappedSubViews { _ in Button("") {} }
         var result = true
-        for view in views {
-            if !(view is Button) {
-                result = false
-            }
+        for view in views where !(view is Button) {
+            result = false
         }
         if views.count != 4 {
             result = false
@@ -397,12 +395,12 @@ class AltSwiftUITests: XCTestCase {
         }
     }
     var iterationOldForEach: ForEach<[Int], Int, Text> {
-        ForEach([0,1,2,3], id: \.self) { index in
+        ForEach([0, 1, 2, 3], id: \.self) { index in
             Text("ForEach Update \(index)")
         }
     }
     var iterationNewForEach: ForEach<[Int], Int, Text> {
-        ForEach([1,3,2,4,5], id: \.self) { index in
+        ForEach([1, 3, 2, 4, 5], id: \.self) { index in
             Text("ForEach Update \(index)")
         }
     }
@@ -443,7 +441,7 @@ class AltSwiftUITests: XCTestCase {
         }
     }
     
-    func forEachIterationTest(baseIndex: Int = 0, index: Int, operation: DiffableSourceOperation) {
+    func forEachIterationTest(index: Int, operation: DiffableSourceOperation, baseIndex: Int = 0) {
         switch index - baseIndex {
         case 0: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Update 0"))))
         case 1: XCTAssert(operation.equalsText(from: .update(view: Text("ForEach Update 1"))))

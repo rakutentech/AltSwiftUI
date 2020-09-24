@@ -11,12 +11,12 @@ import UIKit
 /// A view that displays a range of values, and a knob that allows selecting
 /// a value in the range.
 public struct Slider: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     let value: Binding<Float>
     let bounds: ClosedRange<Float>
     var step: Float?
     public var body: View {
-        return EmptyView()
+        EmptyView()
     }
     
     /// Creates an instance that selects a value from within a range.
@@ -72,9 +72,9 @@ extension Slider: Renderable {
                 // Round the value up or down
                 let remainder = value.remainder(dividingBy: step)
                 if remainder > step / 2 {
-                    value = value + remainder
+                    value += remainder
                 } else {
-                    value = value + remainder - step
+                    value += (remainder - step)
                 }
             }
             self.value.wrappedValue = value

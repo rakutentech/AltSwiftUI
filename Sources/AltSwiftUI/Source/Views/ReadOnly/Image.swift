@@ -10,9 +10,9 @@ import UIKit
 
 /// A view that renders an image.
 public struct Image: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View {
-        return EmptyView()
+        EmptyView()
     }
     let image: UIImage
     var isResizable: Bool = false

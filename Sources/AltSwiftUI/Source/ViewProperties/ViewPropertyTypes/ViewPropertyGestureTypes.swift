@@ -87,7 +87,7 @@ public struct TapGesture: Gesture, ExecutableGesture {
 
 /// This type will handle events of a user's drag gesture.
 public struct DragGesture: Gesture, ExecutableGesture {
-    public struct Value : Equatable {
+    public struct Value: Equatable {
 
         /// The location of the current event.
         public var location: CGPoint

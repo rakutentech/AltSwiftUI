@@ -10,7 +10,7 @@ import UIKit
 
 /// A view that can be tapped by the user to trigger some action.
 public struct Button: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     var labels: [View]
     var action: () -> Void
     
@@ -30,7 +30,7 @@ public struct Button: View {
     }
     
     public var body: View {
-        return self
+        self
     }
 }
 
@@ -55,13 +55,13 @@ extension Button: Renderable {
         let customContext = modifiedContext(context)
         
         context.viewOperationQueue.addOperation {
-            [firstLabel].iterateFullViewDiff(oldList: [firstOldLabel]) { index, operation in
+            [firstLabel].iterateFullViewDiff(oldList: [firstOldLabel]) { _, operation in
                 switch operation {
                 case .insert(let newView):
                     if let newRenderView = newView.renderableView(parentContext: customContext, drainRenderQueue: false) {
                         view.updateContentView(newRenderView)
                     }
-                case .delete(_):
+                case .delete:
                     break
                 case .update(let newView):
                     newView.updateRender(uiView: view.contentView, parentContext: customContext, drainRenderQueue: false)

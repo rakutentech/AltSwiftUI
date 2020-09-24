@@ -14,7 +14,7 @@ import UIKit
 public protocol Identifiable {
 
     /// A type representing the stable identity of the entity associated with `self`.
-    associatedtype ID : Hashable
+    associatedtype ID: Hashable
 
     /// The stable identity of the entity associated with `self`.
     var id: Self.ID { get }
@@ -35,7 +35,7 @@ class DimensionConstraints {
 
 // MARK: - Style
 
-private struct TraitColorHandlerAssociation {
+private enum TraitColorHandlerAssociation {
     static var borderColorKey = "DisappearHandlerAssociatedKey"
 }
 
@@ -200,7 +200,7 @@ class ContextMenuHandler: NSObject, UIContextMenuInteractionDelegate {
     }
     
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] elements in
+        UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
             guard let `self` = self else {
                 return UIMenu(title: "", image: nil, identifier: nil, children: [])
             }
@@ -222,7 +222,7 @@ class ContextMenuHandler: NSObject, UIContextMenuInteractionDelegate {
     }
 }
 
-private struct DisappearHandlerAssociation {
+private enum DisappearHandlerAssociation {
     static var key = "DisappearHandlerAssociatedKey"
 }
 

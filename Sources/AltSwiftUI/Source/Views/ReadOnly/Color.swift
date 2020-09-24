@@ -14,7 +14,7 @@ import UIKit
 /// will expand both horizontally and vertically infinitely as much as
 /// its parent view allows it to.
 public struct Color: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     
     /// Stores the original color held by this view
     private var rawColor: UIColor
@@ -53,7 +53,7 @@ public struct Color: View {
     }
     
     public var body: View {
-        return self
+        self
     }
 }
 
@@ -89,7 +89,7 @@ extension Color {
     }
     
     static var systemAccentColor: Color {
-        return .blue
+        .blue
     }
 }
 

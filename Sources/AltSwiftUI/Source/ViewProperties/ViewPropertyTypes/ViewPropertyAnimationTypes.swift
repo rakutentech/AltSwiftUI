@@ -22,7 +22,7 @@ public struct Animation {
     }
     let curve: Curve
     var delay: Double = 0
-    var repeatCount: (count: Int?, autoReverse: Bool)? = nil
+    var repeatCount: (count: Int?, autoReverse: Bool)?
 }
 
 extension Animation {
@@ -56,7 +56,7 @@ extension Animation {
     }
     private func performCurveAnimation(duration: Double, options: UIView.AnimationOptions, animationCode: @escaping () -> Void, completion: (() -> Void)?) {
         var animationOptions = options
-        var numberOfRepetitions: Int? = nil
+        var numberOfRepetitions: Int?
         if let repeatCount = repeatCount {
             if repeatCount.autoReverse {
                 animationOptions.insert(.autoreverse)

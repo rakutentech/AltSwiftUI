@@ -72,7 +72,7 @@ public struct ViewValues: AnimatedViewValuesHolder {
     var skipOnHighPerformance: Bool?
     var navigationAccentColor: UIColor?
     
-    private var skOverlayPresentationObject: Any? = nil // Workaround as SKOverlayPresentation is only available from iOS 14.0+
+    private var skOverlayPresentationObject: Any? // Workaround as SKOverlayPresentation is only available from iOS 14.0+
     @available(iOS 14.0, *)
     var skOverlayPresentation: SKOverlayPresentation? {
         get {

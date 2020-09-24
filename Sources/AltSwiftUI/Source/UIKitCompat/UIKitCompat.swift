@@ -11,7 +11,7 @@ import UIKit
 // MARK: - UIViewControllerRepresentable
 
 /// The context used in a `UIViewControllerRepresentable` type.
-public struct UIViewControllerRepresentableContext<Representable> where Representable : UIViewControllerRepresentable {
+public struct UIViewControllerRepresentableContext<Representable> where Representable: UIViewControllerRepresentable {
 
     /// The view's associated coordinator.
     public let coordinator: Representable.Coordinator
@@ -25,7 +25,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 
 /// Use this protocol to create a custom `View` that represents a `UIViewController`.
 public protocol UIViewControllerRepresentable: View, Renderable {
-    associatedtype UIViewControllerType : UIViewController
+    associatedtype UIViewControllerType: UIViewController
     typealias UIContext = UIViewControllerRepresentableContext<Self>
     associatedtype Coordinator = Void
     
@@ -44,7 +44,7 @@ public protocol UIViewControllerRepresentable: View, Renderable {
 }
 
 extension UIViewControllerRepresentable where Coordinator == Void {
-    public func makeCoordinator() -> Void {}
+    public func makeCoordinator() {}
 }
 
 extension UIViewControllerRepresentable {
@@ -76,7 +76,7 @@ extension UIViewControllerRepresentable {
 // MARK: - UIViewRepresentable
 
 /// The context used in a `UIViewRepresentable` type.
-public struct UIViewRepresentableContext<Representable> where Representable : UIViewRepresentable {
+public struct UIViewRepresentableContext<Representable> where Representable: UIViewRepresentable {
 
     /// The view's associated coordinator.
     public let coordinator: Representable.Coordinator
@@ -89,8 +89,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 }
 
 /// Use this protocol to create a custom `View` that represents a `UIView`.
-public protocol UIViewRepresentable : View, Renderable {
-    associatedtype UIViewType : UIView
+public protocol UIViewRepresentable: View, Renderable {
+    associatedtype UIViewType: UIView
     typealias UIContext = UIViewRepresentableContext<Self>
     associatedtype Coordinator = Void
     
@@ -109,7 +109,7 @@ public protocol UIViewRepresentable : View, Renderable {
 }
 
 extension UIViewRepresentable where Coordinator == Void {
-    public func makeCoordinator() -> Void {}
+    public func makeCoordinator() {}
 }
 
 extension UIViewRepresentable {

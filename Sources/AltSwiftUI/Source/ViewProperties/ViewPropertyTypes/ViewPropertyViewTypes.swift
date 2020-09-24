@@ -32,6 +32,7 @@ public struct Alert {
     ///
     /// - Note: the system determines the visual ordering of the buttons.
     public init(title: Text, message: Text? = nil, primaryButton: Alert.Button, secondaryButton: Alert.Button) {
+        // swiftlint:disable:previous function_default_parameter_at_end
         self.title = title.string
         self.message = message?.string
         self.primaryButton = primaryButton
@@ -81,6 +82,7 @@ public struct ActionSheet {
     /// Send nil in the title to hide the title space in the
     /// action sheet. This behavior is not compatible with SwiftUI.
     public init(title: Text? = nil, message: Text? = nil, buttons: [ActionSheet.Button]) {
+    // swiftlint:disable:previous function_default_parameter_at_end
         self.title = title?.string
         self.message = message?.string
         self.buttons = buttons

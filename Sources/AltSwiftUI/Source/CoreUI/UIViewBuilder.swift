@@ -512,7 +512,7 @@ extension UIView {
 
 extension UIEdgeInsets {
     static func withEdgeInsets(_ edgeInsets: EdgeInsets) -> Self {
-        return UIEdgeInsets(top: edgeInsets.top, left: edgeInsets.leading, bottom: edgeInsets.bottom, right: edgeInsets.trailing)
+        UIEdgeInsets(top: edgeInsets.top, left: edgeInsets.leading, bottom: edgeInsets.bottom, right: edgeInsets.trailing)
     }
 }
 

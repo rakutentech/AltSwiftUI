@@ -133,6 +133,7 @@ extension Array where Element == View {
         }
     }
     
+    // swiftlint:disable:next function_body_length
     private func iterateFullSubviewDiff(subView: View?, oldView: View?, iteration: (Int, DiffableSourceOperation) -> Void, displayIndex: inout Int) {
         if let optionalView = subView as? OptionalView, let optionalViewContent = optionalView.content {
             // Optional insert / update
@@ -234,7 +235,7 @@ extension UIStackView {
         context.viewOperationQueue.addOperation { [weak self] in
             guard let `self` = self else { return }
             var equalViews = [UIView]()
-            views.iterateFullViewInsert() { view in
+            views.iterateFullViewInsert { view in
                 if let renderView = view.renderableView(parentContext: context, drainRenderQueue: false) {
                     if isEquallySpaced(view) {
                         equalViews.append(renderView)
@@ -253,12 +254,12 @@ extension UIStackView {
         guard let firstUIView = arrangedSubviews.first else { return }
         view.scheduleUpdateRender(uiView: firstUIView, parentContext: context)
     }
-    func updateViews(_ views: [View], oldViews: [View],  context: Context, isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
+    func updateViews(_ views: [View], oldViews: [View], context: Context, isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
         context.viewOperationQueue.addOperation { [weak self] in
             guard let `self` = self else { return }
             
             var equalViews = [UIView]()
-            var equalViewReference: UIView? = nil
+            var equalViewReference: UIView?
             
             var indexSkip = 0
             views.iterateFullViewDiff(oldList: oldViews) { i, operation in
@@ -300,7 +301,7 @@ extension UIStackView {
                     }
                     
                     removeGroup.enter()
-                    view.performRemovalTransition(view: uiView, animation: context.transaction?.animation, completion:{
+                    view.performRemovalTransition(view: uiView, animation: context.transaction?.animation, completion: {
                         removeGroup.leave()
                     })
                     

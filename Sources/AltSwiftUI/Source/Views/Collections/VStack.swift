@@ -10,7 +10,7 @@ import UIKit
 
 /// This view arranges subviews vertically.
 public struct VStack: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     let viewContent: [View]
     let alignment: HorizontalAlignment
     let spacing: CGFloat?
@@ -70,8 +70,7 @@ extension VStack: Renderable {
         view.spacing = spacing ?? 0
     }
     
-    private var subviewIsEquallySpaced: (View) -> Bool {
-        { view in
+    private var subviewIsEquallySpaced: (View) -> Bool { { view in
            if (view is Spacer ||
                view.viewStore.viewDimensions?.maxHeight == CGFloat.limitForUI
                )
@@ -84,8 +83,7 @@ extension VStack: Renderable {
         }
     }
     
-    private var setSubviewEqualDimension: (UIView, UIView) -> Void {
-        { firstView, secondView in
+    private var setSubviewEqualDimension: (UIView, UIView) -> Void { { firstView, secondView in
             firstView.heightAnchor.constraint(equalTo: secondView.heightAnchor).isActive = true
         }
     }

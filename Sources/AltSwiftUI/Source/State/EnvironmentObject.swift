@@ -14,7 +14,7 @@ import Foundation
 ///
 /// - Important: Referencing an environment object not previously set
 /// will trigger an exception.
-@propertyWrapper public class EnvironmentObject<ObjectType>: DynamicProperty where ObjectType : ObservableObject {
+@propertyWrapper public class EnvironmentObject<ObjectType>: DynamicProperty where ObjectType: ObservableObject {
     /// A wrapper of the underlying `ObservableObject` that can create
     /// `Binding`s to its properties using dynamic member lookup.
     @dynamicMemberLookup public struct Wrapper {
@@ -33,7 +33,7 @@ import Foundation
        }
     }
 
-    var _wrappedValue: ObjectType? = nil
+    var _wrappedValue: ObjectType?
     
     public init() {
     }

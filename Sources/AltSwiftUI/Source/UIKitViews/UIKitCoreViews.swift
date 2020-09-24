@@ -158,7 +158,7 @@ class SwiftUIPaddingView: UIView, UIKitViewHandler {
             setupView()
         }
     }
-    var insets: UIEdgeInsets = UIEdgeInsets() {
+    var insets = UIEdgeInsets() {
         didSet {
             updateInsets()
         }
