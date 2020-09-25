@@ -441,7 +441,6 @@ class AltSwiftUITests: XCTestCase {
         }
     }
     
-    // swiftlint:disable:next function_default_parameter_at_end
     func forEachIterationTest(baseIndex: Int = 0, index: Int, operation: DiffableSourceOperation) {
         switch index - baseIndex {
         case 0: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Update 0"))))

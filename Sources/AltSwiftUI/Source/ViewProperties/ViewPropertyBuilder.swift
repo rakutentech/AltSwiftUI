@@ -405,7 +405,6 @@ extension View {
     ///   - y: A vertical offset you use to position the shadow relative to
     ///     this view.
     public func shadow(color: Color = Color(white: 0, opacity: 0.33), radius: CGFloat, x: CGFloat = 0, y: CGFloat = 0) -> Self {
-        // swiftlint:disable:previous function_default_parameter_at_end
         var view = self
         view.viewStore.shadow = Shadow(color: color.color, radius: radius, xOffset: x, yOffset: y)
         return view

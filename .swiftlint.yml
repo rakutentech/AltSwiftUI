@@ -1,5 +1,4 @@
 opt_in_rules:
-  - function_default_parameter_at_end
   - implicit_return
   - modifier_order
   - first_where
