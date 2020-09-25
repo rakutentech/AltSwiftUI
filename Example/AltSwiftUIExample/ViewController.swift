@@ -8,8 +8,8 @@
 
 import UIKit
 import AltSwiftUI
-import protocol AltSwiftUI.ObservableObject // swiftlint:disable:current duplicate_imports
-import class AltSwiftUI.Published // swiftlint:disable:current duplicate_imports
+import protocol AltSwiftUI.ObservableObject
+import class AltSwiftUI.Published
 
 struct Ramen: Identifiable {
     var id: String

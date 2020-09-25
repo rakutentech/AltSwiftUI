@@ -27,6 +27,7 @@ disabled_rules:
   - function_parameter_count
   - cyclomatic_complexity
   - nesting
+  - duplicate_imports
 excluded:
 - AltSwiftUITests.swift
 function_body_length:
