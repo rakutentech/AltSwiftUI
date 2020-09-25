@@ -38,7 +38,7 @@ line_length:
   error: 600
 custom_rules:
   travel_verb_getter_function:
-    name: "TID: Verb Prefixed Getter Function" 
+    name: "Verb Prefixed Getter Function" 
     regex: '(?<=func\s)(get|calculate|fetch|retrieve|generate)\w+\([^\)]*\)[\n\t\s]+\-\>[\n\t\s]+\w+\??[\n\t\s]+\{'
     message: "Avoid the use of verbs on getter methods unless its a mutating/nonmutating method pair or a factory method."
   
