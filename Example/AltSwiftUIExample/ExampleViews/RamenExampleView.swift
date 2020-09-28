@@ -172,4 +172,3 @@ struct RamenDetailView: View {
         .navigationBarTitle(ramen.name, displayMode: .large)
     }
 }
-

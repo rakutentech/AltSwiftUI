@@ -118,7 +118,7 @@ extension Shape {
 }
 
 /// Type that hold style properties of a stroke.
-public struct StrokeStyle : Equatable {
+public struct StrokeStyle: Equatable {
 
     /// The width of the stroke's line
     public var lineWidth: CGFloat

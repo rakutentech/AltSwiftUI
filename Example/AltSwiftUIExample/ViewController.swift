@@ -11,8 +11,6 @@ import AltSwiftUI
 import protocol AltSwiftUI.ObservableObject
 import class AltSwiftUI.Published
 
-
-
 struct ExampleViewData {
     var title: String
     var destination: View
