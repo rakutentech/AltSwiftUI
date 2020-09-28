@@ -25,6 +25,7 @@ public struct List<Content: View, Data, ID: Hashable>: View {
     var dragEnded: (() -> Void)?
     var ignoresHighPerformance: Bool = false
     var idKeyPath: KeyPath<Data, ID>?
+    var listStyle: ListStyle?
     
     public init(@ViewBuilder content: () -> Content) {
         let contentResult = content()
@@ -135,6 +136,16 @@ public struct List<Content: View, Data, ID: Hashable>: View {
         list.ignoresHighPerformance = true
         return list
     }
+    
+    /// Returns an instance of `self` with the specified list
+    /// style.
+    /// - Parameter style: A style to apply. Pass a predefined instance of the types that conforms to ListStyle.
+    /// - Returns: An styled instance of `self`
+    public func listStyle(_ style: ListStyle) -> Self {
+        var list = self
+        list.listStyle = style
+        return list
+    }
 }
 
 extension List where Data: Identifiable, Content == ForEach<[Data], String, HStack>, ID == Data.ID {
@@ -162,7 +173,16 @@ extension List where Data == Int, Content == ForEach<[Data], Int, HStack>, ID ==
 
 extension List: Renderable {
     public func createView(context: Context) -> UIView {
-        let view = SwiftUITableView().noAutoresizingMask()
+        var style = UITableView.Style.plain
+        if let listStyle = listStyle {
+            if listStyle is GroupedListStyle {
+                style = .grouped
+            } else if #available(iOS 13.0, *),
+                      listStyle is InsetGroupedListStyle {
+                style = .insetGrouped
+            }
+        }
+        let view = SwiftUITableView(frame: .zero, style: style).noAutoresizingMask()
         view.register(SwiftUITableViewCell.self, forCellReuseIdentifier: SwiftUITableViewCell.swiftUICellReuseIdentifier)
         setupView(view, context: context)
         updateViewSetup(view, context: context)

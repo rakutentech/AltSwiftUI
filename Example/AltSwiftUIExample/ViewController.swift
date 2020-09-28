@@ -243,9 +243,18 @@ struct ExampleListView: View {
             List(ramenModel.ramenList) { ramen in
                 RamenCell(ramen: ramen)
             }
+            .listStyle(listStyle)
         }
         .onAppear {
             ramenModel.loadRamen()
+        }
+    }
+    
+    var listStyle: ListStyle {
+        if #available(iOS 13.0, *) {
+            return InsetGroupedListStyle()
+        } else {
+            return PlainListStyle()
         }
     }
 }
