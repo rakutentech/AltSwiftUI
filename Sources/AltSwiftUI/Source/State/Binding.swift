@@ -38,7 +38,7 @@ public struct Binding<Value> {
     
     /// The binding value, as "unwrapped" by accessing `$foo` on a `@Binding` property.
     public var projectedValue: Binding<Value> {
-        return self
+        self
     }
     
     /// Creates a new `Binding` focused on `Subject` using a key path.

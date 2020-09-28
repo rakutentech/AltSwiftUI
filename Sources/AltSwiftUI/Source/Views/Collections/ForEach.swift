@@ -11,13 +11,13 @@ import Foundation
 /// A view that creates views based on data. This view itself has no visual
 /// representation. Adding a background to this view, for example, will have no effect.
 public struct ForEach<Data: RandomAccessCollection, ID: Hashable, Content: View>: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     var viewContent: [View]
     let data: Data
     let idKeyPath: KeyPath<Data.Element, ID>
     
     public var body: View {
-        return EmptyView()
+        EmptyView()
     }
     
     /// Creates views based on uniquely identifiable data, by using a custom id.
@@ -36,7 +36,7 @@ public struct ForEach<Data: RandomAccessCollection, ID: Hashable, Content: View>
     }
 }
 
-extension ForEach where ID == Data.Element.ID, Data.Element : Identifiable {
+extension ForEach where ID == Data.Element.ID, Data.Element: Identifiable {
 
     /// Creates views based on uniquely identifiable data.
     ///
@@ -90,7 +90,7 @@ extension ForEach: ComparableViewGrouper {
         
         var oldIndex = 0
         var currentIndex = 0
-        while(oldIndex < oldCount || currentIndex < currentCount) {
+        while oldIndex < oldCount || currentIndex < currentCount {
             let oldId = oldViewGroup.idForIndex(index: oldIndex) as? ID
             let currentId = idForIndex(index: currentIndex) as? ID
             if let oldId = oldId, let currentId = currentId {

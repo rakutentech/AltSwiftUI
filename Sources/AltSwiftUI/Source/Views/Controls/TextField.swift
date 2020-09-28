@@ -10,7 +10,7 @@ import UIKit
 
 /// A view that allows text input in one line.
 public struct TextField<T>: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     let title: String
     let onCommit: () -> Void
     let onEditingChanged: (Bool) -> Void
@@ -21,7 +21,7 @@ public struct TextField<T>: View {
     var isSecureTextEntry: Bool?
     
     public var body: View {
-        return EmptyView()
+        EmptyView()
     }
 
     /// Create an instance which binds with a value of type `T`.

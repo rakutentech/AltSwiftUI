@@ -97,7 +97,7 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
         return CGSize(width: CGFloat.limitForUI, height: size.height)
     }
     
-    //MARK: Private methods
+    // MARK: Private methods
     
     private func setupView() {
         setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -115,7 +115,7 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
         }
     }
     
-    //MARK: TextField delegate
+    // MARK: TextField delegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         onCommit?()
@@ -210,7 +210,7 @@ class SwiftUISegmentedControl: UISegmentedControl, UIKitViewHandler {
         super.init(items: items)
         setup()
     }
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
@@ -260,4 +260,3 @@ class SwiftUIDatePicker: UIDatePicker, UIKitViewHandler {
         }
     }
 }
-

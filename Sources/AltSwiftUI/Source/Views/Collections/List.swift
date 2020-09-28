@@ -10,11 +10,11 @@ import UIKit
 
 /// A list of elements that creates each subview on demand.
 public struct List<Content: View, Data>: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View { EmptyView() }
-    var sections: [Section]? = nil
-    var data: [Data]? = nil
-    var rowBuilder: ((Data) -> View)? = nil
+    var sections: [Section]?
+    var data: [Data]?
+    var rowBuilder: ((Data) -> View)?
     var contentOffset: Binding<CGPoint>?
     var rowHeight: CGFloat?
     var isAlwaysReloadData: Bool = false
@@ -32,7 +32,7 @@ public struct List<Content: View, Data>: View {
 
     /// Creates a List that identifies its rows based on the `id` key path to a
     /// property on an underlying data element.
-    public init<ID>(_ data: [Data], id: KeyPath<Data, ID>, @ViewBuilder rowContent: @escaping (Data) -> View) where Content == ForEach<[Data], ID, HStack>, ID : Hashable {
+    public init<ID>(_ data: [Data], id: KeyPath<Data, ID>, @ViewBuilder rowContent: @escaping (Data) -> View) where Content == ForEach<[Data], ID, HStack>, ID: Hashable {
         self.data = data
         self.rowBuilder = rowContent
     }
@@ -75,7 +75,6 @@ public struct List<Content: View, Data>: View {
         list.isAlwaysReloadData = true
         return list
     }
-    
     
     /// Determines if the list can bounce.
     ///
@@ -412,7 +411,7 @@ extension UIView {
 }
 
 struct Section: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     var header: View?
     var footer: View?
     var viewContent: [View]
@@ -432,6 +431,6 @@ struct Section: View {
     }
     
     public var body: View {
-        return EmptyView()
+        EmptyView()
     }
 }

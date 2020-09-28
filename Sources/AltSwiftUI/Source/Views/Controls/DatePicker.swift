@@ -29,7 +29,7 @@ public struct DatePicker: View {
     public typealias Components = [DatePickerComponent]
     
     public var body: View {
-        return EmptyView()
+        EmptyView()
     }
     
     /// Creates an instance that selects a date from within a range.
@@ -76,6 +76,10 @@ extension DatePicker: Renderable {
         guard let view = view as? SwiftUIDatePicker else { return }
         view.dateBinding = selection
         
+        if #available(iOS 13.4, *) {
+            view.preferredDatePickerStyle = .wheels
+        }
+        
         if components.contains(.date) && components.contains(.hourAndMinute) {
             view.datePickerMode = .dateAndTime
         } else if components.contains(.date) {
@@ -91,4 +95,3 @@ extension DatePicker: Renderable {
         }
     }
 }
-

@@ -125,7 +125,7 @@ extension View {
     /// This is to inform invalid case. `frame()` should always be called with
     /// at least one parameter.
     @available(*, deprecated, message: "Please pass one or more parameters.")
-    public func frame() -> Self { return self }
+    public func frame() -> Self { self }
     
     /// Adds a contextual menu to this view.
     ///
@@ -156,7 +156,6 @@ extension View {
         contextMenu(ContextMenu { menuItems() })
     }
 
-
     /// Attaches a `ContextMenu` and its children to `self`.
     ///
     /// This modifier allows for the contextual menu to be conditionally
@@ -168,8 +167,7 @@ extension View {
         return view
     }
     
-    
-    public func buttonStyle<S>(_ style: S) -> Self where S : ButtonStyle {
+    public func buttonStyle<S>(_ style: S) -> Self where S: ButtonStyle {
         var view = self
         view.viewStore.buttonStyle = style
         return view
@@ -199,12 +197,11 @@ extension View {
     ///   - overlay: The view to layer in front of this view.
     ///   - alignment: The alignment for `overlay` in relation to this view.
     /// - Returns: The view with an `overlay` layer in front.
-    public func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> Self where Overlay : View {
+    public func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> Self where Overlay: View {
         var view = self
         view.viewStore.overlay = AlignedView(view: overlay, alignment: alignment)
         return view
     }
-     
     
     /// Adds a border to this view with the specified style and width.
     ///
@@ -263,7 +260,7 @@ extension View {
     ///
     /// - Returns: The view with fit content mode.
     public func scaledToFit() -> Self {
-        return aspectRatio(contentMode: .fit)
+        aspectRatio(contentMode: .fit)
     }
     
     /// Scales this view to fill its parent.
@@ -278,7 +275,7 @@ extension View {
     ///
     /// - Returns: The view with fill content mode.
     public func scaledToFill() -> Self {
-        return aspectRatio(contentMode: .fill)
+        aspectRatio(contentMode: .fill)
     }
      
     /// Set the foreground color within `self`.
@@ -315,7 +312,6 @@ extension View {
         view.viewStore.accentColor = accentColor?.color ?? .black
         return view
     }
-    
      
     /// Adds a condition that controls whether users can interact with this
     /// view.
@@ -370,7 +366,6 @@ extension View {
         return view
     }
 
-
     /// Clips this view to its bounding frame, with the specified corner radius.
     ///
     /// By default, a view's bounding frame only affects its layout, so any
@@ -414,7 +409,6 @@ extension View {
         view.viewStore.shadow = Shadow(color: color.color, radius: radius, xOffset: x, yOffset: y)
         return view
     }
-     
     
     /// Sets the default font for text in this view.
     ///
@@ -587,7 +581,7 @@ extension View {
     
     /// Attaches `gesture` to `self` such that it has higher precedence
     /// than gestures defined by `self`.
-    public func highPriorityGesture<T>(_ gesture: T) -> Self where T : Gesture {
+    public func highPriorityGesture<T>(_ gesture: T) -> Self where T: Gesture {
         var view = self
         guard var priorityGesture = gesture.firstExecutableGesture() else {
             return view
@@ -605,7 +599,7 @@ extension View {
 
     /// Attaches `gesture` to self such that it will be processed
     /// simultaneously with gestures defined by `self`.
-    public func simultaneousGesture<T>(_ gesture: T) -> Self where T : Gesture {
+    public func simultaneousGesture<T>(_ gesture: T) -> Self where T: Gesture {
         var view = self
         guard var priorityGesture = gesture.firstExecutableGesture() else {
             return view
@@ -906,7 +900,7 @@ extension View {
     /// Sets an environment object as a __global__ object.
     /// Views can access this object through the `EnvironmentObject` property
     /// wrapper and listen to changes in an `ObservableObject`.
-    public func environmentObject<B>(_ bindable: B) -> Self where B : ObservableObject {
+    public func environmentObject<B>(_ bindable: B) -> Self where B: ObservableObject {
         EnvironmentHolder.environmentObjects[String(describing: B.self)] = bindable
         let view = self
         return view

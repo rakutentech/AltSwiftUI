@@ -24,7 +24,7 @@ import Foundation
     public var wrappedValue: Value {
         get {
             assert(_wrappedValue != nil, "Environment being called outside of body")
-            //TODO: Register --> EnvironmentHolder.currentBodyViewBinderStack.last?.registerStateNotification(origin: _wrappedValue!)
+            // TODO: Register --> EnvironmentHolder.currentBodyViewBinderStack.last?.registerStateNotification(origin: _wrappedValue!)
             return _wrappedValue!
         }
         set {

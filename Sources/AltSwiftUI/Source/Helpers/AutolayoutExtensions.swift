@@ -57,7 +57,7 @@ extension UIView {
      to activate them for them to take effect.
      */
     func edgesAnchorEqualTo(destinationView: UIView) -> [NSLayoutConstraint] {
-        return [leftAnchor.constraint(equalTo: destinationView.leftAnchor),
+        [leftAnchor.constraint(equalTo: destinationView.leftAnchor),
                 rightAnchor.constraint(equalTo: destinationView.rightAnchor),
                 topAnchor.constraint(equalTo: destinationView.topAnchor),
                 bottomAnchor.constraint(equalTo: destinationView.bottomAnchor)]
@@ -73,8 +73,8 @@ extension UIView {
      - Important: Constraints are not activated. You need
      to activate them for them to take effect.
      */
-    func edgesAnchorEqualTo(destinationView: UIView, insets: UIEdgeInsets) -> Array<NSLayoutConstraint> {
-        return [leftAnchor.constraint(equalTo: destinationView.leftAnchor, constant: insets.left),
+    func edgesAnchorEqualTo(destinationView: UIView, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
+        [leftAnchor.constraint(equalTo: destinationView.leftAnchor, constant: insets.left),
                 rightAnchor.constraint(equalTo: destinationView.rightAnchor, constant: -insets.right),
                 topAnchor.constraint(equalTo: destinationView.topAnchor, constant: insets.top),
                 bottomAnchor.constraint(equalTo: destinationView.bottomAnchor, constant: -insets.bottom)]
@@ -90,8 +90,8 @@ extension UIView {
      - Important: Constraints are not activated. You need
      to activate them for them to take effect.
      */
-    func edgesAnchorEqualTo(layoutGuide: UILayoutGuide, insets: UIEdgeInsets? = nil) -> Array<NSLayoutConstraint> {
-        return [leftAnchor.constraint(equalTo: layoutGuide.leftAnchor, constant: insets?.left ?? 0),
+    func edgesAnchorEqualTo(layoutGuide: UILayoutGuide, insets: UIEdgeInsets? = nil) -> [NSLayoutConstraint] {
+        [leftAnchor.constraint(equalTo: layoutGuide.leftAnchor, constant: insets?.left ?? 0),
                 rightAnchor.constraint(equalTo: layoutGuide.rightAnchor, constant: -(insets?.right ?? 0)),
                 topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: insets?.top ?? 0),
                 bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: -(insets?.bottom ?? 0))]
@@ -255,6 +255,6 @@ extension NSLayoutConstraint {
      Set priority to 999 to avoid auto layout conflict
     */
     func withPriorityFix() -> NSLayoutConstraint {
-        return self.withPriority(999)
+        self.withPriority(999)
     }
 }

@@ -447,6 +447,7 @@
 			buildConfigurationList = 2C7A7C4B250F2AE5001A8613 /* Build configuration list for PBXNativeTarget "AltSwiftUI" */;
 			buildPhases = (
 				2C7A7C32250F2AE5001A8613 /* Headers */,
+				35621789251C222B0068F0BA /* SwiftLint */,
 				2C7A7C33250F2AE5001A8613 /* Sources */,
 				2C7A7C34250F2AE5001A8613 /* Frameworks */,
 				2C7A7C35250F2AE5001A8613 /* Resources */,
@@ -530,6 +531,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		35621789251C222B0068F0BA /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    ls\n    swiftlint autocorrect\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2C7A7C33250F2AE5001A8613 /* Sources */ = {

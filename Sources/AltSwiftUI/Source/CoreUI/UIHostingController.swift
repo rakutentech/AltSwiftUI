@@ -38,15 +38,15 @@ open class UIHostingController: UINavigationController {
         setupNavigation()
     }
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+    override public func pushViewController(_ viewController: UIViewController, animated: Bool) {
         duringPushAnimation = true
         super.pushViewController(viewController, animated: animated)
     }
@@ -62,7 +62,7 @@ open class UIHostingController: UINavigationController {
      The TabView will cause the root controller to be recreated, so don't
      subclass a UIHostingController and replace it in the app's delegate.
      */
-    public static var customRootTabBarController: SwiftUITabBarController = SwiftUITabBarController()
+    public static var customRootTabBarController = SwiftUITabBarController()
     private func setupNavigation() {
         delegate = self
         interactivePopGestureRecognizer?.delegate = self

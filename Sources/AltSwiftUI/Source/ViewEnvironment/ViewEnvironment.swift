@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Environment
 
 /// Main container for global environment properties
-class EnvironmentHolder {
+enum EnvironmentHolder {
     static var currentBodyViewBinderStack: [ViewBinder] = []
     static var environmentObjects: [String: ObservableObject] = [:]
     static var globalAnimation: Animation?
@@ -49,12 +49,12 @@ public struct Context {
     // When you add new properties, be sure to add them to `merge` methods
     // to transfer context information when merging contexts.
     
-    var viewValues: ViewValues? = nil
+    var viewValues: ViewValues?
     weak var rootController: ScreenViewController?
     // Currently used for Tab controller
     weak var overwriteRootController: UIViewController?
     var transaction: Transaction?
-    var viewOperationQueue: ViewOperationQueue = ViewOperationQueue()
+    var viewOperationQueue = ViewOperationQueue()
     
     /// True when the current view context is inside a button. Use this
     /// to handle special View behavior when inside buttons.
@@ -74,7 +74,7 @@ extension Context {
     /// Merges all values and takes priority from `viewValues`.
     func completeMerge(viewValues: ViewValues?) -> Context {
         if let viewValues = viewValues {
-            return Context(viewValues: viewValues.completeMerge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController,  transaction: transaction, viewOperationQueue: viewOperationQueue, isInsideButton: isInsideButton)
+            return Context(viewValues: viewValues.completeMerge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, isInsideButton: isInsideButton)
         } else {
             return self
         }
@@ -102,7 +102,7 @@ class ViewOperationQueue {
     // Executes all queued operations. If any operation adds more
     // operations, traversing follows a Breadth First Search approach.
     func drainRecursively() {
-        while operations.count > 0 {
+        while !operations.isEmpty {
            let operationsCopy = operations
            operations.removeAll()
            for operation in operationsCopy {
@@ -110,8 +110,7 @@ class ViewOperationQueue {
                     EnvironmentHolder.currentBodyViewBinderStack.append(viewBinder)
                     operation.operation()
                     EnvironmentHolder.currentBodyViewBinderStack.removeLast()
-                }
-                else {
+                } else {
                     operation.operation()
                 }
            }
