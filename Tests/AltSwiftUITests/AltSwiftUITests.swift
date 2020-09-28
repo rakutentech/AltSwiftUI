@@ -412,7 +412,7 @@ class AltSwiftUITests: XCTestCase {
         let views = exampleIterateViews(old: false, new: true, iterateText: " Modify").subViews
         
         var iterateIndex = 0
-        var ifElseOperations: [DiffableSourceOperation] = []
+        var ifElseOperations: [DiffableViewSourceOperation] = []
         views.iterateFullViewDiff(oldList: oldViews) { index, operation in
             switch iterateIndex {
             case 0: XCTAssert(operation.equalsText(from: .update(view: Text("First Modify"))))
@@ -443,7 +443,7 @@ class AltSwiftUITests: XCTestCase {
         }
     }
     
-    func forEachIterationTest(baseIndex: Int = 0, index: Int, operation: DiffableSourceOperation) {
+    func forEachIterationTest(baseIndex: Int = 0, index: Int, operation: DiffableViewSourceOperation) {
         switch index - baseIndex {
         case 0: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Update 0"))))
         case 1: XCTAssert(operation.equalsText(from: .update(view: Text("ForEach Update 1"))))
@@ -456,8 +456,8 @@ class AltSwiftUITests: XCTestCase {
     }
 }
 
-fileprivate extension DiffableSourceOperation {
-    func equalsText(from operation: DiffableSourceOperation) -> Bool {
+fileprivate extension DiffableViewSourceOperation {
+    func equalsText(from operation: DiffableViewSourceOperation) -> Bool {
         switch (self, operation) {
         case let (.insert(a), .insert(b)),
              let (.delete(a), .delete(b)),

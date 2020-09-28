@@ -49,6 +49,24 @@ extension Color {
 
 struct ExampleView: View {
     var viewStore = ViewValues()
+    var body: View {
+        TabView {
+            ExampleScrollView()
+                .tabItem {
+                    Text("Scroll")
+                    Image("icon")
+                }
+            ExampleListView()
+                .tabItem {
+                    Text("List")
+                    Image("icon")
+                }
+        }
+    }
+}
+
+struct ExampleScrollView: View {
+    var viewStore = ViewValues()
     
     @StateObject var ramenModel = RamenModel()
     @State private var ramenInOrder: Bool = false
@@ -61,9 +79,31 @@ struct ExampleView: View {
                 VStack {
                     RamenIcon(imageGeometry: $imageGeometry, offset: $offset)
                     
-                    if ramenInOrder {
-                        ramenInOrderView
-                            .transition(.opacity)
+                    ramenInOrderView
+                        .transition(.opacity)
+                    
+                    HStack {
+                        Button("Remove") {
+                            withAnimation {
+                                _ = ramenModel.ramenList.remove(at: 3)
+                            }
+                        }
+                        Button("Add") {
+                            withAnimation {
+                                ramenModel.ramenList.insert(Ramen(id: UUID().uuidString, name: "Insert Ramen", score: 3, price: "20"), at: 3)
+                            }
+                        }
+                        Button("Update") {
+                            withAnimation {
+                                ramenModel.ramenList[3].name = "Updated Ramen"
+                                ramenModel.ramenList[3].price = "100"
+                            }
+                        }
+                        Button("Toggle") {
+                            withAnimation {
+                                ramenModel.ramenList[3].score = 6
+                            }
+                        }
                     }
             
                     ForEach(ramenModel.ramenList) { ramen in
@@ -71,7 +111,7 @@ struct ExampleView: View {
                         NavigationLink(destination: RamenDetailView(ramenInOrder: $ramenInOrder, ramen: ramen)) {
                             RamenCell(ramen: ramen)
                         }
-                        .accentColor(Color.label)
+                        .accentColor(ramenInOrder ? Color.green : Color.label)
                     }
                 }
             }
@@ -88,20 +128,21 @@ struct ExampleView: View {
             Text("Preparing Ramen")
                 .font(.title)
             Text("Please wait...")
+                .padding(.top, ramenInOrder ? 50 : 20)
     
             Button("Cancel") {
                 withAnimation {
-                    ramenInOrder = false
+                    ramenInOrder.toggle()
                 }
             }
-            .frame(width: 120, height: 30)
-            .cornerRadius(10)
-            .background(Color.blue)
+            .frame(width: 120, height: ramenInOrder ? 60 : 30)
+            .background(ramenInOrder ? Color.blue : Color.pink)
+            .cornerRadius(ramenInOrder ? 30 : 0)
+            .padding(.top, ramenInOrder ? 50 : 30)
             .accentColor(Color.white)
-            .padding(.top, 20)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 50)
+        .padding(.vertical, ramenInOrder ? 50 : 20)
         .background(Color(white: 0.9))
     }
 }
@@ -139,7 +180,7 @@ struct RamenCell: View {
             Spacer()
             Text("\(ramen.price)")
         }
-        .frame(height: 40)
+        .frame(height: ramen.score == 6 ? 60 : 40)
         .padding(10)
     }
 }
@@ -170,5 +211,41 @@ struct RamenDetailView: View {
         .frame(maxWidth: .infinity)
         .padding(10)
         .navigationBarTitle(ramen.name, displayMode: .large)
+    }
+}
+
+// MARK: - List View
+
+struct ExampleListView: View {
+    var viewStore = ViewValues()
+    @StateObject var ramenModel = RamenModel()
+    
+    var body: View {
+        VStack {
+            HStack {
+                Button("Remove") {
+                    withAnimation {
+                        _ = ramenModel.ramenList.remove(at: 3)
+                    }
+                }
+                Button("Add") {
+                    withAnimation {
+                        ramenModel.ramenList.insert(Ramen(id: UUID().uuidString, name: "Insert Ramen", score: 3, price: "20"), at: 3)
+                    }
+                }
+                Button("Update") {
+                    withAnimation {
+                        ramenModel.ramenList[3].name = "Updated Ramen"
+                        ramenModel.ramenList[3].price = "100"
+                    }
+                }
+            }
+            List(ramenModel.ramenList) { ramen in
+                RamenCell(ramen: ramen)
+            }
+        }
+        .onAppear {
+            ramenModel.loadRamen()
+        }
     }
 }

@@ -96,6 +96,7 @@ class SwiftUILabeledView<Label: UIView, Control: UIView>: UIStackView, UIKitView
 
 class SwiftUITableViewCell: UITableViewCell {
     static let swiftUICellReuseIdentifier = "SwiftUICellReuseIdentifier"
+    weak var renderedView: UIView?
     func reconfigureView(content: UIView, insets: EdgeInsets?) {
         let cellInsets = insets ?? EdgeInsets(top: 0, leading: SwiftUIConstants.defaultCellPadding, bottom: 0, trailing: 0)
         for subView in contentView.subviews {
@@ -108,6 +109,8 @@ class SwiftUITableViewCell: UITableViewCell {
          content.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -cellInsets.bottom)]
             .activate()
         selectionStyle = .none
+        
+        renderedView = content
     }
 }
 

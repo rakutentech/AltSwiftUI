@@ -1013,9 +1013,10 @@ extension View {
 /// as the thread's current animation, by setting it as the animation
 /// property of the thread's current transaction.
 public func withAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result {
+    let previousAnimation = EnvironmentHolder.globalAnimation
     EnvironmentHolder.globalAnimation = animation
     let result = try body()
-    EnvironmentHolder.globalAnimation = nil
+    EnvironmentHolder.globalAnimation = previousAnimation
     return result
 }
 

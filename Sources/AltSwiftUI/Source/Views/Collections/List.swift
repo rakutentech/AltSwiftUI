@@ -9,7 +9,7 @@
 import UIKit
 
 /// A list of elements that creates each subview on demand.
-public struct List<Content: View, Data>: View {
+public struct List<Content: View, Data, ID: Hashable>: View {
     public var viewStore: ViewValues = ViewValues()
     public var body: View { EmptyView() }
     var sections: [Section]? = nil
@@ -24,6 +24,7 @@ public struct List<Content: View, Data>: View {
     var dragStarted: (() -> Void)?
     var dragEnded: (() -> Void)?
     var ignoresHighPerformance: Bool = false
+    var idKeyPath: KeyPath<Data, ID>?
     
     public init(@ViewBuilder content: () -> Content) {
         let contentResult = content()
@@ -32,9 +33,10 @@ public struct List<Content: View, Data>: View {
 
     /// Creates a List that identifies its rows based on the `id` key path to a
     /// property on an underlying data element.
-    public init<ID>(_ data: [Data], id: KeyPath<Data, ID>, @ViewBuilder rowContent: @escaping (Data) -> View) where Content == ForEach<[Data], ID, HStack>, ID : Hashable {
+    public init(_ data: [Data], id: KeyPath<Data, ID>, @ViewBuilder rowContent: @escaping (Data) -> View) {
         self.data = data
         self.rowBuilder = rowContent
+        self.idKeyPath = id
     }
     
     init(sections: [Section]) {
@@ -135,16 +137,17 @@ public struct List<Content: View, Data>: View {
     }
 }
 
-extension List where Data: Identifiable, Content == ForEach<[Data], String, HStack> {
+extension List where Data: Identifiable, Content == ForEach<[Data], String, HStack>, ID == Data.ID {
     /// Creates a List that computes its rows on demand from an underlying
     /// collection of identified data.
     public init(_ data: [Data], @ViewBuilder rowContent: @escaping (Data) -> View) {
         self.data = data
         self.rowBuilder = rowContent
+        self.idKeyPath = \Data.id
     }
 }
 
-extension List where Data == Int, Content == ForEach<[Data], Int, HStack> {
+extension List where Data == Int, Content == ForEach<[Data], Int, HStack>, ID == Int {
     /// Creates a List that computes views on demand over a *constant* range.
     ///
     /// This instance only reads the initial value of `data` and so it does not
@@ -153,11 +156,7 @@ extension List where Data == Int, Content == ForEach<[Data], Int, HStack> {
     /// To compute views on demand over a dynamic range use
     /// `List(_:id:content:)`.
     public init(_ data: Range<Int>, @ViewBuilder rowContent: @escaping (Int) -> View) {
-        let views = data.map { data -> View in
-            let rowContentView = rowContent(data)
-            return rowContentView.subViews[0]
-        }
-        self.init(sections: [Section(views: views)])
+        self.init(Array(data), id: \.self, rowContent: rowContent)
     }
 }
 
@@ -180,23 +179,61 @@ extension List: Renderable {
         updateViewSetup(view, context: context)
         
         let oldTotalCount = tableDelegate.totalCount
+        let oldData = tableDelegate.data
         tableDelegate.update(sections: sections, data: data, rowBuilder: rowBuilder, context: context, contentOffset: contentOffset)
         
-        if oldTotalCount != tableDelegate.totalCount {
-            tableDelegate.storedViews.removeAllObjects()
+        if isAlwaysReloadData {
             view.reloadData()
-        } else {
-            if isAlwaysReloadData {
-                view.reloadData()
-            } else {
-                let storedViews = tableDelegate.storedViews
-                let enumerator = storedViews.objectEnumerator()
-                while let storedView: UIView = enumerator.nextObject() as? UIView {
-                    if let cellOptions = storedView.cellViewOptions {
-                        let updateView = tableDelegate.viewForIndex(section: cellOptions.section, row: cellOptions.row)
-                        updateView.scheduleUpdateRender(uiView: storedView, parentContext: context)
+            view.layoutIfNeeded()
+        } else if oldTotalCount != tableDelegate.totalCount,
+           let data = data,
+           let oldData = oldData {
+            if context.transaction?.animation != nil {
+                // Animated
+                if let idKeyPath = idKeyPath {
+                    let visibleCells = view.visibleCells
+                    var cellStoredViewMap = [Int: UIView]()
+                    for cell in visibleCells {
+                        guard let cell = cell as? SwiftUITableViewCell,
+                              let storedView = cell.renderedView,
+                              let row = view.indexPath(for: cell)?.row else { continue }
+                        cellStoredViewMap[row] = storedView
                     }
+                    
+                    view.beginUpdates()
+                    data.iterateDataDiff(oldData: oldData, id: { $0[keyPath: idKeyPath] }, dynamicIndex: false) { iteratedIndex, collectionIndex, operation in
+                        switch operation {
+                        case .insert(_):
+                            view.insertRows(at: [IndexPath(item: iteratedIndex, section: 0)], with: .automatic)
+                        case .delete(_):
+                            view.deleteRows(at: [IndexPath(item: iteratedIndex, section: 0)], with: .automatic)
+                        case .update(_):
+                            if case let .current(currentDataIndex) = collectionIndex,
+                               let storedView = cellStoredViewMap[iteratedIndex] {
+                                let updateView = tableDelegate.viewForIndex(section: 0, row: currentDataIndex)
+                                updateView.scheduleUpdateRender(uiView: storedView, parentContext: context)
+                            }
+                        }
+                    }
+                    view.endUpdates()
+                } else {
+                    let sectionsRange = 0...(max(0, sections?.count ?? 0))
+                    view.reloadSections(IndexSet(integersIn: sectionsRange), with: .automatic)
                 }
+            } else {
+                // Non animated
+                view.reloadData()
+                view.layoutIfNeeded()
+            }
+        } else {
+            // If there is no change in cell numbers, only update
+            // visible cells.
+            for cell in view.visibleCells {
+                guard let cell = cell as? SwiftUITableViewCell,
+                      let storedView = cell.renderedView,
+                      let indexPath = view.indexPath(for: cell) else { continue }
+                let updateView = tableDelegate.viewForIndex(section: indexPath.section, row: indexPath.row)
+                updateView.scheduleUpdateRender(uiView: storedView, parentContext: context)
             }
         }
     }
@@ -234,7 +271,6 @@ class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableView
     var data: [Data]?
     var rowBuilder: ((Data) -> View)?
     var context: Context
-    var storedViews = NSHashTable<UIView>(options: .weakMemory)
     var contentOffsetBinding: Binding<CGPoint>?
     var dragStarted: (() -> Void)?
     var dragEnded: (() -> Void)?
@@ -293,8 +329,6 @@ class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableView
         let view = suiView.renderableView(parentContext: handlerContext) ?? UIView()
         let cell = tableView.dequeueReusableCell(withIdentifier: SwiftUITableViewCell.swiftUICellReuseIdentifier, for: indexPath) as? SwiftUITableViewCell
         cell?.reconfigureView(content: view, insets: suiView.viewStore.listRowInsets)
-        storedViews.add(view)
-        view.cellViewOptions = CellViewOptions(view: suiView, section: indexPath.section, row: indexPath.row)
         cell?.parentEventHandler = eventHandler
         
         return cell ?? UITableViewCell()
@@ -389,24 +423,6 @@ extension UITableViewCell {
         }
         set {
             objc_setAssociatedObject(self, &Self.parentEventHandlerKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-}
-
-struct CellViewOptions {
-    let view: View
-    let section: Int
-    let row: Int
-}
-
-extension UIView {
-    static var cellViewOptionsKey = "CellViewOptionsAssociatedKey"
-    var cellViewOptions: CellViewOptions? {
-        get {
-            objc_getAssociatedObject(self, &Self.cellViewOptionsKey) as? CellViewOptions
-        }
-        set {
-            objc_setAssociatedObject(self, &Self.cellViewOptionsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }

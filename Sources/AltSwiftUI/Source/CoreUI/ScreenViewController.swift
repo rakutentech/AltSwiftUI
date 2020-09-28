@@ -17,14 +17,9 @@ class EventCodeHandler {
 
 class ScreenViewController: UIViewController {
     var contentView: View
-    private var isNavigationController: Bool
-    private var presenter: SwiftUIPresenter?
-    private var onDismiss: (() -> Void)?
-    private var onPop: (() -> Void)?
     var onAppearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
     var onDisappearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
     var insertOnAppearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
-    private var executedInsertAppearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
     var statusBarHidden = false
     var customStatusBarStyle: UIStatusBarStyle?
     var sheetPresentation: SheetPresentation?
@@ -32,6 +27,11 @@ class ScreenViewController: UIViewController {
     var background: UIColor?
     lazy var lazyLayoutConstraints: [NSLayoutConstraint] = []
     var navigationBarTint: UIColor?
+    private var isNavigationController: Bool
+    private var presenter: SwiftUIPresenter?
+    private var onDismiss: (() -> Void)?
+    private var onPop: (() -> Void)?
+    private var executedInsertAppearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
     
     public init(
         contentView: View,

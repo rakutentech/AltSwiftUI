@@ -48,9 +48,15 @@ class ViewBinder {
     private func updateView(transaction: Transaction?) {
         if let subView = uiView {
             assert(rootController?.lazyLayoutConstraints.isEmpty ?? true, "State changed while the body is being executed")
+            if transaction?.animation != nil {
+                rootController?.view.layoutIfNeeded()
+            }
             view.updateRender(uiView: subView, parentContext: Context(rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, isInsideButton: isInsideButton), bodyLevel: bodyLevel)
             rootController?.executeLazyConstraints()
             rootController?.executeInsertAppearHandlers()
+            transaction?.animation?.performAnimation({ [weak self] in
+                self?.rootController?.view.layoutIfNeeded()
+            })
         }
     }
     @objc private func handleStateNotification(notification: Notification) {

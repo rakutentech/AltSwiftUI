@@ -18,12 +18,21 @@ extension UIView {
             return UIView()
         }
         
-        setColor(viewValues)
-        setLayout(viewValues, animation: viewValues.animatedValues?.first?.animation ?? context.transaction?.animation, update: update)
-        setViewStyle(context, update: update)
+        if let animation = context.transaction?.animation, update {
+            animation.performAnimation { [weak self] in
+                self?.setColor(viewValues)
+                self?.setViewStyle(context, update: update)
+            }
+        } else {
+            setColor(viewValues)
+            setViewStyle(context, update: update)
+        }
+        
+        setLayout(viewValues, animation: viewValues.animatedValues?.first?.animation ?? context.transaction?.animation, context: context, update: update)
         setupViewInteraction(viewValues)
         setupNavigation(context)
         setupGestures(context)
+        
         setupAnimations(viewValues, animation: context.transaction?.animation, update: update)
         if let animatedValues = viewValues.animatedValues {
             for animatedValue in animatedValues {
@@ -33,6 +42,7 @@ extension UIView {
         if let shieldedValues = viewValues.animationShieldedValues {
             setupAnimations(shieldedValues, animation: nil, update: update)
         }
+        
         setupController(context, update: update)
         setupCoordinate(context)
         return self
@@ -45,8 +55,8 @@ extension UIView {
             tintColor = accentColor
         }
     }
-    private func setLayout(_ viewValues: ViewValues, animation: Animation?, update: Bool) {
-        setDimensions(viewValues, animation: animation, update: update)
+    private func setLayout(_ viewValues: ViewValues, animation: Animation?, context: Context, update: Bool) {
+        setDimensions(viewValues, animation: animation, context: context, update: update)
         
         if let layoutPriority = viewValues.layoutPriority {
             var priority: UILayoutPriority = .defaultLow
@@ -65,18 +75,13 @@ extension UIView {
             geometryView.registerGeometryListener(geometry)
         }
     }
-    private func setDimensions(_ viewValues: ViewValues, animation: Animation?, update: Bool) {
+    private func setDimensions(_ viewValues: ViewValues, animation: Animation?, context: Context,  update: Bool) {
         guard viewValues.viewDimensions != lastRenderableView?.view.viewStore.viewDimensions else {
             return
         }
         
-        if update {
-            if animation != nil {
-                superview?.layoutIfNeeded()
-            }
-            if let dimensionConstraints = dimensionConstraints?.value {
-                removeConstraints(dimensionConstraints)
-            }
+        if let dimensionConstraints = dimensionConstraints?.value, update {
+            removeConstraints(dimensionConstraints)
         }
         
         var constraints = [NSLayoutConstraint]()
@@ -102,11 +107,8 @@ extension UIView {
             constraints.append(heightAnchor.constraint(equalToConstant: maxHeight).withPriority(.required - 1))
         }
         constraints.activate()
-        if let animation = animation, update {
+        if animation != nil, update {
             setNeedsLayout()
-            animation.performAnimation({ [weak self] in
-                self?.superview?.layoutIfNeeded()
-            })
         }
         
         dimensionConstraints = DimensionConstraints(value: constraints)

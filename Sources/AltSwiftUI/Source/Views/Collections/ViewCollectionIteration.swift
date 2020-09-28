@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum DiffableSourceOperation {
+enum DiffableViewSourceOperation {
     case insert(view: View)
     case delete(view: View)
     case update(view: View)
@@ -113,7 +113,7 @@ extension Array where Element == View {
     ///
     /// Groups are not flattened, and are expected to already be
     /// flattened.
-    func iterateFullViewDiff(oldList: [View] = [], iteration: (Int, DiffableSourceOperation) -> Void) {
+    func iterateFullViewDiff(oldList: [View] = [], iteration: (Int, DiffableViewSourceOperation) -> Void) {
         var displayIndex = 0
         let maxCount = Swift.max(count, oldList.count)
         if maxCount == 0 {
@@ -133,7 +133,7 @@ extension Array where Element == View {
         }
     }
     
-    private func iterateFullSubviewDiff(subView: View?, oldView: View?, iteration: (Int, DiffableSourceOperation) -> Void, displayIndex: inout Int) {
+    private func iterateFullSubviewDiff(subView: View?, oldView: View?, iteration: (Int, DiffableViewSourceOperation) -> Void, displayIndex: inout Int) {
         if let optionalView = subView as? OptionalView, let optionalViewContent = optionalView.content {
             // Optional insert / update
             let oldOptionalView = oldView as? OptionalView

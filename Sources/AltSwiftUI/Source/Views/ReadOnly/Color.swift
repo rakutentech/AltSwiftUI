@@ -101,6 +101,12 @@ extension Color: Renderable {
     }
     
     public func updateView(_ view: UIView, context: Context) {
-        view.backgroundColor = rawColor
+        if let animation = context.transaction?.animation {
+            animation.performAnimation {
+                view.backgroundColor = rawColor
+            }
+        } else {
+            view.backgroundColor = rawColor
+        }
     }
 }

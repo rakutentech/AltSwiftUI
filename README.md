@@ -123,7 +123,7 @@ To work with previews, there are 2 steps that need to be done:
 import protocol SwiftUI.PreviewProvider
 import protocol AltSwiftUI.View
 
-struct MyTextPreview : RPreviewProvider, PreviewProvider {
+struct MyTextPreview : AltPreviewProvider, PreviewProvider {
     static var previewView: View {
         MyText()
     }
