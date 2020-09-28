@@ -80,7 +80,7 @@ extension Animation {
             animation = anim
         case .spring(response: let response, dampingFraction: let dampingFraction, _):
             let anim = CASpringAnimation(keyPath: keyPath)
-            let springParams = springParameters(dampingRatio: CGFloat(dampingFraction), response: CGFloat(response))
+            let springParams = SpringParameters(dampingRatio: CGFloat(dampingFraction), response: CGFloat(response))
             anim.mass = springParams.mass
             anim.stiffness = springParams.stiffness
             anim.damping = springParams.damping
@@ -135,14 +135,20 @@ extension Animation {
         })
     }
     private func springTimingParameter(dampingRatio: CGFloat, response: CGFloat) -> UISpringTimingParameters {
-        let params = springParameters(dampingRatio: dampingRatio, response: response)
+        let params = SpringParameters(dampingRatio: dampingRatio, response: response)
         return UISpringTimingParameters(mass: params.mass, stiffness: params.stiffness, damping: params.damping, initialVelocity: .zero)
     }
-    private func springParameters(dampingRatio: CGFloat, response: CGFloat) -> (mass: CGFloat, stiffness: CGFloat, damping: CGFloat) {
-        let mass: CGFloat = 1
-        let stiffness = pow(2 * .pi / response, 2)
-        let damping = 4 * .pi * dampingRatio * mass / response
-        return (mass: mass, stiffness: stiffness, damping: damping)
+    
+    private struct SpringParameters {
+        let mass: CGFloat
+        let stiffness: CGFloat
+        let damping: CGFloat
+        
+        init(dampingRatio: CGFloat, response: CGFloat) {
+            mass = 1
+            stiffness = pow(2 * .pi / response, 2)
+            damping = 4 * .pi * dampingRatio * mass / response
+        }
     }
 }
 
