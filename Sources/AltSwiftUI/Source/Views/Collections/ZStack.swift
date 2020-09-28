@@ -10,7 +10,7 @@ import UIKit
 
 /// This view arranges subviews one in front of the other, using the _z_ axis.
 public struct ZStack: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     let viewContent: [View]
     let alignment: Alignment
     
@@ -38,7 +38,7 @@ extension ZStack: Renderable {
             self.viewContent.iterateFullViewInsert { subView in
                 if let renderView = subView.renderableView(parentContext: context, drainRenderQueue: false) {
                     view.addSubview(renderView)
-                    LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: subView, alignment: self.alignment, context: context)
+                    LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: subView, context: context, alignment: self.alignment)
                 }
             }
         }
@@ -56,7 +56,7 @@ extension ZStack: Renderable {
                     case .insert(let suiView):
                         if let subView = suiView.renderableView(parentContext: context, drainRenderQueue: false) {
                             view.insertSubview(subView, at: index)
-                            LayoutSolver.solveLayout(parentView: view, contentView: subView, content: suiView, alignment: self.alignment, context: context.merge(viewValues: suiView.viewStore))
+                            LayoutSolver.solveLayout(parentView: view, contentView: subView, content: suiView, context: context.merge(viewValues: suiView.viewStore), alignment: self.alignment)
                             suiView.performInsertTransition(view: subView, animation: context.transaction?.animation) {}
                         }
                     case .delete(let suiView):
@@ -67,7 +67,7 @@ extension ZStack: Renderable {
                         indexSkip += subViewData.skippedSubViews
                         let subView = subViewData.uiView
                         subView.isAnimatingRemoval = true
-                        if suiView.performRemovalTransition(view: subView, animation: context.transaction?.animation, completion:{
+                        if suiView.performRemovalTransition(view: subView, animation: context.transaction?.animation, completion: {
                             subView.removeFromSuperview()
                         }) {
                             indexSkip -= 1
@@ -80,7 +80,6 @@ extension ZStack: Renderable {
                         indexSkip += subViewData.skippedSubViews
                         let subView = subViewData.uiView
                         suiView.updateRender(uiView: subView, parentContext: context, drainRenderQueue: false)
-                        break
                     }
                 }
             }

@@ -11,7 +11,7 @@ import UIKit
 /// Creates a view that can scroll its subviews. Unlike a `List`,
 /// all subviews are created together with this view.
 public struct ScrollView: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View {
         EmptyView()
     }
@@ -27,7 +27,6 @@ public struct ScrollView: View {
         self.axis = axis
         self.showsIndicators = showsIndicators
     }
-    
     
     /// Listen to changes in the ScrollView's content offset.
     ///

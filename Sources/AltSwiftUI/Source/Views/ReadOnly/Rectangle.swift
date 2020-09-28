@@ -10,7 +10,7 @@ import UIKit
 
 /// A view that represents a Rectangle shape.
 public struct Rectangle: View, Renderable {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View {
         EmptyView()
     }

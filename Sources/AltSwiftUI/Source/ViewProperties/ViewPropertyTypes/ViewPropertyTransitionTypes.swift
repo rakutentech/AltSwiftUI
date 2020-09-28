@@ -84,7 +84,7 @@ public struct AnyTransition {
     
     /// A transition from transparent to opaque on insertion and opaque to
     /// transparent on removal.
-    public static let opacity: AnyTransition = AnyTransition(InternalTransition(opacity: 0))
+    public static let opacity = AnyTransition(InternalTransition(opacity: 0))
     
     /// A composite `Transition` that gives the result of two transitions both
     /// applied.

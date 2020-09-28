@@ -12,7 +12,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AltSwiftUI",
-            targets: ["AltSwiftUI"]),
+            targets: ["AltSwiftUI"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -27,7 +27,7 @@ let package = Package(
             sources: ["Source"]),
         .testTarget(
             name: "AltSwiftUITests",
-            dependencies: ["AltSwiftUI"]),
+            dependencies: ["AltSwiftUI"])
     ],
     swiftLanguageVersions: [SwiftVersion.v5]
 )

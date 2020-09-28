@@ -14,7 +14,7 @@ import Foundation
 ///
 /// Use this when the number of elements inside a `ViewBuilder` exceeds the limit.
 public struct Group: View, ViewGrouper {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     var viewContent: [View]
     public init(@ViewBuilder content: () -> View) {
         viewContent = content().subViews

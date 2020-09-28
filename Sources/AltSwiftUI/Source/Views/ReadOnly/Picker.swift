@@ -12,14 +12,14 @@ import UIKit
 ///
 /// By Default a picker view style will be used. If you want to use a different
 /// style, modify the view with the `.pickerStyle(_)` method.
-public struct Picker : View {
-    public var viewStore: ViewValues = ViewValues()
+public struct Picker: View {
+    public var viewStore = ViewValues()
     let selection: Binding<Int>
     let views: [View]
     var style: PickerStyle?
     
     public var body: View {
-        return EmptyView()
+        EmptyView()
     }
     
     /// Initializes a picker with a selected index and content. The title
@@ -52,7 +52,7 @@ extension Picker: Renderable {
     public func createView(context: Context) -> UIView {
         if style is SegmentedPickerStyle {
             let items = segmentItems()
-            let picker = SwiftUISegmentedControl(items:items).noAutoresizingMask()
+            let picker = SwiftUISegmentedControl(items: items).noAutoresizingMask()
             
             updateView(picker, context: context)
             return picker

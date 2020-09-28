@@ -29,7 +29,7 @@ public struct DatePicker: View {
     public typealias Components = [DatePickerComponent]
     
     public var body: View {
-        return EmptyView()
+        EmptyView()
     }
     
     /// Creates an instance that selects a date from within a range.
@@ -91,4 +91,3 @@ extension DatePicker: Renderable {
         }
     }
 }
-

@@ -10,7 +10,7 @@ import UIKit
 
 /// A view that represents a read only text
 public struct Text: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var string: String
     private var combinedTexts: [Text]?
     private var strikethroughColor: DefaultableColor?
@@ -26,7 +26,7 @@ public struct Text: View {
     /// Unlike SwiftUI, calling this will result in the same of
     /// calling `init(verbatim:)`. If you want to use localized
     /// strings, use `init(key:)` instead.
-    public init<S>(_ content: S) where S : StringProtocol {
+    public init<S>(_ content: S) where S: StringProtocol {
         self.string = String(content)
     }
     
@@ -90,8 +90,8 @@ public struct Text: View {
     
     /// Returns the result of combining two texts. The properties
     /// of each text is maintained even after the combination.
-    public static func +(left: Text, right: Text) -> Text {
-        return Text(combinedTexts: left.viewStoreMergedCombinedTexts + right.viewStoreMergedCombinedTexts)
+    public static func + (left: Text, right: Text) -> Text {
+        Text(combinedTexts: left.viewStoreMergedCombinedTexts + right.viewStoreMergedCombinedTexts)
     }
     
     private var viewStoreMergedCombinedTexts: [Text] {
@@ -163,7 +163,7 @@ extension Text: Renderable {
     }
     
     private func mergedAttributedString(parentText: Text, context: Context) -> NSAttributedString {
-        var attributes = [NSAttributedString.Key : Any]()
+        var attributes = [NSAttributedString.Key: Any]()
         if let font = viewStore.font ?? context.viewValues?.font {
             attributes[.font] = font.font
         }

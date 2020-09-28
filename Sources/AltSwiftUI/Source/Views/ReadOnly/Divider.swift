@@ -17,10 +17,10 @@ import UIKit
 /// vertical line.
 ///
 /// Otherwise, the divider will always display a horizontal line.
-public struct Divider : View {
-    public var viewStore: ViewValues = ViewValues()
+public struct Divider: View {
+    public var viewStore = ViewValues()
     public var body: View {
-        return self
+        self
     }
     public init() {}
 }

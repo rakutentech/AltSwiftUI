@@ -12,7 +12,7 @@ import UIKit
 
 /// An empty view with no content.
 public struct EmptyView: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View {
         self
     }
@@ -38,7 +38,7 @@ public struct PaddingView: View, Equatable {
         }
     }
     
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View {
         EmptyView()
     }
@@ -82,7 +82,7 @@ extension PaddingView: Renderable {
 // MARK: - Builder Views
 
 public struct OptionalView: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View {
         EmptyView()
     }
@@ -90,7 +90,7 @@ public struct OptionalView: View {
 }
 
 public struct TupleView: View, ViewGrouper {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     var viewContent: [View]
     
     public init(_ values: [View]) {
