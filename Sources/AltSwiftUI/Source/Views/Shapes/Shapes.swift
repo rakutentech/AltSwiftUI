@@ -166,4 +166,3 @@ public struct StrokeStyle: Equatable {
         self.dashPhase = dashPhase
     }
 }
-
