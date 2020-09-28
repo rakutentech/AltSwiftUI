@@ -9,7 +9,7 @@
 import UIKit
 
 /// A view that represents a Ellipse shape.
-public struct Ellipse: shape {
+public struct Ellipse: Shape {
 
     public var viewStore: ViewValues = ViewValues()
     

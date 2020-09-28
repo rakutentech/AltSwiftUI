@@ -7,9 +7,9 @@
     | --- | --- |
     | `NavigationLink`  | :white_check_mark: |
     | `NavigationView`  | :white_check_mark: |
-    | Sheet             | :white_check_mark: |
-    | Master Detail     |  |
-    | Sidebar           |  |
+    | `Sheet`           | :white_check_mark: |
+    | `Master Detail`   |  |
+    | `Sidebar`         |  |
 
     </p> 
     </details>
@@ -59,11 +59,11 @@
     | `Text`        | :white_check_mark: |
     | `TextField`   | :white_check_mark: |
     | `Toggle`      | :white_check_mark: |
-    | Gradients     |  |
+    | `Gradients`   |  |
     | `Link`        |  |
     | `Path`        |  |
     | `SecureField` |  |
-    | Shapes        |  |
+    | `Shapes`      | :white_check_mark: |
     | `TextEditor`  |  |
 
     </p>
@@ -73,11 +73,11 @@
 
     | Component | Supported |
     | --- | --- |
-    | Action Sheet      | :white_check_mark: |
-    | Alert             | :white_check_mark: |
-    | AppStore Overlay  | :white_check_mark: |
-    | Context Menu      | :white_check_mark: |
-    | `Menu`            | |
+    | `Action Sheet`      | :white_check_mark: |
+    | `Alert`             | :white_check_mark: |
+    | `AppStore Overlay`  | :white_check_mark: |
+    | `Context Menu`      | :white_check_mark: |
+    | `Menu`              | |
 
     </p>
     </details>

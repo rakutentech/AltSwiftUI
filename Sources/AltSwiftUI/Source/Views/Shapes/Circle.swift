@@ -9,7 +9,7 @@
 import UIKit
 
 /// A view that represents a Circle shape.
-public struct Circle: shape {
+public struct Circle: Shape {
     public var viewStore: ViewValues = ViewValues()
     
     public var fillColor = Color.clear

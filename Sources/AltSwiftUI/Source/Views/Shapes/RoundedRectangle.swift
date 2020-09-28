@@ -9,7 +9,7 @@
 import UIKit
 
 /// A view that represents a RoundedRectangle shape.
-public struct RoundedRectangle: shape {
+public struct RoundedRectangle: Shape {
     public var viewStore: ViewValues = ViewValues()
     
     public var fillColor = Color.clear

@@ -9,7 +9,7 @@
 import UIKit
 
 /// A view that represents a Rectangle shape.
-public struct Rectangle: shape {
+public struct Rectangle: Shape {
     public var viewStore: ViewValues = ViewValues()
     
     public var fillColor = Color.clear

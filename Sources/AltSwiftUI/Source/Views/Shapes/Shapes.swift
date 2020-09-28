@@ -12,13 +12,13 @@ class AltShapeView: UIView {
     public var caShapeLayer = CAShapeLayer()
 }
 
-public protocol shape: View, Renderable {
+public protocol Shape: View, Renderable {
     var fillColor: Color { get set }
     var strokeBorderColor: Color { get set }
     var style: StrokeStyle { get set }
 }
 
-extension shape {
+extension Shape {
     
     /// Fills this shape with a color.
     ///

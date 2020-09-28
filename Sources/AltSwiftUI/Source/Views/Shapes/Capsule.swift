@@ -9,7 +9,7 @@
 import UIKit
 
 /// A view that represents a Capsule shape.
-public struct Capsule: shape {
+public struct Capsule: Shape {
     public var viewStore: ViewValues = ViewValues()
     
     public var fillColor = Color.clear
