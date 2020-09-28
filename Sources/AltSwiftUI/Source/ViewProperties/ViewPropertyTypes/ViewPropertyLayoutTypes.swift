@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Public Types
 
 /// The inset distances for the sides of a rectangle.
-public struct EdgeInsets : Equatable {
+public struct EdgeInsets: Equatable {
     public var top: CGFloat
     public var leading: CGFloat
     public var bottom: CGFloat
@@ -55,7 +55,7 @@ public enum VerticalAlignment {
 
 /// A type that specifies the alignment of the
 /// content inside its container.
-public struct Alignment : Equatable {
+public struct Alignment: Equatable {
     public var horizontal: HorizontalAlignment
     public var vertical: VerticalAlignment
 
@@ -97,7 +97,7 @@ public enum Edge: Int8 {
     case top, leading, bottom, trailing
     
     /// An efficient option set of `Edge`s.
-    public struct Set : OptionSet {
+    public struct Set: OptionSet {
 
         /// The element type of the option set.
         ///
@@ -256,7 +256,8 @@ struct ViewDimensions: Equatable {
     var minHeight: CGFloat?
     var maxHeight: CGFloat?
     
-    init(width: CGFloat? = nil,
+    init(
+        width: CGFloat? = nil,
         height: CGFloat? = nil,
         minWidth: CGFloat? = nil,
         maxWidth: CGFloat? = nil,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SwiftUIConstants {
+enum SwiftUIConstants {
     static let defaultCellHeight: CGFloat = 44
     static let defaultPadding: CGFloat = 10
     static let defaultCellPadding: CGFloat = 12
@@ -20,5 +20,5 @@ struct SwiftUIConstants {
             return UIColor(white: 0.9, alpha: 1)
         }
     }
-    static let minHeaderHeight: CGFloat = 25
+    static let minHeaderHeight: CGFloat = 35
 }

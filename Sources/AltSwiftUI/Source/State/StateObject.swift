@@ -18,7 +18,7 @@ import Foundation
 /// - StateObject owned by view: Keeps same instance
 @propertyWrapper
 public class StateObject<ObjectType: ObservableObject>: ObservedObject<ObjectType> {
-    public override var wrappedValue: ObjectType {
+    override public var wrappedValue: ObjectType {
         get {
             super.wrappedValue
         }

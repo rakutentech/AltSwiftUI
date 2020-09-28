@@ -13,7 +13,7 @@ import UIKit
 /// __Important__: This view will add a tab view at the __root__
 /// screen in the application.
 @available(watchOS, unavailable)
-public struct TabView : View {
+public struct TabView: View {
     let selection: Binding<Int>?
     let content: [View]
     private var selectedIndex: Int? {
@@ -23,7 +23,7 @@ public struct TabView : View {
         return content.firstIndex { $0.viewStore.tag == selectionValue }
     }
 
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View {
         EmptyView()
     }

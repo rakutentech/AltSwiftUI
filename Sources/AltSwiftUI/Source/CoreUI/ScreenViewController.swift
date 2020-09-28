@@ -116,7 +116,7 @@ class ScreenViewController: UIViewController {
         }
         
         view.addSubview(renderView)
-        LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: contentView.firstRenderableView(context: context), expand: false, context: context)
+        LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: contentView.firstRenderableView(context: context), context: context, expand: false)
         executeLazyConstraints()
         executeInsertAppearHandlers()
     }
@@ -149,7 +149,7 @@ class ScreenViewController: UIViewController {
     
     // MARK: - Public methods: Navigation
     
-    func navigateToView(_ view: View, context: Context, onPop: (()->Void)? = nil) {
+    func navigateToView(_ view: View, context: Context, onPop: (() -> Void)? = nil) {
         let vc = ScreenViewController(
             contentView: view,
             parentContext: context,

@@ -14,7 +14,7 @@ import Foundation
 /// ViewBuilder is used when passing children views as parameter to a parent
 /// view.
 @_functionBuilder
-public struct ViewBuilder {
+public enum ViewBuilder {
     public static func buildBlock() -> EmptyView {
         EmptyView()
     }
@@ -30,7 +30,6 @@ public struct ViewBuilder {
     public static func buildBlock(_ c0: View, _ c1: View, _ c2: View) -> TupleView {
         TupleView([c0, c1, c2])
     }
-
 
     public static func buildBlock(_ c0: View, _ c1: View, _ c2: View, _ c3: View) -> TupleView {
         TupleView([c0, c1, c2, c3])

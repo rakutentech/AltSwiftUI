@@ -22,7 +22,7 @@ open class SwiftUITabBarController: UITabBarController, UITabBarControllerDelega
         super.init(nibName: nil, bundle: nil)
         setupController()
     }
-    required public init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -36,7 +36,7 @@ open class SwiftUITabBarController: UITabBarController, UITabBarControllerDelega
         delegate = self
     }
     
-    //MARK: Delegate
+    // MARK: Delegate
     
     override open func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if let index = tabBar.items?.firstIndex(of: item) {
@@ -73,13 +73,13 @@ class SwiftUIBarButtonItem: UIBarButtonItem {
     
     var actionHolder: ActionHolder?
     
-    convenience init(title: String, style: UIBarButtonItem.Style, accent: UIColor? = nil,  buttonAction: @escaping () -> Void) {
+    convenience init(title: String, style: UIBarButtonItem.Style, accent: UIColor? = nil, buttonAction: @escaping () -> Void) {
         let actionHolder = ActionHolder(buttonAction: buttonAction)
         self.init(title: title, style: style, target: actionHolder, action: #selector(ActionHolder.performAction))
         self.actionHolder = actionHolder
         tintColor = accent
     }
-    convenience init(image: UIImage, style: UIBarButtonItem.Style, accent: UIColor? = nil,  buttonAction: @escaping () -> Void) {
+    convenience init(image: UIImage, style: UIBarButtonItem.Style, accent: UIColor? = nil, buttonAction: @escaping () -> Void) {
         let actionHolder = ActionHolder(buttonAction: buttonAction)
         self.init(image: image, style: style, target: actionHolder, action: #selector(ActionHolder.performAction))
         self.actionHolder = actionHolder

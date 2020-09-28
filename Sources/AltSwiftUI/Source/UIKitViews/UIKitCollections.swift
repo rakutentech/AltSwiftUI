@@ -72,7 +72,7 @@ class SwiftUITableView: UITableView, UIKitViewHandler {
         updateOnTraitChange(previousTrait: previousTraitCollection)
     }
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: CGFloat.limitForUI, height: CGFloat.limitForUI)
+        CGSize(width: CGFloat.limitForUI, height: CGFloat.limitForUI)
     }
     override func layoutSubviews() {
         super.layoutSubviews()

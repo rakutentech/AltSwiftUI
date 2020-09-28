@@ -13,7 +13,7 @@ import UIKit
 ///
 /// By adding a `NavigationView`, a navigation bar will be shown by default.
 public struct NavigationView: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View {
         EmptyView()
     }
@@ -68,13 +68,13 @@ extension NavigationView: Renderable {
 /// The behavior of this view is same as a `Button`, but the action
 /// is predefined to navigate to a specified `View`.
 public struct NavigationLink: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     public var body: View {
         EmptyView()
     }
     let contentView: View
     var destination: View
-    var isActive: Binding<Bool>? = nil
+    var isActive: Binding<Bool>?
     
     /// Creates an instance that will navigate to the `destination` when
     /// triggered by user interaction.

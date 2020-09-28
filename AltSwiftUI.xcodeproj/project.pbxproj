@@ -48,7 +48,6 @@
 		2CD1A0332512066D00E2CCBA /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FEE2512066D00E2CCBA /* Divider.swift */; };
 		2CD1A0342512066D00E2CCBA /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FEF2512066D00E2CCBA /* Text.swift */; };
 		2CD1A0352512066D00E2CCBA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FF02512066D00E2CCBA /* Color.swift */; };
-		2CD1A0362512066D00E2CCBA /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FF12512066D00E2CCBA /* Rectangle.swift */; };
 		2CD1A0372512066D00E2CCBA /* GeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FF22512066D00E2CCBA /* GeometryReader.swift */; };
 		2CD1A0382512066D00E2CCBA /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FF42512066D00E2CCBA /* DatePicker.swift */; };
 		2CD1A0392512066D00E2CCBA /* Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FF52512066D00E2CCBA /* Toggle.swift */; };
@@ -73,6 +72,12 @@
 		2CD1A04C2512066D00E2CCBA /* ViewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A00B2512066D00E2CCBA /* ViewEnvironment.swift */; };
 		2CD1A04E2512066D00E2CCBA /* AltSwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CD1A056251206C200E2CCBA /* AltSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A054251206C200E2CCBA /* AltSwiftUITests.swift */; };
+		7D2D4D6B25148269000F5DDC /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6525148269000F5DDC /* Capsule.swift */; };
+		7D2D4D6C25148269000F5DDC /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6625148269000F5DDC /* Circle.swift */; };
+		7D2D4D6D25148269000F5DDC /* Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6725148269000F5DDC /* Ellipse.swift */; };
+		7D2D4D6E25148269000F5DDC /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6825148269000F5DDC /* Rectangle.swift */; };
+		7D2D4D6F25148269000F5DDC /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6925148269000F5DDC /* Shapes.swift */; };
+		7D2D4D7025148269000F5DDC /* RoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,7 +133,6 @@
 		2CD19FEE2512066D00E2CCBA /* Divider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		2CD19FEF2512066D00E2CCBA /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		2CD19FF02512066D00E2CCBA /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		2CD19FF12512066D00E2CCBA /* Rectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		2CD19FF22512066D00E2CCBA /* GeometryReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryReader.swift; sourceTree = "<group>"; };
 		2CD19FF42512066D00E2CCBA /* DatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		2CD19FF52512066D00E2CCBA /* Toggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toggle.swift; sourceTree = "<group>"; };
@@ -155,6 +159,12 @@
 		2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AltSwiftUI.h; sourceTree = "<group>"; };
 		2CD1A054251206C200E2CCBA /* AltSwiftUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AltSwiftUITests.swift; sourceTree = "<group>"; };
 		2CD1A055251206C200E2CCBA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D2D4D6525148269000F5DDC /* Capsule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
+		7D2D4D6625148269000F5DDC /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		7D2D4D6725148269000F5DDC /* Ellipse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ellipse.swift; sourceTree = "<group>"; };
+		7D2D4D6825148269000F5DDC /* Rectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
+		7D2D4D6925148269000F5DDC /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
+		7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRectangle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +334,7 @@
 		2CD19FE92512066D00E2CCBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7D2D4D6425148237000F5DDC /* Shapes */,
 				2CD19FEA2512066D00E2CCBA /* ReadOnly */,
 				2CD19FF32512066D00E2CCBA /* Controls */,
 				2CD19FF92512066D00E2CCBA /* CoreViews.swift */,
@@ -342,7 +353,6 @@
 				2CD19FEE2512066D00E2CCBA /* Divider.swift */,
 				2CD19FEF2512066D00E2CCBA /* Text.swift */,
 				2CD19FF02512066D00E2CCBA /* Color.swift */,
-				2CD19FF12512066D00E2CCBA /* Rectangle.swift */,
 				2CD19FF22512066D00E2CCBA /* GeometryReader.swift */,
 			);
 			path = ReadOnly;
@@ -405,6 +415,19 @@
 			path = Tests/AltSwiftUITests;
 			sourceTree = "<group>";
 		};
+		7D2D4D6425148237000F5DDC /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				7D2D4D6525148269000F5DDC /* Capsule.swift */,
+				7D2D4D6625148269000F5DDC /* Circle.swift */,
+				7D2D4D6725148269000F5DDC /* Ellipse.swift */,
+				7D2D4D6825148269000F5DDC /* Rectangle.swift */,
+				7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */,
+				7D2D4D6925148269000F5DDC /* Shapes.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -424,6 +447,7 @@
 			buildConfigurationList = 2C7A7C4B250F2AE5001A8613 /* Build configuration list for PBXNativeTarget "AltSwiftUI" */;
 			buildPhases = (
 				2C7A7C32250F2AE5001A8613 /* Headers */,
+				35621789251C222B0068F0BA /* SwiftLint */,
 				2C7A7C33250F2AE5001A8613 /* Sources */,
 				2C7A7C34250F2AE5001A8613 /* Frameworks */,
 				2C7A7C35250F2AE5001A8613 /* Resources */,
@@ -508,6 +532,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		35621789251C222B0068F0BA /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    ls\n    swiftlint autocorrect\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2C7A7C33250F2AE5001A8613 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -522,12 +568,14 @@
 				2CD1A0162512066D00E2CCBA /* StateTypes.swift in Sources */,
 				2CD1A03A2512066D00E2CCBA /* TextField.swift in Sources */,
 				2CD1A02B2512066D00E2CCBA /* ViewPropertyTransitionTypes.swift in Sources */,
+				7D2D4D6E25148269000F5DDC /* Rectangle.swift in Sources */,
 				2CD1A0432512066D00E2CCBA /* List.swift in Sources */,
 				2CD1A01F2512066D00E2CCBA /* UIKitNavigationViews.swift in Sources */,
 				2CD1A0112512066D00E2CCBA /* UIHostingController.swift in Sources */,
 				2CD1A02D2512066D00E2CCBA /* ViewBuilder.swift in Sources */,
 				2CD1A0172512066D00E2CCBA /* Binding.swift in Sources */,
 				2CD1A0152512066D00E2CCBA /* SwiftUIConstants.swift in Sources */,
+				7D2D4D7025148269000F5DDC /* RoundedRectangle.swift in Sources */,
 				2CD1A0402512066D00E2CCBA /* ViewCollectionIteration.swift in Sources */,
 				2CD1A02C2512066D00E2CCBA /* ViewValues.swift in Sources */,
 				2CD1A0342512066D00E2CCBA /* Text.swift in Sources */,
@@ -535,6 +583,7 @@
 				2CD1A0232512066D00E2CCBA /* UIKitReadOnlyViews.swift in Sources */,
 				2CD1A04B2512066D00E2CCBA /* UIApplicationExtensions.swift in Sources */,
 				2CD1A01D2512066D00E2CCBA /* Published.swift in Sources */,
+				7D2D4D6F25148269000F5DDC /* Shapes.swift in Sources */,
 				2CD1A0122512066D00E2CCBA /* ScreenViewController.swift in Sources */,
 				2CD1A03B2512066D00E2CCBA /* Slider.swift in Sources */,
 				2CD1A0202512066D00E2CCBA /* UIKitControls.swift in Sources */,
@@ -543,11 +592,12 @@
 				2CD1A02E2512066D00E2CCBA /* AltPreviewProvider.swift in Sources */,
 				2CD1A0322512066D00E2CCBA /* Image.swift in Sources */,
 				2CD1A0312512066D00E2CCBA /* Spacer.swift in Sources */,
+				7D2D4D6D25148269000F5DDC /* Ellipse.swift in Sources */,
 				2CD1A0382512066D00E2CCBA /* DatePicker.swift in Sources */,
-				2CD1A0362512066D00E2CCBA /* Rectangle.swift in Sources */,
 				2CD1A0222512066D00E2CCBA /* UIKitCollections.swift in Sources */,
 				2CD1A0282512066D00E2CCBA /* ViewPropertyRenderingTypes.swift in Sources */,
 				2CD1A03C2512066D00E2CCBA /* Button.swift in Sources */,
+				7D2D4D6C25148269000F5DDC /* Circle.swift in Sources */,
 				2CD1A0102512066D00E2CCBA /* LayoutSolver.swift in Sources */,
 				2CD1A02F2512066D00E2CCBA /* UIKitCompat.swift in Sources */,
 				2CD1A02A2512066D00E2CCBA /* ViewPropertyLayoutTypes.swift in Sources */,
@@ -566,6 +616,7 @@
 				2CD1A0252512066D00E2CCBA /* ViewPropertyGestureTypes.swift in Sources */,
 				2CD1A01A2512066D00E2CCBA /* State.swift in Sources */,
 				2CD1A0482512066D00E2CCBA /* NavigationViews.swift in Sources */,
+				7D2D4D6B25148269000F5DDC /* Capsule.swift in Sources */,
 				2CD1A0242512066D00E2CCBA /* ViewPropertyBuilder.swift in Sources */,
 				2CD1A0292512066D00E2CCBA /* ViewPropertyAnimationTypes.swift in Sources */,
 				2CD1A0182512066D00E2CCBA /* Environment.swift in Sources */,

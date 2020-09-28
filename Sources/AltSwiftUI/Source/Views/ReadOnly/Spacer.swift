@@ -16,7 +16,7 @@ import UIKit
 ///
 /// When inside a `VStack`, the spacer will expand vertically.
 public struct Spacer: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     
     public var body: View {
         self

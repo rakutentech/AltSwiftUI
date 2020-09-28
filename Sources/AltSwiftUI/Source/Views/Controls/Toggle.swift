@@ -10,7 +10,7 @@ import UIKit
 
 /// A view that can be turned on and off.
 public struct Toggle: View {
-    public var viewStore: ViewValues = ViewValues()
+    public var viewStore = ViewValues()
     let isOn: Binding<Bool>
     let label: View
     
