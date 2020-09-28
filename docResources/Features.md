@@ -63,7 +63,7 @@
     | `Link`        |  |
     | `Path`        |  |
     | `SecureField` |  |
-    | Shapes        |  |
+    | Shapes        | :white_check_mark: |
     | `TextEditor`  |  |
 
     </p>
