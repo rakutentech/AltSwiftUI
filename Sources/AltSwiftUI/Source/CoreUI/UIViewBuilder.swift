@@ -18,39 +18,25 @@ extension UIView {
             return UIView()
         }
         
-        if let animation = context.transaction?.animation, update {
-            animation.performAnimation { [weak self] in
-                self?.setColor(viewValues)
-                self?.setViewStyle(context, update: update)
-            }
-        } else {
-            setColor(viewValues)
-            setViewStyle(context, update: update)
-        }
-        
-        setLayout(viewValues, animation: viewValues.animatedValues?.first?.animation ?? context.transaction?.animation, context: context, update: update)
+        setColor(viewValues)
+        setViewStyle(context, update: update)
+        setLayout(viewValues, animation: context.transaction?.animationInContext, context: context, update: update)
         setupViewInteraction(viewValues)
         setupNavigation(context)
         setupGestures(context)
         
-        setupAnimations(viewValues, animation: context.transaction?.animation, update: update)
         if let animatedValues = viewValues.animatedValues {
             for animatedValue in animatedValues {
-                setupAnimations(animatedValue, animation: animatedValue.animation, update: update)
+                setupAnimatedValues(animatedValue, animation: animatedValue.animation, update: update)
             }
         }
-        if let shieldedValues = viewValues.animationShieldedValues {
-            setupAnimations(shieldedValues, animation: nil, update: update)
-        }
+        setupAnimatedValues(viewValues, animation: context.transaction?.animationInContext, update: update)
         
         setupController(context, update: update)
         setupCoordinate(context)
         return self
     }
     private func setColor(_ viewValues: ViewValues) {
-        if let background = viewValues.background {
-            backgroundColor = background
-        }
         if let accentColor = viewValues.accentColor {
             tintColor = accentColor
         }
@@ -76,7 +62,20 @@ extension UIView {
         }
     }
     private func setDimensions(_ viewValues: ViewValues, animation: Animation?, context: Context,  update: Bool) {
-        guard viewValues.viewDimensions != lastRenderableView?.view.viewStore.viewDimensions else {
+        var hasAnimationDiff = false
+        if lastRenderableView?.view.viewStore.animatedValues?.count != viewValues.animatedValues?.count {
+            hasAnimationDiff = true
+        } else if let oldAnimatedValues = lastRenderableView?.view.viewStore.animatedValues, let currentAnimatedValues = viewValues.animatedValues {
+            for i in 0..<min(currentAnimatedValues.count, oldAnimatedValues.count) {
+                if currentAnimatedValues[i].viewDimensions != oldAnimatedValues[i].viewDimensions {
+                    hasAnimationDiff = true
+                    break
+                }
+            }
+        }
+        guard !update ||
+                viewValues.viewDimensions != lastRenderableView?.view.viewStore.viewDimensions ||
+                hasAnimationDiff else {
             return
         }
         
@@ -86,32 +85,53 @@ extension UIView {
         
         var constraints = [NSLayoutConstraint]()
         
-        if let width = viewValues.viewDimensions?.width {
-            constraints.append(widthAnchor.constraint(equalToConstant: width))
+        if let animatedValuesCollection = viewValues.animatedValues {
+            for animatedValues in animatedValuesCollection {
+                constraints += animatedValueAppliedDimensions(animatedValues: animatedValues)
+                if let animation = animatedValues.animation, update {
+                    animation.performAnimation { [weak self] in
+                        self?.setNeedsLayout()
+                        self?.layoutIfNeeded()
+                    }
+                } else {
+                    setNeedsLayout()
+                    layoutIfNeeded()
+                }
+            }
         }
-        if let height = viewValues.viewDimensions?.height {
-            constraints.append(heightAnchor.constraint(equalToConstant: height))
-        }
-        if let minWidth = viewValues.viewDimensions?.minWidth {
-            constraints.append(widthAnchor.constraint(greaterThanOrEqualToConstant: minWidth))
-        }
-        if let maxWidth = viewValues.viewDimensions?.maxWidth {
-            constraints.append(widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth).withPriority(.required))
-            constraints.append(widthAnchor.constraint(equalToConstant: maxWidth).withPriority(.required - 1))
-        }
-        if let minHeight = viewValues.viewDimensions?.minHeight {
-            constraints.append(heightAnchor.constraint(greaterThanOrEqualToConstant: minHeight))
-        }
-        if let maxHeight = viewValues.viewDimensions?.maxHeight {
-            constraints.append(heightAnchor.constraint(lessThanOrEqualToConstant: maxHeight).withPriority(.required))
-            constraints.append(heightAnchor.constraint(equalToConstant: maxHeight).withPriority(.required - 1))
-        }
-        constraints.activate()
+        constraints += animatedValueAppliedDimensions(animatedValues: viewValues)
+        
         if animation != nil, update {
             setNeedsLayout()
         }
         
         dimensionConstraints = DimensionConstraints(value: constraints)
+    }
+    private func animatedValueAppliedDimensions(animatedValues: AnimatedViewValuesHolder) -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
+        if let width = animatedValues.viewDimensions?.width {
+            constraints.append(widthAnchor.constraint(equalToConstant: width))
+        }
+        if let height = animatedValues.viewDimensions?.height {
+            constraints.append(heightAnchor.constraint(equalToConstant: height))
+        }
+        if let minWidth = animatedValues.viewDimensions?.minWidth {
+            constraints.append(widthAnchor.constraint(greaterThanOrEqualToConstant: minWidth))
+        }
+        if let maxWidth = animatedValues.viewDimensions?.maxWidth {
+            constraints.append(widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth).withPriority(.required))
+            constraints.append(widthAnchor.constraint(equalToConstant: maxWidth).withPriority(.required - 1))
+        }
+        if let minHeight = animatedValues.viewDimensions?.minHeight {
+            constraints.append(heightAnchor.constraint(greaterThanOrEqualToConstant: minHeight))
+        }
+        if let maxHeight = animatedValues.viewDimensions?.maxHeight {
+            constraints.append(heightAnchor.constraint(lessThanOrEqualToConstant: maxHeight).withPriority(.required))
+            constraints.append(heightAnchor.constraint(equalToConstant: maxHeight).withPriority(.required - 1))
+        }
+        constraints.activate()
+        
+        return constraints
     }
     private func setupGestures(_ context: Context) {
         if let gestures = context.viewValues?.gestures {
@@ -150,7 +170,7 @@ extension UIView {
             }
         }
     }
-    private func setupAnimations(_ viewValues: AnimatedViewValuesHolder, animation: Animation?, update: Bool) {
+    private func setupAnimatedValues(_ viewValues: AnimatedViewValuesHolder, animation: Animation?, update: Bool) {
         if let animation = animation, update {
             animation.performAnimation({ [weak self] in
                 self?.setupAnimatedValues(viewValues)
@@ -175,6 +195,25 @@ extension UIView {
         if let rotation = viewValues.rotation {
             transform = transform.rotated(by: CGFloat(rotation.radians))
         }
+        if let background = viewValues.background {
+            if self is UILabel {
+                // `bagroundColor` of UILabel is not animatable, unlike the layer.
+                layer.backgroundColor = background.cgColor
+            } else {
+                backgroundColor = background
+            }
+        }
+        if let cornerRadius = viewValues.cornerRadius {
+            layer.cornerRadius = cornerRadius
+        }
+        if let border = viewValues.border {
+            if let traitHandler = self as? (TraitColorHandler & UIView) {
+                traitHandler.borderColor = border.color
+            } else {
+                layer.borderColor = border.color.cgColor
+            }
+            layer.borderWidth = border.width
+        }
     }
     private func setViewStyle(_ context: Context, update: Bool) {
         guard let viewValues = context.viewValues else { return }
@@ -192,23 +231,12 @@ extension UIView {
                 overlay.view.scheduleUpdateRender(uiView: overlayView, parentContext: context)
             }
         }
-        if let border = viewValues.border {
-            if let traitHandler = self as? (TraitColorHandler & UIView) {
-                traitHandler.borderColor = border.color
-            } else {
-                layer.borderColor = border.color.cgColor
-            }
-            layer.borderWidth = border.width
-        }
         if let disabled = viewValues.disabled {
             isUserInteractionEnabled = !disabled
         }
         if let antialiasClip = viewValues.antialiasClip {
             clipsToBounds = true
             layer.allowsEdgeAntialiasing = antialiasClip
-        }
-        if let cornerRadius = viewValues.cornerRadius {
-            layer.cornerRadius = cornerRadius
         }
         if let shadow = viewValues.shadow {
             layer.shadowColor = shadow.color.cgColor
@@ -221,7 +249,7 @@ extension UIView {
                 if let uiView = update ? self?.mask : mask.renderableView(parentContext: context, drainRenderQueue: false) {
                     if let maskWidth = mask.viewStore.viewDimensions?.width,
                         let maskHeight = mask.viewStore.viewDimensions?.height {
-                        if let animation = context.transaction?.animation, update, uiView.frame.width != maskWidth || uiView.frame.height != maskHeight {
+                        if let animation = context.transaction?.animationInContext, update, uiView.frame.width != maskWidth || uiView.frame.height != maskHeight {
                             animation.performAnimation({
                                 uiView.frame = CGRect(x: 0, y: 0, width: maskWidth, height: maskHeight)
                             })

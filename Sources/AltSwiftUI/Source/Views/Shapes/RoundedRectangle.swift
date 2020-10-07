@@ -28,7 +28,7 @@ public struct RoundedRectangle: Shape {
     public func createView(context: Context) -> UIView {
         let view = AltShapeView().noAutoresizingMask()
         view.layer.addSublayer(view.caShapeLayer)
-        updateView(view, context: context)
+        updateView(view, context: context.withoutTransaction)
         return view
     }
     

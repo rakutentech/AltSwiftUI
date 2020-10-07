@@ -157,7 +157,7 @@ public protocol ViewModifier {
 }
 
 /// A type representing a geometry angle.
-public struct Angle {
+public struct Angle: Hashable {
     /// The value of the angle in radians.
     public var radians: Double
     
@@ -214,7 +214,7 @@ public struct InsetGroupedListStyle : ListStyle {
 
 // MARK: - Internal Types
 
-struct Border {
+struct Border: Hashable {
     var color: UIColor
     var width: CGFloat
 }

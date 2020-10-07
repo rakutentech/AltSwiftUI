@@ -385,7 +385,7 @@ extension UIStackView {
                     indexSkip += nonHiddenSubView.skippedSubViews
                     let removeGroup = DispatchGroup()
                     
-                    let viewAnim = context.viewValues?.animationShieldedValues == nil ?  context.viewValues?.animatedValues?.first?.animation : nil
+                    let viewAnim = context.viewValues?.animatedValues?.first?.animation
                     if let animation = viewAnim ?? context.transaction?.animation {
                         removeGroup.enter()
                         animation.performAnimation({
