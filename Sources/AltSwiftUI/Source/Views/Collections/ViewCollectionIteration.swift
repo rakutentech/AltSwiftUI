@@ -280,9 +280,7 @@ extension RandomAccessCollection {
                     // Delete item
                     iteration(startIndex, .old(index: oldIndex), .delete(data: oldElement))
                     oldIndex += 1
-                    if !dynamicIndex {
-                        startIndex += 1
-                    }
+                    startIndex += 1
                 } else {
                     // New item
                     iteration(startIndex, .current(index: currentIndex), .insert(data: currentElement))
@@ -304,9 +302,7 @@ extension RandomAccessCollection {
                 iteration(startIndex, .old(index: oldIndex), .delete(data: oldElement))
                 oldIndex += 1
                 currentIndex += 1
-                if !dynamicIndex {
-                    startIndex += 1
-                }
+                startIndex += 1
             } else {
                 break
             }

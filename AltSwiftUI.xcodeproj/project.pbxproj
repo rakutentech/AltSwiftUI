@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2C7A7C41250F2AE5001A8613 /* AltSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7A7C37250F2AE5001A8613 /* AltSwiftUI.framework */; };
+		2CA33E51252E964C005A7C96 /* IterationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA33E4B252E95B8005A7C96 /* IterationTests.swift */; };
+		2CA33E5C252E96BF005A7C96 /* ViewBinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA33E56252E96BA005A7C96 /* ViewBinderTests.swift */; };
+		2CA33E65252E9731005A7C96 /* OperationQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA33E61252E9718005A7C96 /* OperationQueueTests.swift */; };
 		2CD1A00E2512066D00E2CCBA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FBF2512066D00E2CCBA /* View.swift */; };
 		2CD1A00F2512066D00E2CCBA /* ViewBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FC02512066D00E2CCBA /* ViewBinder.swift */; };
 		2CD1A0102512066D00E2CCBA /* LayoutSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FC12512066D00E2CCBA /* LayoutSolver.swift */; };
@@ -71,7 +74,7 @@
 		2CD1A04B2512066D00E2CCBA /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A0092512066D00E2CCBA /* UIApplicationExtensions.swift */; };
 		2CD1A04C2512066D00E2CCBA /* ViewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A00B2512066D00E2CCBA /* ViewEnvironment.swift */; };
 		2CD1A04E2512066D00E2CCBA /* AltSwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2CD1A056251206C200E2CCBA /* AltSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A054251206C200E2CCBA /* AltSwiftUITests.swift */; };
+		2CD1A056251206C200E2CCBA /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A054251206C200E2CCBA /* ViewTests.swift */; };
 		7D2D4D6B25148269000F5DDC /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6525148269000F5DDC /* Capsule.swift */; };
 		7D2D4D6C25148269000F5DDC /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6625148269000F5DDC /* Circle.swift */; };
 		7D2D4D6D25148269000F5DDC /* Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6725148269000F5DDC /* Ellipse.swift */; };
@@ -93,6 +96,9 @@
 /* Begin PBXFileReference section */
 		2C7A7C37250F2AE5001A8613 /* AltSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AltSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C7A7C40250F2AE5001A8613 /* AltSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AltSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CA33E4B252E95B8005A7C96 /* IterationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IterationTests.swift; sourceTree = "<group>"; };
+		2CA33E56252E96BA005A7C96 /* ViewBinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBinderTests.swift; sourceTree = "<group>"; };
+		2CA33E61252E9718005A7C96 /* OperationQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueueTests.swift; sourceTree = "<group>"; };
 		2CD19FBF2512066D00E2CCBA /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		2CD19FC02512066D00E2CCBA /* ViewBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewBinder.swift; sourceTree = "<group>"; };
 		2CD19FC12512066D00E2CCBA /* LayoutSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutSolver.swift; sourceTree = "<group>"; };
@@ -157,7 +163,7 @@
 		2CD1A00B2512066D00E2CCBA /* ViewEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEnvironment.swift; sourceTree = "<group>"; };
 		2CD1A00C2512066D00E2CCBA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AltSwiftUI.h; sourceTree = "<group>"; };
-		2CD1A054251206C200E2CCBA /* AltSwiftUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AltSwiftUITests.swift; sourceTree = "<group>"; };
+		2CD1A054251206C200E2CCBA /* ViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
 		2CD1A055251206C200E2CCBA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D2D4D6525148269000F5DDC /* Capsule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
 		7D2D4D6625148269000F5DDC /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
@@ -408,7 +414,10 @@
 		2CD1A053251206C200E2CCBA /* AltSwiftUITests */ = {
 			isa = PBXGroup;
 			children = (
-				2CD1A054251206C200E2CCBA /* AltSwiftUITests.swift */,
+				2CD1A054251206C200E2CCBA /* ViewTests.swift */,
+				2CA33E4B252E95B8005A7C96 /* IterationTests.swift */,
+				2CA33E56252E96BA005A7C96 /* ViewBinderTests.swift */,
+				2CA33E61252E9718005A7C96 /* OperationQueueTests.swift */,
 				2CD1A055251206C200E2CCBA /* Info.plist */,
 			);
 			name = AltSwiftUITests;
@@ -634,7 +643,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD1A056251206C200E2CCBA /* AltSwiftUITests.swift in Sources */,
+				2CD1A056251206C200E2CCBA /* ViewTests.swift in Sources */,
+				2CA33E65252E9731005A7C96 /* OperationQueueTests.swift in Sources */,
+				2CA33E5C252E96BF005A7C96 /* ViewBinderTests.swift in Sources */,
+				2CA33E51252E964C005A7C96 /* IterationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
