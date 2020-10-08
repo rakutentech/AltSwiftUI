@@ -96,7 +96,7 @@ extension Color {
 extension Color: Renderable {
     public func createView(context: Context) -> UIView {
         let view = SwiftUIExpandView(expandWidth: true, expandHeight: true).noAutoresizingMask()
-        updateView(view, context: context)
+        updateView(view, context: context.withoutTransaction)
         return view
     }
     
