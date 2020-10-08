@@ -58,7 +58,7 @@ extension Picker: Renderable {
             return picker
         }
         let picker = UIPickerView().noAutoresizingMask()
-        updateView(picker, context: context)
+        updateView(picker, context: context.withoutTransaction)
         return picker
     }
     
