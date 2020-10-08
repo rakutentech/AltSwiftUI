@@ -61,16 +61,15 @@ extension UIView {
             geometryView.registerGeometryListener(geometry)
         }
     }
-    private func setDimensions(_ viewValues: ViewValues, animation: Animation?, context: Context,  update: Bool) {
+    private func setDimensions(_ viewValues: ViewValues, animation: Animation?, context: Context, update: Bool) {
         var hasAnimationDiff = false
         if lastRenderableView?.view.viewStore.animatedValues?.count != viewValues.animatedValues?.count {
             hasAnimationDiff = true
         } else if let oldAnimatedValues = lastRenderableView?.view.viewStore.animatedValues, let currentAnimatedValues = viewValues.animatedValues {
-            for i in 0..<min(currentAnimatedValues.count, oldAnimatedValues.count) {
-                if currentAnimatedValues[i].viewDimensions != oldAnimatedValues[i].viewDimensions {
-                    hasAnimationDiff = true
-                    break
-                }
+            for i in 0..<min(currentAnimatedValues.count, oldAnimatedValues.count) where
+                currentAnimatedValues[i].viewDimensions != oldAnimatedValues[i].viewDimensions {
+                hasAnimationDiff = true
+                break
             }
         }
         guard !update ||

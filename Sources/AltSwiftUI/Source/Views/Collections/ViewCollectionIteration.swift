@@ -242,7 +242,6 @@ extension Array where Element == View {
 }
 
 extension RandomAccessCollection {
-    // swiftlint:disable:next function_body_length
     /// Iterates and specifies the operation to apply the current
     /// collection's data to the `oldData`.
     /// - Parameters:
@@ -261,7 +260,7 @@ extension RandomAccessCollection {
         
         var oldIndex = 0
         var currentIndex = 0
-        while(oldIndex < oldCount || currentIndex < currentCount) {
+        while oldIndex < oldCount || currentIndex < currentCount {
             let currentElement = element(for: currentIndex)
             let oldElement = oldData.element(for: oldIndex)
             

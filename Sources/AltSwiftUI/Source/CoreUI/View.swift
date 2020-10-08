@@ -42,8 +42,6 @@ extension View {
     func updateRender(uiView: UIView, parentContext: Context, completeMerge: Bool = false, bodyLevel: Int = 0, drainRenderQueue: Bool = true) {
         var mergedContext = completeMerge ? parentContext.completeMerge(viewValues: viewStore) : parentContext.merge(viewValues: viewStore)
         
-        // TODO: Which is the first animation? (including animation shield), merge into one array, new mechanism for dividing animation sections and store (current can't differentiate sectors for concrete view properties)
-        
         if let renderableSelf = self as? Renderable {
             if !(mergedContext.viewValues?.skipOnHighPerformance ?? false) {
                 if mergedContext.transaction?.isHighPerformance == false ||

@@ -222,11 +222,11 @@ extension List: Renderable {
                     view.beginUpdates()
                     data.iterateDataDiff(oldData: oldData, id: { $0[keyPath: idKeyPath] }, dynamicIndex: false) { iteratedIndex, collectionIndex, operation in
                         switch operation {
-                        case .insert(_):
+                        case .insert:
                             view.insertRows(at: [IndexPath(item: iteratedIndex, section: 0)], with: .automatic)
-                        case .delete(_):
+                        case .delete:
                             view.deleteRows(at: [IndexPath(item: iteratedIndex, section: 0)], with: .automatic)
-                        case .update(_):
+                        case .update:
                             if case let .current(currentDataIndex) = collectionIndex,
                                let storedView = cellStoredViewMap[iteratedIndex] {
                                 let updateView = tableDelegate.viewForIndex(section: 0, row: currentDataIndex)

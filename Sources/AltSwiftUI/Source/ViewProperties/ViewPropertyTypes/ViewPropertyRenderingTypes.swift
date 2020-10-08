@@ -191,13 +191,13 @@ public struct Angle: Hashable {
 public protocol ListStyle { }
 
 /// A plain list style to be a applied to a `List`.
-public struct PlainListStyle : ListStyle {
+public struct PlainListStyle: ListStyle {
     /// Creates a plain list style.
     public init() {}
 }
 
 /// A grouped list style to be a applied to a `List`.
-public struct GroupedListStyle : ListStyle {
+public struct GroupedListStyle: ListStyle {
     /// Creates a grouped list style.
     public init() {}
 }
@@ -207,7 +207,7 @@ public struct GroupedListStyle : ListStyle {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct InsetGroupedListStyle : ListStyle {
+public struct InsetGroupedListStyle: ListStyle {
     /// Creates an inset grouped list style.
     public init() {}
 }
