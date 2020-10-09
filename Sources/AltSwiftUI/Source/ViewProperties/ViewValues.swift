@@ -71,6 +71,7 @@ public struct ViewValues: AnimatedViewValuesHolder {
     var strictOnHighPerformance: Bool?
     var skipOnHighPerformance: Bool?
     var navigationAccentColor: UIColor?
+    var accessibilityIdentifier: String?
     
     private var skOverlayPresentationObject: Any? // Workaround as SKOverlayPresentation is only available from iOS 14.0+
     @available(iOS 14.0, *)
@@ -208,6 +209,7 @@ extension ViewValues {
         if onDrop == nil { mergedValues.onDrop = defaultValues.onDrop }
         if strictOnHighPerformance == nil { mergedValues.strictOnHighPerformance = defaultValues.strictOnHighPerformance }
         if skipOnHighPerformance == nil { mergedValues.skipOnHighPerformance = defaultValues.skipOnHighPerformance }
+        if accessibilityIdentifier == nil { mergedValues.accessibilityIdentifier = defaultValues.accessibilityIdentifier }
         
         if #available(iOS 14.0, *) {
             if skOverlayPresentation == nil {
