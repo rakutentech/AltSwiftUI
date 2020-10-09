@@ -163,6 +163,7 @@ struct RamenDetailView: View {
                 presentationMode.wrappedValue.dismiss()
             }
             .font(.headline)
+            .accessibility(identifier: "OrderButton")
 
             Spacer()
         }

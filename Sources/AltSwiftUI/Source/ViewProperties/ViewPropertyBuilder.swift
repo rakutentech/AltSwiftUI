@@ -1001,6 +1001,15 @@ extension View {
         view.viewStore.transition = t
         return view
     }
+    
+    // MARK: - Accessibility
+    
+    /// Uses the specified string to identify the view.
+    public func accessibility(identifier: String) -> Self {
+        var view = self
+        view.viewStore.accessibilityIdentifier = identifier
+        return view
+    }
 }
 
 /// Returns the result of executing `body` with `animation` installed
