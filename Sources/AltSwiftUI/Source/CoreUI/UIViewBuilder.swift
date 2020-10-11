@@ -24,6 +24,7 @@ extension UIView {
         setupViewInteraction(viewValues)
         setupNavigation(context)
         setupGestures(context)
+        setupAccessibility(context)
         
         if let animatedValues = viewValues.animatedValues {
             for animatedValue in animatedValues {
@@ -396,9 +397,16 @@ extension UIView {
             }
         }
     }
+    
     private func setupCoordinate(_ context: Context) {
         if let coordinateSpace = context.viewValues?.coordinateSpace {
             EnvironmentHolder.coordinateSpaceNames[coordinateSpace] = WeakObject(object: self)
+        }
+    }
+    
+    private func setupAccessibility(_ context: Context) {
+        if let accessibilityIdentifier = context.viewValues?.accessibilityIdentifier {
+            self.accessibilityIdentifier = accessibilityIdentifier
         }
     }
     
