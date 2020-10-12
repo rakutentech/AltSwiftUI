@@ -40,18 +40,32 @@ extension View {
     /// in its hierarchy. Changes in view properties and in the context
     /// will be processed here.
     func updateRender(uiView: UIView, parentContext: Context, completeMerge: Bool = false, bodyLevel: Int = 0, drainRenderQueue: Bool = true) {
-        let mergedContext = completeMerge ? parentContext.completeMerge(viewValues: viewStore) : parentContext.merge(viewValues: viewStore)
+        var mergedContext = completeMerge ? parentContext.completeMerge(viewValues: viewStore) : parentContext.merge(viewValues: viewStore)
         
         if let renderableSelf = self as? Renderable {
             if !(mergedContext.viewValues?.skipOnHighPerformance ?? false) {
                 if mergedContext.transaction?.isHighPerformance == false ||
                     !(mergedContext.viewValues?.strictOnHighPerformance ?? false) {
+                    
+                    // Set animation originating from this view into the transaction
+                    mergedContext = updatedAnimationContext(context: mergedContext, uiView: uiView)
+                    
+                    // Update view properties
                     renderableSelf.updateView(uiView, context: mergedContext)
                     uiView.setViewValues(mergedContext, update: true)
                     
+                    // Execute sub render operations with Breadth First Search
                     if drainRenderQueue {
-                        // Execute sub render operations with Breadth First Search
                         mergedContext.viewOperationQueue.drainRecursively()
+                    }
+                    
+                    // Layout the hierarchy if this view generates an animation.
+                    if mergedContext.transaction?.disablesAnimations == true {
+                        uiView.superview?.layoutIfNeeded()
+                    } else {
+                        mergedContext.viewValues?.animatedValues?.first?.animation?.performAnimation {
+                            uiView.superview?.layoutIfNeeded()
+                        }
                     }
                 } else {
                     uiView.setViewValues(mergedContext, update: true)
@@ -63,6 +77,8 @@ extension View {
             }
             uiView.lastRenderableView = LastRenderableView(view: mergedView)
         } else if let binder = uiView.viewBinder(index: bodyLevel) {
+            // Store the context values into the view inside the binder,
+            // for future atomic updates without the same context.
             let oldView = binder.view
             var updatedView = self
             updatedView.migrateState(fromView: oldView)
@@ -71,6 +87,7 @@ extension View {
             }
             binder.view = updatedView
             binder.isInsideButton = mergedContext.isInsideButton
+            binder.overwriteTransaction = overwriteTransaction(from: mergedContext.transaction)
             
             EnvironmentHolder.currentBodyViewBinderStack.append(binder)
             setupDynamicProperties(context: mergedContext)
@@ -90,10 +107,21 @@ extension View {
     /// Generates a `UIView` out of the view and it's subview hierarchy.
     func renderableView(parentContext: Context, completeMerge: Bool = false, bodyLevel: Int = 0, renderProperties: RenderProperties? = nil, drainRenderQueue: Bool = true) -> UIView? {
         var view: UIView?
-        let mergedContext = completeMerge ? parentContext.completeMerge(viewValues: viewStore) : parentContext.merge(viewValues: viewStore)
+        var mergedContext = completeMerge ? parentContext.completeMerge(viewValues: viewStore) : parentContext.merge(viewValues: viewStore)
         
         if let renderableSelf = self as? Renderable {
+            // Set animation originating from this view into the transaction
+            // for children in queue to identify the overwrite transaction.
+            let updatedTransaction = updatedAnimationTransaction(context: mergedContext)
+            if let updatedTransaction = updatedTransaction {
+                mergedContext.transaction = updatedTransaction
+            }
+            
             view = renderableSelf.createView(context: mergedContext).setViewValues(mergedContext, update: false)
+            
+            // Set the view of the overwrite transaction after UIView is created and
+            // before children are rendered.
+            updatedTransaction?.overwriteAnimationParent?.view = view
             
             if drainRenderQueue {
                 // Execute sub render operations with Breadth First Search
@@ -106,7 +134,12 @@ extension View {
             if let mergedViewValues = mergedContext.viewValues {
                 updatedView.viewStore = mergedViewValues
             }
-            let binder = ViewBinder(view: updatedView, rootController: mergedContext.rootController, bodyLevel: bodyLevel, isInsideButton: mergedContext.isInsideButton)
+            let binder = ViewBinder(
+                view: updatedView,
+                rootController: mergedContext.rootController,
+                bodyLevel: bodyLevel,
+                isInsideButton: mergedContext.isInsideButton,
+                overwriteTransaction: overwriteTransaction(from: mergedContext.transaction))
             EnvironmentHolder.currentBodyViewBinderStack.append(binder)
             setupDynamicProperties(context: mergedContext)
             view = body.renderableView(parentContext: mergedContext, completeMerge: true, bodyLevel: bodyLevel + 1, renderProperties: renderProperties, drainRenderQueue: drainRenderQueue)
@@ -230,6 +263,39 @@ extension View {
             context.viewValues?.rotation?.degrees != oldView?.viewStore.rotation?.degrees ||
             context.viewValues?.opacity != oldView?.viewStore.opacity
     }
+    
+    private func overwriteTransaction(from transaction: Transaction?) -> ViewBinder.OverwriteTransaction? {
+        if let transaction = transaction,
+           let overwriteAnimationParent = transaction.overwriteAnimationParent?.view {
+            return .init(transaction: transaction, parent: overwriteAnimationParent)
+        } else {
+            return nil
+        }
+    }
+    
+    private func updatedAnimationContext(context: Context, uiView: UIView?) -> Context {
+        var newContext = context
+        if let updatedTransaction = updatedAnimationTransaction(context: context) {
+            updatedTransaction.overwriteAnimationParent?.view = uiView
+            newContext.transaction = updatedTransaction
+        }
+        return newContext
+    }
+    
+    private func updatedAnimationTransaction(context: Context) -> Transaction? {
+        if let firstAnimatedValues = context.viewValues?.animatedValues?.first {
+            var updatedTransaction = context.transaction ?? Transaction()
+            if let firstAnimation = firstAnimatedValues.animation {
+                updatedTransaction.animation = firstAnimation
+            } else {
+                updatedTransaction.disablesAnimations = true
+            }
+            updatedTransaction.overwriteAnimationParent = .init()
+            return updatedTransaction
+        } else {
+            return nil
+        }
+    }
 }
 
 extension View {
@@ -247,8 +313,6 @@ extension View {
     var firstTransition: (transition: AnyTransition, animationValues: AnimatedViewValues?)? {
         if let transition = viewStore.transition {
             return (transition: transition, animationValues: nil)
-        } else if let shieldValues = viewStore.animationShieldedValues, let transition = shieldValues.transition {
-            return (transition: transition, animationValues: shieldValues)
         } else if let animationValues = viewStore.animatedValues {
            for values in animationValues {
                if let transition = values.transition {

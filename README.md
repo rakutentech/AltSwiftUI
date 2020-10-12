@@ -115,7 +115,7 @@ When using `Text` without `lineLimit` inside a `HStack`, make sure that all othe
 
 To work with previews, there are 2 steps that need to be done:
 
-1. Write the preview code at the end of the file that contains the view(s) you want to preview. This works similar to SwiftUI, but the preview must also conform to `RPreviewProvider`.
+1. Write the preview code at the end of the file that contains the view(s) you want to preview. This works similar to SwiftUI, but the preview must also conform to `AltPreviewProvider`.
 
 ```swift
 #if DEBUG && canImport(SwiftUI)
@@ -123,7 +123,7 @@ To work with previews, there are 2 steps that need to be done:
 import protocol SwiftUI.PreviewProvider
 import protocol AltSwiftUI.View
 
-struct MyTextPreview : RPreviewProvider, PreviewProvider {
+struct MyTextPreview : AltPreviewProvider, PreviewProvider {
     static var previewView: View {
         MyText()
     }

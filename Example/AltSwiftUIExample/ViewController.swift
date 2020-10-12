@@ -18,8 +18,10 @@ struct ExampleViewData {
 
 struct ExampleView: View {
     var viewStore = ViewValues()
+
     var views: [ExampleViewData] = [
         ExampleViewData(title: "Ramen Example", destination: RamenExampleView()),
+        ExampleViewData(title: "List", destination: ListExampleView()),
         ExampleViewData(title: "Shapes", destination: ShapesExampleView())
     ]
     

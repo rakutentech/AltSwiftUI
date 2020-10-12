@@ -13,7 +13,7 @@ import SwiftUI
 
 /// A type that produces AltSwiftUI view previews in Xcode.
 ///
-/// Xcode statically discovers types that conform to the ``RPreviewProvider``
+/// Xcode statically discovers types that conform to the ``AltPreviewProvider``
 /// protocol in your app, and generates previews for each provider it discovers.
 ///
 /// __Note__: In case you can't get the preview window to show, make sure
@@ -32,7 +32,7 @@ public protocol AltPreviewProvider: PreviewProvider {
     ///     import protocol SwiftUI.PreviewProvider
     ///     import protocol RakutenTravelCore.View
     ///
-    ///     struct MyTextPreview : RPreviewProvider, PreviewProvider {
+    ///     struct MyTextPreview : AltPreviewProvider, PreviewProvider {
     ///         static var previewView: View {
     ///             MyText()
     ///         }

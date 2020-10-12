@@ -20,5 +20,5 @@ enum SwiftUIConstants {
             return UIColor(white: 0.9, alpha: 1)
         }
     }
-    static let minHeaderHeight: CGFloat = 25
+    static let minHeaderHeight: CGFloat = 35
 }

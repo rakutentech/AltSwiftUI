@@ -8,10 +8,21 @@
 
 import UIKit
 
-enum DiffableSourceOperation {
+enum DiffableViewSourceOperation {
     case insert(view: View)
     case delete(view: View)
     case update(view: View)
+}
+
+enum DiffableDataSourceOperation<Data> {
+    case insert(data: Data)
+    case delete(data: Data)
+    case update(data: Data)
+}
+
+enum CollectionDiffIndex {
+    case current(index: Int)
+    case old(index: Int)
 }
 
 extension Array where Element == View {
@@ -113,7 +124,7 @@ extension Array where Element == View {
     ///
     /// Groups are not flattened, and are expected to already be
     /// flattened.
-    func iterateFullViewDiff(oldList: [View] = [], iteration: (Int, DiffableSourceOperation) -> Void) {
+    func iterateFullViewDiff(oldList: [View] = [], iteration: (Int, DiffableViewSourceOperation) -> Void) {
         var displayIndex = 0
         let maxCount = Swift.max(count, oldList.count)
         if maxCount == 0 {
@@ -134,7 +145,7 @@ extension Array where Element == View {
     }
     
     // swiftlint:disable:next function_body_length
-    private func iterateFullSubviewDiff(subView: View?, oldView: View?, iteration: (Int, DiffableSourceOperation) -> Void, displayIndex: inout Int) {
+    private func iterateFullSubviewDiff(subView: View?, oldView: View?, iteration: (Int, DiffableViewSourceOperation) -> Void, displayIndex: inout Int) {
         if let optionalView = subView as? OptionalView, let optionalViewContent = optionalView.content {
             // Optional insert / update
             let oldOptionalView = oldView as? OptionalView
@@ -230,6 +241,87 @@ extension Array where Element == View {
     }
 }
 
+extension RandomAccessCollection {
+    /// Iterates and specifies the operation to apply the current
+    /// collection's data to the `oldData`.
+    /// - Parameters:
+    ///   - oldData: The previos collection
+    ///   - id: The keypath to use to get the id of an element in the collection
+    ///   - startIndex: A base index to offset the operation index
+    ///   - iteration: Closure called for each operation iteration
+    func iterateDataDiff<OldData, ID>(oldData: OldData, id: (Element) -> ID, startIndex: Int = 0, dynamicIndex: Bool = true, iteration: (Int, CollectionDiffIndex, DiffableDataSourceOperation<Element>) -> Void)
+    where OldData: RandomAccessCollection, OldData.Element == Element, ID: Hashable {
+        let currentCount = count
+        let oldCount =  oldData.count
+        if currentCount == 0 && oldCount == 0 {
+            return
+        }
+        var startIndex = startIndex
+        
+        var oldIndex = 0
+        var currentIndex = 0
+        while oldIndex < oldCount || currentIndex < currentCount {
+            let currentElement = element(for: currentIndex)
+            let oldElement = oldData.element(for: oldIndex)
+            
+            if let oldElement = oldElement, let currentElement = currentElement {
+                let currentId = id(currentElement)
+                let oldId = id(oldElement)
+                let oldContainsCurrent = oldData.containsId(currentId, idFetcher: id)
+                let currentContainsOld = containsId(oldId, idFetcher: id)
+                if currentId == oldId || (oldContainsCurrent && currentContainsOld) {
+                    // Place swap
+                    iteration(startIndex, .current(index: currentIndex), .update(data: currentElement))
+                    oldIndex += 1
+                    currentIndex += 1
+                    startIndex += 1
+                } else if oldContainsCurrent {
+                    // Delete item
+                    iteration(startIndex, .old(index: oldIndex), .delete(data: oldElement))
+                    oldIndex += 1
+                    startIndex += 1
+                } else {
+                    // New item
+                    iteration(startIndex, .current(index: currentIndex), .insert(data: currentElement))
+                    currentIndex += 1
+                    if dynamicIndex {
+                        startIndex += 1
+                    }
+                }
+            } else if let currentElement = currentElement {
+                // New item
+                iteration(startIndex, .current(index: currentIndex), .insert(data: currentElement))
+                oldIndex += 1
+                currentIndex += 1
+                if dynamicIndex {
+                    startIndex += 1
+                }
+            } else if let oldElement = oldElement {
+                // Delete item
+                iteration(startIndex, .old(index: oldIndex), .delete(data: oldElement))
+                oldIndex += 1
+                currentIndex += 1
+                startIndex += 1
+            } else {
+                break
+            }
+        }
+    }
+    
+    func element(for numberIndex: Int) -> Element? {
+        if numberIndex >= count {
+            return nil
+        }
+        
+        let dataIndex = index(startIndex, offsetBy: numberIndex)
+        return self[dataIndex]
+    }
+    
+    func containsId<ID: Hashable>(_ id: ID, idFetcher: (Element) -> ID) -> Bool {
+        contains { idFetcher($0) == id }
+    }
+}
+
 extension UIStackView {
     func addViews(_ views: [View], context: Context, isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
         context.viewOperationQueue.addOperation { [weak self] in
@@ -288,7 +380,7 @@ extension UIStackView {
                     indexSkip += nonHiddenSubView.skippedSubViews
                     let removeGroup = DispatchGroup()
                     
-                    let viewAnim = context.viewValues?.animationShieldedValues == nil ?  context.viewValues?.animatedValues?.first?.animation : nil
+                    let viewAnim = context.viewValues?.animatedValues?.first?.animation
                     if let animation = viewAnim ?? context.transaction?.animation {
                         removeGroup.enter()
                         animation.performAnimation({

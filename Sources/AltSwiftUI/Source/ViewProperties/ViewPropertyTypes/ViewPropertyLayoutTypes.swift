@@ -248,7 +248,7 @@ struct AlignedView {
     var alignment: Alignment
 }
 
-struct ViewDimensions: Equatable {
+struct ViewDimensions: Hashable {
     var width: CGFloat?
     var height: CGFloat?
     var minWidth: CGFloat?

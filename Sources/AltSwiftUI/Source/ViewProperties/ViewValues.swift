@@ -12,7 +12,6 @@ import UIKit
 /// by view modifiers. For internal use only.
 public struct ViewValues: AnimatedViewValuesHolder {
     var animatedValues: [AnimatedViewValues]?
-    var animationShieldedValues: AnimatedViewValues?
     
     // When you add new properties, be sure to add them to `merge` methods
     // to make sure view values are inherited in the right scenarios.
@@ -88,20 +87,12 @@ public struct ViewValues: AnimatedViewValuesHolder {
     
     func withAnimatedValues(animation: Animation?) -> ViewValues {
         var values = self
-        let newAnimatedValues = AnimatedViewValues(animation: animation, opacity: opacity, transform: transform, rotation: rotation, scale: scale, transition: transition)
-        values.opacity = nil
-        values.transform = nil
-        values.rotation = nil
-        values.scale = nil
-        values.transition = nil
+        let newAnimatedValues = AnimatedViewValues.fromViewValues(self, animation: animation)
+        values.resetAnimatedValues()
         
-        if animation != nil {
-            var animatedValueCollection = self.animatedValues ?? [AnimatedViewValues]()
-            animatedValueCollection.append(newAnimatedValues)
-            values.animatedValues = animatedValueCollection
-        } else {
-            values.animationShieldedValues = newAnimatedValues
-        }
+        var animatedValueCollection = self.animatedValues ?? [AnimatedViewValues]()
+        animatedValueCollection.append(newAnimatedValues)
+        values.animatedValues = animatedValueCollection
         
         return values
     }
@@ -194,7 +185,6 @@ extension ViewValues {
         if scale == nil { mergedValues.scale = defaultValues.scale }
         if animatedValues == nil { mergedValues.animatedValues = defaultValues.animatedValues }
         if transition == nil { mergedValues.transition = defaultValues.transition }
-        if animationShieldedValues == nil { mergedValues.animationShieldedValues = defaultValues.animationShieldedValues }
         if animatedValues == nil { mergedValues.animatedValues = defaultValues.animatedValues }
         if mask == nil { mergedValues.mask = defaultValues.mask }
         if geometry == nil { mergedValues.geometry = defaultValues.geometry }
@@ -224,11 +214,29 @@ extension ViewValues {
 // MARK: - Supporting Types
 
 protocol AnimatedViewValuesHolder {
-    var opacity: Double? { get }
-    var transform: CGAffineTransform? { get }
-    var rotation: Angle? { get }
-    var scale: CGSize? { get }
-    var transition: AnyTransition? { get }
+    var opacity: Double? { get set }
+    var transform: CGAffineTransform? { get set }
+    var rotation: Angle? { get set }
+    var scale: CGSize? { get set }
+    var transition: AnyTransition? { get set }
+    var background: UIColor? { get set }
+    var border: Border? { get set }
+    var cornerRadius: CGFloat? { get set }
+    var viewDimensions: ViewDimensions? { get set }
+}
+
+extension AnimatedViewValuesHolder {
+    mutating func resetAnimatedValues() {
+        opacity = nil
+        transform = nil
+        rotation = nil
+        scale = nil
+        transition = nil
+        background = nil
+        border = nil
+        cornerRadius = nil
+        viewDimensions = nil
+    }
 }
 
 struct AnimatedViewValues: AnimatedViewValuesHolder {
@@ -238,6 +246,24 @@ struct AnimatedViewValues: AnimatedViewValuesHolder {
     var rotation: Angle?
     var scale: CGSize?
     var transition: AnyTransition?
+    var background: UIColor?
+    var border: Border?
+    var cornerRadius: CGFloat?
+    var viewDimensions: ViewDimensions?
+    
+    static func fromViewValues(_ viewValues: ViewValues, animation: Animation?) -> AnimatedViewValues {
+        AnimatedViewValues(
+            animation: animation,
+            opacity: viewValues.opacity,
+            transform: viewValues.transform,
+            rotation: viewValues.rotation,
+            scale: viewValues.scale,
+            transition: viewValues.transition,
+            background: viewValues.background,
+            border: viewValues.border,
+            cornerRadius: viewValues.cornerRadius,
+            viewDimensions: viewValues.viewDimensions)
+    }
 }
 
 struct DefaultableColor {

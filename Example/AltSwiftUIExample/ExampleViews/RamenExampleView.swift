@@ -65,6 +65,30 @@ struct RamenExampleView: View {
                         ramenInOrderView
                             .transition(.opacity)
                     }
+                    
+                    HStack {
+                        Button("Remove") {
+                            withAnimation {
+                                _ = ramenModel.ramenList.remove(at: 3)
+                            }
+                        }
+                        Button("Add") {
+                            withAnimation {
+                                ramenModel.ramenList.insert(Ramen(id: UUID().uuidString, name: "Insert Ramen", score: 3, price: "20"), at: 3)
+                            }
+                        }
+                        Button("Update") {
+                            withAnimation {
+                                ramenModel.ramenList[3].name = "Updated Ramen"
+                                ramenModel.ramenList[3].price = "100"
+                            }
+                        }
+                        Button("Toggle") {
+                            withAnimation {
+                                ramenModel.ramenList[3].score = 6
+                            }
+                        }
+                    }
 
                     ForEach(ramenModel.ramenList) { ramen in
                         // ...
@@ -139,7 +163,7 @@ struct RamenCell: View {
             Spacer()
             Text("\(ramen.price)")
         }
-        .frame(height: 40)
+        .frame(height: ramen.score == 6 ? 60 : 40)
         .padding(10)
     }
 }

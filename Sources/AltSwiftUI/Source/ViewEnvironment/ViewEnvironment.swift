@@ -59,6 +59,13 @@ public struct Context {
     /// True when the current view context is inside a button. Use this
     /// to handle special View behavior when inside buttons.
     var isInsideButton = false
+    
+    /// Normally used when handling context without animation.
+    var withoutTransaction: Context {
+        var newContext = self
+        newContext.transaction = nil
+        return newContext
+    }
 }
 
 extension Context {
@@ -120,6 +127,10 @@ class ViewOperationQueue {
 
 /// Contains originating attributes of a view update transaction
 public struct Transaction {
+    class OverwriteAnimationParentContainer {
+        weak var view: UIView?
+    }
+    
     init() {
         animation = nil
     }
@@ -131,6 +142,16 @@ public struct Transaction {
     var disablesAnimations: Bool = false
     
     var isHighPerformance: Bool = false
+    
+    /// When the animation in this transaction takes priority over other transactions.
+    /// Usually when animating with `View.animation()`.
+    var overwriteAnimationParent: OverwriteAnimationParentContainer?
+    
+    /// Returns the animation in the transaction if
+    /// animations are not disabled.
+    var animationInContext: Animation? {
+        disablesAnimations ? nil : animation
+    }
 }
 
 extension Transaction: Hashable {

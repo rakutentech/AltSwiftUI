@@ -9,11 +9,7 @@
 import Foundation
 
 protocol ComparableViewGrouper {
-    func containsId(id: Any) -> Bool
-    func numberOfItems() -> Int
-    func idForIndex(index: Int) -> Any?
-    func viewForIndex(index: Int) -> View
-    func iterateDiff(oldViewGroup: ComparableViewGrouper, startDisplayIndex: inout Int, iterate: (Int, DiffableSourceOperation) -> Void)
+    func iterateDiff(oldViewGroup: ComparableViewGrouper, startDisplayIndex: inout Int, iterate: (Int, DiffableViewSourceOperation) -> Void)
     var viewContent: [View] { get }
 }
 

@@ -105,7 +105,7 @@
 
 ## Roadmap
 
-- [ ] Shapes
+- [x] Shapes
 - [ ] TextEditor
 - [ ] LazyGrid
 - [ ] EnvironmentObject sub hierarchies

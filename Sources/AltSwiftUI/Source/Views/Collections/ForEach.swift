@@ -68,72 +68,28 @@ extension ForEach where Data == Range<Int>, ID == Int {
 }
 
 extension ForEach: ComparableViewGrouper {
-    func containsId(id: Any) -> Bool {
-        if let id = id as? ID {
-            return data.contains { $0[keyPath: idKeyPath] == id }
-        } else {
-            return false
-        }
-    }
-    func numberOfItems() -> Int {
-        data.count
-    }
-    func viewForIndex(index: Int) -> View {
-        viewContent[index]
-    }
-    func iterateDiff(oldViewGroup: ComparableViewGrouper, startDisplayIndex: inout Int, iterate: (Int, DiffableSourceOperation) -> Void) {
-        let currentCount = data.count
-        let oldCount =  oldViewGroup.numberOfItems()
-        if currentCount == 0 && oldCount == 0 {
-            return
-        }
-        
-        var oldIndex = 0
-        var currentIndex = 0
-        while oldIndex < oldCount || currentIndex < currentCount {
-            let oldId = oldViewGroup.idForIndex(index: oldIndex) as? ID
-            let currentId = idForIndex(index: currentIndex) as? ID
-            if let oldId = oldId, let currentId = currentId {
-                let oldContainsCurrent = oldViewGroup.containsId(id: currentId)
-                let currentContainsOld = containsId(id: oldId)
-                if currentId == oldId || (oldContainsCurrent && currentContainsOld) {
-                    // Place swap
-                    iterate(startDisplayIndex, .update(view: viewForIndex(index: currentIndex)))
-                    oldIndex += 1
-                    currentIndex += 1
-                } else if oldContainsCurrent {
-                    // Delete item
-                    iterate(startDisplayIndex, .delete(view: oldViewGroup.viewForIndex(index: oldIndex)))
-                    oldIndex += 1
-                } else {
-                    // New item
-                    iterate(startDisplayIndex, .insert(view: viewForIndex(index: currentIndex)))
-                    currentIndex += 1
+    func iterateDiff(oldViewGroup: ComparableViewGrouper, startDisplayIndex: inout Int, iterate: (Int, DiffableViewSourceOperation) -> Void) {
+        guard let oldViewGroup = oldViewGroup as? Self else { return }
+        data.iterateDataDiff(oldData: oldViewGroup.data, id: id(for:), startIndex: startDisplayIndex) { currentDisplayIndex, collectionIndex, operation in
+            startDisplayIndex = currentDisplayIndex
+            switch operation {
+            case .insert:
+                if case let .current(index) = collectionIndex {
+                    iterate(currentDisplayIndex, .insert(view: viewContent[index]))
                 }
-            } else if currentId != nil {
-                // New item
-                iterate(startDisplayIndex, .insert(view: viewForIndex(index: currentIndex)))
-                oldIndex += 1
-                currentIndex += 1
-            } else if oldId != nil {
-                // Delete item
-                iterate(startDisplayIndex, .delete(view: oldViewGroup.viewForIndex(index: oldIndex)))
-                oldIndex += 1
-                currentIndex += 1
-            } else {
-                break
+            case .delete:
+                if case let .old(index) = collectionIndex {
+                    iterate(currentDisplayIndex, .delete(view: oldViewGroup.viewContent[index]))
+                }
+            case .update:
+                if case let .current(index) = collectionIndex {
+                    iterate(currentDisplayIndex, .update(view: viewContent[index]))
+                }
             }
-            
-            startDisplayIndex += 1
         }
     }
-    func idForIndex(index: Int) -> Any? {
-        if index >= data.count {
-            return nil
-        }
-        
-        let dataIndex = data.index(data.startIndex, offsetBy: index)
-        let element = data[dataIndex]
-        return element[keyPath: idKeyPath]
+    
+    private func id(for item: Data.Element) -> ID {
+        item[keyPath: idKeyPath]
     }
 }

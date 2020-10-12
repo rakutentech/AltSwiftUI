@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0BE74C2521CEE800B37BA9 /* ListExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */; };
 		2CADC30F251CA0DF00EA3F17 /* RamenExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */; };
 		2CADC317251CA15400EA3F17 /* ShapesExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */; };
 		2CD1A094251485CB00E2CCBA /* AltSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD1A08D251485AC00E2CCBA /* AltSwiftUI.framework */; };
@@ -66,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExampleView.swift; sourceTree = "<group>"; };
 		2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamenExampleView.swift; sourceTree = "<group>"; };
 		2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesExampleView.swift; sourceTree = "<group>"; };
 		2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AltSwiftUI.xcodeproj; path = ../../AltSwiftUI.xcodeproj; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */,
 				2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */,
+				2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */,
 			);
 			path = ExampleViews;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				2CADC317251CA15400EA3F17 /* ShapesExampleView.swift in Sources */,
 				2CE5E28F231398D70072F907 /* ViewController.swift in Sources */,
 				2CE5E28B231398D70072F907 /* AppDelegate.swift in Sources */,
+				2C0BE74C2521CEE800B37BA9 /* ListExampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

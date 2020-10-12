@@ -76,6 +76,9 @@ extension PaddingView: Renderable {
         } else if let padding = padding {
             view.insets = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         }
+        if context.transaction?.animation != nil {
+            view.setNeedsLayout()
+        }
     }
 }
 

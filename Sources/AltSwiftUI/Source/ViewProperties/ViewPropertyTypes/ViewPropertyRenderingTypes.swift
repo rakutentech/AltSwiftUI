@@ -157,7 +157,7 @@ public protocol ViewModifier {
 }
 
 /// A type representing a geometry angle.
-public struct Angle {
+public struct Angle: Hashable {
     /// The value of the angle in radians.
     public var radians: Double
     
@@ -187,9 +187,34 @@ public struct Angle {
     }
 }
 
+/// A protocol that describes the behavior and appearance of a list.
+public protocol ListStyle { }
+
+/// A plain list style to be a applied to a `List`.
+public struct PlainListStyle: ListStyle {
+    /// Creates a plain list style.
+    public init() {}
+}
+
+/// A grouped list style to be a applied to a `List`.
+public struct GroupedListStyle: ListStyle {
+    /// Creates a grouped list style.
+    public init() {}
+}
+
+/// An inset grouped list style to be a applied to a `List`.
+@available(iOS 13.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct InsetGroupedListStyle: ListStyle {
+    /// Creates an inset grouped list style.
+    public init() {}
+}
+
 // MARK: - Internal Types
 
-struct Border {
+struct Border: Hashable {
     var color: UIColor
     var width: CGFloat
 }

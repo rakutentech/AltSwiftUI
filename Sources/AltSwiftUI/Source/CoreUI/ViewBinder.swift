@@ -17,6 +17,10 @@ class ViewBinder {
         static let name = Notification.Name(rawValue: "AltSwiftUI.Notification.State")
         static let transactionKey = "Transaction"
     }
+    struct OverwriteTransaction {
+        var transaction: Transaction
+        weak var parent: UIView?
+    }
     
     var view: View
     weak var uiView: UIView?
@@ -25,17 +29,19 @@ class ViewBinder {
     var isQueuingTransactionUpdate = [Transaction: Bool]()
     var isQueuingStandardUpdate = false
     var isInsideButton: Bool
+    var overwriteTransaction: OverwriteTransaction?
     
     /// The body level describes how many parent views the current view
     /// has to traverse to reach the topmost View in the hierarchy associated
     /// to the same `UIView`.
     var bodyLevel: Int
     
-    init(view: View, rootController: ScreenViewController?, bodyLevel: Int, isInsideButton: Bool = false) {
+    init(view: View, rootController: ScreenViewController?, bodyLevel: Int, isInsideButton: Bool, overwriteTransaction: OverwriteTransaction?) {
         self.view = view
         self.rootController = rootController
         self.bodyLevel = bodyLevel
         self.isInsideButton = isInsideButton
+        self.overwriteTransaction = overwriteTransaction
     }
 
     func registerStateNotification(origin: Any) {
@@ -48,9 +54,26 @@ class ViewBinder {
     private func updateView(transaction: Transaction?) {
         if let subView = uiView {
             assert(rootController?.lazyLayoutConstraints.isEmpty ?? true, "State changed while the body is being executed")
-            view.updateRender(uiView: subView, parentContext: Context(rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, isInsideButton: isInsideButton), bodyLevel: bodyLevel)
+            if transaction?.animation != nil {
+                rootController?.view.layoutIfNeeded()
+            }
+            view.updateRender(
+                uiView: subView,
+                parentContext:
+                    Context(
+                        rootController: rootController,
+                        overwriteRootController: overwriteRootController,
+                        transaction: overwriteTransaction?.transaction ?? transaction,
+                        isInsideButton: isInsideButton),
+                bodyLevel: bodyLevel)
             rootController?.executeLazyConstraints()
             rootController?.executeInsertAppearHandlers()
+            overwriteTransaction?.transaction.animation?.performAnimation({ [weak self] in
+                self?.overwriteTransaction?.parent?.layoutIfNeeded()
+            })
+            transaction?.animation?.performAnimation({ [weak self] in
+                self?.rootController?.view.layoutIfNeeded()
+            })
         }
     }
     @objc private func handleStateNotification(notification: Notification) {

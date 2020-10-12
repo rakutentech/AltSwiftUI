@@ -9,7 +9,7 @@
 import UIKit
 
 /// A list of elements that creates each subview on demand.
-public struct List<Content: View, Data>: View {
+public struct List<Content: View, Data, ID: Hashable>: View {
     public var viewStore = ViewValues()
     public var body: View { EmptyView() }
     var sections: [Section]?
@@ -24,6 +24,8 @@ public struct List<Content: View, Data>: View {
     var dragStarted: (() -> Void)?
     var dragEnded: (() -> Void)?
     var ignoresHighPerformance: Bool = false
+    var idKeyPath: KeyPath<Data, ID>?
+    var listStyle: ListStyle?
     
     public init(@ViewBuilder content: () -> Content) {
         let contentResult = content()
@@ -32,9 +34,10 @@ public struct List<Content: View, Data>: View {
 
     /// Creates a List that identifies its rows based on the `id` key path to a
     /// property on an underlying data element.
-    public init<ID>(_ data: [Data], id: KeyPath<Data, ID>, @ViewBuilder rowContent: @escaping (Data) -> View) where Content == ForEach<[Data], ID, HStack>, ID: Hashable {
+    public init(_ data: [Data], id: KeyPath<Data, ID>, @ViewBuilder rowContent: @escaping (Data) -> View) where Content == ForEach<[Data], ID, HStack> {
         self.data = data
         self.rowBuilder = rowContent
+        self.idKeyPath = id
     }
     
     init(sections: [Section]) {
@@ -132,18 +135,29 @@ public struct List<Content: View, Data>: View {
         list.ignoresHighPerformance = true
         return list
     }
+    
+    /// Returns an instance of `self` with the specified list
+    /// style.
+    /// - Parameter style: A style to apply. Pass a predefined instance of the types that conforms to ListStyle.
+    /// - Returns: An styled instance of `self`
+    public func listStyle(_ style: ListStyle) -> Self {
+        var list = self
+        list.listStyle = style
+        return list
+    }
 }
 
-extension List where Data: Identifiable, Content == ForEach<[Data], String, HStack> {
+extension List where Data: Identifiable, Content == ForEach<[Data], String, HStack>, ID == Data.ID {
     /// Creates a List that computes its rows on demand from an underlying
     /// collection of identified data.
     public init(_ data: [Data], @ViewBuilder rowContent: @escaping (Data) -> View) {
         self.data = data
         self.rowBuilder = rowContent
+        self.idKeyPath = \Data.id
     }
 }
 
-extension List where Data == Int, Content == ForEach<[Data], Int, HStack> {
+extension List where Data == Int, Content == ForEach<[Data], Int, HStack>, ID == Int {
     /// Creates a List that computes views on demand over a *constant* range.
     ///
     /// This instance only reads the initial value of `data` and so it does not
@@ -152,17 +166,22 @@ extension List where Data == Int, Content == ForEach<[Data], Int, HStack> {
     /// To compute views on demand over a dynamic range use
     /// `List(_:id:content:)`.
     public init(_ data: Range<Int>, @ViewBuilder rowContent: @escaping (Int) -> View) {
-        let views = data.map { data -> View in
-            let rowContentView = rowContent(data)
-            return rowContentView.subViews[0]
-        }
-        self.init(sections: [Section(views: views)])
+        self.init(Array(data), id: \.self, rowContent: rowContent)
     }
 }
 
 extension List: Renderable {
     public func createView(context: Context) -> UIView {
-        let view = SwiftUITableView().noAutoresizingMask()
+        var style = UITableView.Style.plain
+        if let listStyle = listStyle {
+            if listStyle is GroupedListStyle {
+                style = .grouped
+            } else if #available(iOS 13.0, *),
+                      listStyle is InsetGroupedListStyle {
+                style = .insetGrouped
+            }
+        }
+        let view = SwiftUITableView(frame: .zero, style: style).noAutoresizingMask()
         view.register(SwiftUITableViewCell.self, forCellReuseIdentifier: SwiftUITableViewCell.swiftUICellReuseIdentifier)
         setupView(view, context: context)
         updateViewSetup(view, context: context)
@@ -171,7 +190,7 @@ extension List: Renderable {
     
     public func updateView(_ view: UIView, context: Context) {
         guard let view = view as? SwiftUITableView,
-              let tableDelegate = view.delegate as? GenericTableViewDelegate<Data>,
+              let tableDelegate = view.delegate as? GenericTableViewDelegate<Content, Data, ID>,
               context.transaction?.isHighPerformance == false ||
                 ignoresHighPerformance
         else { return }
@@ -179,29 +198,67 @@ extension List: Renderable {
         updateViewSetup(view, context: context)
         
         let oldTotalCount = tableDelegate.totalCount
-        tableDelegate.update(sections: sections, data: data, rowBuilder: rowBuilder, context: context, contentOffset: contentOffset)
+        let oldData = tableDelegate.list.data
+        tableDelegate.update(list: self, context: context)
         
-        if oldTotalCount != tableDelegate.totalCount {
-            tableDelegate.storedViews.removeAllObjects()
+        if isAlwaysReloadData {
             view.reloadData()
-        } else {
-            if isAlwaysReloadData {
-                view.reloadData()
-            } else {
-                let storedViews = tableDelegate.storedViews
-                let enumerator = storedViews.objectEnumerator()
-                while let storedView: UIView = enumerator.nextObject() as? UIView {
-                    if let cellOptions = storedView.cellViewOptions {
-                        let updateView = tableDelegate.viewForIndex(section: cellOptions.section, row: cellOptions.row)
-                        updateView.scheduleUpdateRender(uiView: storedView, parentContext: context)
+            view.layoutIfNeeded()
+        } else if oldTotalCount != tableDelegate.totalCount,
+           let data = data,
+           let oldData = oldData {
+            if context.transaction?.animation != nil {
+                // Animated
+                if let idKeyPath = idKeyPath {
+                    let visibleCells = view.visibleCells
+                    var cellStoredViewMap = [Int: UIView]()
+                    for cell in visibleCells {
+                        guard let cell = cell as? SwiftUITableViewCell,
+                              let storedView = cell.renderedView,
+                              let row = view.indexPath(for: cell)?.row else { continue }
+                        cellStoredViewMap[row] = storedView
                     }
+                    
+                    view.beginUpdates()
+                    data.iterateDataDiff(oldData: oldData, id: { $0[keyPath: idKeyPath] }, dynamicIndex: false) { iteratedIndex, collectionIndex, operation in
+                        switch operation {
+                        case .insert:
+                            view.insertRows(at: [IndexPath(item: iteratedIndex, section: 0)], with: .automatic)
+                        case .delete:
+                            view.deleteRows(at: [IndexPath(item: iteratedIndex, section: 0)], with: .automatic)
+                        case .update:
+                            if case let .current(currentDataIndex) = collectionIndex,
+                               let storedView = cellStoredViewMap[iteratedIndex] {
+                                let updateView = tableDelegate.viewForIndex(section: 0, row: currentDataIndex)
+                                updateView.scheduleUpdateRender(uiView: storedView, parentContext: context)
+                            }
+                        }
+                    }
+                    view.endUpdates()
+                } else {
+                    let sectionsRange = 0...(max(0, sections?.count ?? 0))
+                    view.reloadSections(IndexSet(integersIn: sectionsRange), with: .automatic)
                 }
+            } else {
+                // Non animated
+                view.reloadData()
+                view.layoutIfNeeded()
+            }
+        } else {
+            // If there is no change in cell numbers, only update
+            // visible cells.
+            for cell in view.visibleCells {
+                guard let cell = cell as? SwiftUITableViewCell,
+                      let storedView = cell.renderedView,
+                      let indexPath = view.indexPath(for: cell) else { continue }
+                let updateView = tableDelegate.viewForIndex(section: indexPath.section, row: indexPath.row)
+                updateView.scheduleUpdateRender(uiView: storedView, parentContext: context)
             }
         }
     }
     
-    @discardableResult private func setupView(_ view: SwiftUITableView, context: Context) -> GenericTableViewDelegate<Data> {
-        let delegate = GenericTableViewDelegate<Data>(sections: sections, data: data, rowBuilder: rowBuilder, context: context, contentOffset: contentOffset, dragStarted: dragStarted, dragEnded: dragEnded)
+    @discardableResult private func setupView(_ view: SwiftUITableView, context: Context) -> GenericTableViewDelegate<Content, Data, ID> {
+        let delegate = GenericTableViewDelegate(list: self, context: context)
         view.ownedSwiftUIDelegate = delegate
         view.delegate = delegate
         view.dataSource = delegate
@@ -228,46 +285,33 @@ extension List: Renderable {
 
 // MARK: - Supporting Types
 
-class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableViewDataSource {
-    var sections: [Section]?
-    var data: [Data]?
-    var rowBuilder: ((Data) -> View)?
+class GenericTableViewDelegate<Content: View, Data, ID: Hashable>: NSObject, UITableViewDelegate, UITableViewDataSource {
+    typealias ParentList = List<Content, Data, ID>
+    var list: ParentList
     var context: Context
-    var storedViews = NSHashTable<UIView>(options: .weakMemory)
-    var contentOffsetBinding: Binding<CGPoint>?
-    var dragStarted: (() -> Void)?
-    var dragEnded: (() -> Void)?
     
-    init(sections: [Section]?, data: [Data]?, rowBuilder: ((Data) -> View)?, context: Context, contentOffset: Binding<CGPoint>?, dragStarted: (() -> Void)?, dragEnded: (() -> Void)?) {
-        self.data = data
-        self.rowBuilder = rowBuilder
-        self.sections = sections
+    init(list: ParentList, context: Context) {
+        self.list = list
         self.context = context
-        self.contentOffsetBinding = contentOffset
-        self.dragStarted = dragStarted
-        self.dragEnded = dragEnded
     }
     
-    func update(sections: [Section]?, data: [Data]?, rowBuilder: ((Data) -> View)?, context: Context, contentOffset: Binding<CGPoint>?) {
-        self.data = data
-        self.rowBuilder = rowBuilder
-        self.sections = sections
+    func update(list: ParentList, context: Context) {
+        self.list = list
         self.context = context
-        self.contentOffsetBinding = contentOffset
     }
     
     func viewForIndex(section: Int, row: Int) -> View {
-        if let data = data, let builder = rowBuilder {
+        if let data = list.data, let builder = list.rowBuilder {
             return builder(data[row])
-        } else if let sections = sections {
+        } else if let sections = list.sections {
             return sections[section].viewContent[row]
         }
         return EmptyView()
     }
     
     var totalCount: Int {
-        let sectionCount: Int? = sections?.reduce(0) { $0 + $1.viewContent.count }
-        return data?.count ?? sectionCount ?? 0
+        let sectionCount: Int? = list.sections?.reduce(0) { $0 + $1.viewContent.count }
+        return list.data?.count ?? sectionCount ?? 0
     }
     
     func idForIndexPath(_ indexPath: IndexPath) -> String {
@@ -277,11 +321,11 @@ class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableView
     // Data Source + Delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        sections?.count ?? 1
+        list.sections?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data?.count ?? sections?[section].viewContent.count ?? 0
+        list.data?.count ?? list.sections?[section].viewContent.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -292,15 +336,13 @@ class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableView
         let view = suiView.renderableView(parentContext: handlerContext) ?? UIView()
         let cell = tableView.dequeueReusableCell(withIdentifier: SwiftUITableViewCell.swiftUICellReuseIdentifier, for: indexPath) as? SwiftUITableViewCell
         cell?.reconfigureView(content: view, insets: suiView.viewStore.listRowInsets)
-        storedViews.add(view)
-        view.cellViewOptions = CellViewOptions(view: suiView, section: indexPath.section, row: indexPath.row)
         cell?.parentEventHandler = eventHandler
         
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let sections = sections {
+        if let sections = list.sections {
             let sectionView = sections[section]
             let eventHandler = ParentViewEventHandler()
             var handlerContext = context
@@ -315,13 +357,17 @@ class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableView
             } else {
                 return UIView()
             }
+        } else if isGrouped {
+            let view: UIView = .noAutoSizingInstance()
+            view.heightAnchor.constraint(equalToConstant: SwiftUIConstants.minHeaderHeight).isActive = true
+            return view
         } else {
             return nil
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if data != nil || sections?[section].header == nil {
+        if !isGrouped && (list.data != nil || list.sections?[section].header == nil) {
             return 0.1
         } else {
             return UITableView.automaticDimension
@@ -329,7 +375,7 @@ class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if let sections = sections {
+        if let sections = list.sections {
             let sectionView = sections[section]
             let eventHandler = ParentViewEventHandler()
             var handlerContext = context
@@ -349,7 +395,7 @@ class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if data != nil || sections?[section].footer == nil {
+        if list.data != nil || list.sections?[section].footer == nil {
             return 0.1
         } else {
             return UITableView.automaticDimension
@@ -358,16 +404,16 @@ class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableView
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         withHighPerformance {
-            self.contentOffsetBinding?.wrappedValue = scrollView.contentOffset
+            self.list.contentOffset?.wrappedValue = scrollView.contentOffset
         }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        dragStarted?()
+        list.dragStarted?()
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        dragEnded?()
+        list.dragEnded?()
     }
     
     private func configureAlignmentHeaderView(_ view: SwiftUIAlignmentView<UIView>) {
@@ -377,6 +423,17 @@ class GenericTableViewDelegate<Data>: NSObject, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.parentEventHandler?.executeOnAppearHandlers()
+    }
+    
+    // MARK: Private methods
+    
+    private var isGrouped: Bool {
+        if #available(iOS 13.0, *), list.listStyle is InsetGroupedListStyle {
+            return true
+        } else if list.listStyle is GroupedListStyle {
+            return true
+        }
+        return false
     }
 }
 
@@ -388,24 +445,6 @@ extension UITableViewCell {
         }
         set {
             objc_setAssociatedObject(self, &Self.parentEventHandlerKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-}
-
-struct CellViewOptions {
-    let view: View
-    let section: Int
-    let row: Int
-}
-
-extension UIView {
-    static var cellViewOptionsKey = "CellViewOptionsAssociatedKey"
-    var cellViewOptions: CellViewOptions? {
-        get {
-            objc_getAssociatedObject(self, &Self.cellViewOptionsKey) as? CellViewOptions
-        }
-        set {
-            objc_setAssociatedObject(self, &Self.cellViewOptionsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }
