@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AltSwiftUI"
-  s.version      = "1.2.0"
+  s.version      = "1.3.0"
   s.ios.deployment_target = "11.0"
   s.swift_version = "5.3"
   s.summary      = "Open Source UI framework based on SwiftUI syntax and features, adding backwards compatibility."
