@@ -71,7 +71,7 @@ extension ForEach: ComparableViewGrouper {
     func iterateDiff(oldViewGroup: ComparableViewGrouper, startDisplayIndex: inout Int, iterate: (Int, DiffableViewSourceOperation) -> Void) {
         guard let oldViewGroup = oldViewGroup as? Self else { return }
         data.iterateDataDiff(oldData: oldViewGroup.data, id: id(for:), startIndex: startDisplayIndex) { currentDisplayIndex, collectionIndex, operation in
-            startDisplayIndex = currentDisplayIndex
+            startDisplayIndex = currentDisplayIndex + 1
             switch operation {
             case .insert:
                 if case let .current(index) = collectionIndex {

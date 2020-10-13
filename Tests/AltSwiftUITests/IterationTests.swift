@@ -47,6 +47,7 @@ class IterationTests: XCTestCase {
         } else {
             iterationNewForEach
         }
+        Text("After ForEach")
     }
     var exampleView: View {
         NestView {
@@ -146,10 +147,9 @@ class IterationTests: XCTestCase {
         let oldViews = exampleIterateViews(old: true, new: false).subViews
         let views = exampleIterateViews(old: false, new: true, iterateText: " Modify").subViews
         
-        var iterateIndex = 0
         var ifElseOperations: [DiffableViewSourceOperation] = []
         views.iterateFullViewDiff(oldList: oldViews) { index, operation in
-            switch iterateIndex {
+            switch index {
             case 0: XCTAssert(operation.equalsText(from: .update(view: Text("First Modify"))))
             case 1: XCTAssert(operation.equalsText(from: .update(view: Text("Condition 1 Modify"))))
             case 2: XCTAssert(operation.equalsText(from: .update(view: Text("Condition 2 Modify"))))
@@ -157,11 +157,12 @@ class IterationTests: XCTestCase {
             case 4: XCTAssert(operation.equalsText(from: .insert(view: Text("Condition Insert"))))
             case 5, 6: ifElseOperations.append(operation)
             case 7: XCTAssert(operation.equalsText(from: .update(view: Text("Group Modify"))))
-            case 8, 9: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Delete \(iterateIndex-8)"))))
-            case 10, 11: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Insert \(iterateIndex-10)"))))
-            default: forEachIterationTest(baseIndex: 12, index: index, operation: operation)
+            case 8, 9: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Delete \(index-8)"))))
+            case 10, 11: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Insert \(index-10)"))))
+            case 12, 13, 14, 15, 16, 17: forEachIterationTest(baseIndex: 12, index: index, operation: operation)
+            case 18: XCTAssert(operation.equalsText(from: .update(view: Text("After ForEach"))))
+            default: break
             }
-            iterateIndex += 1
         }
         // If else
         XCTAssert(ifElseOperations.count == 2)
