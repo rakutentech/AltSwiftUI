@@ -22,7 +22,8 @@ struct ExampleView: View {
     var views: [ExampleViewData] = [
         ExampleViewData(title: "Ramen Example", destination: RamenExampleView()),
         ExampleViewData(title: "List", destination: ListExampleView()),
-        ExampleViewData(title: "Shapes", destination: ShapesExampleView())
+        ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
+        ExampleViewData(title: "Texts", destination: TextExampleView())
     ]
     
     var body: View {
