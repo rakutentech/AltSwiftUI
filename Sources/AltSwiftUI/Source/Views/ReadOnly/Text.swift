@@ -14,6 +14,7 @@ public struct Text: View {
     public var string: String
     private var combinedTexts: [Text]?
     private var strikethroughColor: DefaultableColor?
+    private var underlineColor: DefaultableColor?
     private var minimumScaleFactorValue: CGFloat?
     
     /// Creates a text view based on a unlocalized string
@@ -65,9 +66,22 @@ public struct Text: View {
     /// the same foreground color as the text.
     public func strikethrough(_ active: Bool = true, color: Color? = nil) -> Self {
         var view = self
-        if active {
-            view.strikethroughColor = DefaultableColor(color: color?.color)
-        }
+        view.strikethroughColor = active ? DefaultableColor(color: color?.color) : nil
+        return view
+    }
+
+    /// Applies an underline to the text.
+    ///
+    /// - Parameters:
+    ///   - active: A Boolean value that indicates whether the text has an
+    ///     underline.
+    ///   - color: The color of the underline. If `color` is `nil`, the
+    ///     underline uses the default foreground color.
+    ///
+    /// - Returns: Text with a line running along its baseline.
+    public func underline(_ active: Bool = true, color: Color? = nil) -> Text {
+        var view = self
+        view.underlineColor = active ? DefaultableColor(color: color?.color) : nil
         return view
     }
     
@@ -101,6 +115,9 @@ public struct Text: View {
                 newCombinedText.viewStore = combinedText.viewStore.merge(defaultValues: viewStore)
                 if newCombinedText.strikethroughColor == nil {
                     newCombinedText.strikethroughColor = strikethroughColor
+                }
+                if newCombinedText.underlineColor == nil {
+                    newCombinedText.underlineColor = underlineColor
                 }
                 return newCombinedText
             }
@@ -145,21 +162,17 @@ extension Text: Renderable {
     }
     
     private func updateTextAttributes(with string: String, label: SwiftUILabel, context: Context) {
-        label.text = string
+        if let attributedString = attributedStringFromModifiers() {
+            label.attributedText = attributedString
+        } else {
+            label.text = string
+        }
         if let fgColor = context.viewValues?.foregroundColor {
             label.textColor = fgColor
         } else if context.isInsideButton, let accentColor = context.viewValues?.accentColor {
             label.textColor = accentColor
         }
         label.font = context.viewValues?.font?.font
-        if let strikethroughColor = strikethroughColor {
-            let color = strikethroughColor.color ?? context.viewValues?.foregroundColor ?? UIColor.black
-            let attributedText = NSAttributedString(string: string, attributes: [
-                NSAttributedString.Key.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
-                NSAttributedString.Key.strikethroughColor: color
-            ])
-            label.attributedText = attributedText
-        }
     }
     
     private func mergedAttributedString(parentText: Text, context: Context) -> NSAttributedString {
@@ -174,7 +187,29 @@ extension Text: Renderable {
             attributes[.strikethroughStyle] = NSNumber(value: NSUnderlineStyle.single.rawValue)
             attributes[.strikethroughColor] = strikethroughColor.color ?? UIColor.black
         }
+        if let underlineColor = underlineColor ?? parentText.underlineColor {
+            attributes[.underlineStyle] = NSNumber(value: NSUnderlineStyle.single.rawValue)
+            attributes[.underlineColor] = underlineColor.color ?? UIColor.black
+        }
         
         return NSAttributedString(string: string, attributes: attributes)
+    }
+    
+    private func attributedStringFromModifiers() -> NSAttributedString? {
+        var attributes = [NSAttributedString.Key: Any]()
+        if let strikethroughColor = strikethroughColor {
+            attributes[.strikethroughStyle] = NSNumber(value: NSUnderlineStyle.single.rawValue)
+            attributes[.strikethroughColor] = strikethroughColor.color ?? UIColor.black
+        }
+        if let underlineColor = underlineColor {
+            attributes[.underlineStyle] = NSNumber(value: NSUnderlineStyle.single.rawValue)
+            attributes[.underlineColor] = underlineColor.color ?? UIColor.black
+        }
+        
+        if attributes.isEmpty {
+            return nil
+        } else {
+            return NSAttributedString(string: string, attributes: attributes)
+        }
     }
 }
