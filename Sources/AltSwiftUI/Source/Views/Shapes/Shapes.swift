@@ -9,7 +9,31 @@
 import UIKit
 
 class AltShapeView: UIView {
-    public var caShapeLayer = CAShapeLayer()
+    let caShapeLayer = CAShapeLayer()
+    var updateOnLayout: ((CGRect) -> Void)?
+    /// Set this size from `updateView` to prevent unnecessary updates on layout
+    /// changes.
+    var lastSizeFromViewUpdate: CGSize = .zero
+    
+    init() {
+        super.init(frame: .zero)
+        setupLayer()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        caShapeLayer.frame = bounds
+        if lastSizeFromViewUpdate != bounds.size {
+            updateOnLayout?(bounds)
+        }
+    }
+    
+    private func setupLayer() {
+        layer.addSublayer(caShapeLayer)
+    }
 }
 
 public protocol Shape: View, Renderable {
@@ -88,6 +112,12 @@ extension Shape {
         } else {
             animationCode()
         }
+    }
+    
+    /// Updates the path with the given rect
+    func updatePath(view: AltShapeView, path: UIBezierPath, animation: Animation?) {
+        let path = path.cgPath
+        performUpdate(layer: view.caShapeLayer, keyPath: "path", newValue: path, animation: animation)
     }
     
     func lineCap(fromCGLineCap value: CGLineCap) -> CAShapeLayerLineCap {

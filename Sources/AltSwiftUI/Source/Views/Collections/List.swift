@@ -203,7 +203,6 @@ extension List: Renderable {
         
         if isAlwaysReloadData {
             view.reloadData()
-            view.layoutIfNeeded()
         } else if oldTotalCount != tableDelegate.totalCount,
            let data = data,
            let oldData = oldData {
@@ -242,7 +241,6 @@ extension List: Renderable {
             } else {
                 // Non animated
                 view.reloadData()
-                view.layoutIfNeeded()
             }
         } else {
             // If there is no change in cell numbers, only update

@@ -13,19 +13,37 @@ struct ShapesExampleView: View {
     @State private var goBig: Bool = false
     
     var body: View {
-        VStack {
+        VStack(spacing: 10) {
             Button(action: {
                 goBig.toggle()
             }, label: {
                 Text("PRESS ME")
             })
-            .padding([.top, .bottom], 50)
+            .padding([.top, .bottom], 20)
             
             RoundedRectangle(cornerRadius: goBig ? 20 : 10)
                 .background(.yellow)
                 .fill(goBig ? .purple : .green)
                 .strokeBorder(goBig ? .pink : .purple, lineWidth: goBig ? 8 : 3)
                 .frame(width: goBig ? 300 : 200, height: 200)
+            
+            HStack {
+                Capsule()
+                    .frame(width: 50, height: 70)
+                    .fill(goBig ? .purple : .green)
+                Circle()
+                    .frame(width: 100, height: 70)
+                    .fill(goBig ? .purple : .green)
+            }
+            
+            HStack {
+                Ellipse()
+                    .frame(width: 50, height: 70)
+                    .fill(goBig ? .purple : .green)
+                Rectangle()
+                    .frame(width: 50, height: 70)
+                    .fill(goBig ? .purple : .green)
+            }
             
             ShapeExampleNonShapeView(goBig: $goBig)
         }
@@ -43,5 +61,8 @@ struct ShapeExampleNonShapeView: View {
             .cornerRadius(goBig ? 20 : 5)
             .border(goBig ? .blue : .green, width: goBig ? 10 : 3)
             .padding(.top, 20)
+            .onTapGesture {
+                print("asd")
+            }
     }
 }
