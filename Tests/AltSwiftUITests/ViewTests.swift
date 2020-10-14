@@ -65,7 +65,7 @@ class ViewTests: XCTestCase {
     // MARK: Tests
     
     func testFirstRenderableView() {
-        let result = exampleView.firstRenderableView(context: Context())
+        let result = exampleView.firstRenderableView(parentContext: Context())
         XCTAssert(result is Text)
     }
     

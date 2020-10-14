@@ -38,7 +38,7 @@ extension ZStack: Renderable {
             self.viewContent.iterateFullViewInsert { subView in
                 if let renderView = subView.renderableView(parentContext: context, drainRenderQueue: false) {
                     view.addSubview(renderView)
-                    LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: subView, context: context, alignment: self.alignment)
+                    LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: subView, parentContext: context, alignment: self.alignment)
                 }
             }
         }
@@ -56,7 +56,7 @@ extension ZStack: Renderable {
                     case .insert(let suiView):
                         if let subView = suiView.renderableView(parentContext: context, drainRenderQueue: false) {
                             view.insertSubview(subView, at: index)
-                            LayoutSolver.solveLayout(parentView: view, contentView: subView, content: suiView, context: context.merge(viewValues: suiView.viewStore), alignment: self.alignment)
+                            LayoutSolver.solveLayout(parentView: view, contentView: subView, content: suiView, parentContext: context, alignment: self.alignment)
                             suiView.performInsertTransition(view: subView, animation: context.transaction?.animation) {}
                         }
                     case .delete(let suiView):
