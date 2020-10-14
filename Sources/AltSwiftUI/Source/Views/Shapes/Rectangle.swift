@@ -24,7 +24,9 @@ public struct Rectangle: Shape {
     
     public func createView(context: Context) -> UIView {
         let view = AltShapeView().noAutoresizingMask()
-        view.layer.addSublayer(view.caShapeLayer)
+        view.updateOnLayout = { rect in
+            updatePath(view: view, path: UIBezierPath(rect: rect), animation: nil)
+        }
         updateView(view, context: context.withoutTransaction)
         return view
     }
@@ -32,12 +34,12 @@ public struct Rectangle: Shape {
     public func updateView(_ view: UIView, context: Context) {
         guard let view = view as? AltShapeView else { return }
         
-        let width = context.viewValues?.viewDimensions?.width ?? .infinity
-        let height = context.viewValues?.viewDimensions?.height ?? .infinity
+        let width = context.viewValues?.viewDimensions?.width ?? view.bounds.width
+        let height = context.viewValues?.viewDimensions?.height ?? view.bounds.height
         let animation = context.transaction?.animation
-        let path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: height)).cgPath
+        view.lastSizeFromViewUpdate = CGSize(width: width, height: height)
         
-        performUpdate(layer: view.caShapeLayer, keyPath: "path", newValue: path, animation: animation)
+        updatePath(view: view, path: UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: height)), animation: animation)
         updateShapeLayerValues(view: view, context: context)
     }
 }
