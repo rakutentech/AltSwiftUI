@@ -73,6 +73,7 @@ extension UIView {
                 break
             }
         }
+        
         guard !update ||
                 viewValues.viewDimensions != lastRenderableView?.view.viewStore.viewDimensions ||
                 hasAnimationDiff else {
@@ -87,23 +88,26 @@ extension UIView {
         
         if let animatedValuesCollection = viewValues.animatedValues {
             for animatedValues in animatedValuesCollection {
-                constraints += animatedValueAppliedDimensions(animatedValues: animatedValues)
-                if let animation = animatedValues.animation, update {
-                    animation.performAnimation { [weak self] in
-                        self?.setNeedsLayout()
-                        self?.layoutIfNeeded()
+                let newConstraints = animatedValueAppliedDimensions(animatedValues: animatedValues)
+                if newConstraints.isEmpty {
+                    continue
+                }
+                
+                constraints += newConstraints
+                if update {
+                    if let animation = animatedValues.animation {
+                        animation.performAnimation { [weak self] in
+                            self?.setNeedsLayout()
+                            self?.layoutIfNeeded()
+                        }
+                    } else {
+                        setNeedsLayout()
+                        layoutIfNeeded()
                     }
-                } else {
-                    setNeedsLayout()
-                    layoutIfNeeded()
                 }
             }
         }
         constraints += animatedValueAppliedDimensions(animatedValues: viewValues)
-        
-        if animation != nil, update {
-            setNeedsLayout()
-        }
         
         dimensionConstraints = DimensionConstraints(value: constraints)
     }

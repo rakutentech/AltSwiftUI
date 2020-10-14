@@ -47,6 +47,10 @@ extension View {
                 if mergedContext.transaction?.isHighPerformance == false ||
                     !(mergedContext.viewValues?.strictOnHighPerformance ?? false) {
                     
+                    if mergedContext.viewValues?.animatedValues?.first?.animation != nil {
+                        uiView.layoutIfNeeded()
+                    }
+                    
                     // Set animation originating from this view into the transaction
                     mergedContext = updatedAnimationContext(context: mergedContext, uiView: uiView)
                     
@@ -61,10 +65,10 @@ extension View {
                     
                     // Layout the hierarchy if this view generates an animation.
                     if mergedContext.transaction?.disablesAnimations == true {
-                        uiView.superview?.layoutIfNeeded()
+                        uiView.layoutIfNeeded()
                     } else {
                         mergedContext.viewValues?.animatedValues?.first?.animation?.performAnimation {
-                            uiView.superview?.layoutIfNeeded()
+                            uiView.layoutIfNeeded()
                         }
                     }
                 } else {
@@ -128,7 +132,11 @@ extension View {
                 mergedContext.viewOperationQueue.drainRecursively()
             }
             
-            view?.lastRenderableView = LastRenderableView(view: self)
+            var mergedView = self
+            if let mergedViewValues = mergedContext.viewValues {
+                mergedView.viewStore = mergedViewValues
+            }
+            view?.lastRenderableView = LastRenderableView(view: mergedView)
         } else {
             var updatedView = self
             if let mergedViewValues = mergedContext.viewValues {
@@ -161,13 +169,17 @@ extension View {
     }
     
     /// Finds the first view in the hierarchy that conforms to `Renderable`.
-    func firstRenderableView(context: Context) -> View {
+    func firstRenderableView(parentContext: Context, completeMerge: Bool = false) -> View {
+        let mergedContext = completeMerge ? parentContext.completeMerge(viewValues: viewStore) : parentContext.merge(viewValues: viewStore)
         if self is Renderable {
-            return self
+            var mergedSelf = self
+            if let viewValues = mergedContext.viewValues {
+                mergedSelf.viewStore = viewValues
+            }
+            return mergedSelf
         } else {
-            let mergedContext = context.completeMerge(viewValues: viewStore)
-            setupDynamicProperties(context: context)
-            return body.firstRenderableView(context: mergedContext)
+            setupDynamicProperties(context: parentContext)
+            return body.firstRenderableView(parentContext: mergedContext, completeMerge: true)
         }
     }
     

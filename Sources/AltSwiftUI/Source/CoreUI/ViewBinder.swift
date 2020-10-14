@@ -56,7 +56,10 @@ class ViewBinder {
             assert(rootController?.lazyLayoutConstraints.isEmpty ?? true, "State changed while the body is being executed")
             if transaction?.animation != nil {
                 rootController?.view.layoutIfNeeded()
+            } else if overwriteTransaction?.transaction.animation != nil {
+                overwriteTransaction?.parent?.layoutIfNeeded()
             }
+            
             view.updateRender(
                 uiView: subView,
                 parentContext:
@@ -68,6 +71,7 @@ class ViewBinder {
                 bodyLevel: bodyLevel)
             rootController?.executeLazyConstraints()
             rootController?.executeInsertAppearHandlers()
+            
             overwriteTransaction?.transaction.animation?.performAnimation({ [weak self] in
                 self?.overwriteTransaction?.parent?.layoutIfNeeded()
             })

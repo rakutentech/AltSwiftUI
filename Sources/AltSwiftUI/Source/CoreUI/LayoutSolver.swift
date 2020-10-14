@@ -11,12 +11,13 @@ import UIKit
 /// In charge of setting the correct layout constraints for a `View` configuration.
 enum LayoutSolver {
     // swiftlint:disable:next function_body_length
-    static func solveLayout(parentView: UIView, contentView: UIView, content: View, context: Context, expand: Bool = false, alignment: Alignment = .center) {
+    static func solveLayout(parentView: UIView, contentView: UIView, content: View, parentContext: Context, expand: Bool = false, alignment: Alignment = .center) {
         var safeTop = true
         var safeLeft = true
         var safeRight = true
         var safeBottom = true
-        let edges = content.viewStore.edgesIgnoringSafeArea ?? contentView.lastRenderableView?.view.viewStore.edgesIgnoringSafeArea
+        let content = content.firstRenderableView(parentContext: parentContext)
+        let edges = content.viewStore.edgesIgnoringSafeArea
         let rootView = edges != nil
         if let ignoringEdges = edges {
             if ignoringEdges.contains(.top) {
@@ -36,7 +37,7 @@ enum LayoutSolver {
         let originalParentView = parentView
         var parentView = parentView
         var lazy = false
-        if let contextController = context.rootController, rootView {
+        if let contextController = parentContext.rootController, rootView {
             parentView = contextController.view
             lazy = true
         }
@@ -106,7 +107,7 @@ enum LayoutSolver {
         
         if !lazy {
             constraints.activate()
-        } else if let controller = context.rootController {
+        } else if let controller = parentContext.rootController {
             controller.lazyLayoutConstraints.append(contentsOf: constraints)
         }
     }

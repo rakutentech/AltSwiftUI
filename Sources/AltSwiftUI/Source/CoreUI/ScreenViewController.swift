@@ -116,7 +116,7 @@ class ScreenViewController: UIViewController {
         }
         
         view.addSubview(renderView)
-        LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: contentView.firstRenderableView(context: context), context: context, expand: false)
+        LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: contentView, parentContext: context, expand: false)
         executeLazyConstraints()
         executeInsertAppearHandlers()
     }

@@ -139,9 +139,6 @@ extension ViewValues {
         }
         if parentViewEventHandler == nil {
             mergedValues.parentViewEventHandler = defaultValues.parentViewEventHandler }
-        if edgesIgnoringSafeArea == nil {
-            mergedValues.edgesIgnoringSafeArea = defaultValues.edgesIgnoringSafeArea
-        }
         if textContentType == nil { mergedValues.textContentType = defaultValues.textContentType }
         if navigationAccentColor == nil { mergedValues.navigationAccentColor = defaultValues.navigationAccentColor }
         
@@ -200,6 +197,9 @@ extension ViewValues {
         if strictOnHighPerformance == nil { mergedValues.strictOnHighPerformance = defaultValues.strictOnHighPerformance }
         if skipOnHighPerformance == nil { mergedValues.skipOnHighPerformance = defaultValues.skipOnHighPerformance }
         if accessibilityIdentifier == nil { mergedValues.accessibilityIdentifier = defaultValues.accessibilityIdentifier }
+        if edgesIgnoringSafeArea == nil {
+            mergedValues.edgesIgnoringSafeArea = defaultValues.edgesIgnoringSafeArea
+        }
         
         if #available(iOS 14.0, *) {
             if skOverlayPresentation == nil {
