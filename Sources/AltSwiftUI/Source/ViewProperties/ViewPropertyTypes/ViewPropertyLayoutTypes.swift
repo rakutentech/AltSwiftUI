@@ -17,6 +17,14 @@ public struct EdgeInsets: Equatable {
     public var bottom: CGFloat
     public var trailing: CGFloat
     
+    /// Initializes a "zero" EdgeInsets instance.
+    public init() {
+        self.top = 0
+        self.leading = 0
+        self.bottom = 0
+        self.trailing = 0
+    }
+    
     /// Initializes an EdgeInsets instance with the specified insets of each side.
     public init(top: CGFloat, leading: CGFloat, bottom: CGFloat, trailing: CGFloat) {
         self.top = top
