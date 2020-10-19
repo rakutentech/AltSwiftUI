@@ -187,6 +187,14 @@ public enum Axis {
 /// A type that represents the alignment position of text
 public enum TextAlignment {
     case leading, center, trailing
+    
+    var nsTextAlignment: NSTextAlignment {
+        switch self {
+        case .center: return .center
+        case .leading: return .left
+        case .trailing: return .right
+        }
+    }
 }
 
 /// Represents a coordinate space.
