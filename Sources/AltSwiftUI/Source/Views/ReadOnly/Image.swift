@@ -10,11 +10,23 @@ import UIKit
 
 /// A view that renders an image.
 public struct Image: View {
+    public enum ResizingMode {
+        case stretch
+        case tile
+        
+        var uiImageResizingMode: UIImage.ResizingMode {
+            switch self {
+            case .stretch:  return .stretch
+            case .tile:     return .tile
+            }
+        }
+    }
+    
     public var viewStore = ViewValues()
     public var body: View {
         EmptyView()
     }
-    let image: UIImage
+    private(set) var image: UIImage
     var isResizable: Bool = false
     var renderingMode: Image.TemplateRenderingMode?
     
@@ -36,12 +48,15 @@ public struct Image: View {
     /// vertically infinitely as much as its parent allows it to.
     /// Also, when specifying a `frame`, the image contents will stretch
     /// to the dimensions of the specified `frame`.
-    ///
-    /// Use `.scaledToFit()` and `.scaledToFill()` to modify how the aspect
+    /// - Parameters:
+    ///     + capInsets: The values to use for the cap insets.
+    ///     + resizingMode: The mode with which the interior of the image is resized.
+    /// - Note: Use `.scaledToFit()` and `.scaledToFill()` to modify how the aspect
     /// ratio of the image varies when stretching.
-    public func resizable() -> Self {
+    public func resizable(capInsets: EdgeInsets = EdgeInsets(), resizingMode: Image.ResizingMode = .stretch) -> Self {
         var view = self
         view.isResizable = true
+        view.image = view.image.resizableImage(withCapInsets: capInsets.uiEdgeInsets, resizingMode: resizingMode.uiImageResizingMode)
         return view.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     

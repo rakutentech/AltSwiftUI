@@ -109,6 +109,9 @@ extension TextField: Renderable {
         if let fgColor = context.viewValues?.foregroundColor {
             view.textColor = fgColor
         }
+        if let textAlignment = context.viewValues?.multilineTextAlignment {
+            view.textAlignment = textAlignment.nsTextAlignment
+        }
         view.font = context.viewValues?.font?.font
         if let keyboardType = context.viewValues?.keyboardType {
             view.keyboardType = keyboardType

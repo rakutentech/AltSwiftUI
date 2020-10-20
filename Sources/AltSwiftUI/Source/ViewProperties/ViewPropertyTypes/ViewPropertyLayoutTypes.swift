@@ -17,6 +17,14 @@ public struct EdgeInsets: Equatable {
     public var bottom: CGFloat
     public var trailing: CGFloat
     
+    /// Initializes a "zero" EdgeInsets instance.
+    public init() {
+        self.top = 0
+        self.leading = 0
+        self.bottom = 0
+        self.trailing = 0
+    }
+    
     /// Initializes an EdgeInsets instance with the specified insets of each side.
     public init(top: CGFloat, leading: CGFloat, bottom: CGFloat, trailing: CGFloat) {
         self.top = top
@@ -187,6 +195,14 @@ public enum Axis {
 /// A type that represents the alignment position of text
 public enum TextAlignment {
     case leading, center, trailing
+    
+    var nsTextAlignment: NSTextAlignment {
+        switch self {
+        case .center: return .center
+        case .leading: return .left
+        case .trailing: return .right
+        }
+    }
 }
 
 /// Represents a coordinate space.
