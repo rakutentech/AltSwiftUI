@@ -26,6 +26,7 @@ public struct List<Content: View, Data, ID: Hashable>: View {
     var ignoresHighPerformance: Bool = false
     var idKeyPath: KeyPath<Data, ID>?
     var listStyle: ListStyle?
+    var showsIndicators: Bool = true
     
     public init(@ViewBuilder content: () -> Content) {
         let contentResult = content()
@@ -143,6 +144,13 @@ public struct List<Content: View, Data, ID: Hashable>: View {
     public func listStyle(_ style: ListStyle) -> Self {
         var list = self
         list.listStyle = style
+        return list
+    }
+    
+    /// Hides the vertical scroll indicator.
+    public func hidesIndicator() -> Self {
+        var list = self
+        list.showsIndicators = false
         return list
     }
 }
@@ -263,6 +271,7 @@ extension List: Renderable {
         if let rowHeight = rowHeight {
             view.estimatedRowHeight = rowHeight
         }
+        view.showsVerticalScrollIndicator = showsIndicators
         return delegate
     }
     
