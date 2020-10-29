@@ -11,6 +11,7 @@ import AltSwiftUI
 struct ListExampleView: View {
     var viewStore = ViewValues()
     @StateObject var ramenModel = RamenModel()
+    @State var scrollEnabled = true
     
     var body: View {
         VStack {
@@ -32,10 +33,16 @@ struct ListExampleView: View {
                     }
                 }
             }
+            HStack {
+                Button("Lock/Unlock Scroll") {
+                    scrollEnabled.toggle()
+                }
+            }
             List(ramenModel.ramenList) { ramen in
                 RamenCell(ramen: ramen)
             }
             .listStyle(listStyle)
+            .scrollEnabled(scrollEnabled)
         }
         .onAppear {
             ramenModel.loadRamen()

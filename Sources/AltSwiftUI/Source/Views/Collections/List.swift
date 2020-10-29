@@ -27,6 +27,7 @@ public struct List<Content: View, Data, ID: Hashable>: View {
     var idKeyPath: KeyPath<Data, ID>?
     var listStyle: ListStyle?
     var showsIndicators: Bool = true
+    var scrollEnabled: Bool = true
     
     public init(@ViewBuilder content: () -> Content) {
         let contentResult = content()
@@ -148,9 +149,20 @@ public struct List<Content: View, Data, ID: Hashable>: View {
     }
     
     /// Hides the vertical scroll indicator.
+    ///
+    /// - important: Not SwiftUI compatible.
     public func hidesIndicator() -> Self {
         var list = self
         list.showsIndicators = false
+        return list
+    }
+    
+    /// Sets if scrolling in this view is enabled or not.
+    ///
+    /// - important: Not SwiftUI compatible.
+    public func scrollEnabled(_ enabled: Bool) -> Self {
+        var list = self
+        list.scrollEnabled = enabled
         return list
     }
 }
@@ -287,6 +299,7 @@ extension List: Renderable {
             }
         }
         view.separatorStyle = separatorStyle
+        view.isScrollEnabled = scrollEnabled
     }
 }
 

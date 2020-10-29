@@ -21,6 +21,7 @@ public struct ScrollView: View {
     var contentOffset: Binding<CGPoint>?
     var isBounceEnabled = true
     var ignoresHighPerformance = false
+    var scrollEnabled: Bool = true
     
     public init(_ axis: Axis = .vertical, showsIndicators: Bool = true, @ViewBuilder content: () -> View) {
         contentView = content().subViews.first
@@ -66,6 +67,15 @@ public struct ScrollView: View {
     public func ignoreHighPerformance() -> Self {
         var list = self
         list.ignoresHighPerformance = true
+        return list
+    }
+    
+    /// Sets if scrolling in this view is enabled or not.
+    ///
+    /// - important: Not SwiftUI compatible.
+    public func scrollEnabled(_ enabled: Bool) -> Self {
+        var list = self
+        list.scrollEnabled = enabled
         return list
     }
 }
@@ -116,5 +126,6 @@ extension ScrollView: Renderable {
     private func setupView(_ view: SwiftUIScrollView, context: Context) {
         view.contentOffsetBinding = contentOffset
         view.bounces = isBounceEnabled
+        view.isScrollEnabled = scrollEnabled
     }
 }
