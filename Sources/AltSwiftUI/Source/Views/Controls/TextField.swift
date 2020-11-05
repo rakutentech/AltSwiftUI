@@ -17,7 +17,7 @@ public struct TextField<T>: View {
     var formatter: Formatter?
     var text: Binding<String>?
     var value: Binding<T>?
-    var isFirstResponder: Bool?
+    var isFirstResponder: Binding<Bool>?
     var isSecureTextEntry: Bool?
     
     public var body: View {
@@ -55,7 +55,7 @@ public struct TextField<T>: View {
     /// responder if it is the first responder.
     ///
     /// - important: Not SwiftUI compatible.
-    public func firstResponder(_ firstResponder: Bool) -> Self {
+    public func firstResponder(_ firstResponder: Binding<Bool>) -> Self {
         var view = self
         view.isFirstResponder = firstResponder
         return view
@@ -98,6 +98,7 @@ extension TextField: Renderable {
         view.formatter = formatter
         view.onCommit = onCommit
         view.onEditingChanged = onEditingChanged
+        view.firstResponder = isFirstResponder
         view.placeholder = title
         view.textContentType = viewStore.textContentType
         if let text = text?.wrappedValue, view.lastWrittenText != text {
@@ -117,10 +118,14 @@ extension TextField: Renderable {
             view.keyboardType = keyboardType
         }
         if let firstResponder = isFirstResponder {
-            if firstResponder {
-                view.becomeFirstResponder()
+            if firstResponder.wrappedValue {
+                if !view.isFirstResponder {
+                    view.becomeFirstResponder()
+                }
             } else {
-                view.resignFirstResponder()
+                if view.isFirstResponder {
+                    view.resignFirstResponder()
+                }
             }
         }
         if let isSecureTextEntry = isSecureTextEntry {
