@@ -70,6 +70,8 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
     var value: Binding<T>?
     var textBinding: Binding<String>?
     var formatter: Formatter?
+    var firstResponder: Binding<Bool>?
+    
     lazy var lastWrittenText: String? = text
     override var text: String? {
         didSet {
@@ -122,9 +124,11 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
         return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        firstResponder?.wrappedValue = true
         onEditingChanged?(true)
     }
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        firstResponder?.wrappedValue = false
         onEditingChanged?(false)
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
