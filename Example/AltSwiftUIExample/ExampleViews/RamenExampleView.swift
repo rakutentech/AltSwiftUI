@@ -98,6 +98,7 @@ struct RamenExampleView: View {
                         .accentColor(Color.label)
                     }
                 }
+                .skipHighPerformanceUpdate()
             }
             .contentOffset($offset)
             .navigationBarTitle("My Ramen Store", displayMode: .inline)

@@ -66,6 +66,13 @@ public struct Context {
         newContext.transaction = nil
         return newContext
     }
+    
+    var shouldSkipUpdate: Bool {
+        transaction?.isHighPerformance == true && viewValues?.skipOnHighPerformance == true
+    }
+    var isStrictUpdate: Bool {
+        transaction?.isHighPerformance == true && viewValues?.strictOnHighPerformance == true
+    }
 }
 
 extension Context {

@@ -43,9 +43,8 @@ extension View {
         var mergedContext = completeMerge ? parentContext.completeMerge(viewValues: viewStore) : parentContext.merge(viewValues: viewStore)
         
         if let renderableSelf = self as? Renderable {
-            if !(mergedContext.viewValues?.skipOnHighPerformance ?? false) {
-                if mergedContext.transaction?.isHighPerformance == false ||
-                    !(mergedContext.viewValues?.strictOnHighPerformance ?? false) {
+            if !mergedContext.shouldSkipUpdate {
+                if !mergedContext.isStrictUpdate {
                     
                     if mergedContext.viewValues?.animatedValues?.first?.animation != nil {
                         uiView.layoutIfNeeded()
