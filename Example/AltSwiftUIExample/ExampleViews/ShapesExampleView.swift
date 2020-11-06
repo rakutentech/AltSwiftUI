@@ -7,10 +7,12 @@
 //
 
 import AltSwiftUI
+import UIKit
 
 struct ShapesExampleView: View {
     var viewStore = ViewValues()
     @State private var goBig: Bool = false
+    @State private var progress: CGFloat = 0.5
     
     var body: View {
         VStack(spacing: 10) {
@@ -27,13 +29,31 @@ struct ShapesExampleView: View {
                 .strokeBorder(goBig ? .pink : .purple, lineWidth: goBig ? 8 : 3)
                 .frame(width: goBig ? 300 : 200, height: 200)
             
+            Button("Progress") {
+                if progress == 0.5 {
+                    progress = 1
+                } else {
+                    progress = 0.5
+                }
+            }
             HStack {
                 Capsule()
                     .frame(width: 50, height: 70)
                     .fill(goBig ? .purple : .green)
                 Circle()
-                    .frame(width: 100, height: 70)
+                    .frame(width: 50, height: 70)
                     .fill(goBig ? .purple : .green)
+                    .stroke(Color.black, style: .init(lineWidth: 8, lineCap: .round))
+                Circle()
+                    .frame(width: 50, height: 70)
+                    .fill(goBig ? .purple : .green)
+                    .stroke(Color.black, style: .init(lineWidth: 8, lineCap: .round))
+                    .trim(from: 0.25, to: 0.75)
+                Circle()
+                    .frame(width: 100, height: 70)
+                    .stroke(Color.black, style: .init(lineWidth: 8, lineCap: .round))
+                    .trim(from: 0.25, to: progress)
+                    .animation(.spring())
             }
             
             HStack {

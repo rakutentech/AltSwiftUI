@@ -34,13 +34,16 @@ public struct Ellipse: Shape {
     
     public func updateView(_ view: UIView, context: Context) {
         guard let view = view as? AltShapeView else { return }
+        let oldView = view.lastRenderableView?.view as? Ellipse
         
         let width = context.viewValues?.viewDimensions?.width ?? view.bounds.width
         let height = context.viewValues?.viewDimensions?.height ?? view.bounds.height
         let animation = context.transaction?.animation
         view.lastSizeFromViewUpdate = CGSize(width: width, height: height)
         
-        updatePath(view: view, path: path(from: CGRect(x: 0, y: 0, width: width, height: height)), animation: animation)
+        if context.viewValues?.viewDimensions != oldView?.viewStore.viewDimensions {
+            updatePath(view: view, path: path(from: CGRect(x: 0, y: 0, width: width, height: height)), animation: animation)
+        }
         updateShapeLayerValues(view: view, context: context)
     }
     
