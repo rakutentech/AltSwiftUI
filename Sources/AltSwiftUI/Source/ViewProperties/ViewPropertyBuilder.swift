@@ -790,16 +790,15 @@ extension View {
     ///     - content: A closure returning the content of the sheet.
     public func sheet<Content: View>(isPresented: Binding<Bool>, isFullScreen: Bool = false, onDismiss: (() -> Void)? = nil, content: @escaping () -> Content) -> View {
         var view = self
-        let id = "\(type(of: content))"
         if isPresented.wrappedValue {
             let content = content().subViews.first ?? EmptyView()
             let sheetDismiss = {
                 isPresented.wrappedValue = false
                 onDismiss?()
             }
-            view.viewStore.sheetPresentation = SheetPresentation(sheetView: content, onDismiss: sheetDismiss, isPresented: isPresented, isFullScreen: isFullScreen, id: id)
+            view.viewStore.sheetPresentation = SheetPresentation(sheetView: content, onDismiss: sheetDismiss, isPresented: isPresented, isFullScreen: isFullScreen)
         } else {
-            view.viewStore.sheetPresentation = SheetPresentation(sheetView: EmptyView(), onDismiss: {}, isPresented: isPresented, isFullScreen: false, id: id)
+            view.viewStore.sheetPresentation = SheetPresentation(sheetView: EmptyView(), onDismiss: {}, isPresented: isPresented, isFullScreen: false)
         }
         return view
     }

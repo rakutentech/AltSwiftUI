@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C0BE74C2521CEE800B37BA9 /* ListExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */; };
 		2C49E3CC2535382F00543E7D /* TextExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49E3CB2535382F00543E7D /* TextExampleView.swift */; };
+		2C83ED522554E50400C378DC /* NavigationExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83ED512554E50400C378DC /* NavigationExampleView.swift */; };
 		2CADC30F251CA0DF00EA3F17 /* RamenExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */; };
 		2CADC317251CA15400EA3F17 /* ShapesExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */; };
 		2CD1A094251485CB00E2CCBA /* AltSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD1A08D251485AC00E2CCBA /* AltSwiftUI.framework */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExampleView.swift; sourceTree = "<group>"; };
 		2C49E3CB2535382F00543E7D /* TextExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExampleView.swift; sourceTree = "<group>"; };
+		2C83ED512554E50400C378DC /* NavigationExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExampleView.swift; sourceTree = "<group>"; };
 		2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamenExampleView.swift; sourceTree = "<group>"; };
 		2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesExampleView.swift; sourceTree = "<group>"; };
 		2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AltSwiftUI.xcodeproj; path = ../../AltSwiftUI.xcodeproj; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */,
 				2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */,
 				2C49E3CB2535382F00543E7D /* TextExampleView.swift */,
+				2C83ED512554E50400C378DC /* NavigationExampleView.swift */,
 			);
 			path = ExampleViews;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C49E3CC2535382F00543E7D /* TextExampleView.swift in Sources */,
+				2C83ED522554E50400C378DC /* NavigationExampleView.swift in Sources */,
 				2CADC30F251CA0DF00EA3F17 /* RamenExampleView.swift in Sources */,
 				2CADC317251CA15400EA3F17 /* ShapesExampleView.swift in Sources */,
 				2CE5E28F231398D70072F907 /* ViewController.swift in Sources */,

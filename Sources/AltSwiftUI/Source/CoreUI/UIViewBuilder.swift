@@ -331,7 +331,8 @@ extension UIView {
                 controller.navigationItem.setRightBarButtonItems(trailingItems, animated: false)
             }
         }
-        if let sheetPresentation = context.viewValues?.sheetPresentation {
+        if var sheetPresentation = context.viewValues?.sheetPresentation {
+            sheetPresentation.id = self
             if sheetPresentation.isPresented.wrappedValue {
                 controller.presentView(viewValues: context.viewValues, sheetPresentation: sheetPresentation)
             } else {
