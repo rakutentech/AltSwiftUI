@@ -220,7 +220,7 @@ public enum CoordinateSpace {
 
 /// A proxy for access to the size and coordinate space (for anchor resolution)
 /// of the container view.
-public struct GeometryProxy {
+public struct GeometryProxy: Hashable {
     let frame: CGRect
     weak var view: UIView?
     
@@ -251,6 +251,13 @@ public struct GeometryProxy {
     }
     
     public static var `default` = GeometryProxy(frame: .zero, view: nil)
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(frame.minX)
+        hasher.combine(frame.minY)
+        hasher.combine(frame.width)
+        hasher.combine(frame.height)
+    }
 }
 
 // MARK: - Internal Types
