@@ -14,6 +14,8 @@ class AltShapeView: UIView {
     /// Set this size from `updateView` to prevent unnecessary updates on layout
     /// changes.
     var lastSizeFromViewUpdate: CGSize = .zero
+    var strokeColor: UIColor?
+    var fillColor: UIColor?
     
     init() {
         super.init(frame: .zero)
@@ -28,6 +30,15 @@ class AltShapeView: UIView {
         caShapeLayer.frame = bounds
         if lastSizeFromViewUpdate != bounds.size {
             updateOnLayout?(bounds)
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13.0, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                caShapeLayer.strokeColor = strokeColor?.cgColor
+                caShapeLayer.fillColor = fillColor?.cgColor
+            }
         }
     }
     
@@ -99,6 +110,9 @@ extension Shape {
             performUpdate(layer: layer, keyPath: "lineDashPattern", newValue: style.dash.map { NSNumber(value: Float($0)) }, animation: animation)
         }
         performUpdate(layer: layer, keyPath: "lineDashPhase", newValue: style.dashPhase, animation: animation, oldValue: oldView?.style.dashPhase)
+        
+        view.strokeColor = strokeBorderColor.color
+        view.fillColor = fillColor.color
     }
     
     /// Performs an update to a layer property with animation, if any. If
