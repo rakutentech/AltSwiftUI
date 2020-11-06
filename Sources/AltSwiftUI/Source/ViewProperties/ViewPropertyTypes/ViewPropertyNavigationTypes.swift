@@ -53,5 +53,5 @@ struct SheetPresentation {
     let onDismiss: () -> Void
     let isPresented: Binding<Bool>
     let isFullScreen: Bool
-    let id: String
+    weak var id: UIView?
 }

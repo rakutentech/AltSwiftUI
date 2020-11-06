@@ -23,7 +23,8 @@ struct ExampleView: View {
         ExampleViewData(title: "Ramen Example", destination: RamenExampleView()),
         ExampleViewData(title: "List", destination: ListExampleView()),
         ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
-        ExampleViewData(title: "Texts", destination: TextExampleView())
+        ExampleViewData(title: "Texts", destination: TextExampleView()),
+        ExampleViewData(title: "Navigation", destination: NavigationExampleView())
     ]
     
     var body: View {
