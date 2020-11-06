@@ -85,7 +85,7 @@ extension Animation {
             anim.stiffness = springParams.stiffness
             anim.damping = springParams.damping
             anim.initialVelocity = 0
-            anim.duration = 0.4
+            anim.duration = 0.6
             animation = anim
         }
         

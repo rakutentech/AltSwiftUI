@@ -17,7 +17,7 @@ public struct Color: View {
     public var viewStore = ViewValues()
     
     /// Stores the original color held by this view
-    private var rawColor: UIColor
+    var rawColor: UIColor
     
     /// Calculates the color of this view based on its properties,
     /// like opacity.

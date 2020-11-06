@@ -14,6 +14,8 @@ class AltShapeView: UIView {
     /// Set this size from `updateView` to prevent unnecessary updates on layout
     /// changes.
     var lastSizeFromViewUpdate: CGSize = .zero
+    var strokeColor: UIColor?
+    var fillColor: UIColor?
     
     init() {
         super.init(frame: .zero)
@@ -28,6 +30,15 @@ class AltShapeView: UIView {
         caShapeLayer.frame = bounds
         if lastSizeFromViewUpdate != bounds.size {
             updateOnLayout?(bounds)
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13.0, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                caShapeLayer.strokeColor = strokeColor?.cgColor
+                caShapeLayer.fillColor = fillColor?.cgColor
+            }
         }
     }
     
@@ -83,20 +94,32 @@ extension Shape {
     func updateShapeLayerValues(view: AltShapeView, context: Context) {
         let layer = view.caShapeLayer
         let animation = context.transaction?.animation
+        let oldView = view.lastRenderableView?.view as? Shape
         
-        performUpdate(layer: layer, keyPath: "strokeColor", newValue: strokeBorderColor.color.cgColor, animation: animation)
-        performUpdate(layer: layer, keyPath: "fillColor", newValue: fillColor.color.cgColor, animation: animation)
-        performUpdate(layer: layer, keyPath: "lineWidth", newValue: style.lineWidth, animation: animation)
-        performUpdate(layer: layer, keyPath: "lineCap", newValue: lineCap(fromCGLineCap: style.lineCap), animation: animation)
-        performUpdate(layer: layer, keyPath: "lineJoin", newValue: lineJoin(fromCGLineCap: style.lineJoin), animation: animation)
-        performUpdate(layer: layer, keyPath: "miterLimit", newValue: style.miterLimit, animation: animation)
-        performUpdate(layer: layer, keyPath: "lineDashPattern", newValue: style.dash.map { NSNumber(value: Float($0)) }, animation: animation)
-        performUpdate(layer: layer, keyPath: "lineDashPhase", newValue: style.dashPhase, animation: animation)
+        performUpdate(layer: layer, keyPath: "strokeColor", newValue: strokeBorderColor.color.cgColor, animation: animation, oldValue: oldView?.strokeBorderColor.color.cgColor)
+        performUpdate(layer: layer, keyPath: "fillColor", newValue: fillColor.color.cgColor, animation: animation, oldValue: oldView?.fillColor.color.cgColor)
+        performUpdate(layer: layer, keyPath: "lineWidth", newValue: style.lineWidth, animation: animation, oldValue: oldView?.style.lineWidth)
+        if style.lineCap != oldView?.style.lineCap {
+            performUpdate(layer: layer, keyPath: "lineCap", newValue: lineCap(fromCGLineCap: style.lineCap), animation: animation)
+        }
+        if style.lineJoin != oldView?.style.lineJoin {
+            performUpdate(layer: layer, keyPath: "lineJoin", newValue: lineJoin(fromCGLineCap: style.lineJoin), animation: animation)
+        }
+        performUpdate(layer: layer, keyPath: "miterLimit", newValue: style.miterLimit, animation: animation, oldValue: oldView?.style.miterLimit)
+        if style.dash != oldView?.style.dash {
+            performUpdate(layer: layer, keyPath: "lineDashPattern", newValue: style.dash.map { NSNumber(value: Float($0)) }, animation: animation)
+        }
+        performUpdate(layer: layer, keyPath: "lineDashPhase", newValue: style.dashPhase, animation: animation, oldValue: oldView?.style.dashPhase)
+        
+        view.strokeColor = strokeBorderColor.color
+        view.fillColor = fillColor.color
     }
     
     /// Performs an update to a layer property with animation, if any. If
     /// animation is `nil`, the update is executed normally.
-    func performUpdate(layer: CALayer, keyPath: String, newValue: Any?, animation: Animation?) {
+    func performUpdate<Value: Equatable>(layer: CALayer, keyPath: String, newValue: Value?, animation: Animation?, oldValue: Value? = nil) {
+        guard newValue != oldValue else { return }
+        
         if let animation = animation {
             animation.performCALayerAnimation(layer: layer, keyPath: keyPath, newValue: newValue)
         } else {

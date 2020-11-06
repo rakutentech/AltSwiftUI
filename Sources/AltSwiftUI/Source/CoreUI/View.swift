@@ -29,6 +29,10 @@ class LastRenderableView {
     }
 }
 
+protocol EquatableView {
+    func equalsView(_ view: View) -> Bool
+}
+
 /// A type that represents a view.
 public protocol View {
     var viewStore: ViewValues { get set }
@@ -43,7 +47,13 @@ extension View {
         var mergedContext = completeMerge ? parentContext.completeMerge(viewValues: viewStore) : parentContext.merge(viewValues: viewStore)
         
         if let renderableSelf = self as? Renderable {
-            if !mergedContext.shouldSkipUpdate {
+            var valuesChanged = true
+            if let equatableView = self as? EquatableView,
+               let oldView = uiView.lastRenderableView?.view,
+               equatableView.equalsView(oldView) {
+                valuesChanged = false
+            }
+            if !mergedContext.shouldSkipUpdate && valuesChanged {
                 if !mergedContext.isStrictUpdate {
                     
                     if mergedContext.viewValues?.animatedValues?.first?.animation != nil {
