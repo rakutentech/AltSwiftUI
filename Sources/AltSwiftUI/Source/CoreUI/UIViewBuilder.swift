@@ -188,11 +188,10 @@ extension UIView {
             alpha = CGFloat(opacity)
         }
         var baseTransform: CGAffineTransform? = nil
-        if viewValues.scale != nil || viewValues.rotation != nil {
-            baseTransform = CGAffineTransform.identity
-        }
         if let transform = viewValues.transform {
             baseTransform = transform
+        } else if viewValues.scale != nil || viewValues.rotation != nil {
+            baseTransform = CGAffineTransform.identity
         }
         if let scale = viewValues.scale {
             baseTransform = baseTransform?.scaledBy(x: scale.width, y: scale.height)
