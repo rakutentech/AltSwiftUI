@@ -187,7 +187,7 @@ extension UIView {
         if let opacity = viewValues.opacity {
             alpha = CGFloat(opacity)
         }
-        var baseTransform: CGAffineTransform? = nil
+        var baseTransform: CGAffineTransform?
         if let transform = viewValues.transform {
             baseTransform = transform
         } else if viewValues.scale != nil || viewValues.rotation != nil {
