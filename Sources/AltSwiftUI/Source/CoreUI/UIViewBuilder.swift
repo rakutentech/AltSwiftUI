@@ -187,17 +187,22 @@ extension UIView {
         if let opacity = viewValues.opacity {
             alpha = CGFloat(opacity)
         }
-        var baseTransform = CGAffineTransform.identity
+        var baseTransform: CGAffineTransform? = nil
+        if viewValues.transform != nil || viewValues.scale != nil || viewValues.rotation != nil {
+            baseTransform = CGAffineTransform.identity
+        }
         if let transform = viewValues.transform {
             baseTransform = transform
         }
         if let scale = viewValues.scale {
-            baseTransform = baseTransform.scaledBy(x: scale.width, y: scale.height)
+            baseTransform = baseTransform?.scaledBy(x: scale.width, y: scale.height)
         }
         if let rotation = viewValues.rotation {
-            baseTransform = transform.rotated(by: CGFloat(rotation.radians))
+            baseTransform = baseTransform?.rotated(by: CGFloat(rotation.radians))
         }
-        self.transform = baseTransform
+        if let baseTransform = baseTransform {
+            self.transform = baseTransform
+        }
         if let background = viewValues.background {
             if self is UILabel {
                 // `bagroundColor` of UILabel is not animatable, unlike the layer.
