@@ -281,7 +281,7 @@ extension List: Renderable {
             updateView.scheduleUpdateRender(uiView: storedView, parentContext: context)
         }
         // Reload rows which have size changes
-        DispatchQueue.main.async {
+        context.postRenderOperationQueue.addOperation {
             var updatePaths = [IndexPath]()
             for path in paths {
                 path.view.layoutIfNeeded()

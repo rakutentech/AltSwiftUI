@@ -60,14 +60,14 @@ class ViewBinder {
                 overwriteTransaction?.parent?.layoutIfNeeded()
             }
             
+            let context = Context(
+                rootController: rootController,
+                overwriteRootController: overwriteRootController,
+                transaction: overwriteTransaction?.transaction ?? transaction,
+                isInsideButton: isInsideButton)
             view.updateRender(
                 uiView: subView,
-                parentContext:
-                    Context(
-                        rootController: rootController,
-                        overwriteRootController: overwriteRootController,
-                        transaction: overwriteTransaction?.transaction ?? transaction,
-                        isInsideButton: isInsideButton),
+                parentContext: context,
                 bodyLevel: bodyLevel)
             rootController?.executeLazyConstraints()
             rootController?.executeInsertAppearHandlers()
@@ -78,6 +78,8 @@ class ViewBinder {
             transaction?.animation?.performAnimation({ [weak self] in
                 self?.rootController?.view.layoutIfNeeded()
             })
+            
+            context.postRenderOperationQueue.drainRecursively()
         }
     }
     @objc private func handleStateNotification(notification: Notification) {

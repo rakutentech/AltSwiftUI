@@ -55,6 +55,7 @@ public struct Context {
     weak var overwriteRootController: UIViewController?
     var transaction: Transaction?
     var viewOperationQueue = ViewOperationQueue()
+    var postRenderOperationQueue = ViewOperationQueue()
     
     /// True when the current view context is inside a button. Use this
     /// to handle special View behavior when inside buttons.
@@ -79,7 +80,7 @@ extension Context {
     /// Merges values that can be inherited and takes priority from `viewValues`.
     func merge(viewValues: ViewValues?) -> Context {
         if let viewValues = viewValues {
-            return Context(viewValues: viewValues.merge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, isInsideButton: isInsideButton)
+            return Context(viewValues: viewValues.merge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, postRenderOperationQueue: postRenderOperationQueue, isInsideButton: isInsideButton)
         } else {
             return self
         }
@@ -88,7 +89,7 @@ extension Context {
     /// Merges all values and takes priority from `viewValues`.
     func completeMerge(viewValues: ViewValues?) -> Context {
         if let viewValues = viewValues {
-            return Context(viewValues: viewValues.completeMerge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, isInsideButton: isInsideButton)
+            return Context(viewValues: viewValues.completeMerge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, postRenderOperationQueue: postRenderOperationQueue, isInsideButton: isInsideButton)
         } else {
             return self
         }
