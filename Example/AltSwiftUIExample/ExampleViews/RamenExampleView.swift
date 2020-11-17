@@ -85,7 +85,11 @@ struct RamenExampleView: View {
                         }
                         Button("Toggle") {
                             withAnimation {
-                                ramenModel.ramenList[3].score = 6
+                                if ramenModel.ramenList[3].score == 6 {
+                                    ramenModel.ramenList[3].score = 5
+                                } else {
+                                    ramenModel.ramenList[3].score = 6
+                                }
                             }
                         }
                     }
@@ -164,7 +168,7 @@ struct RamenCell: View {
             Spacer()
             Text("\(ramen.price)")
         }
-        .frame(height: ramen.score == 6 ? 60 : 40)
+        .frame(height: ramen.score == 6 ? 260 : 40)
         .padding(10)
     }
 }

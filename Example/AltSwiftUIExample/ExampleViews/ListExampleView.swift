@@ -32,6 +32,15 @@ struct ListExampleView: View {
                         ramenModel.ramenList[3].price = "100"
                     }
                 }
+                Button("Toggle") {
+                    withAnimation {
+                        if ramenModel.ramenList[3].score == 6 {
+                            ramenModel.ramenList[3].score = 5
+                        } else {
+                            ramenModel.ramenList[3].score = 6
+                        }
+                    }
+                }
             }
             HStack {
                 Button("Lock/Unlock Scroll") {

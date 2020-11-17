@@ -263,14 +263,37 @@ extension List: Renderable {
                 view.reloadData()
             }
         } else {
-            // If there is no change in cell numbers, only update
-            // visible cells.
-            for cell in view.visibleCells {
-                guard let cell = cell as? SwiftUITableViewCell,
-                      let storedView = cell.renderedView,
-                      let indexPath = view.indexPath(for: cell) else { continue }
-                let updateView = tableDelegate.viewForIndex(section: indexPath.section, row: indexPath.row)
-                updateView.scheduleUpdateRender(uiView: storedView, parentContext: context)
+            updateCells(view, tableDelegate: tableDelegate, context: context)
+        }
+    }
+    
+    private func updateCells(_ view: SwiftUITableView, tableDelegate: GenericTableViewDelegate<Content, Data, ID>, context: Context) {
+        // If there is no change in cell numbers, only update
+        // visible cells.
+        var paths = [(view: UIView, indexPath: IndexPath, size: CGSize, projectedSize: CGSize)]()
+        for cell in view.visibleCells {
+            guard let cell = cell as? SwiftUITableViewCell,
+                  let storedView = cell.renderedView,
+                  let indexPath = view.indexPath(for: cell) else { continue }
+            let updateView = tableDelegate.viewForIndex(section: indexPath.section, row: indexPath.row)
+            let projectedSize = storedView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            paths.append((view: storedView, indexPath: indexPath, size: storedView.bounds.size, projectedSize: projectedSize))
+            updateView.scheduleUpdateRender(uiView: storedView, parentContext: context)
+        }
+        // Reload rows which have size changes
+        DispatchQueue.main.async {
+            var updatePaths = [IndexPath]()
+            for path in paths {
+                path.view.layoutIfNeeded()
+                if path.view.bounds.size != path.size ||
+                    path.view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize) != path.projectedSize {
+                    updatePaths.append(path.indexPath)
+                }
+            }
+            if !updatePaths.isEmpty {
+                view.reloadRows(
+                    at: updatePaths,
+                    with: context.transaction?.animation != nil ? .automatic : .none)
             }
         }
     }
