@@ -60,14 +60,15 @@ class ViewBinder {
                 overwriteTransaction?.parent?.layoutIfNeeded()
             }
             
-            let context = Context(
-                rootController: rootController,
-                overwriteRootController: overwriteRootController,
-                transaction: overwriteTransaction?.transaction ?? transaction,
-                isInsideButton: isInsideButton)
+            let postRenderQueue = ViewOperationQueue()
             view.updateRender(
                 uiView: subView,
-                parentContext: context,
+                parentContext: Context(
+                    rootController: rootController,
+                    overwriteRootController: overwriteRootController,
+                    transaction: overwriteTransaction?.transaction ?? transaction,
+                    postRenderOperationQueue: postRenderQueue,
+                    isInsideButton: isInsideButton),
                 bodyLevel: bodyLevel)
             rootController?.executeLazyConstraints()
             rootController?.executeInsertAppearHandlers()
@@ -79,7 +80,7 @@ class ViewBinder {
                 self?.rootController?.view.layoutIfNeeded()
             })
             
-            context.postRenderOperationQueue.drainRecursively()
+            postRenderQueue.drainRecursively()
         }
     }
     @objc private func handleStateNotification(notification: Notification) {
