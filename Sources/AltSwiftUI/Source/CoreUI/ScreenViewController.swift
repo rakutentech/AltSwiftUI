@@ -118,7 +118,7 @@ class ScreenViewController: UIViewController {
         view.addSubview(renderView)
         LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: contentView, parentContext: context, expand: false)
         executeLazyConstraints()
-        executeInsertAppearHandlers()
+        executeInsertAppearHandlers(preventExecutionInNextAppear: true)
     }
     
     func setNavigationBarHidden(_ hidden: Bool) {
@@ -180,13 +180,15 @@ class ScreenViewController: UIViewController {
         lazyLayoutConstraints.activate()
         lazyLayoutConstraints = []
     }
-    func executeInsertAppearHandlers() {
+    func executeInsertAppearHandlers(preventExecutionInNextAppear: Bool = false) {
         guard let appearHandlers = insertOnAppearHandlers.copy(with: nil) as? NSMapTable<UIView, EventCodeHandler> else { return }
         insertOnAppearHandlers.removeAllObjects()
         for key in appearHandlers.keyEnumerator() {
             if let key = key as? UIView,
                 let handler = appearHandlers.object(forKey: key) {
-                executedInsertAppearHandlers.setObject(handler, forKey: key)
+                if preventExecutionInNextAppear {
+                    executedInsertAppearHandlers.setObject(handler, forKey: key)
+                }
                 handler.handler()
             }
         }
