@@ -224,6 +224,7 @@ class ContextMenuHandler: NSObject, UIContextMenuInteractionDelegate {
 
 private enum DisappearHandlerAssociation {
     static var key = "DisappearHandlerAssociatedKey"
+    static var dismissingKey = "DisappearHandlerAssociatedKey.RootControllerDismissing"
 }
 
 protocol DisappearHandler: AnyObject {
@@ -231,6 +232,14 @@ protocol DisappearHandler: AnyObject {
 }
 
 extension DisappearHandler {
+    var parentControllerIsDismissing: Bool? {
+        get {
+            objc_getAssociatedObject(self, &DisappearHandlerAssociation.dismissingKey) as? Bool
+        }
+        set {
+            objc_setAssociatedObject(self, &DisappearHandlerAssociation.dismissingKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
     var disappearHandler: EventCodeHandler? {
         get {
             objc_getAssociatedObject(self, &DisappearHandlerAssociation.key) as? EventCodeHandler
@@ -240,7 +249,9 @@ extension DisappearHandler {
         }
     }
     func executeDisappearHandler() {
-        disappearHandler?.handler()
+        if !(parentControllerIsDismissing ?? false) {
+            disappearHandler?.handler()
+        }
     }
 }
 
