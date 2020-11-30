@@ -89,7 +89,6 @@ class ScreenViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         guard let handlersCopy = onDisappearHandlers.copy(with: nil) as? NSMapTable<UIView, EventCodeHandler> else { return }
-        
         for handler in handlersCopy.objectEnumerator() ?? NSEnumerator() {
             if let handler = handler as? EventCodeHandler {
                 handler.handler()
@@ -173,6 +172,7 @@ class ScreenViewController: UIViewController {
             popView()
         } else {
             sheetPresentation?.isPresented.wrappedValue = false
+            onSheetDismiss()
         }
     }
     
@@ -190,6 +190,16 @@ class ScreenViewController: UIViewController {
                     executedInsertAppearHandlers.setObject(handler, forKey: key)
                 }
                 handler.handler()
+            }
+        }
+    }
+    
+    func onSheetDismiss() {
+        if let handlersCopy = onDisappearHandlers.copy(with: nil) as? NSMapTable<UIView, EventCodeHandler> {
+            for view in handlersCopy.keyEnumerator() {
+                if let view = view as? DisappearHandler {
+                    view.parentControllerIsDismissing = true
+                }
             }
         }
     }
@@ -226,8 +236,11 @@ class ScreenViewController: UIViewController {
         if !isNavigationController {
             navigationController?.setNavigationBarHidden(true, animated: false)
         }
-        if let onDismiss = onDismiss {
-            presenter = SwiftUIPresenter(onDismiss: onDismiss)
+        if sheetPresentation != nil {
+            presenter = SwiftUIPresenter(onDismiss: { [weak self] in
+                self?.onSheetDismiss()
+                self?.onDismiss?()
+            })
             if let navigationController = navigationController {
                 navigationController.presentationController?.delegate = presenter
             } else {
@@ -261,6 +274,7 @@ extension UIViewController {
             !presentedVC.isBeingDismissed,
             sheetVC.sheetPresentation?.id == sheetPresentation.id {
             dismiss(animated: true)
+            sheetVC.onSheetDismiss()
         }
     }
     func presentAlert(_ alert: Alert) {
