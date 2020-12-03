@@ -75,6 +75,7 @@
 		2CD1A04C2512066D00E2CCBA /* ViewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A00B2512066D00E2CCBA /* ViewEnvironment.swift */; };
 		2CD1A04E2512066D00E2CCBA /* AltSwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CD1A056251206C200E2CCBA /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A054251206C200E2CCBA /* ViewTests.swift */; };
+		68CBD3E12578AADB00A3F033 /* SecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CBD3E02578AADB00A3F033 /* SecureField.swift */; };
 		7D2D4D6B25148269000F5DDC /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6525148269000F5DDC /* Capsule.swift */; };
 		7D2D4D6C25148269000F5DDC /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6625148269000F5DDC /* Circle.swift */; };
 		7D2D4D6D25148269000F5DDC /* Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6725148269000F5DDC /* Ellipse.swift */; };
@@ -165,6 +166,7 @@
 		2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AltSwiftUI.h; sourceTree = "<group>"; };
 		2CD1A054251206C200E2CCBA /* ViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
 		2CD1A055251206C200E2CCBA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68CBD3E02578AADB00A3F033 /* SecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureField.swift; sourceTree = "<group>"; };
 		7D2D4D6525148269000F5DDC /* Capsule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
 		7D2D4D6625148269000F5DDC /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		7D2D4D6725148269000F5DDC /* Ellipse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ellipse.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			children = (
 				2CD19FF82512066D00E2CCBA /* Button.swift */,
 				2CD19FF42512066D00E2CCBA /* DatePicker.swift */,
+				68CBD3E02578AADB00A3F033 /* SecureField.swift */,
 				2CD19FF72512066D00E2CCBA /* Slider.swift */,
 				2CD19FF62512066D00E2CCBA /* TextField.swift */,
 				2CD19FF52512066D00E2CCBA /* Toggle.swift */,
@@ -591,6 +594,7 @@
 				2CD1A0412512066D00E2CCBA /* ZStack.swift in Sources */,
 				2CD1A0232512066D00E2CCBA /* UIKitReadOnlyViews.swift in Sources */,
 				2CD1A04B2512066D00E2CCBA /* UIApplicationExtensions.swift in Sources */,
+				68CBD3E12578AADB00A3F033 /* SecureField.swift in Sources */,
 				2CD1A01D2512066D00E2CCBA /* Published.swift in Sources */,
 				7D2D4D6F25148269000F5DDC /* Shapes.swift in Sources */,
 				2CD1A0122512066D00E2CCBA /* ScreenViewController.swift in Sources */,
