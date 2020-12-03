@@ -224,17 +224,17 @@
 		2CD19FBD2512066D00E2CCBA /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				2CD19FBE2512066D00E2CCBA /* CoreUI */,
-				2CD19FC52512066D00E2CCBA /* CoreTypes */,
 				2CD19FC72512066D00E2CCBA /* Constants */,
-				2CD19FC92512066D00E2CCBA /* State */,
-				2CD19FD32512066D00E2CCBA /* UIKitViews */,
-				2CD19FD92512066D00E2CCBA /* ViewProperties */,
-				2CD19FE52512066D00E2CCBA /* Previews */,
-				2CD19FE72512066D00E2CCBA /* UIKitCompat */,
-				2CD19FE92512066D00E2CCBA /* Views */,
+				2CD19FC52512066D00E2CCBA /* CoreTypes */,
+				2CD19FBE2512066D00E2CCBA /* CoreUI */,
 				2CD1A0062512066D00E2CCBA /* Helpers */,
+				2CD19FE52512066D00E2CCBA /* Previews */,
+				2CD19FC92512066D00E2CCBA /* State */,
+				2CD19FE72512066D00E2CCBA /* UIKitCompat */,
+				2CD19FD32512066D00E2CCBA /* UIKitViews */,
 				2CD1A00A2512066D00E2CCBA /* ViewEnvironment */,
+				2CD19FD92512066D00E2CCBA /* ViewProperties */,
+				2CD19FE92512066D00E2CCBA /* Views */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -242,12 +242,12 @@
 		2CD19FBE2512066D00E2CCBA /* CoreUI */ = {
 			isa = PBXGroup;
 			children = (
+				2CD19FC12512066D00E2CCBA /* LayoutSolver.swift */,
+				2CD19FC32512066D00E2CCBA /* ScreenViewController.swift */,
+				2CD19FC22512066D00E2CCBA /* UIHostingController.swift */,
+				2CD19FC42512066D00E2CCBA /* UIViewBuilder.swift */,
 				2CD19FBF2512066D00E2CCBA /* View.swift */,
 				2CD19FC02512066D00E2CCBA /* ViewBinder.swift */,
-				2CD19FC12512066D00E2CCBA /* LayoutSolver.swift */,
-				2CD19FC22512066D00E2CCBA /* UIHostingController.swift */,
-				2CD19FC32512066D00E2CCBA /* ScreenViewController.swift */,
-				2CD19FC42512066D00E2CCBA /* UIViewBuilder.swift */,
 			);
 			path = CoreUI;
 			sourceTree = "<group>";
@@ -271,15 +271,15 @@
 		2CD19FC92512066D00E2CCBA /* State */ = {
 			isa = PBXGroup;
 			children = (
-				2CD19FCA2512066D00E2CCBA /* StateTypes.swift */,
 				2CD19FCB2512066D00E2CCBA /* Binding.swift */,
 				2CD19FCC2512066D00E2CCBA /* Environment.swift */,
-				2CD19FCD2512066D00E2CCBA /* ObservableObject.swift */,
-				2CD19FCE2512066D00E2CCBA /* State.swift */,
 				2CD19FCF2512066D00E2CCBA /* EnvironmentObject.swift */,
-				2CD19FD02512066D00E2CCBA /* StateObject.swift */,
-				2CD19FD12512066D00E2CCBA /* Published.swift */,
+				2CD19FCD2512066D00E2CCBA /* ObservableObject.swift */,
 				2CD19FD22512066D00E2CCBA /* ObservedObject.swift */,
+				2CD19FD12512066D00E2CCBA /* Published.swift */,
+				2CD19FCE2512066D00E2CCBA /* State.swift */,
+				2CD19FD02512066D00E2CCBA /* StateObject.swift */,
+				2CD19FCA2512066D00E2CCBA /* StateTypes.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -287,10 +287,10 @@
 		2CD19FD32512066D00E2CCBA /* UIKitViews */ = {
 			isa = PBXGroup;
 			children = (
-				2CD19FD42512066D00E2CCBA /* UIKitNavigationViews.swift */,
+				2CD19FD72512066D00E2CCBA /* UIKitCollections.swift */,
 				2CD19FD52512066D00E2CCBA /* UIKitControls.swift */,
 				2CD19FD62512066D00E2CCBA /* UIKitCoreViews.swift */,
-				2CD19FD72512066D00E2CCBA /* UIKitCollections.swift */,
+				2CD19FD42512066D00E2CCBA /* UIKitNavigationViews.swift */,
 				2CD19FD82512066D00E2CCBA /* UIKitReadOnlyViews.swift */,
 			);
 			path = UIKitViews;
@@ -299,10 +299,10 @@
 		2CD19FD92512066D00E2CCBA /* ViewProperties */ = {
 			isa = PBXGroup;
 			children = (
-				2CD19FDA2512066D00E2CCBA /* ViewPropertyBuilder.swift */,
 				2CD19FDB2512066D00E2CCBA /* ViewPropertyTypes */,
-				2CD19FE32512066D00E2CCBA /* ViewValues.swift */,
 				2CD19FE42512066D00E2CCBA /* ViewBuilder.swift */,
+				2CD19FDA2512066D00E2CCBA /* ViewPropertyBuilder.swift */,
+				2CD19FE32512066D00E2CCBA /* ViewValues.swift */,
 			);
 			path = ViewProperties;
 			sourceTree = "<group>";
@@ -340,11 +340,11 @@
 		2CD19FE92512066D00E2CCBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7D2D4D6425148237000F5DDC /* Shapes */,
-				2CD19FEA2512066D00E2CCBA /* ReadOnly */,
-				2CD19FF32512066D00E2CCBA /* Controls */,
-				2CD19FF92512066D00E2CCBA /* CoreViews.swift */,
 				2CD19FFA2512066D00E2CCBA /* Collections */,
+				2CD19FF32512066D00E2CCBA /* Controls */,
+				2CD19FEA2512066D00E2CCBA /* ReadOnly */,
+				7D2D4D6425148237000F5DDC /* Shapes */,
+				2CD19FF92512066D00E2CCBA /* CoreViews.swift */,
 				2CD1A0052512066D00E2CCBA /* NavigationViews.swift */,
 			);
 			path = Views;
@@ -353,13 +353,13 @@
 		2CD19FEA2512066D00E2CCBA /* ReadOnly */ = {
 			isa = PBXGroup;
 			children = (
+				2CD19FF02512066D00E2CCBA /* Color.swift */,
+				2CD19FEE2512066D00E2CCBA /* Divider.swift */,
+				2CD19FF22512066D00E2CCBA /* GeometryReader.swift */,
+				2CD19FED2512066D00E2CCBA /* Image.swift */,
 				2CD19FEB2512066D00E2CCBA /* Picker.swift */,
 				2CD19FEC2512066D00E2CCBA /* Spacer.swift */,
-				2CD19FED2512066D00E2CCBA /* Image.swift */,
-				2CD19FEE2512066D00E2CCBA /* Divider.swift */,
 				2CD19FEF2512066D00E2CCBA /* Text.swift */,
-				2CD19FF02512066D00E2CCBA /* Color.swift */,
-				2CD19FF22512066D00E2CCBA /* GeometryReader.swift */,
 			);
 			path = ReadOnly;
 			sourceTree = "<group>";
@@ -367,11 +367,11 @@
 		2CD19FF32512066D00E2CCBA /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				2CD19FF42512066D00E2CCBA /* DatePicker.swift */,
-				2CD19FF52512066D00E2CCBA /* Toggle.swift */,
-				2CD19FF62512066D00E2CCBA /* TextField.swift */,
-				2CD19FF72512066D00E2CCBA /* Slider.swift */,
 				2CD19FF82512066D00E2CCBA /* Button.swift */,
+				2CD19FF42512066D00E2CCBA /* DatePicker.swift */,
+				2CD19FF72512066D00E2CCBA /* Slider.swift */,
+				2CD19FF62512066D00E2CCBA /* TextField.swift */,
+				2CD19FF52512066D00E2CCBA /* Toggle.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -380,15 +380,15 @@
 			isa = PBXGroup;
 			children = (
 				2CD19FFB2512066D00E2CCBA /* CollectionProtocols.swift */,
-				2CD19FFC2512066D00E2CCBA /* TabView.swift */,
-				2CD19FFD2512066D00E2CCBA /* ViewCollectionIteration.swift */,
-				2CD19FFE2512066D00E2CCBA /* ZStack.swift */,
-				2CD19FFF2512066D00E2CCBA /* ScrollView.swift */,
-				2CD1A0002512066D00E2CCBA /* List.swift */,
+				2CD1A0042512066D00E2CCBA /* ForEach.swift */,
 				2CD1A0012512066D00E2CCBA /* Group.swift */,
 				2CD1A0022512066D00E2CCBA /* HStack.swift */,
+				2CD1A0002512066D00E2CCBA /* List.swift */,
+				2CD19FFF2512066D00E2CCBA /* ScrollView.swift */,
+				2CD19FFC2512066D00E2CCBA /* TabView.swift */,
+				2CD19FFD2512066D00E2CCBA /* ViewCollectionIteration.swift */,
 				2CD1A0032512066D00E2CCBA /* VStack.swift */,
-				2CD1A0042512066D00E2CCBA /* ForEach.swift */,
+				2CD19FFE2512066D00E2CCBA /* ZStack.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -396,8 +396,8 @@
 		2CD1A0062512066D00E2CCBA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2CD1A0072512066D00E2CCBA /* FoundationExtensions.swift */,
 				2CD1A0082512066D00E2CCBA /* AutolayoutExtensions.swift */,
+				2CD1A0072512066D00E2CCBA /* FoundationExtensions.swift */,
 				2CD1A0092512066D00E2CCBA /* UIApplicationExtensions.swift */,
 			);
 			path = Helpers;
@@ -414,10 +414,10 @@
 		2CD1A053251206C200E2CCBA /* AltSwiftUITests */ = {
 			isa = PBXGroup;
 			children = (
-				2CD1A054251206C200E2CCBA /* ViewTests.swift */,
 				2CA33E4B252E95B8005A7C96 /* IterationTests.swift */,
-				2CA33E56252E96BA005A7C96 /* ViewBinderTests.swift */,
 				2CA33E61252E9718005A7C96 /* OperationQueueTests.swift */,
+				2CA33E56252E96BA005A7C96 /* ViewBinderTests.swift */,
+				2CD1A054251206C200E2CCBA /* ViewTests.swift */,
 				2CD1A055251206C200E2CCBA /* Info.plist */,
 			);
 			name = AltSwiftUITests;
