@@ -32,6 +32,7 @@ class ScreenViewController: UIViewController {
     private var onDismiss: (() -> Void)?
     private var onPop: (() -> Void)?
     private var executedInsertAppearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
+    private var hasAppeared = false
     
     public init(
         contentView: View,
@@ -71,6 +72,8 @@ class ScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        hasAppeared = true
+        
         guard let handlersCopy = onAppearHandlers.copy(with: nil) as? NSMapTable<UIView, EventCodeHandler> else { return }
         
         for view in handlersCopy.keyEnumerator() {
@@ -100,6 +103,7 @@ class ScreenViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         if isBeingDismissed || isMovingFromParent {
+            onControllerDismiss()
             onPop?()
         }
     }
@@ -172,7 +176,7 @@ class ScreenViewController: UIViewController {
             popView()
         } else {
             sheetPresentation?.isPresented.wrappedValue = false
-            onSheetDismiss()
+            onControllerDismiss()
         }
     }
     
@@ -186,7 +190,7 @@ class ScreenViewController: UIViewController {
         for key in appearHandlers.keyEnumerator() {
             if let key = key as? UIView,
                 let handler = appearHandlers.object(forKey: key) {
-                if preventExecutionInNextAppear {
+                if preventExecutionInNextAppear || !hasAppeared {
                     executedInsertAppearHandlers.setObject(handler, forKey: key)
                 }
                 handler.handler()
@@ -194,7 +198,7 @@ class ScreenViewController: UIViewController {
         }
     }
     
-    func onSheetDismiss() {
+    func onControllerDismiss() {
         if let handlersCopy = onDisappearHandlers.copy(with: nil) as? NSMapTable<UIView, EventCodeHandler> {
             for view in handlersCopy.keyEnumerator() {
                 if let view = view as? DisappearHandler {
@@ -238,7 +242,7 @@ class ScreenViewController: UIViewController {
         }
         if sheetPresentation != nil {
             presenter = SwiftUIPresenter(onDismiss: { [weak self] in
-                self?.onSheetDismiss()
+                self?.onControllerDismiss()
                 self?.onDismiss?()
             })
             if let navigationController = navigationController {
@@ -274,7 +278,7 @@ extension UIViewController {
             !presentedVC.isBeingDismissed,
             sheetVC.sheetPresentation?.id == sheetPresentation.id {
             dismiss(animated: true)
-            sheetVC.onSheetDismiss()
+            sheetVC.onControllerDismiss()
         }
     }
     func presentAlert(_ alert: Alert) {
