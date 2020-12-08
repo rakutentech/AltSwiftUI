@@ -12,6 +12,8 @@ struct ListExampleView: View {
     var viewStore = ViewValues()
     @StateObject var ramenModel = RamenModel()
     @State var scrollEnabled = true
+    @State private var appliedRow: ListVisibleRow?
+    @State private var interactiveScrollEnabled = true
     
     var body: View {
         VStack {
@@ -41,6 +43,14 @@ struct ListExampleView: View {
                         }
                     }
                 }
+                Button("Int. Lock") {
+                    interactiveScrollEnabled.toggle()
+                }
+                Button("Visible") {
+                    withAnimation {
+                        appliedRow = ListVisibleRow(indexPath: IndexPath(row: 0, section: 0), scrollPosition: .top)
+                    }
+                }
             }
             HStack {
                 Button("Lock/Unlock Scroll") {
@@ -52,6 +62,8 @@ struct ListExampleView: View {
             }
             .listStyle(listStyle)
             .scrollEnabled(scrollEnabled)
+            .interactiveScrollEnabled(interactiveScrollEnabled)
+            .appliedVisibleRow($appliedRow)
         }
         .onAppear {
             ramenModel.loadRamen()

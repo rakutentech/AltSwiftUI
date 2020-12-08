@@ -37,7 +37,9 @@ protocol ChildWrapper {
                 return
             }
             _wrappedValue = newValue
-            sendStateChangeNotification()
+            if EnvironmentHolder.notifyStateChanges {
+                sendStateChangeNotification()
+            }
         }
     }
 

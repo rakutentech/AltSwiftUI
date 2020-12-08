@@ -17,6 +17,7 @@ enum EnvironmentHolder {
     static var globalAnimation: Animation?
     static var coordinateSpaceNames = [String: WeakObject<UIView>]()
     static var highPerformanceMode: Bool = false
+    static var notifyStateChanges = true
     
     static var notificationUserInfo: [AnyHashable: Any] {
         var transaction = Transaction()
