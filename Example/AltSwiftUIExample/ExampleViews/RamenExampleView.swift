@@ -32,7 +32,10 @@ class RamenModel: ObservableObject {
             Ramen(id: "6", name: "Shio Ramen Extra", score: 3, price: "¥1200"),
             Ramen(id: "7", name: "Miso Ramen Extra", score: 2, price: "¥1200"),
             Ramen(id: "8", name: "Shoyu Ramen Extra", score: 4, price: "¥1300"),
-            Ramen(id: "9", name: "Taiwan Ramen Extra", score: 5, price: "¥1400")
+            Ramen(id: "9", name: "Taiwan Ramen Extra", score: 5, price: "¥1400"),
+            Ramen(id: "10", name: "Miso Ramen Extra 2", score: 2, price: "¥1200"),
+            Ramen(id: "11", name: "Shoyu Ramen Extra 2", score: 4, price: "¥1300"),
+            Ramen(id: "12", name: "Taiwan Ramen Extra 2", score: 5, price: "¥1400")
         ]
     }
 }
@@ -54,6 +57,8 @@ struct RamenExampleView: View {
     @State private var ramenInOrder: Bool = false
     @State private var offset: CGPoint = .zero
     @State private var imageGeometry: GeometryProxy = .default
+    @State private var appliedRect: CGRect?
+    @State private var interactiveScrollEnabled = true
     
     var body: View {
         NavigationView {
@@ -92,6 +97,14 @@ struct RamenExampleView: View {
                                 }
                             }
                         }
+                        Button("Int. Lock") {
+                            interactiveScrollEnabled.toggle()
+                        }
+                        Button("Visible") {
+                            withAnimation {
+                                appliedRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+                            }
+                        }
                     }
 
                     ForEach(ramenModel.ramenList) { ramen in
@@ -105,6 +118,8 @@ struct RamenExampleView: View {
                 .skipHighPerformanceUpdate()
             }
             .contentOffset($offset)
+            .appliedVisibleRect($appliedRect)
+            .interactiveScrollEnabled(interactiveScrollEnabled)
             .navigationBarTitle("My Ramen Store", displayMode: .inline)
             .onAppear {
                 ramenModel.loadRamen()

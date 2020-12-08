@@ -19,9 +19,11 @@ public struct ScrollView: View {
     let showsIndicators: Bool
     let axis: Axis
     var contentOffset: Binding<CGPoint>?
+    var appliedVisibleRect: Binding<CGRect?>?
     var isBounceEnabled = true
     var ignoresHighPerformance = false
     var scrollEnabled: Bool = true
+    var interactiveScrollEnabled = true
     
     public init(_ axis: Axis = .vertical, showsIndicators: Bool = true, @ViewBuilder content: () -> View) {
         contentView = content().subViews.first
@@ -30,6 +32,7 @@ public struct ScrollView: View {
     }
     
     /// Listen to changes in the ScrollView's content offset.
+    /// Setting the value of this binding does **not** affect the ScrollView's content offset.
     ///
     /// - warning:
     /// Updates to the value of this binding
@@ -46,6 +49,20 @@ public struct ScrollView: View {
     public func contentOffset(_ offset: Binding<CGPoint>) -> Self {
         var view = self
         view.contentOffset = offset
+        return view
+    }
+    
+    /// Applies the specified offset to the ScrollView's content. Once applied,
+    /// the value inside the Binding will be set to `nil`.
+    ///
+    /// - Parameter offset: The visible rect to apply
+    ///
+    /// - important: Not SwiftUI compatible.
+    public func appliedVisibleRect(_ rect: Binding<CGRect?>) -> Self {
+        // Listen to changes in this binding
+        _ = rect.wrappedValue
+        var view = self
+        view.appliedVisibleRect = rect
         return view
     }
     
@@ -76,6 +93,17 @@ public struct ScrollView: View {
     public func scrollEnabled(_ enabled: Bool) -> Self {
         var list = self
         list.scrollEnabled = enabled
+        return list
+    }
+    
+    /// Sets if scrolling is enabled, while still capturing user gestures.
+    /// Use this instead of `scrollEnabled` if you want to start/stop receiving
+    /// updates from user gestures while it's being executed.
+    ///
+    /// - important: Not SwiftUI compatible.
+    public func interactiveScrollEnabled(_ enabled: Bool) -> Self {
+        var list = self
+        list.interactiveScrollEnabled = enabled
         return list
     }
 }
@@ -127,5 +155,13 @@ extension ScrollView: Renderable {
         view.contentOffsetBinding = contentOffset
         view.bounces = isBounceEnabled
         view.isScrollEnabled = scrollEnabled
+        if let appliedRect = appliedVisibleRect?.wrappedValue {
+            let animated = context.transaction?.animation != nil
+            view.scrollRectToVisible(appliedRect, animated: animated)
+            EnvironmentHolder.notifyStateChanges = false
+            appliedVisibleRect?.wrappedValue = nil
+            EnvironmentHolder.notifyStateChanges = true
+        }
+        view.interactiveScrollEnabled = interactiveScrollEnabled
     }
 }

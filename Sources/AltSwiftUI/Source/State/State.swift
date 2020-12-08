@@ -40,7 +40,9 @@ public class State<Value> {
                 return
             }
             _wrappedValue.value = newValue
-            sendStateChangeNotification()
+            if EnvironmentHolder.notifyStateChanges {
+                sendStateChangeNotification()
+            }
         }
     }
     

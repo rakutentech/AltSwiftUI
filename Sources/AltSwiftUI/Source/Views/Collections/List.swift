@@ -8,6 +8,17 @@
 
 import UIKit
 
+public struct ListVisibleRow {
+    let indexPath: IndexPath
+    let scrollPosition: UITableView.ScrollPosition
+    
+    public init(indexPath: IndexPath,
+        scrollPosition: UITableView.ScrollPosition) {
+        self.indexPath = indexPath
+        self.scrollPosition = scrollPosition
+    }
+}
+
 /// A list of elements that creates each subview on demand.
 public struct List<Content: View, Data, ID: Hashable>: View {
     public var viewStore = ViewValues()
@@ -28,6 +39,8 @@ public struct List<Content: View, Data, ID: Hashable>: View {
     var listStyle: ListStyle?
     var showsIndicators: Bool = true
     var scrollEnabled: Bool = true
+    var interactiveScrollEnabled = true
+    var appliedVisibleRow: Binding<ListVisibleRow?>?
     
     public init(@ViewBuilder content: () -> Content) {
         let contentResult = content()
@@ -165,6 +178,31 @@ public struct List<Content: View, Data, ID: Hashable>: View {
         list.scrollEnabled = enabled
         return list
     }
+    
+    /// Sets if scrolling is enabled, while still capturing user gestures.
+    /// Use this instead of `scrollEnabled` if you want to start/stop receiving
+    /// updates from user gestures while it's being executed.
+    ///
+    /// - important: Not SwiftUI compatible.
+    public func interactiveScrollEnabled(_ enabled: Bool) -> Self {
+        var list = self
+        list.interactiveScrollEnabled = enabled
+        return list
+    }
+    
+    /// Makes the specified row visible. Once applied,
+    /// the value inside the Binding will be set to `nil`.
+    ///
+    /// - Parameter offset: The visible row to apply
+    ///
+    /// - important: Not SwiftUI compatible.
+    public func appliedVisibleRow(_ row: Binding<ListVisibleRow?>) -> Self {
+        // Listen to changes in this binding
+        _ = row.wrappedValue
+        var view = self
+        view.appliedVisibleRow = row
+        return view
+    }
 }
 
 extension List where Data: Identifiable, Content == ForEach<[Data], String, HStack>, ID == Data.ID {
@@ -300,6 +338,7 @@ extension List: Renderable {
     
     @discardableResult private func setupView(_ view: SwiftUITableView, context: Context) -> GenericTableViewDelegate<Content, Data, ID> {
         let delegate = GenericTableViewDelegate(list: self, context: context)
+        delegate.tableView = view
         view.ownedSwiftUIDelegate = delegate
         view.delegate = delegate
         view.dataSource = delegate
@@ -323,6 +362,20 @@ extension List: Renderable {
         }
         view.separatorStyle = separatorStyle
         view.isScrollEnabled = scrollEnabled
+        if let tableDelegate = view.delegate as? GenericTableViewDelegate<Content, Data, ID> {
+            if tableDelegate.interactiveScrollEnabled != interactiveScrollEnabled {
+                view.setContentOffset(view.contentOffset, animated: false)
+            }
+            tableDelegate.interactiveScrollEnabled = interactiveScrollEnabled
+        }
+        
+        if let appliedRow = appliedVisibleRow?.wrappedValue {
+            let animated = context.transaction?.animation != nil
+            view.scrollToRow(at: appliedRow.indexPath, at: appliedRow.scrollPosition, animated: animated)
+            EnvironmentHolder.notifyStateChanges = false
+            appliedVisibleRow?.wrappedValue = nil
+            EnvironmentHolder.notifyStateChanges = true
+        }
     }
 }
 
@@ -332,6 +385,19 @@ class GenericTableViewDelegate<Content: View, Data, ID: Hashable>: NSObject, UIT
     typealias ParentList = List<Content, Data, ID>
     var list: ParentList
     var context: Context
+    weak var tableView: SwiftUITableView?
+    var interactiveScrollEnabled = true {
+        didSet {
+            var offset = tableView?.contentOffset ?? .zero
+            if offset.y < 0 {
+                offset = .zero
+                fixBouncingScroll = true
+            }
+            previousInteractiveScrollOffset = offset
+        }
+    }
+    var previousInteractiveScrollOffset: CGPoint = .zero
+    var fixBouncingScroll = false
     
     init(list: ParentList, context: Context) {
         self.list = list
@@ -446,6 +512,20 @@ class GenericTableViewDelegate<Content: View, Data, ID: Hashable>: NSObject, UIT
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !interactiveScrollEnabled {
+            if fixBouncingScroll && scrollView.contentOffset.y < 0 {
+                UIView.animate(withDuration: 0.1) { [weak self] in
+                    guard let `self` = self else { return }
+                    scrollView.contentOffset = self.previousInteractiveScrollOffset
+                }
+            } else {
+                scrollView.contentOffset = previousInteractiveScrollOffset
+            }
+            if fixBouncingScroll {
+                fixBouncingScroll = false
+            }
+            return
+        }
         withHighPerformance {
             self.list.contentOffset?.wrappedValue = scrollView.contentOffset
         }

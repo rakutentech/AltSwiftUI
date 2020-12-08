@@ -11,6 +11,18 @@ import UIKit
 class SwiftUIScrollView: UIScrollView, UIKitViewHandler {
     var contentOffsetBinding: Binding<CGPoint>?
     var contentView: UIView?
+    var interactiveScrollEnabled = true {
+        didSet {
+            var offset = contentOffset
+            if offset.y < 0 {
+                offset = .zero
+                fixBouncingScroll = true
+            }
+            previousInteractiveScrollOffset = offset
+        }
+    }
+    var previousInteractiveScrollOffset: CGPoint = .zero
+    var fixBouncingScroll = false
     let axis: Axis
     init(axis: Axis) {
         self.axis = axis
@@ -50,6 +62,20 @@ class SwiftUIScrollView: UIScrollView, UIKitViewHandler {
 
 extension SwiftUIScrollView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !interactiveScrollEnabled {
+            if fixBouncingScroll && scrollView.contentOffset.y < 0 {
+                UIView.animate(withDuration: 0.1) { [weak self] in
+                    guard let `self` = self else { return }
+                    scrollView.contentOffset = self.previousInteractiveScrollOffset
+                }
+            } else {
+                scrollView.contentOffset = previousInteractiveScrollOffset
+            }
+            if fixBouncingScroll {
+                fixBouncingScroll = false
+            }
+            return
+        }
         withHighPerformance {
             self.contentOffsetBinding?.wrappedValue = scrollView.contentOffset
         }
