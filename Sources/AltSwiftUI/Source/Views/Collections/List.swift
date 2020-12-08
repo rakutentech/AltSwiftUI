@@ -12,7 +12,8 @@ public struct ListVisibleRow {
     let indexPath: IndexPath
     let scrollPosition: UITableView.ScrollPosition
     
-    public init(indexPath: IndexPath,
+    public init(
+        indexPath: IndexPath,
         scrollPosition: UITableView.ScrollPosition) {
         self.indexPath = indexPath
         self.scrollPosition = scrollPosition
