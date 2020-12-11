@@ -137,7 +137,7 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
             lastWrittenText = text
             setBindingText(text)
         }
-        return true
+        return textBinding?.wrappedValue == newText
     }
 }
 
