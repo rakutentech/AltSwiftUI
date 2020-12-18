@@ -21,6 +21,22 @@ class SwiftUIView: UIView, UIKitViewHandler {
     }
 }
 
+class SwiftUIEmptyView: UIView, UIKitViewHandler {
+    deinit {
+        executeDisappearHandler()
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        notifyGeometryListener(frame: frame)
+    }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        updateOnTraitChange(previousTrait: previousTraitCollection)
+    }
+    override var intrinsicContentSize: CGSize {
+        CGSize(width: 0, height: 0)
+    }
+}
+
 class SwiftUIExpandView: UIView, UIKitViewHandler {
     let expandWidth: Bool
     let expandHeight: Bool

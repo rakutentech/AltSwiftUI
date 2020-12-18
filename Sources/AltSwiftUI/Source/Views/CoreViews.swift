@@ -24,7 +24,7 @@ extension EmptyView: Renderable {
     }
     
     public func createView(context: Context) -> UIView {
-        UIView().noAutoresizingMask()
+        SwiftUIEmptyView().noAutoresizingMask()
     }
 }
 
