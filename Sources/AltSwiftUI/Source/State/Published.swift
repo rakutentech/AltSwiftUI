@@ -33,10 +33,11 @@ protocol ChildWrapper {
             _wrappedValue
         }
         set {
-            if let hashOld = _wrappedValue as? AnyHashable, let hashNew = newValue as? AnyHashable, hashOld == hashNew {
+            let oldValue = _wrappedValue
+            _wrappedValue = newValue
+            if let hashOld = oldValue as? AnyHashable, let hashNew = newValue as? AnyHashable, hashOld == hashNew {
                 return
             }
-            _wrappedValue = newValue
             if EnvironmentHolder.notifyStateChanges {
                 sendStateChangeNotification()
             }

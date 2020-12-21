@@ -36,10 +36,11 @@ public class State<Value> {
             return _wrappedValue.value
         }
         set {
-            if let hashOld = _wrappedValue.value as? AnyHashable, let hashNew = newValue as? AnyHashable, hashOld == hashNew {
+            let oldValue = _wrappedValue.value
+            _wrappedValue.value = newValue
+            if let hashOld = oldValue as? AnyHashable, let hashNew = newValue as? AnyHashable, hashOld == hashNew {
                 return
             }
-            _wrappedValue.value = newValue
             if EnvironmentHolder.notifyStateChanges {
                 sendStateChangeNotification()
             }
