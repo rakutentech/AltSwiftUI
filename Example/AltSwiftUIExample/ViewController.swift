@@ -25,7 +25,8 @@ struct ExampleView: View {
         ExampleViewData(title: "2 Axis Scroll", destination: ScrollView2AxisExampleView()),
         ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
         ExampleViewData(title: "Texts", destination: TextExampleView()),
-        ExampleViewData(title: "Navigation", destination: NavigationExampleView())
+        ExampleViewData(title: "Navigation", destination: NavigationExampleView()),
+        ExampleViewData(title: "SecureField", destination: SecureFieldExampleView())
     ]
     
     var body: View {
