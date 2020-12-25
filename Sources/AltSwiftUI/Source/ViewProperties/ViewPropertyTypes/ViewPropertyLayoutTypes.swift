@@ -189,7 +189,7 @@ public enum Edge: Int8 {
 
 /// A visual axis
 public enum Axis {
-    case horizontal, vertical
+    case horizontal, vertical, both
 }
 
 /// A type that represents the alignment position of text

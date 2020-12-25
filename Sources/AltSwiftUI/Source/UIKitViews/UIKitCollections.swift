@@ -50,10 +50,11 @@ class SwiftUIScrollView: UIScrollView, UIKitViewHandler {
         notifyGeometryListener(frame: frame)
     }
     private func setupView() {
-        if axis == .vertical {
+        if axis == .vertical || axis == .both {
             setContentHuggingPriority(.defaultLow, for: .vertical)
             setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        } else {
+        }
+        if axis == .horizontal || axis == .both {
             setContentHuggingPriority(.defaultLow, for: .horizontal)
             setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         }

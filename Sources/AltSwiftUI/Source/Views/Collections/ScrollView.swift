@@ -128,7 +128,7 @@ extension ScrollView: Renderable {
                 container.edgesAnchorEqualTo(destinationView: scrollView).activate()
                 if self.axis == .horizontal {
                     scrollView.heightAnchor.constraint(equalTo: renderView.heightAnchor).isActive = true
-                } else {
+                } else if self.axis == .vertical {
                     scrollView.widthAnchor.constraint(equalTo: renderView.widthAnchor).isActive = true
                 }
             }
