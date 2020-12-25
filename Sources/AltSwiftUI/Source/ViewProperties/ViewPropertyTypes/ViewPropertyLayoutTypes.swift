@@ -188,6 +188,8 @@ public enum Edge: Int8 {
 }
 
 /// A visual axis
+/// Add `both` for supporting both horizontal and vertical scroll directions,
+/// and `both` is not offical swiftUI axis option.
 public enum Axis {
     case horizontal, vertical, both
 }
