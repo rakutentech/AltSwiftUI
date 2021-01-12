@@ -42,18 +42,19 @@ class SwiftUIScrollView: UIScrollView, UIKitViewHandler {
     }
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
-        return CGSize(width: (axis == .horizontal) ? CGFloat.limitForUI : size.width,
-                      height: (axis == .vertical) ? CGFloat.limitForUI : size.height)
+        return CGSize(width: (axis == .horizontal || axis == .both) ? CGFloat.limitForUI : size.width,
+                      height: (axis == .vertical || axis == .both) ? CGFloat.limitForUI : size.height)
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         notifyGeometryListener(frame: frame)
     }
     private func setupView() {
-        if axis == .vertical {
+        if axis == .vertical || axis == .both {
             setContentHuggingPriority(.defaultLow, for: .vertical)
             setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        } else {
+        }
+        if axis == .horizontal || axis == .both {
             setContentHuggingPriority(.defaultLow, for: .horizontal)
             setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         }
