@@ -42,8 +42,8 @@ class SwiftUIScrollView: UIScrollView, UIKitViewHandler {
     }
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
-        return CGSize(width: (axis == .horizontal) ? CGFloat.limitForUI : size.width,
-                      height: (axis == .vertical) ? CGFloat.limitForUI : size.height)
+        return CGSize(width: (axis == .horizontal || axis == .both) ? CGFloat.limitForUI : size.width,
+                      height: (axis == .vertical || axis == .both) ? CGFloat.limitForUI : size.height)
     }
     override func layoutSubviews() {
         super.layoutSubviews()
