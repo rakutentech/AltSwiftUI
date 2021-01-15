@@ -22,6 +22,7 @@
 		2CE5E2A2231398DA0072F907 /* AltSwiftUIExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5E2A1231398DA0072F907 /* AltSwiftUIExampleTests.swift */; };
 		2CE5E2AD231398DA0072F907 /* AltSwiftUIExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5E2AC231398DA0072F907 /* AltSwiftUIExampleUITests.swift */; };
 		2CFE2AC025AD487800C925FC /* ScrollView2AxisExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */; };
+		682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		2CE5E2AC231398DA0072F907 /* AltSwiftUIExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltSwiftUIExampleUITests.swift; sourceTree = "<group>"; };
 		2CE5E2AE231398DA0072F907 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView2AxisExampleView.swift; sourceTree = "<group>"; };
+		682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFieldExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,12 +130,13 @@
 		2CADC30B251CA0C900EA3F17 /* ExampleViews */ = {
 			isa = PBXGroup;
 			children = (
-				2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */,
-				2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */,
 				2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */,
-				2C49E3CB2535382F00543E7D /* TextExampleView.swift */,
 				2C83ED512554E50400C378DC /* NavigationExampleView.swift */,
+				2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */,
+				682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */,
 				2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */,
+				2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */,
+				2C49E3CB2535382F00543E7D /* TextExampleView.swift */,
 			);
 			path = ExampleViews;
 			sourceTree = "<group>";
@@ -171,14 +174,14 @@
 		2CE5E289231398D70072F907 /* AltSwiftUIExample */ = {
 			isa = PBXGroup;
 			children = (
-				2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */,
+				2CADC30B251CA0C900EA3F17 /* ExampleViews */,
 				2CE5E28A231398D70072F907 /* AppDelegate.swift */,
 				2CE5E28E231398D70072F907 /* ViewController.swift */,
-				2CADC30B251CA0C900EA3F17 /* ExampleViews */,
-				2CE5E290231398D70072F907 /* Main.storyboard */,
+				2CD1A087251485AC00E2CCBA /* AltSwiftUI.xcodeproj */,
 				2CE5E293231398DA0072F907 /* Assets.xcassets */,
-				2CE5E295231398DA0072F907 /* LaunchScreen.storyboard */,
 				2CE5E298231398DA0072F907 /* Info.plist */,
+				2CE5E295231398DA0072F907 /* LaunchScreen.storyboard */,
+				2CE5E290231398D70072F907 /* Main.storyboard */,
 			);
 			path = AltSwiftUIExample;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C49E3CC2535382F00543E7D /* TextExampleView.swift in Sources */,
+				682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */,
 				2C83ED522554E50400C378DC /* NavigationExampleView.swift in Sources */,
 				2CADC30F251CA0DF00EA3F17 /* RamenExampleView.swift in Sources */,
 				2CADC317251CA15400EA3F17 /* ShapesExampleView.swift in Sources */,
