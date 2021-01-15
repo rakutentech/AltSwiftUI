@@ -308,8 +308,8 @@ extension UIViewController {
     }
     private func alertAction(alertButton: Alert.Button, alertIsPresented: Binding<Bool>?) -> UIAlertAction {
         UIAlertAction(title: alertButton.text, style: alertActionStyle(alertButtonStyle: alertButton.style), handler: { _ in
-            alertIsPresented?.wrappedValue = false
             alertButton.action?()
+            alertIsPresented?.wrappedValue = false
         })
     }
     private func alertActionStyle(alertButtonStyle: Alert.Button.Style) -> UIAlertAction.Style {
