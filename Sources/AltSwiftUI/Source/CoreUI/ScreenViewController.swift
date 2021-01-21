@@ -308,8 +308,10 @@ extension UIViewController {
     }
     private func alertAction(alertButton: Alert.Button, alertIsPresented: Binding<Bool>?) -> UIAlertAction {
         UIAlertAction(title: alertButton.text, style: alertActionStyle(alertButtonStyle: alertButton.style), handler: { _ in
-            alertButton.action?()
+            // Dismiss should happen first otherwise updates or navigations
+            // inside the action will not execute properly.
             alertIsPresented?.wrappedValue = false
+            alertButton.action?()
         })
     }
     private func alertActionStyle(alertButtonStyle: Alert.Button.Style) -> UIAlertAction.Style {
