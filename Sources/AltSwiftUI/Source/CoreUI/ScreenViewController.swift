@@ -282,10 +282,6 @@ extension UIViewController {
         }
     }
     func presentAlert(_ alert: Alert) {
-        if presentedViewController != nil {
-            return
-        }
-        
         let controller = UIAlertController(title: alert.title, message: alert.message, preferredStyle: .alert)
         if let secondaryButton = alert.secondaryButton {
             controller.addAction(alertAction(alertButton: secondaryButton, alertIsPresented: alert.alertIsPresented))
@@ -293,18 +289,14 @@ extension UIViewController {
         if let primaryButton = alert.primaryButton {
             controller.addAction(alertAction(alertButton: primaryButton, alertIsPresented: alert.alertIsPresented))
         }
-        present(controller, animated: true)
+        foregroundViewController().present(controller, animated: true)
     }
     func presentActionSheet(_ actionSheet: ActionSheet) {
-        if presentedViewController != nil {
-            return
-        }
-        
         let controller = UIAlertController(title: actionSheet.title, message: actionSheet.message, preferredStyle: .actionSheet)
         for button in actionSheet.buttons {
             controller.addAction(alertAction(alertButton: button, alertIsPresented: actionSheet.actionSheetIsPresented))
         }
-        present(controller, animated: true)
+        foregroundViewController().present(controller, animated: true)
     }
     private func alertAction(alertButton: Alert.Button, alertIsPresented: Binding<Bool>?) -> UIAlertAction {
         UIAlertAction(title: alertButton.text, style: alertActionStyle(alertButtonStyle: alertButton.style), handler: { _ in
@@ -323,5 +315,13 @@ extension UIViewController {
         case .destructive:
             return .destructive
         }
+    }
+    private func foregroundViewController() -> UIViewController {
+        var topViewController: UIViewController? = self
+        while topViewController?.presentedViewController != nil {
+            topViewController = topViewController?.presentedViewController
+        }
+        
+        return topViewController ?? self
     }
 }
