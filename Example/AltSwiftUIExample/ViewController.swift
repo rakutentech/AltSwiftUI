@@ -26,7 +26,8 @@ struct ExampleView: View {
         ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
         ExampleViewData(title: "Texts", destination: TextExampleView()),
         ExampleViewData(title: "Navigation", destination: NavigationExampleView()),
-        ExampleViewData(title: "SecureField", destination: SecureFieldExampleView())
+        ExampleViewData(title: "SecureField", destination: SecureFieldExampleView()),
+        ExampleViewData(title: "Stack Update", destination: StackUpdateExample())
     ]
     
     var body: View {

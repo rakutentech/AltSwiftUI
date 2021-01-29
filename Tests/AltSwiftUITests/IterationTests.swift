@@ -159,8 +159,9 @@ class IterationTests: XCTestCase {
             case 7: XCTAssert(operation.equalsText(from: .update(view: Text("Group Modify"))))
             case 8, 9: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Delete \(index-8)"))))
             case 10, 11: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Insert \(index-10)"))))
-            case 12, 13, 14, 15, 16, 17: forEachIterationTest(baseIndex: 12, index: index, operation: operation)
-            case 18: XCTAssert(operation.equalsText(from: .update(view: Text("After ForEach"))))
+            case 12, 13, 14, 15: forEachIfCaseIterationTest(baseIndex: 12, index: index, operation: operation)
+            case 16, 17, 18, 19, 20: forEachElseCaseIterationTest(baseIndex: 16, index: index, operation: operation)
+            case 21: XCTAssert(operation.equalsText(from: .update(view: Text("After ForEach"))))
             default: break
             }
         }
@@ -217,6 +218,27 @@ class IterationTests: XCTestCase {
         case 3: XCTAssert(operation.equalsText(from: .update(view: Text("ForEach Update 2"))))
         case 4: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Update 4"))))
         case 5: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Update 5"))))
+        default: XCTAssert(false)
+        }
+    }
+    
+    private func forEachIfCaseIterationTest(baseIndex: Int = 0, index: Int, operation: DiffableViewSourceOperation) {
+        switch index - baseIndex {
+        case 0: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Update 0"))))
+        case 1: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Update 1"))))
+        case 2: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Update 2"))))
+        case 3: XCTAssert(operation.equalsText(from: .delete(view: Text("ForEach Update 3"))))
+        default: XCTAssert(false)
+        }
+    }
+    
+    private func forEachElseCaseIterationTest(baseIndex: Int = 0, index: Int, operation: DiffableViewSourceOperation) {
+        switch index - baseIndex {
+        case 0: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Update 1"))))
+        case 1: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Update 3"))))
+        case 2: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Update 2"))))
+        case 3: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Update 4"))))
+        case 4: XCTAssert(operation.equalsText(from: .insert(view: Text("ForEach Update 5"))))
         default: XCTAssert(false)
         }
     }
