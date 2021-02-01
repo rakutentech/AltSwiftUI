@@ -24,6 +24,7 @@ struct ExampleView: View {
         ExampleViewData(title: "List", destination: ListExampleView()),
         ExampleViewData(title: "2 Axis Scroll", destination: ScrollView2AxisExampleView()),
         ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
+        ExampleViewData(title: "Alerts", destination: AlertsExampleView()),
         ExampleViewData(title: "Texts", destination: TextExampleView()),
         ExampleViewData(title: "Navigation", destination: NavigationExampleView()),
         ExampleViewData(title: "SecureField", destination: SecureFieldExampleView())
