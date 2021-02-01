@@ -836,12 +836,15 @@ extension View {
     ///
     /// - Parameters:
     ///     - isPresented: A `Binding` to whether the `Alert` should be shown.
+    ///     - onForegroundView: A `Bool` indicating whether the alert should be displayed from the foremost view or not.
     ///     - content: A closure returning the `Alert` to present.
-    public func alert(isPresented: Binding<Bool>, content: () -> Alert) -> Self {
+    /// - Important: `onForegroundView` is not a native SwiftUI feature
+    public func alert(isPresented: Binding<Bool>, onForegroundView: Bool = false, content: () -> Alert) -> Self {
         var view = self
         if isPresented.wrappedValue {
             var alertContent = content()
             alertContent.alertIsPresented = isPresented
+            alertContent.displayOnForegroundView = onForegroundView
             view.viewStore.alert = alertContent
         }
         return view
@@ -850,15 +853,17 @@ extension View {
     /// Presents an action sheet.
     ///
     /// - Parameters:
-    ///     - isPresented: A `Binding` to whether the action sheet should be
-    ///     shown.
+    ///     - isPresented: A `Binding` to whether the action sheet should be shown.
+    ///     - onForegroundView: A `Bool` indicating whether the alert should be displayed from the foremost view or not.
     ///     - content: A closure returning the `ActionSheet` to present.
+    /// - Important: `onForegroundView` is not a native SwiftUI feature
     @available(OSX, unavailable)
-    public func actionSheet(isPresented: Binding<Bool>, content: () -> ActionSheet) -> Self {
+    public func actionSheet(isPresented: Binding<Bool>, onForegroundView: Bool = false, content: () -> ActionSheet) -> Self {
         var view = self
         if isPresented.wrappedValue {
             var actionSheetContent = content()
             actionSheetContent.actionSheetIsPresented = isPresented
+            actionSheetContent.displayOnForegroundView = onForegroundView
             view.viewStore.actionSheet = actionSheetContent
         }
         return view
