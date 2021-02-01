@@ -68,12 +68,12 @@ public enum ViewBuilder {
     /// Provides support for "if" statements in multi-statement closures, producing
     /// ConditionalContent for the "then" branch.
     public static func buildEither(first: View) -> View {
-        first
+        OptionalView(content: first.subViews, ifElseType: .if)
     }
     
     /// Provides support for "if-else" statements in multi-statement closures, producing
     /// ConditionalContent for the "else" branch.
     public static func buildEither(second: View) -> View {
-        second
+        OptionalView(content: second.subViews, ifElseType: .else)
     }
 }
