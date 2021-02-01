@@ -281,8 +281,8 @@ extension UIViewController {
             sheetVC.onControllerDismiss()
         }
     }
-    func presentAlert(_ alert: Alert, onForegroundView: Bool = false) {
-        if !onForegroundView && presentedViewController != nil {
+    func presentAlert(_ alert: Alert) {
+        if !alert.displayOnForegroundView && presentedViewController != nil {
             return
         }
         let controller = UIAlertController(title: alert.title, message: alert.message, preferredStyle: .alert)
@@ -292,17 +292,17 @@ extension UIViewController {
         if let primaryButton = alert.primaryButton {
             controller.addAction(alertAction(alertButton: primaryButton, alertIsPresented: alert.alertIsPresented))
         }
-        (onForegroundView ? foregroundViewController() : self).present(controller, animated: true)
+        (alert.displayOnForegroundView ? foregroundViewController() : self).present(controller, animated: true)
     }
-    func presentActionSheet(_ actionSheet: ActionSheet, onForegroundView: Bool = false) {
-        if !onForegroundView && presentedViewController != nil {
+    func presentActionSheet(_ actionSheet: ActionSheet) {
+        if !actionSheet.displayOnForegroundView && presentedViewController != nil {
             return
         }
         let controller = UIAlertController(title: actionSheet.title, message: actionSheet.message, preferredStyle: .actionSheet)
         for button in actionSheet.buttons {
             controller.addAction(alertAction(alertButton: button, alertIsPresented: actionSheet.actionSheetIsPresented))
         }
-        (onForegroundView ? foregroundViewController() : self).present(controller, animated: true)
+        (actionSheet.displayOnForegroundView ? foregroundViewController() : self).present(controller, animated: true)
     }
     private func alertAction(alertButton: Alert.Button, alertIsPresented: Binding<Bool>?) -> UIAlertAction {
         UIAlertAction(title: alertButton.text, style: alertActionStyle(alertButtonStyle: alertButton.style), handler: { _ in
