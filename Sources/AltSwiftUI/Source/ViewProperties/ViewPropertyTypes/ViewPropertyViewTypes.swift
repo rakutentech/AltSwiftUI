@@ -105,7 +105,7 @@ public struct ActionSheet {
 public struct ContextMenu {
     let items: [View]
     
-    ///__Important__: Only Buttons with `Image` or `Text` are allowed as items.
+    /// __Important__: Only Buttons with `Image` or `Text` are allowed as items.
     /// The following 3 view combinations are allowed for building a contextual menu:
     ///
     ///     ContextMenu {

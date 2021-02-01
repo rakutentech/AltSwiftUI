@@ -147,14 +147,23 @@ extension Array where Element == View {
     // swiftlint:disable:next function_body_length
     private func iterateFullSubviewDiff(subView: View?, oldView: View?, iteration: (Int, DiffableViewSourceOperation) -> Void, displayIndex: inout Int) {
         if let optionalView = subView as? OptionalView, let optionalViewContent = optionalView.content {
-            // Optional insert / update
             let oldOptionalView = oldView as? OptionalView
             let maxCount = Swift.max(optionalViewContent.count, oldOptionalView?.content?.count ?? 0)
-            for i in 0..<maxCount {
-                let subView = optionalViewContent[safe: i]
-                let oldSubView = oldOptionalView?.content?[safe: i]
-                iterateFullSubviewDiff(subView: subView, oldView: oldSubView, iteration: iteration, displayIndex: &displayIndex)
+            if let newIfElseType = optionalView.ifElseType,
+               let oldIfElseType = oldOptionalView?.ifElseType,
+               newIfElseType != oldIfElseType {
+                // If / else replacement
+                iterateFullSubviewDiff(subView: nil, oldView: oldOptionalView, iteration: iteration, displayIndex: &displayIndex)
+                iterateFullSubviewDiff(subView: optionalView, oldView: nil, iteration: iteration, displayIndex: &displayIndex)
+            } else {
+                // Optional insert / update
+                for i in 0..<maxCount {
+                    let subView = optionalViewContent[safe: i]
+                    let oldSubView = oldOptionalView?.content?[safe: i]
+                    iterateFullSubviewDiff(subView: subView, oldView: oldSubView, iteration: iteration, displayIndex: &displayIndex)
+                }
             }
+            
             // Normal delete
             if let oldView = oldView, oldOptionalView == nil {
                 iterateFullSubviewDiff(subView: nil, oldView: oldView, iteration: iteration, displayIndex: &displayIndex)

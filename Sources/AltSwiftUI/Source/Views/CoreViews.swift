@@ -85,11 +85,16 @@ extension PaddingView: Renderable {
 // MARK: - Builder Views
 
 public struct OptionalView: View {
+    enum IfElseType {
+        case `if`, `else`
+    }
+    
     public var viewStore = ViewValues()
     public var body: View {
         EmptyView()
     }
     let content: [View]?
+    var ifElseType: IfElseType?
 }
 
 public struct TupleView: View, ViewGrouper {
