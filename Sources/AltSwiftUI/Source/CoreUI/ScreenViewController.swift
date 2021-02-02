@@ -22,29 +22,31 @@ class ScreenViewController: UIViewController {
     var insertOnAppearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
     var statusBarHidden = false
     var customStatusBarStyle: UIStatusBarStyle?
-    var sheetPresentation: SheetPresentation?
     var isPushed: Bool = false
     var background: UIColor?
     lazy var lazyLayoutConstraints: [NSLayoutConstraint] = []
     var navigationBarTint: UIColor?
+    weak var hostingController: UIHostingController?
+    
     private var isNavigationController: Bool
     private var presenter: SwiftUIPresenter?
-    private var onDismiss: (() -> Void)?
     private var onPop: (() -> Void)?
     private var executedInsertAppearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
     private var hasAppeared = false
+    private var sheetPresentation: SheetPresentation? {
+        get { hostingController?.sheetPresentation }
+        set { hostingController?.sheetPresentation = newValue }
+    }
     
     public init(
         contentView: View,
         parentContext: Context? = nil,
         isNavigationController: Bool = false,
-        onDismiss: (() -> Void)? = nil,
         onPop: (() -> Void)? = nil,
         background: UIColor? = nil,
         isNavigating: Bool = false) {
         self.contentView = contentView
         self.isNavigationController = isNavigationController
-        self.onDismiss = onDismiss
         self.onPop = onPop
         self.background = background
         super.init(nibName: nil, bundle: nil)
@@ -73,20 +75,21 @@ class ScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hasAppeared = true
+        updateNavigation()
         
-        guard let handlersCopy = onAppearHandlers.copy(with: nil) as? NSMapTable<UIView, EventCodeHandler> else { return }
-        
-        for view in handlersCopy.keyEnumerator() {
-            guard let view = view as? UIView, executedInsertAppearHandlers.object(forKey: view) == nil else {
-                continue
+        if let handlersCopy = onAppearHandlers.copy(with: nil) as? NSMapTable<UIView, EventCodeHandler> {
+            for view in handlersCopy.keyEnumerator() {
+                guard let view = view as? UIView, executedInsertAppearHandlers.object(forKey: view) == nil else {
+                    continue
+                }
+                
+                if let handler = handlersCopy.object(forKey: view) {
+                    handler.handler()
+                }
             }
             
-            if let handler = handlersCopy.object(forKey: view) {
-                handler.handler()
-            }
+            executedInsertAppearHandlers.removeAllObjects()
         }
-        
-        executedInsertAppearHandlers.removeAllObjects()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -102,9 +105,18 @@ class ScreenViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
+        // Pop
         if isBeingDismissed || isMovingFromParent {
             onControllerDismiss()
             onPop?()
+        }
+        
+        // Dismiss
+        if sheetPresentation != nil && presentingViewController == nil {
+            EnvironmentHolder.withoutNotifyingStateChanges {
+                sheetPresentation?.isPresented.wrappedValue = false
+            }
+            onControllerDismiss()
         }
     }
     
@@ -237,13 +249,16 @@ class ScreenViewController: UIViewController {
         }
     }
     private func setupNavigation() {
+        hostingController = navigationController as? UIHostingController
         if !isNavigationController {
             navigationController?.setNavigationBarHidden(true, animated: false)
         }
+    }
+    private func updateNavigation() {
         if sheetPresentation != nil {
             presenter = SwiftUIPresenter(onDismiss: { [weak self] in
                 self?.onControllerDismiss()
-                self?.onDismiss?()
+                self?.sheetPresentation?.onDismiss()
             })
             if let navigationController = navigationController {
                 navigationController.presentationController?.delegate = presenter
@@ -263,10 +278,9 @@ extension UIViewController {
         let vc = ScreenViewController(contentView: sheetPresentation.sheetView,
                                       parentContext: Context(viewValues: viewValues),
                                       isNavigationController: false,
-                                      onDismiss: sheetPresentation.onDismiss,
                                       isNavigating: true)
-        vc.sheetPresentation = sheetPresentation
         let hostingVc = UIHostingController(rootViewController: vc)
+        hostingVc.sheetPresentation = sheetPresentation
         if sheetPresentation.isFullScreen {
             hostingVc.modalPresentationStyle = .fullScreen
         }
@@ -274,9 +288,9 @@ extension UIViewController {
     }
     func dismissPresentedView(sheetPresentation: SheetPresentation) {
         if let presentedVC = presentedViewController as? UIHostingController,
-            let sheetVC = presentedVC.viewControllers.first as? ScreenViewController,
+           let sheetVC = presentedVC.topViewController as? ScreenViewController,
             !presentedVC.isBeingDismissed,
-            sheetVC.sheetPresentation?.id == sheetPresentation.id {
+            presentedVC.sheetPresentation?.id == sheetPresentation.id {
             dismiss(animated: true)
             sheetVC.onControllerDismiss()
         }

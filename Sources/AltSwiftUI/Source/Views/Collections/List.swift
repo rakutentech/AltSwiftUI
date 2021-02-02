@@ -373,9 +373,9 @@ extension List: Renderable {
         if let appliedRow = appliedVisibleRow?.wrappedValue {
             let animated = context.transaction?.animation != nil
             view.scrollToRow(at: appliedRow.indexPath, at: appliedRow.scrollPosition, animated: animated)
-            EnvironmentHolder.notifyStateChanges = false
-            appliedVisibleRow?.wrappedValue = nil
-            EnvironmentHolder.notifyStateChanges = true
+            EnvironmentHolder.withoutNotifyingStateChanges {
+                appliedVisibleRow?.wrappedValue = nil
+            }
         }
     }
 }
