@@ -29,6 +29,12 @@ enum EnvironmentHolder {
         }
         return [ViewBinder.StateNotification.transactionKey: transaction]
     }
+    
+    static func withoutNotifyingStateChanges(_ code: () -> Void) {
+        notifyStateChanges = false
+        code()
+        notifyStateChanges = true
+    }
 }
 
 /// Contains the Environment values set by the framework.

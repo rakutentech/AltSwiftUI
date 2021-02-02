@@ -158,9 +158,9 @@ extension ScrollView: Renderable {
         if let appliedRect = appliedVisibleRect?.wrappedValue {
             let animated = context.transaction?.animation != nil
             view.scrollRectToVisible(appliedRect, animated: animated)
-            EnvironmentHolder.notifyStateChanges = false
-            appliedVisibleRect?.wrappedValue = nil
-            EnvironmentHolder.notifyStateChanges = true
+            EnvironmentHolder.withoutNotifyingStateChanges {
+                appliedVisibleRect?.wrappedValue = nil
+            }
         }
         view.interactiveScrollEnabled = interactiveScrollEnabled
     }

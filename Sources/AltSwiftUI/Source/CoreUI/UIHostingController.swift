@@ -24,6 +24,8 @@ open class UIHostingController: UINavigationController {
     /// this property is able to turn on/off the gesture even if there is no existent `navigationBar` or if the `leftBarButtonItem` is set.
     public static var isInteractivePopGestureEnabled = true
     
+    var sheetPresentation: SheetPresentation?
+    
     /// Indicates if a UIViewController is currently being pushed onto this navigation controller
     private var duringPushAnimation = false
     
