@@ -112,10 +112,8 @@ class ScreenViewController: UIViewController {
         }
         
         // Dismiss
-        if sheetPresentation != nil && presentingViewController == nil {
-            EnvironmentHolder.withoutNotifyingStateChanges {
-                sheetPresentation?.isPresented.wrappedValue = false
-            }
+        if sheetPresentation != nil && hostingController?.presentingViewController == nil {
+            sheetPresentation?.isPresented.wrappedValue = false
             onControllerDismiss()
         }
     }
