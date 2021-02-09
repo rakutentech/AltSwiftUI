@@ -43,7 +43,9 @@ public struct EnvironmentValues {
     
     public var presentationMode: Binding<PresentationMode> {
         Binding(get: {
-            PresentationMode(controller: self.rootController, isPresented: self.rootController?.presentingViewController != nil)
+            let modalDismissInProgress = self.rootController?.presentingViewController == nil
+            let popInProgress = self.rootController?.isBeingDismissed == true || self.rootController?.isMovingFromParent == true
+            return PresentationMode(controller: self.rootController, isPresented: !modalDismissInProgress && !popInProgress)
         }, set: { _ in })
     }
 }

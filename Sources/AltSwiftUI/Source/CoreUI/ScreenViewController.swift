@@ -92,18 +92,16 @@ class ScreenViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // onDisappear execution
         guard let handlersCopy = onDisappearHandlers.copy(with: nil) as? NSMapTable<UIView, EventCodeHandler> else { return }
         for handler in handlersCopy.objectEnumerator() ?? NSEnumerator() {
             if let handler = handler as? EventCodeHandler {
                 handler.handler()
             }
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
         
         // Pop
         if isBeingDismissed || isMovingFromParent {
