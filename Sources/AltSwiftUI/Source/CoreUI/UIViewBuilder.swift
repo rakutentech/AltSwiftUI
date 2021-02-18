@@ -346,7 +346,7 @@ extension UIView {
             controller.presentAlert(alert)
         }
         if let actionSheet = context.viewValues?.actionSheet {
-            controller.presentActionSheet(actionSheet)
+            controller.presentActionSheet(actionSheet, self)
         }
         if let statusBarHidden = context.viewValues?.statusBarHidden {
             context.rootController?.setStatusBarHidden(statusBarHidden)
