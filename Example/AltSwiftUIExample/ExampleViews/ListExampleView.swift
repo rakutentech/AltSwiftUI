@@ -57,6 +57,7 @@ struct ListExampleView: View {
                     scrollEnabled.toggle()
                 }
             }
+            
             List(ramenModel.ramenList) { ramen in
                 RamenCell(ramen: ramen)
             }

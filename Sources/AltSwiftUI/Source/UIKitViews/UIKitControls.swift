@@ -264,3 +264,45 @@ class SwiftUIDatePicker: UIDatePicker, UIKitViewHandler {
         }
     }
 }
+
+@available(iOS 14.0, *)
+class SwiftUIMenuButton: UIButton, UIKitViewHandler {
+    var contentView: UIView
+    
+    init(contentView: UIView, menu: UIMenu) {
+        self.contentView = contentView
+        super.init(frame: .zero)
+        setupView(menu: menu)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    deinit {
+        executeDisappearHandler()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        updateOnTraitChange(previousTrait: previousTraitCollection)
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        notifyGeometryListener(frame: frame)
+    }
+    func updateContentView(_ contentView: UIView) {
+        contentView.isUserInteractionEnabled = false
+        self.contentView.removeFromSuperview()
+        self.contentView = contentView
+        addSubview(contentView)
+        contentView.edgesAnchorEqualTo(destinationView: self).activate()
+        setNeedsLayout()
+    }
+    private func setupView(menu: UIMenu) {
+        contentView.isUserInteractionEnabled = false
+        addSubview(contentView)
+        contentView.edgesAnchorEqualTo(destinationView: self).activate()
+
+        showsMenuAsPrimaryAction = true
+        self.menu = menu
+    }
+}
+
