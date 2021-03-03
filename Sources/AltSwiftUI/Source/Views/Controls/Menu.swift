@@ -12,8 +12,8 @@ import UIKit
 /// A view that can be tapped by the user to open a menu.
 public struct Menu: View {
     public var viewStore = ViewValues()
-    var labels: [View]
-    let viewContent: [View]
+    var label: View
+    var viewContent: [View]
     
     /// Creates an instance that triggers an `action`.
     ///
@@ -21,7 +21,7 @@ public struct Menu: View {
     ///     - - content: A view builder that creates the content of menu options.
     ///     - label: The visual representation of the menu button
     public init(@ViewBuilder content: () -> View, @ViewBuilder label: () -> View) {
-        self.labels = label().subViews
+        self.label = label()
         self.viewContent = content().subViews
     }
     
@@ -38,7 +38,7 @@ extension Menu {
     ///     - title: The title of the button.
     ///     - content: A view builder that creates the content of menu options.
     public init(_ title: String, @ViewBuilder content: () -> View) {
-        labels = [Text(title)]
+        label = Text(title)
         self.viewContent = content().subViews
     }
 }
@@ -46,37 +46,26 @@ extension Menu {
 @available(iOS 14.0, *)
 extension Menu: Renderable {
     public func updateView(_ view: UIView, context: Context) {
-        guard let view = view as? SwiftUIMenuButton,
-            let lastView = view.lastRenderableView?.view as? Self,
-            let firstLabel = labels.first,
-            let firstOldLabel = lastView.labels.first else { return }
+        guard let view = view as? SwiftUIButton,
+              let contentView = label.subViews.first?.renderableView(parentContext: context) else { return }
         
-        context.viewOperationQueue.addOperation {
-            [firstLabel].iterateFullViewDiff(oldList: [firstOldLabel]) { _, operation in
-                switch operation {
-                case .insert(let newView):
-                    if let newRenderView = newView.renderableView(parentContext: context, drainRenderQueue: false) {
-                        view.updateContentView(newRenderView)
-                    }
-                case .delete:
-                    break
-                case .update(let newView):
-                    newView.updateRender(uiView: view.contentView, parentContext: context, drainRenderQueue: false)
-                }
-            }
-        }
+        view.contentView = contentView
         view.menu = menu
     }
     
     public func createView(context: Context) -> UIView {
-        guard let contentView = labels.first?.renderableView(parentContext: context) else { return UIView() }
-        let button = SwiftUIMenuButton(contentView: contentView, menu: menu).noAutoresizingMask()
-        if let buttonStyle = context.viewValues?.buttonStyle {
-            let styledContentView = buttonStyle.makeBody(configuration: ButtonStyleConfiguration(label: labels[0], isPressed: false))
-            styledContentView.updateRender(uiView: contentView, parentContext: context)
+        let button = Button {
+            
+        } label: { () -> View in
+            label
+        }
+        if let uiButton = button.createView(context: context) as? SwiftUIButton {
+            uiButton.showsMenuAsPrimaryAction = true
+            uiButton.menu = menu
+            return uiButton
         }
         
-        return button
+        return UIView()
     }
     
     private var menu: UIMenu {
@@ -90,7 +79,7 @@ extension Menu: Renderable {
                let textView = buttonView.labels.first as? Text {
                 let action = UIAction(title: textView.string, image: nil, handler: { _ in buttonView.action() })
                 elements.append(action)
-            } else if let menuView = view as? Menu, let textView = menuView.labels.first as? Text {
+            } else if let menuView = view as? Menu, let textView = menuView.label.subViews.first as? Text {
                 let menu = UIMenu(title: textView.string, image: nil, children: menuElements(viewContent: menuView.viewContent))
                 elements.append(menu)
             }
