@@ -65,11 +65,11 @@ extension Menu: Renderable {
                 }
             }
         }
+        view.menu = menu
     }
     
     public func createView(context: Context) -> UIView {
         guard let contentView = labels.first?.renderableView(parentContext: context) else { return UIView() }
-        let menu = UIMenu(title: "", image: nil, options: .displayInline, children: generateUIMenuElements(viewContent: viewContent))
         let button = SwiftUIMenuButton(contentView: contentView, menu: menu).noAutoresizingMask()
         if let buttonStyle = context.viewValues?.buttonStyle {
             let styledContentView = buttonStyle.makeBody(configuration: ButtonStyleConfiguration(label: labels[0], isPressed: false))
@@ -79,7 +79,11 @@ extension Menu: Renderable {
         return button
     }
     
-    private func generateUIMenuElements(viewContent: [View]) -> [UIMenuElement] {
+    private var menu: UIMenu {
+        UIMenu(title: "", image: nil, options: .displayInline, children: menuElements(viewContent: viewContent))
+    }
+    
+    private func menuElements(viewContent: [View]) -> [UIMenuElement] {
         var elements = [UIMenuElement]()
         viewContent.totallyFlatIterate { (view) in
             if let buttonView = view as? Button,
@@ -87,7 +91,7 @@ extension Menu: Renderable {
                 let action = UIAction(title: textView.string, image: nil, handler: { _ in buttonView.action() })
                 elements.append(action)
             } else if let menuView = view as? Menu, let textView = menuView.labels.first as? Text {
-                let menu = UIMenu(title: textView.string, image: nil, children: generateUIMenuElements(viewContent: menuView.viewContent))
+                let menu = UIMenu(title: textView.string, image: nil, children: menuElements(viewContent: menuView.viewContent))
                 elements.append(menu)
             }
         }
