@@ -47,9 +47,22 @@ extension Menu {
 extension Menu: Renderable {
     public func updateView(_ view: UIView, context: Context) {
         guard let view = view as? SwiftUIButton,
-              let contentView = label.subViews.first?.renderableView(parentContext: context) else { return }
+              let lastView = view.lastRenderableView?.view as? Self else { return }
         
-        view.contentView = contentView
+        context.viewOperationQueue.addOperation {
+            [label].iterateFullViewDiff(oldList: [lastView.label]) { _, operation in
+                switch operation {
+                case .insert(let newView):
+                    if let newRenderView = newView.renderableView(parentContext: context, drainRenderQueue: false) {
+                        view.updateContentView(newRenderView)
+                    }
+                case .delete:
+                    break
+                case .update(let newView):
+                    newView.updateRender(uiView: view.contentView, parentContext: context, drainRenderQueue: false)
+                }
+            }
+        }
         view.menu = menu
     }
     
