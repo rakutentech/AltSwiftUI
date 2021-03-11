@@ -75,6 +75,7 @@
 		2CD1A04C2512066D00E2CCBA /* ViewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A00B2512066D00E2CCBA /* ViewEnvironment.swift */; };
 		2CD1A04E2512066D00E2CCBA /* AltSwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CD1A056251206C200E2CCBA /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A054251206C200E2CCBA /* ViewTests.swift */; };
+		3047F8BB25FA15B800F3B5EF /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3047F8BA25FA15B800F3B5EF /* AppStorage.swift */; };
 		68CBD3E12578AADB00A3F033 /* SecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CBD3E02578AADB00A3F033 /* SecureField.swift */; };
 		7D2D4D6B25148269000F5DDC /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6525148269000F5DDC /* Capsule.swift */; };
 		7D2D4D6C25148269000F5DDC /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6625148269000F5DDC /* Circle.swift */; };
@@ -166,6 +167,7 @@
 		2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AltSwiftUI.h; sourceTree = "<group>"; };
 		2CD1A054251206C200E2CCBA /* ViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
 		2CD1A055251206C200E2CCBA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3047F8BA25FA15B800F3B5EF /* AppStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		68CBD3E02578AADB00A3F033 /* SecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureField.swift; sourceTree = "<group>"; };
 		7D2D4D6525148269000F5DDC /* Capsule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
 		7D2D4D6625148269000F5DDC /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				2CD19FCE2512066D00E2CCBA /* State.swift */,
 				2CD19FD02512066D00E2CCBA /* StateObject.swift */,
 				2CD19FCA2512066D00E2CCBA /* StateTypes.swift */,
+				3047F8BA25FA15B800F3B5EF /* AppStorage.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				2CD1A01A2512066D00E2CCBA /* State.swift in Sources */,
 				2CD1A0482512066D00E2CCBA /* NavigationViews.swift in Sources */,
 				7D2D4D6B25148269000F5DDC /* Capsule.swift in Sources */,
+				3047F8BB25FA15B800F3B5EF /* AppStorage.swift in Sources */,
 				2CD1A0242512066D00E2CCBA /* ViewPropertyBuilder.swift in Sources */,
 				2CD1A0292512066D00E2CCBA /* ViewPropertyAnimationTypes.swift in Sources */,
 				2CD1A0182512066D00E2CCBA /* Environment.swift in Sources */,
