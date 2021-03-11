@@ -245,20 +245,31 @@ class AppStorageValueHolder<Value>{
             tempStorage.set(value, forKey: key)
         }
     }
-    init(value: Value , key:String ,store: UserDefaults? = nil) where Value : RawRepresentable, Value.Rawvalue == Int{
+    init(value: Value , key:String ,store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == Int{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
         self.getDataFromStorage = { () -> Value in
-            if Value.RawValue.self == Int.self {
-                return Value(rawValue: (tempStorage.integer(forKey: key)) as! Value.RawValue)!
-            }
-            if Value.RawValue.self == String.self {
-                return Value(rawValue: (tempStorage.string(forKey: key)!) as! Value.RawValue)!
-            }
-            return value
+            return Value(rawValue: (tempStorage.integer(forKey: key)))!
+        }
+        self.setDataInStorage = { (value) in
+            tempStorage.set(value.rawValue, forKey: key)
+        }
+        guard  let _ = self.storage.value(forKey: key) else  {
+            self.value = value
+            return
+        }
+    }
+    init(value: Value , key:String ,store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == String{
+        self.key = key
+        if let _store = store {
+            self.storage = _store
+        }
+        let tempStorage = self.storage
+        self.getDataFromStorage = { () -> Value in
+            return Value(rawValue: (tempStorage.string(forKey: key)!))!
         }
         self.setDataInStorage = { (value) in
             tempStorage.set(value.rawValue, forKey: key)
