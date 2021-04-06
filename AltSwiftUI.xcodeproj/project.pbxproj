@@ -82,6 +82,7 @@
 		7D2D4D6E25148269000F5DDC /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6825148269000F5DDC /* Rectangle.swift */; };
 		7D2D4D6F25148269000F5DDC /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6925148269000F5DDC /* Shapes.swift */; };
 		7D2D4D7025148269000F5DDC /* RoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */; };
+		CA56160825E8C3C5002B3DCF /* LazyGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA56160725E8C3C5002B3DCF /* LazyGrid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +174,7 @@
 		7D2D4D6825148269000F5DDC /* Rectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		7D2D4D6925148269000F5DDC /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRectangle.swift; sourceTree = "<group>"; };
+		CA56160725E8C3C5002B3DCF /* LazyGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGrid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,13 +387,14 @@
 				2CD19FFB2512066D00E2CCBA /* CollectionProtocols.swift */,
 				2CD1A0042512066D00E2CCBA /* ForEach.swift */,
 				2CD1A0012512066D00E2CCBA /* Group.swift */,
+				CA56160725E8C3C5002B3DCF /* LazyGrid.swift */,
 				2CD1A0022512066D00E2CCBA /* HStack.swift */,
+				2CD1A0032512066D00E2CCBA /* VStack.swift */,
+				2CD19FFE2512066D00E2CCBA /* ZStack.swift */,
 				2CD1A0002512066D00E2CCBA /* List.swift */,
 				2CD19FFF2512066D00E2CCBA /* ScrollView.swift */,
 				2CD19FFC2512066D00E2CCBA /* TabView.swift */,
 				2CD19FFD2512066D00E2CCBA /* ViewCollectionIteration.swift */,
-				2CD1A0032512066D00E2CCBA /* VStack.swift */,
-				2CD19FFE2512066D00E2CCBA /* ZStack.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				2CD1A03F2512066D00E2CCBA /* TabView.swift in Sources */,
 				2CD1A0372512066D00E2CCBA /* GeometryReader.swift in Sources */,
 				2CD1A03D2512066D00E2CCBA /* CoreViews.swift in Sources */,
+				CA56160825E8C3C5002B3DCF /* LazyGrid.swift in Sources */,
 				2CD1A0212512066D00E2CCBA /* UIKitCoreViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
