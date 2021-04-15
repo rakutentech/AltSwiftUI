@@ -24,6 +24,7 @@ public struct ScrollView: View {
     var ignoresHighPerformance = false
     var scrollEnabled: Bool = true
     var interactiveScrollEnabled = true
+    var keyboardDismissMode: UIScrollView.KeyboardDismissMode?
     
     public init(_ axis: Axis = .vertical, showsIndicators: Bool = true, @ViewBuilder content: () -> View) {
         contentView = content().subViews.first
@@ -106,13 +107,22 @@ public struct ScrollView: View {
         list.interactiveScrollEnabled = enabled
         return list
     }
+    
+    /// Sets the keyboard dismiss mode of the ScrollView.
+    /// If not set, by default it will be `interactive`.
+    ///
+    /// - important: Not SwiftUI compatible.
+    public func keyboardDismissMode(_ dismissMode: UIScrollView.KeyboardDismissMode) -> Self {
+        var list = self
+        list.keyboardDismissMode = dismissMode
+        return list
+    }
 }
 
 extension ScrollView: Renderable {
     public func createView(context: Context) -> UIView {
         let scrollView = SwiftUIScrollView(axis: axis).noAutoresizingMask()
         scrollView.bounces = true
-        scrollView.keyboardDismissMode = .interactive
         if !showsIndicators {
             scrollView.showsVerticalScrollIndicator = false
             scrollView.showsHorizontalScrollIndicator = false
@@ -163,5 +173,9 @@ extension ScrollView: Renderable {
             }
         }
         view.interactiveScrollEnabled = interactiveScrollEnabled
+        let keyboardDismissModeValue = keyboardDismissMode ?? .interactive
+        if view.keyboardDismissMode != keyboardDismissModeValue {
+            view.keyboardDismissMode = keyboardDismissModeValue
+        }
     }
 }

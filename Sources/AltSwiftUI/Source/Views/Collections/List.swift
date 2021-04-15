@@ -42,8 +42,9 @@ public struct List<Content: View, Data, ID: Hashable>: View {
     var scrollEnabled: Bool = true
     var interactiveScrollEnabled = true
     var appliedVisibleRow: Binding<ListVisibleRow?>?
+    var keyboardDismissMode: UIScrollView.KeyboardDismissMode?
     
-    public init(@ViewBuilder content: () -> Content) {
+    public init(@ViewBuilder content: () -> View) where Content == Text, Data == String, ID == String {
         let contentResult = content()
         self.init(sections: contentResult.originalSubViews.totallyFlatGroupedBySection())
     }
@@ -202,6 +203,16 @@ public struct List<Content: View, Data, ID: Hashable>: View {
         _ = row.wrappedValue
         var view = self
         view.appliedVisibleRow = row
+        return view
+    }
+    
+    /// Sets the keyboard dismiss mode of the ScrollView.
+    /// If not set, by default it will be `interactive`.
+    ///
+    /// - important: Not SwiftUI compatible.
+    public func keyboardDismissMode(_ dismissMode: UIScrollView.KeyboardDismissMode) -> Self {
+        var view = self
+        view.keyboardDismissMode = dismissMode
         return view
     }
 }
@@ -376,6 +387,11 @@ extension List: Renderable {
             EnvironmentHolder.withoutNotifyingStateChanges {
                 appliedVisibleRow?.wrappedValue = nil
             }
+        }
+        
+        let keyboardDismissModeValue = keyboardDismissMode ?? .interactive
+        if view.keyboardDismissMode != keyboardDismissModeValue {
+            view.keyboardDismissMode = keyboardDismissModeValue
         }
     }
 }
