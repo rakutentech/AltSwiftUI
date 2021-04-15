@@ -29,17 +29,17 @@ public struct List<Content: View, Data, ID: Hashable>: View {
     var rowBuilder: ((Data) -> View)?
     var contentOffset: Binding<CGPoint>?
     var rowHeight: CGFloat?
-    var isAlwaysReloadData: Bool = false
+    var isAlwaysReloadData = false
     var isBounceEnabled = true
     var separatorStyle = UITableViewCell.SeparatorStyle.singleLine
     var insets: (insets: EdgeInsets, animated: Bool)?
     var dragStarted: (() -> Void)?
     var dragEnded: (() -> Void)?
-    var ignoresHighPerformance: Bool = false
+    var ignoresHighPerformance = false
     var idKeyPath: KeyPath<Data, ID>?
     var listStyle: ListStyle?
-    var showsIndicators: Bool = true
-    var scrollEnabled: Bool = true
+    var showsIndicators = true
+    var scrollEnabled = true
     var interactiveScrollEnabled = true
     var appliedVisibleRow: Binding<ListVisibleRow?>?
     var keyboardDismissMode: UIScrollView.KeyboardDismissMode?

@@ -22,7 +22,7 @@ public struct ScrollView: View {
     var appliedVisibleRect: Binding<CGRect?>?
     var isBounceEnabled = true
     var ignoresHighPerformance = false
-    var scrollEnabled: Bool = true
+    var scrollEnabled = true
     var interactiveScrollEnabled = true
     var keyboardDismissMode: UIScrollView.KeyboardDismissMode?
     
