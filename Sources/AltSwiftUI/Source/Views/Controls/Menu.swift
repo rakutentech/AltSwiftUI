@@ -18,9 +18,12 @@ public struct Menu: View {
     /// Creates an instance that triggers an `action`.
     ///
     /// - Parameters:
-    ///     - - content: A view builder that creates the content of menu options.
+    ///     - content: A view builder that creates the content of menu options.
+    ///     Content can only support two specific types of view:
+    ///         1. Button with Text inside
+    ///         2. Menu
     ///     - label: The visual representation of the menu button
-    public init(@ViewBuilder content: () -> View, @ViewBuilder label: () -> View) {
+    public init(@ViewBuilder content: () -> View, label: () -> View) {
         self.label = label()
         self.viewContent = content().subViews
     }
@@ -37,6 +40,9 @@ extension Menu {
     /// - Parameters:
     ///     - title: The title of the button.
     ///     - content: A view builder that creates the content of menu options.
+    ///     Content can only support two specific types of view:
+    ///         1. Button with Text inside
+    ///         2. Menu
     public init(_ title: String, @ViewBuilder content: () -> View) {
         label = Text(title)
         self.viewContent = content().subViews
