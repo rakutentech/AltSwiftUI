@@ -111,7 +111,7 @@
 - [ ] EnvironmentObject sub hierarchies
 - [ ] Paths
 - [ ] Gradients
-- [ ] SecureField
+- [x] SecureField
 - [ ] Menu
 - [ ] @main App initializer
 - [ ] @AppStorage
