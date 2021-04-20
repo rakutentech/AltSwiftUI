@@ -1,0 +1,2049 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/UIHostingController.swift",
+      "line": 32,
+      "symbol": "UIHostingController.init(rootView:background:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/UIHostingController.swift",
+      "line": 43,
+      "symbol": "UIHostingController.init(nibName:bundle:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/UIHostingController.swift",
+      "line": 47,
+      "symbol": "UIHostingController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/UIHostingController.swift",
+      "line": 51,
+      "symbol": "UIHostingController.pushViewController(_:animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/UIHostingController.swift",
+      "line": 76,
+      "symbol": "UIHostingController.navigationController(_:didShow:animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/UIHostingController.swift",
+      "line": 86,
+      "symbol": "UIHostingController.gestureRecognizerShouldBegin(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/View.swift",
+      "line": 21,
+      "symbol": "Renderable.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/View.swift",
+      "line": 22,
+      "symbol": "Renderable.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/View.swift",
+      "line": 38,
+      "symbol": "View.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/CoreUI/View.swift",
+      "line": 39,
+      "symbol": "View.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/State/Binding.swift",
+      "line": 21,
+      "symbol": "Binding.init(get:set:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/State/Environment.swift",
+      "line": 19,
+      "symbol": "Environment.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/State/EnvironmentObject.swift",
+      "line": 38,
+      "symbol": "EnvironmentObject.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/State/ObservedObject.swift",
+      "line": 35,
+      "symbol": "ObservedObject.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/State/Published.swift",
+      "line": 26,
+      "symbol": "Published.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/State/State.swift",
+      "line": 28,
+      "symbol": "State.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/State/StateObject.swift",
+      "line": 41,
+      "symbol": "StateObject.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 28,
+      "symbol": "UIViewControllerRepresentable.UIViewControllerType",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 29,
+      "symbol": "UIViewControllerRepresentable.UIContext",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 30,
+      "symbol": "UIViewControllerRepresentable.Coordinator",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 51,
+      "symbol": "UIViewControllerRepresentable.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 54,
+      "symbol": "UIViewControllerRepresentable.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 65,
+      "symbol": "UIViewControllerRepresentable.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 93,
+      "symbol": "UIViewRepresentable.UIViewType",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 94,
+      "symbol": "UIViewRepresentable.UIContext",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 95,
+      "symbol": "UIViewRepresentable.Coordinator",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 116,
+      "symbol": "UIViewRepresentable.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 119,
+      "symbol": "UIViewRepresentable.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitCompat/UIKitCompat.swift",
+      "line": 127,
+      "symbol": "UIViewRepresentable.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitViews/UIKitNavigationViews.swift",
+      "line": 21,
+      "symbol": "SwiftUITabBarController.init(nibName:bundle:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitViews/UIKitNavigationViews.swift",
+      "line": 25,
+      "symbol": "SwiftUITabBarController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitViews/UIKitNavigationViews.swift",
+      "line": 29,
+      "symbol": "SwiftUITabBarController.selectedIndex",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/UIKitViews/UIKitNavigationViews.swift",
+      "line": 41,
+      "symbol": "SwiftUITabBarController.tabBar(_:didSelect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewEnvironment/ViewEnvironment.swift",
+      "line": 44,
+      "symbol": "EnvironmentValues.presentationMode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewEnvironment/ViewEnvironment.swift",
+      "line": 154,
+      "symbol": "Transaction.init(animation:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 18,
+      "symbol": "ViewBuilder.buildBlock()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 22,
+      "symbol": "ViewBuilder.buildBlock(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 26,
+      "symbol": "ViewBuilder.buildBlock(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 30,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 34,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 38,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 42,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 46,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 50,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 54,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewBuilder.swift",
+      "line": 58,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyBuilder.swift",
+      "line": 13,
+      "symbol": "View.background(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyBuilder.swift",
+      "line": 170,
+      "symbol": "View.buttonStyle(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyGestureTypes.swift",
+      "line": 16,
+      "symbol": "Gesture.Value",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyGestureTypes.swift",
+      "line": 17,
+      "symbol": "Gesture.Body",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyGestureTypes.swift",
+      "line": 65,
+      "symbol": "TapGesture.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyGestureTypes.swift",
+      "line": 85,
+      "symbol": "TapGesture.Value",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyGestureTypes.swift",
+      "line": 90,
+      "symbol": "DragGesture.Value",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyGestureTypes.swift",
+      "line": 108,
+      "symbol": "DragGesture.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 15,
+      "symbol": "EdgeInsets.top",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 16,
+      "symbol": "EdgeInsets.leading",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 17,
+      "symbol": "EdgeInsets.bottom",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 18,
+      "symbol": "EdgeInsets.trailing",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 55,
+      "symbol": "HorizontalAlignment.center",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 55,
+      "symbol": "HorizontalAlignment.leading",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 55,
+      "symbol": "HorizontalAlignment.trailing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 61,
+      "symbol": "VerticalAlignment.bottom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 61,
+      "symbol": "VerticalAlignment.center",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 61,
+      "symbol": "VerticalAlignment.top",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 67,
+      "symbol": "Alignment.horizontal",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 68,
+      "symbol": "Alignment.vertical",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 70,
+      "symbol": "Alignment.init(horizontal:vertical:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 78,
+      "symbol": "Alignment.center",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 79,
+      "symbol": "Alignment.leading",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 80,
+      "symbol": "Alignment.trailing",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 81,
+      "symbol": "Alignment.top",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 82,
+      "symbol": "Alignment.bottom",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 83,
+      "symbol": "Alignment.topLeading",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 84,
+      "symbol": "Alignment.topTrailing",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 85,
+      "symbol": "Alignment.bottomLeading",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 86,
+      "symbol": "Alignment.bottomTrailing",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 92,
+      "symbol": "CGFloat.limitedForUI()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 100,
+      "symbol": "ContentMode.fill",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 100,
+      "symbol": "ContentMode.fit",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 105,
+      "symbol": "Edge.bottom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 105,
+      "symbol": "Edge.leading",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 105,
+      "symbol": "Edge.top",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 105,
+      "symbol": "Edge.trailing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 153,
+      "symbol": "Edge.Set.top",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 155,
+      "symbol": "Edge.Set.leading",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 157,
+      "symbol": "Edge.Set.bottom",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 159,
+      "symbol": "Edge.Set.trailing",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 161,
+      "symbol": "Edge.Set.all",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 163,
+      "symbol": "Edge.Set.horizontal",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 165,
+      "symbol": "Edge.Set.vertical",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 195,
+      "symbol": "Axis.both",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 195,
+      "symbol": "Axis.horizontal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 195,
+      "symbol": "Axis.vertical",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 200,
+      "symbol": "TextAlignment.center",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 200,
+      "symbol": "TextAlignment.leading",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 200,
+      "symbol": "TextAlignment.trailing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyLayoutTypes.swift",
+      "line": 256,
+      "symbol": "GeometryProxy.default",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyNavigationTypes.swift",
+      "line": 19,
+      "symbol": "NavigationBarTitleDisplayMode.inline",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyNavigationTypes.swift",
+      "line": 20,
+      "symbol": "NavigationBarTitleDisplayMode.large",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 15,
+      "symbol": "Font.Weight",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 16,
+      "symbol": "Font.Weight.ultraLight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 17,
+      "symbol": "Font.Weight.thin",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 18,
+      "symbol": "Font.Weight.light",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 19,
+      "symbol": "Font.Weight.regular",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 20,
+      "symbol": "Font.Weight.medium",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 21,
+      "symbol": "Font.Weight.semibold",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 22,
+      "symbol": "Font.Weight.bold",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 23,
+      "symbol": "Font.Weight.heavy",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 24,
+      "symbol": "Font.Weight.black",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewPropertyTypes/ViewPropertyRenderingTypes.swift",
+      "line": 166,
+      "symbol": "ViewModifier.Content",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/ViewProperties/ViewValues.swift",
+      "line": 86,
+      "symbol": "ViewValues.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ForEach.swift",
+      "line": 14,
+      "symbol": "ForEach.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ForEach.swift",
+      "line": 19,
+      "symbol": "ForEach.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/Group.swift",
+      "line": 17,
+      "symbol": "Group.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/Group.swift",
+      "line": 19,
+      "symbol": "Group.init(content:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/Group.swift",
+      "line": 22,
+      "symbol": "Group.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/HStack.swift",
+      "line": 13,
+      "symbol": "HStack.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/HStack.swift",
+      "line": 47,
+      "symbol": "HStack.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/HStack.swift",
+      "line": 53,
+      "symbol": "HStack.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/HStack.swift",
+      "line": 70,
+      "symbol": "HStack.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/List.swift",
+      "line": 11,
+      "symbol": "ListVisibleRow",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/List.swift",
+      "line": 15,
+      "symbol": "ListVisibleRow.init(indexPath:scrollPosition:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/List.swift",
+      "line": 25,
+      "symbol": "List.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/List.swift",
+      "line": 26,
+      "symbol": "List.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/List.swift",
+      "line": 47,
+      "symbol": "List.init(content:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/List.swift",
+      "line": 244,
+      "symbol": "List.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/List.swift",
+      "line": 261,
+      "symbol": "List.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ScrollView.swift",
+      "line": 14,
+      "symbol": "ScrollView.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ScrollView.swift",
+      "line": 15,
+      "symbol": "ScrollView.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ScrollView.swift",
+      "line": 29,
+      "symbol": "ScrollView.init(_:showsIndicators:content:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ScrollView.swift",
+      "line": 123,
+      "symbol": "ScrollView.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ScrollView.swift",
+      "line": 150,
+      "symbol": "ScrollView.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/TabView.swift",
+      "line": 26,
+      "symbol": "TabView.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/TabView.swift",
+      "line": 27,
+      "symbol": "TabView.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/TabView.swift",
+      "line": 40,
+      "symbol": "TabView.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/TabView.swift",
+      "line": 57,
+      "symbol": "TabView.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/VStack.swift",
+      "line": 13,
+      "symbol": "VStack.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/VStack.swift",
+      "line": 32,
+      "symbol": "VStack.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/VStack.swift",
+      "line": 38,
+      "symbol": "VStack.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/VStack.swift",
+      "line": 56,
+      "symbol": "VStack.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ZStack.swift",
+      "line": 13,
+      "symbol": "ZStack.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ZStack.swift",
+      "line": 28,
+      "symbol": "ZStack.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ZStack.swift",
+      "line": 34,
+      "symbol": "ZStack.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Collections/ZStack.swift",
+      "line": 49,
+      "symbol": "ZStack.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Button.swift",
+      "line": 13,
+      "symbol": "Button.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Button.swift",
+      "line": 32,
+      "symbol": "Button.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Button.swift",
+      "line": 50,
+      "symbol": "Button.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Button.swift",
+      "line": 74,
+      "symbol": "Button.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/DatePicker.swift",
+      "line": 14,
+      "symbol": "DatePicker.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/DatePicker.swift",
+      "line": 21,
+      "symbol": "DatePicker.DatePickerComponent",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/DatePicker.swift",
+      "line": 29,
+      "symbol": "DatePicker.Components",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/DatePicker.swift",
+      "line": 31,
+      "symbol": "DatePicker.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/DatePicker.swift",
+      "line": 70,
+      "symbol": "DatePicker.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/DatePicker.swift",
+      "line": 75,
+      "symbol": "DatePicker.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/SecureField.swift",
+      "line": 12,
+      "symbol": "SecureField.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/SecureField.swift",
+      "line": 16,
+      "symbol": "SecureField.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Slider.swift",
+      "line": 14,
+      "symbol": "Slider.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Slider.swift",
+      "line": 18,
+      "symbol": "Slider.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Slider.swift",
+      "line": 57,
+      "symbol": "Slider.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Slider.swift",
+      "line": 63,
+      "symbol": "Slider.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/TextField.swift",
+      "line": 13,
+      "symbol": "TextField.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/TextField.swift",
+      "line": 23,
+      "symbol": "TextField.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/TextField.swift",
+      "line": 88,
+      "symbol": "TextField.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/TextField.swift",
+      "line": 93,
+      "symbol": "TextField.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Toggle.swift",
+      "line": 13,
+      "symbol": "Toggle.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Toggle.swift",
+      "line": 22,
+      "symbol": "Toggle.init(_:isOn:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Toggle.swift",
+      "line": 26,
+      "symbol": "Toggle.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Toggle.swift",
+      "line": 32,
+      "symbol": "Toggle.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Controls/Toggle.swift",
+      "line": 44,
+      "symbol": "Toggle.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 15,
+      "symbol": "EmptyView.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 16,
+      "symbol": "EmptyView.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 19,
+      "symbol": "EmptyView.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 23,
+      "symbol": "EmptyView.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 26,
+      "symbol": "EmptyView.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 41,
+      "symbol": "PaddingView.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 42,
+      "symbol": "PaddingView.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 51,
+      "symbol": "PaddingView.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 63,
+      "symbol": "PaddingView.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 87,
+      "symbol": "OptionalView",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 92,
+      "symbol": "OptionalView.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 93,
+      "symbol": "OptionalView.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 100,
+      "symbol": "TupleView",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 101,
+      "symbol": "TupleView.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 104,
+      "symbol": "TupleView.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/CoreViews.swift",
+      "line": 108,
+      "symbol": "TupleView.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/NavigationViews.swift",
+      "line": 16,
+      "symbol": "NavigationView.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/NavigationViews.swift",
+      "line": 17,
+      "symbol": "NavigationView.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/NavigationViews.swift",
+      "line": 22,
+      "symbol": "NavigationView.init(content:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/NavigationViews.swift",
+      "line": 28,
+      "symbol": "NavigationView.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/NavigationViews.swift",
+      "line": 44,
+      "symbol": "NavigationView.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/NavigationViews.swift",
+      "line": 71,
+      "symbol": "NavigationLink.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/NavigationViews.swift",
+      "line": 72,
+      "symbol": "NavigationLink.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/NavigationViews.swift",
+      "line": 119,
+      "symbol": "NavigationLink.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/NavigationViews.swift",
+      "line": 130,
+      "symbol": "NavigationLink.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 17,
+      "symbol": "Color.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 33,
+      "symbol": "Color.init(white:opacity:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 36,
+      "symbol": "Color.init(red:green:blue:opacity:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 39,
+      "symbol": "Color.init(_:bundle:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 42,
+      "symbol": "Color.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 55,
+      "symbol": "Color.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 61,
+      "symbol": "Color.black",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 62,
+      "symbol": "Color.white",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 63,
+      "symbol": "Color.blue",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 64,
+      "symbol": "Color.red",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 65,
+      "symbol": "Color.yellow",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 66,
+      "symbol": "Color.green",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 67,
+      "symbol": "Color.orange",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 68,
+      "symbol": "Color.pink",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 69,
+      "symbol": "Color.purple",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 70,
+      "symbol": "Color.gray",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 71,
+      "symbol": "Color.clear",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 97,
+      "symbol": "Color.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Color.swift",
+      "line": 103,
+      "symbol": "Color.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Divider.swift",
+      "line": 21,
+      "symbol": "Divider.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Divider.swift",
+      "line": 22,
+      "symbol": "Divider.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Divider.swift",
+      "line": 25,
+      "symbol": "Divider.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Divider.swift",
+      "line": 29,
+      "symbol": "Divider.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Divider.swift",
+      "line": 41,
+      "symbol": "Divider.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/GeometryReader.swift",
+      "line": 16,
+      "symbol": "GeometryReader.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/GeometryReader.swift",
+      "line": 20,
+      "symbol": "GeometryReader.init(content:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/GeometryReader.swift",
+      "line": 24,
+      "symbol": "GeometryReader.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 13,
+      "symbol": "Image.ResizingMode",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 14,
+      "symbol": "Image.ResizingMode.stretch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 15,
+      "symbol": "Image.ResizingMode.tile",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 25,
+      "symbol": "Image.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 26,
+      "symbol": "Image.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 72,
+      "symbol": "Image.TemplateRenderingMode",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 73,
+      "symbol": "Image.TemplateRenderingMode.original",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 73,
+      "symbol": "Image.TemplateRenderingMode.template",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 78,
+      "symbol": "Image.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Image.swift",
+      "line": 83,
+      "symbol": "Image.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Picker.swift",
+      "line": 16,
+      "symbol": "Picker.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Picker.swift",
+      "line": 21,
+      "symbol": "Picker.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Picker.swift",
+      "line": 52,
+      "symbol": "Picker.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Picker.swift",
+      "line": 65,
+      "symbol": "Picker.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Picker.swift",
+      "line": 140,
+      "symbol": "SegmentedPickerStyle.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Spacer.swift",
+      "line": 19,
+      "symbol": "Spacer.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Spacer.swift",
+      "line": 21,
+      "symbol": "Spacer.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Spacer.swift",
+      "line": 25,
+      "symbol": "Spacer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Spacer.swift",
+      "line": 29,
+      "symbol": "Spacer.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Spacer.swift",
+      "line": 37,
+      "symbol": "Spacer.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Text.swift",
+      "line": 13,
+      "symbol": "Text.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Text.swift",
+      "line": 14,
+      "symbol": "Text.string",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Text.swift",
+      "line": 60,
+      "symbol": "Text.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Text.swift",
+      "line": 131,
+      "symbol": "Text.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/ReadOnly/Text.swift",
+      "line": 148,
+      "symbol": "Text.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Capsule.swift",
+      "line": 13,
+      "symbol": "Capsule.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Capsule.swift",
+      "line": 15,
+      "symbol": "Capsule.fillColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Capsule.swift",
+      "line": 16,
+      "symbol": "Capsule.strokeBorderColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Capsule.swift",
+      "line": 17,
+      "symbol": "Capsule.style",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Capsule.swift",
+      "line": 19,
+      "symbol": "Capsule.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Capsule.swift",
+      "line": 23,
+      "symbol": "Capsule.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Capsule.swift",
+      "line": 25,
+      "symbol": "Capsule.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Capsule.swift",
+      "line": 34,
+      "symbol": "Capsule.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Circle.swift",
+      "line": 13,
+      "symbol": "Circle.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Circle.swift",
+      "line": 15,
+      "symbol": "Circle.fillColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Circle.swift",
+      "line": 16,
+      "symbol": "Circle.strokeBorderColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Circle.swift",
+      "line": 17,
+      "symbol": "Circle.style",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Circle.swift",
+      "line": 21,
+      "symbol": "Circle.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Circle.swift",
+      "line": 25,
+      "symbol": "Circle.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Circle.swift",
+      "line": 35,
+      "symbol": "Circle.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Circle.swift",
+      "line": 44,
+      "symbol": "Circle.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Ellipse.swift",
+      "line": 14,
+      "symbol": "Ellipse.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Ellipse.swift",
+      "line": 16,
+      "symbol": "Ellipse.fillColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Ellipse.swift",
+      "line": 17,
+      "symbol": "Ellipse.strokeBorderColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Ellipse.swift",
+      "line": 18,
+      "symbol": "Ellipse.style",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Ellipse.swift",
+      "line": 20,
+      "symbol": "Ellipse.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Ellipse.swift",
+      "line": 24,
+      "symbol": "Ellipse.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Ellipse.swift",
+      "line": 26,
+      "symbol": "Ellipse.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Ellipse.swift",
+      "line": 35,
+      "symbol": "Ellipse.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Rectangle.swift",
+      "line": 13,
+      "symbol": "Rectangle.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Rectangle.swift",
+      "line": 15,
+      "symbol": "Rectangle.fillColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Rectangle.swift",
+      "line": 16,
+      "symbol": "Rectangle.strokeBorderColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Rectangle.swift",
+      "line": 17,
+      "symbol": "Rectangle.style",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Rectangle.swift",
+      "line": 19,
+      "symbol": "Rectangle.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Rectangle.swift",
+      "line": 23,
+      "symbol": "Rectangle.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Rectangle.swift",
+      "line": 25,
+      "symbol": "Rectangle.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Rectangle.swift",
+      "line": 34,
+      "symbol": "Rectangle.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/RoundedRectangle.swift",
+      "line": 13,
+      "symbol": "RoundedRectangle.viewStore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/RoundedRectangle.swift",
+      "line": 15,
+      "symbol": "RoundedRectangle.fillColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/RoundedRectangle.swift",
+      "line": 16,
+      "symbol": "RoundedRectangle.strokeBorderColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/RoundedRectangle.swift",
+      "line": 17,
+      "symbol": "RoundedRectangle.style",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/RoundedRectangle.swift",
+      "line": 18,
+      "symbol": "RoundedRectangle.cornerRadius",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/RoundedRectangle.swift",
+      "line": 20,
+      "symbol": "RoundedRectangle.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/RoundedRectangle.swift",
+      "line": 24,
+      "symbol": "RoundedRectangle.init(cornerRadius:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/RoundedRectangle.swift",
+      "line": 28,
+      "symbol": "RoundedRectangle.createView(context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/RoundedRectangle.swift",
+      "line": 37,
+      "symbol": "RoundedRectangle.updateView(_:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Shapes.swift",
+      "line": 50,
+      "symbol": "Shape",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Shapes.swift",
+      "line": 51,
+      "symbol": "Shape.fillColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Shapes.swift",
+      "line": 52,
+      "symbol": "Shape.strokeBorderColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Shapes.swift",
+      "line": 53,
+      "symbol": "Shape.style",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/AltSwiftUI/AltSwiftUI/Sources/AltSwiftUI/Source/Views/Shapes/Shapes.swift",
+      "line": 56,
+      "symbol": "Shape",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/work/AltSwiftUI/AltSwiftUI"
+}

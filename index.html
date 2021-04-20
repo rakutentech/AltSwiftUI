@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AltSwiftUI  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="AltSwiftUI  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          AltSwiftUI 1.5.0 Docs
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/rakutentech/AltSwiftUI">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">AltSwiftUI Reference</a>
+      <img class="carat" src="img/carat.png" />
+      AltSwiftUI  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="State.html">State</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Binding.html">Binding</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/Environment.html">Environment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/EnvironmentObject.html">EnvironmentObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/EnvironmentObject/Wrapper.html">– Wrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ObservedObject.html">ObservedObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ObservedObject/Wrapper.html">– Wrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/Published.html">Published</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/State.html">State</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/StateObject.html">StateObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/StateObject/Wrapper.html">– Wrapper</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/SwiftUITabBarController.html">SwiftUITabBarController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/UIHostingController.html">UIHostingController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/Axis.html">Axis</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/ContentMode.html">ContentMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/CoordinateSpace.html">CoordinateSpace</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/Edge.html">Edge</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/Edge/Set.html">– Set</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/HorizontalAlignment.html">HorizontalAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/NavigationBarTitleDisplayMode.html">NavigationBarTitleDisplayMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/TextAlignment.html">TextAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/VerticalAlignment.html">VerticalAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/ViewBuilder.html">ViewBuilder</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/CGFloat.html">CGFloat</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Functions.html#/s:10AltSwiftUI13withAnimationyxAA0E0VSg_xyKXEtKlF">withAnimation(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/AltPreviewProvider.html">AltPreviewProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ButtonStyle.html">ButtonStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Gesture.html">Gesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Identifiable.html">Identifiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols.html#/s:10AltSwiftUI9ListStyleP">ListStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols.html#/s:10AltSwiftUI16ObservableObjectP">ObservableObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols.html#/s:10AltSwiftUI11PickerStyleP">PickerStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Renderable.html">Renderable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Shape.html">Shape</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/UIViewControllerRepresentable.html">UIViewControllerRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/UIViewRepresentable.html">UIViewRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/View.html">View</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ViewModifier.html">ViewModifier</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ActionSheet.html">ActionSheet</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Alert.html">Alert</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Alert/Button.html">– Button</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Alignment.html">Alignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Angle.html">Angle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Animation.html">Animation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/AnyTransition.html">AnyTransition</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Button.html">Button</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ButtonStyleConfiguration.html">ButtonStyleConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Capsule.html">Capsule</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Circle.html">Circle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Color.html">Color</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs.html#/s:10AltSwiftUI7ContextV">Context</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ContextMenu.html">ContextMenu</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/DatePicker.html">DatePicker</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/DatePicker/DatePickerComponent.html">– DatePickerComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Divider.html">Divider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/DragGesture.html">DragGesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/DragGesture/Value.html">– Value</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/EdgeInsets.html">EdgeInsets</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Ellipse.html">Ellipse</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/EmptyView.html">EmptyView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/EnvironmentValues.html">EnvironmentValues</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Font.html">Font</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Font/Weight.html">– Weight</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ForEach.html">ForEach</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/GeometryProxy.html">GeometryProxy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/GeometryReader.html">GeometryReader</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/GroupedListStyle.html">GroupedListStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/HStack.html">HStack</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Image.html">Image</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Image/ResizingMode.html">– ResizingMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Image/TemplateRenderingMode.html">– TemplateRenderingMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/InsetGroupedListStyle.html">InsetGroupedListStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/List.html">List</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ListVisibleRow.html">ListVisibleRow</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/NavigationLink.html">NavigationLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/NavigationView.html">NavigationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/OptionalView.html">OptionalView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PaddingView.html">PaddingView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Picker.html">Picker</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PlainListStyle.html">PlainListStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PresentationMode.html">PresentationMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Rectangle.html">Rectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RoundedRectangle.html">RoundedRectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ScrollView.html">ScrollView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/SecureField.html">SecureField</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/SegmentedPickerStyle.html">SegmentedPickerStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Slider.html">Slider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Spacer.html">Spacer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/StrokeStyle.html">StrokeStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TabView.html">TabView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TapGesture.html">TapGesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Text.html">Text</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TextField.html">TextField</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Toggle.html">Toggle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Transaction.html">Transaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TupleView.html">TupleView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/UIViewControllerRepresentableContext.html">UIViewControllerRepresentableContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/UIViewRepresentableContext.html">UIViewRepresentableContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VStack.html">VStack</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ViewValues.html">ViewValues</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ZStack.html">ZStack</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            
+            <p><img src="https://raw.githubusercontent.com/rakutentech/AltSwiftUI/master/docResources/altswiftui.svg" alt="logo"></p>
+
+<p><a href="https://github.com/rakutentech/AltSwiftUI/actions?query=workflow%3ABuild"><img src="https://github.com/rakutentech/AltSwiftUI/workflows/Build/badge.svg?event=push" alt="Build"></a> 
+<a href="https://cocoapods.org/pods/AltSwiftUI"><img src="http://img.shields.io/cocoapods/v/AltSwiftUI.svg" alt="Pod"></a>
+<img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" alt="Swift Package Manager">
+<img src="https://img.shields.io/badge/Xcode-12.0+-blue.svg" alt="Xcode">
+<img src="https://img.shields.io/badge/iOS-11.0+-blue.svg" alt="iOS">
+<img src="https://img.shields.io/badge/Swift-5.1+-orange.svg" alt="Swift"></p>
+
+<p>Open Source UI framework based on SwiftUI syntax and features, adding backwards compatibility.</p>
+
+<ul>
+<li><a href="#compatibility">Compatibility</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#usage">Usage</a>
+
+<ul>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#view-structure">View Structure</a></li>
+<li><a href="#state-and-rendering">State and Rendering</a></li>
+<li><a href="#hstack-and-multiline-texts">HStack and Multiline Texts</a></li>
+<li><a href="#previews">Previews</a></li>
+<li><a href="#name-conflicts-for-observableobject-and-published">Name conflicts for ObservableObject and Published</a></li>
+<li><a href="#high-performance">High Performance</a></li>
+</ul></li>
+<li><a href="#additional-features">Additional Features</a></li>
+<li><a href="#get-involved">Get Involved</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id='compatibility' class='heading'>Compatibility</h2>
+
+<ul>
+<li><strong>Minimum iOS version</strong>: iOS 11.0</li>
+<li><strong>SwiftUI</strong>: Not interchangeable, but easy to share knowledge and migrate code both ways because of the high similarity in syntax.</li>
+<li><strong>UIKit</strong>: Compatible</li>
+<li><strong>Xcode</strong>: From Xcode 12</li>
+<li><strong>Platforms</strong>: iOS, iPadOS</li>
+</ul>
+<h2 id='features' class='heading'>Features</h2>
+
+<p>An overview of <a href="https://github.com/rakutentech/AltSwiftUI/blob/master/docResources/Features.md">supported features can be seen here</a>.</p>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>Add Package url: <a href="https://github.com/rakutentech/AltSwiftUI">https://github.com/rakutentech/AltSwiftUI</a></p>
+<h3 id='cocoapods' class='heading'>Cocoapods</h3>
+
+<p>Add the following to your Podfile:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'AltSwiftUI'</span>
+</code></pre>
+<h2 id='documentation' class='heading'>Documentation</h2>
+
+<p>The <a href="https://rakutentech.github.io/AltSwiftUI/index.html">complete source documentation</a> contains functionality covered by AltSwiftUI including its unique features.</p>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<p>AltSwiftUI has some small differences to SwiftUI, where it handles certain features slightly differently and adds some missing features as well.</p>
+<h3 id='getting-started' class='heading'>Getting Started</h3>
+
+<p>You can use a AltSwiftUI view hierarchy the same as in SwiftUI with <code>AppDelegate</code> or <code>SceneDelegate</code>.</p>
+
+<p>Create a <code><a href="Classes/UIHostingController.html">UIHostingController</a></code> with a root <code><a href="Protocols/View.html">View</a></code>, and add it to the <code>Window</code>. Even though the names are similar, don&rsquo;t forget you should import AltSwiftUI instead of SwiftUI.</p>
+<h3 id='view-structure' class='heading'>View Structure</h3>
+
+<p>The structure of a <code><a href="Protocols/View.html">View</a></code> is very similar to that of SwiftUI, with 2 key differences:</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">ExampleView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">viewStore</span> <span class="o">=</span> <span class="kt">ViewValues</span><span class="p">()</span> <span class="c1">// Difference 1</span>
+
+    <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span> <span class="c1">// Difference 2</span>
+        <span class="kt">Text</span><span class="p">(</span><span class="s">"Welcome"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<ol>
+<li><p>In order for the library to internally store generic properties of a view, you need to provide a <code>viewStore</code> property initialized with an empty <code><a href="Structs/ViewValues.html">ViewValues</a></code> for each view you create.</p></li>
+<li><p>To target backwards compatibility, opaque return types (<code>some View</code>) which is supported from iOS 13 are not used. Instead, explicity return types are used.</p></li>
+</ol>
+<h3 id='state-and-rendering' class='heading'>State and Rendering</h3>
+
+<p>State management works the same way as in SwiftUI. When a view declares a property attributed with a property wrapper, it will update the view&rsquo;s body when that property&rsquo;s value changes.</p>
+<pre class="highlight swift"><code><span class="kd">@State</span> <span class="kd">private</span> <span class="k">var</span> <span class="nv">exampleText</span> <span class="o">=</span> <span class="s">"Original text"</span>
+<span class="kd">@ObservedObject</span> <span class="k">var</span> <span class="nv">myModel</span> <span class="o">=</span> <span class="kt">MyModel</span><span class="p">()</span>
+
+<span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+    <span class="kt">VStack</span> <span class="p">{</span>
+        <span class="kt">Text</span><span class="p">(</span><span class="n">exampleText</span><span class="p">)</span>
+        <span class="kt">Text</span><span class="p">(</span><span class="n">myModel</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="kt">Divider</span><span class="p">()</span>
+            <span class="o">.</span><span class="nf">padding</span><span class="p">(</span><span class="o">.</span><span class="n">vertical</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="kt">MyView</span><span class="p">(</span><span class="err">$</span><span class="n">myModel</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="c1">// Will update the view when 'MyView' updates the value</span>
+        <span class="kt">Button</span><span class="p">(</span><span class="s">"Update text"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">exampleText</span> <span class="o">=</span> <span class="s">"Updated text"</span> <span class="c1">// Will update the view on button action</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='hstack-and-multiline-texts' class='heading'>HStack and Multiline Texts</h3>
+
+<p>When using <code><a href="Structs/Text.html">Text</a></code> without <code>lineLimit</code> inside a <code><a href="Structs/HStack.html">HStack</a></code>, make sure that all other elements have their width specified. Failing to do so may introduce undesired layouts.</p>
+<h3 id='previews' class='heading'>Previews</h3>
+
+<p>To work with previews, there are 2 steps that need to be done:</p>
+
+<ol>
+<li>Write the preview code at the end of the file that contains the view(s) you want to preview. This works similar to SwiftUI, but the preview must also conform to <code><a href="Protocols/AltPreviewProvider.html">AltPreviewProvider</a></code>.</li>
+</ol>
+<pre class="highlight swift"><code><span class="cp">#if DEBUG &amp;&amp; canImport(SwiftUI)</span>
+
+<span class="kd">import</span> <span class="kd">protocol</span> <span class="kt">SwiftUI</span><span class="o">.</span><span class="kt">PreviewProvider</span>
+<span class="kd">import</span> <span class="kd">protocol</span> <span class="kt">AltSwiftUI</span><span class="o">.</span><span class="kt">View</span>
+
+<span class="kd">struct</span> <span class="kt">MyTextPreview</span> <span class="p">:</span> <span class="kt">AltPreviewProvider</span><span class="p">,</span> <span class="kt">PreviewProvider</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="k">var</span> <span class="nv">previewView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kt">MyText</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cp">#endif</span>
+</code></pre>
+
+<ol>
+<li><strong>Load the canvas</strong>: As of now (Xcode 12 beta), in order to display the preview Canvas, Xcode requires that <code>Editor &gt; Canvas</code> is enabled and the current file contains this line: <code>import SwiftUI</code>. Since AltSwiftUI files won&rsquo;t contain <code>import SwiftUI</code>, you must go to a file that contains it in order to open the Canvas, and then pin it so that you can use it with AltSwiftUI previews. Adding <code>import SwiftUI</code> to your file temporally to open the Canvas is also an option.</li>
+</ol>
+<h3 id='name-conflicts-for-observableobject-and-published' class='heading'>Name conflicts for ObservableObject and Published</h3>
+
+<p>If you end up importing Foundation, either directly or by an umbrella framework, and try to use <code><a href="Protocols.html#/s:10AltSwiftUI16ObservableObjectP">ObservableObject</a></code> or <code><a href="Classes/Published.html">Published</a></code>, Xcode will have a hard time solving the ambiguity as Foundation currently also defines these types as <em>typealias</em>.</p>
+
+<p>To solve this, you can either specify the type like <code>AltSwiftUI.ObservableObject</code> every time you use it, or you can explicitly import these 2 types, which will help resolve the ambiguity:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+<span class="kd">import</span> <span class="kd">protocol</span> <span class="kt">AltSwiftUI</span><span class="o">.</span><span class="kt">ObservableObject</span>
+<span class="kd">import</span> <span class="kd">class</span> <span class="kt">AltSwiftUI</span><span class="o">.</span><span class="kt">Published</span>
+
+<span class="kd">class</span> <span class="kt">MyClass</span><span class="p">:</span> <span class="kt">ObservableObject</span> <span class="p">{</span>
+    <span class="kd">@Published</span> <span class="k">var</span> <span class="nv">property</span><span class="p">:</span> <span class="kt">Bool</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='high-performance' class='heading'>High Performance</h3>
+
+<p>In AltSwiftUI, certain view modifiers can cause views to update with <strong>high performance</strong>. Modifiers in this category will indicate it in their function documentation. You can also refer to the list below:</p>
+
+<ul>
+<li><code><a href="Structs/List.html#/s:10AltSwiftUI4ListV13contentOffsetyACyxq_q0_GAA7BindingVySo7CGPointVGF">List.contentOffset(_:)</a></code>: When the list updates the value of the binding</li>
+<li><code><a href="Structs/ScrollView.html#/s:10AltSwiftUI10ScrollViewV13contentOffsetyAcA7BindingVySo7CGPointVGF">ScrollView.contentOffset(_:)</a></code>: When the scroll view updates the value of the binding</li>
+<li>State changes that happen inside the closure of a <code>DragGesture.onChanged()</code>.</li>
+</ul>
+
+<p>High performance updates <strong>won&rsquo;t</strong> update <em>children views</em> of <code><a href="Structs/List.html">List</a></code> or <code><a href="Structs/ScrollView.html">ScrollView</a></code> types. It&rsquo;s generally recommended for view subhierarchies that you want to modify by high performance updates to be moved to a separate <code><a href="Protocols/View.html">View</a></code> while passing the <em>state</em> that causes the update as a <code><a href="Structs/Binding.html">Binding</a></code>.</p>
+
+<p>There are also a couple of modifiers you can use to alter the default behavior of high performance updates and increase performance gains. For more information see <code><a href="Structs/List.html#/s:10AltSwiftUI4ListV21ignoreHighPerformanceACyxq_q0_GyF">List.ignoreHighPerformance()</a></code>, <code><a href="Structs/ScrollView.html#/s:10AltSwiftUI10ScrollViewV21ignoreHighPerformanceACyF">ScrollView.ignoreHighPerformance()</a></code>, <code><a href="Protocols/View.html#/s:10AltSwiftUI4ViewPAAE27strictHighPerformanceUpdatexyF">View.strictHighPerformanceUpdate()</a></code> and <code><a href="Protocols/View.html#/s:10AltSwiftUI4ViewPAAE25skipHighPerformanceUpdatexyF">View.skipHighPerformanceUpdate()</a></code> in the documentation.</p>
+<h2 id='additional-features' class='heading'>Additional Features</h2>
+
+<p>Some of AltSwiftUI additional features are listed in this section.</p>
+<h3 id='geometry-listener' class='heading'>Geometry Listener</h3>
+
+<p>In addition to the <code><a href="Structs/GeometryReader.html">GeometryReader</a></code> view, AltSwiftUI also offers a <code><a href="Protocols/View.html#/s:10AltSwiftUI4ViewPAAE16geometryListeneryxAA7BindingVyAA13GeometryProxyVGF">View.geometryListener(_:)</a></code> property. This property records changes in a view&rsquo;s frame and stores it in a binding, which can then be referenced in any part of the hierarchy.</p>
+
+<p>Unlike <code><a href="Structs/GeometryReader.html">GeometryReader</a></code>, <code>geometryListener</code> doesn&rsquo;t generate a new view.</p>
+<pre class="highlight swift"><code><span class="kd">@State</span> <span class="kd">private</span> <span class="k">var</span> <span class="nv">geometryProxy</span><span class="p">:</span> <span class="kt">GeometryProxy</span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span>
+
+<span class="kt">VStack</span> <span class="p">{</span>
+    <span class="kt">Text</span><span class="p">(</span><span class="s">"Example"</span><span class="p">)</span>
+        <span class="o">.</span><span class="nf">geometryListener</span><span class="p">(</span><span class="err">$</span><span class="n">geometryProxy</span><span class="p">)</span>
+
+    <span class="kt">Color</span><span class="o">.</span><span class="n">red</span>
+        <span class="o">.</span><span class="nf">frame</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="n">geometryProxy</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre>
+<h3 id='interactive-pop-gesture' class='heading'>Interactive Pop Gesture</h3>
+
+<p>Interactive pop gesture is also enabled by default for navigation views that have custom <em>left bar button items</em> and regardless if they show the <em>navigation bar</em> or not. To set this behavior to false in all cases, set <code><a href="Classes/UIHostingController.html#/s:10AltSwiftUI19UIHostingControllerC30isInteractivePopGestureEnabledSbvpZ">UIHostingController.isInteractivePopGestureEnabled</a></code> to <code>false</code>.</p>
+<h2 id='get-involved' class='heading'>Get Involved</h2>
+
+<p>If you find any issues or ideas of new features/improvements, you can submit an issue in GitHub.</p>
+
+<p>We also welcome you to contribute by submitting a pull request.</p>
+
+<p>For more information, see <a href="https://github.com/rakutentech/AltSwiftUI/blob/master/CONTRIBUTING.md">CONTRIBUTING</a>.</p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>MIT license. You can read the <a href="https://github.com/rakutentech/AltSwiftUI/blob/master/LICENSE">LICENSE</a> for more details.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2021 <a class="link" href="https://github.com/rakutentech/AltSwiftUI" target="_blank" rel="external">Kevin Wong</a>. All rights reserved. (Last updated: 2021-04-20)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
