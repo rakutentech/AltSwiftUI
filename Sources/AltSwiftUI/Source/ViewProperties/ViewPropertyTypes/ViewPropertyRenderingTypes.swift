@@ -37,12 +37,12 @@ public struct Font {
         Font(UIFont.preferredFont(forTextStyle: .title1))
     }
     
-    /// Create a font with the title text style.
+    /// Create a font with the title 2 text style.
     public static var title2: Font {
         Font(UIFont.preferredFont(forTextStyle: .title2))
     }
     
-    /// Create a font with the title text style.
+    /// Create a font with the title 3 text style.
     public static var title3: Font {
         Font(UIFont.preferredFont(forTextStyle: .title3))
     }
