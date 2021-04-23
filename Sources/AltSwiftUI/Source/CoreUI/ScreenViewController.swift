@@ -27,6 +27,7 @@ class ScreenViewController: UIViewController {
     lazy var lazyLayoutConstraints: [NSLayoutConstraint] = []
     var navigationBarTint: UIColor?
     weak var hostingController: UIHostingController?
+    var isPresenting = false
     
     private var isNavigationController: Bool
     private var presenter: SwiftUIPresenter?
@@ -267,6 +268,15 @@ class ScreenViewController: UIViewController {
 
 extension UIViewController {
     func presentView(viewValues: ViewValues?, sheetPresentation: SheetPresentation) {
+        var screenVCSelf: ScreenViewController?
+        if let screenVCSelfRef = self as? ScreenViewController {
+            if screenVCSelfRef.isPresenting {
+                return
+            }
+            screenVCSelfRef.isPresenting = true
+            screenVCSelf = screenVCSelfRef
+        }
+        
         if presentedViewController != nil {
             return
         }
@@ -281,6 +291,7 @@ extension UIViewController {
             hostingVc.modalPresentationStyle = .fullScreen
         }
         present(hostingVc, animated: true)
+        screenVCSelf?.isPresenting = false
     }
     func dismissPresentedView(sheetPresentation: SheetPresentation) {
         if let presentedVC = presentedViewController as? UIHostingController,
