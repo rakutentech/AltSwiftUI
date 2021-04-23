@@ -143,6 +143,7 @@ extension Text: Renderable {
             label.adjustsFontSizeToFitWidth = true
             label.minimumScaleFactor = minimumScaleFactor
         }
+        label.adjustsFontForContentSizeCategory = true
     }
     
     public func createView(context: Context) -> UIView {

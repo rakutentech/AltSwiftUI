@@ -94,6 +94,19 @@ public struct Font {
         font.font = fontWithWeight(font: font.font, weight: weight)
         return font
     }
+    /// Returns a version of the font accroding to system font , limit scope 17 - 21.
+    public static func dynamicalBarTitleFont(_ font: Font) -> Font {
+        let pointSize = font.font.fontDescriptor.pointSize
+        if pointSize > 21 {
+            let descriptor = font.font.fontDescriptor.withSize(21)
+            return Font(UIFont(descriptor: descriptor, size: 0))
+        } else if pointSize < 17 {
+            let descriptor = font.font.fontDescriptor.withSize(17)
+            return Font(UIFont(descriptor: descriptor, size: 0))
+        } else {
+            return font
+        }
+    }
     
     // MARK: Internal methods
     
