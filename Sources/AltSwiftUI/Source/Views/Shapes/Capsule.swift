@@ -24,7 +24,8 @@ public struct Capsule: Shape {
     
     public func createView(context: Context) -> UIView {
         let view = AltShapeView().noAutoresizingMask()
-        view.updateOnLayout = { rect in
+        view.updateOnLayout = { [weak view] rect in
+            guard let view = view else { return }
             updatePath(view: view, path: path(from: rect), animation: nil)
         }
         updateView(view, context: context.withoutTransaction)

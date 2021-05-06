@@ -42,4 +42,9 @@ custom_rules:
     name: "Verb Prefixed Getter Function" 
     regex: '(?<=func\s)(get|calculate|fetch|retrieve|generate)\w+\([^\)]*\)[\n\t\s]+\-\>[\n\t\s]+\w+\??[\n\t\s]+\{'
     message: "Avoid the use of verbs on getter methods unless its a mutating/nonmutating method pair or a factory method."
+  travel_danger_dictionary_function:
+    name: "Dictionary initializer is error prone"
+    regex: 'Dictionary\(uniqueKeysWithValues'
+    message: "Avoid use of uniqueKeysWithValues initializer as it is crash prone."
+    severity: error
   
