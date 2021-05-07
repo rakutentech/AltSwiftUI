@@ -66,7 +66,8 @@ extension Slider: Renderable {
         view.value = value.wrappedValue
         view.minimumValue = bounds.lowerBound
         view.maximumValue = bounds.upperBound
-        view.valueChanged = {
+        view.valueChanged = { [weak view] in
+            guard let view = view else { return }
             var value = view.value
             if let step = self.step {
                 // Round the value up or down
