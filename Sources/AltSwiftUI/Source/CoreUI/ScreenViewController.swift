@@ -280,6 +280,7 @@ extension UIViewController {
         if sheetPresentation.isFullScreen {
             hostingVc.modalPresentationStyle = .fullScreen
         }
+        
         present(hostingVc, animated: true)
     }
     func dismissPresentedView(sheetPresentation: SheetPresentation) {

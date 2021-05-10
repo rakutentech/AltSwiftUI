@@ -337,7 +337,13 @@ extension UIView {
         if var sheetPresentation = context.viewValues?.sheetPresentation {
             sheetPresentation.id = self
             if sheetPresentation.isPresented.wrappedValue {
+                // Newly created views insidea a navigation view
+                // can trigger view load events, we detach the current
+                // body stack to prevent potential coupling.
+                let binderStack = EnvironmentHolder.currentBodyViewBinderStack
+                EnvironmentHolder.currentBodyViewBinderStack = []
                 controller.presentView(viewValues: context.viewValues, sheetPresentation: sheetPresentation)
+                EnvironmentHolder.currentBodyViewBinderStack = binderStack
             } else {
                 controller.dismissPresentedView(sheetPresentation: sheetPresentation)
             }
