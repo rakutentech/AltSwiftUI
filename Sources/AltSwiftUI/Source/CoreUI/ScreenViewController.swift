@@ -22,7 +22,7 @@ class ScreenViewController: UIViewController {
     var insertOnAppearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
     var statusBarHidden = false
     var customStatusBarStyle: UIStatusBarStyle?
-    var isPushed: Bool = false
+    var isPushed = false
     var background: UIColor?
     lazy var lazyLayoutConstraints: [NSLayoutConstraint] = []
     var navigationBarTint: UIColor?
@@ -280,6 +280,7 @@ extension UIViewController {
         if sheetPresentation.isFullScreen {
             hostingVc.modalPresentationStyle = .fullScreen
         }
+        
         present(hostingVc, animated: true)
     }
     func dismissPresentedView(sheetPresentation: SheetPresentation) {
