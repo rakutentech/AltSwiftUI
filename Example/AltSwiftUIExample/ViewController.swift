@@ -27,11 +27,12 @@ struct ExampleView: View {
         ExampleViewData(title: "Navigation", destination: NavigationExampleView()),
         ExampleViewData(title: "ScrollView + TextField", destination: ScrollViewTextFieldExampleView()),
         ExampleViewData(title: "SecureField", destination: SecureFieldExampleView()),
+        ExampleViewData(title: "Stack Update", destination: StackUpdateExample()),
+        ExampleViewData(title: "Menu", destination: MenuExampleView()),
         ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
         ExampleViewData(title: "Stack Update", destination: StackUpdateExample()),
         ExampleViewData(title: "Texts", destination: TextExampleView()),
         ExampleViewData(title: "Ramen Example", destination: RamenExampleView())
-        
     ]
     
     var body: View {

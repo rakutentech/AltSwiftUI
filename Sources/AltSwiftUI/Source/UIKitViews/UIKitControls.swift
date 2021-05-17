@@ -148,7 +148,7 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
     }
 }
 
-class SwiftUIButton: UIControl, UIKitViewHandler {
+class SwiftUIButton: UIButton, UIKitViewHandler {
     var contentView: UIView
     var action: () -> Void
     var animates = true
@@ -172,6 +172,9 @@ class SwiftUIButton: UIControl, UIKitViewHandler {
         super.layoutSubviews()
         notifyGeometryListener(frame: frame)
     }
+    override var intrinsicContentSize: CGSize {
+        contentView.intrinsicContentSize
+    }
     func updateContentView(_ contentView: UIView) {
         contentView.isUserInteractionEnabled = false
         self.contentView.removeFromSuperview()
@@ -181,6 +184,8 @@ class SwiftUIButton: UIControl, UIKitViewHandler {
         setNeedsLayout()
     }
     private func setupView() {
+        contentView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        contentView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         contentView.isUserInteractionEnabled = false
         addSubview(contentView)
         contentView.edgesAnchorEqualTo(destinationView: self).activate()
