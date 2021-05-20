@@ -8,13 +8,30 @@
 import Foundation
 
 enum AppStorageDefaultKey {
-    static let defaultKey = "AltSwiftUI.AppStorageDefaultKey.Key"
+    static let defaultKey = "AltSwiftUI.AppStorage.DefaultKey"
+    static let defautPrefixDomainKey = "AltSwiftUI.AppStorage"
 }
+enum AppStorageNotificationOrigins {
+    static var origins:[NotificationOrigin] = []
+}
+class NotificationOrigin {
+    let id: UUID
+    let value: Any
+    var Name:  NSNotification.Name {
+        let name = "\(AppStorageDefaultKey.defautPrefixDomainKey).\(id)"
+        return NSNotification.Name(name)
+    }
+    init(id: UUID, value: Any) {
+        self.id = id
+        self.value = value
+    }
+}
+
 class AppStorageValueHolder<Value>{
     public var storage: UserDefaults = UserDefaults.standard
     public var key = AppStorageDefaultKey.defaultKey
-    var getDataFromStorage:(()->Value)
-    var setDataInStorage:((_ value:Value)->Void)
+    var getDataFromStorage:(()-> Value)
+    var setDataInStorage:((_ value: Value) -> Void)
     var value: Value  {
         get {
             return self.getDataFromStorage()
@@ -23,7 +40,7 @@ class AppStorageValueHolder<Value>{
             self.setDataInStorage(newValue)
         }
     }
-    init(value: Value , key:String,store: UserDefaults? = nil) where Value == Bool{
+    init(value: Value, key: String, store: UserDefaults? = nil) where Value == Bool{
         self.key = key
         if let _store = store {
             self.storage = _store
@@ -35,69 +52,55 @@ class AppStorageValueHolder<Value>{
         self.setDataInStorage = { (value) in
             tempStorage.set(value, forKey: key)
         }
-        guard  let _ = self.storage.value(forKey: key) else  {
-            self.value = value
-            return
-        }
+        self.value = value
     }
-    init(key:String,store: UserDefaults? = nil) where Value == Bool?{
+    init(key: String,store: UserDefaults? = nil) where Value == Bool?{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
         self.getDataFromStorage = { () ->Value in
-            if let _ = tempStorage.value(forKey: key){
+            if tempStorage.value(forKey: key) != nil {
                 return tempStorage.bool(forKey: key)
-            }else{
-                return Optional<Bool>.none
             }
+            return nil
         }
         self.setDataInStorage = { (value) in
-            if value == Optional<Bool>.none {
-                return
-            }
             tempStorage.set(value, forKey: key)
         }
     }
-    init(value: Value , key:String,store: UserDefaults? = nil) where Value == Int{
+    init(value: Value, key: String,store: UserDefaults? = nil) where Value == Int{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
-        self.getDataFromStorage = { () ->Value in
-            return (tempStorage.integer(forKey: key) )
+        self.getDataFromStorage = { () -> Value in
+            return tempStorage.integer(forKey: key)
         }
         self.setDataInStorage = { (value) in
             tempStorage.set(value, forKey: key)
         }
-        guard  let _ = self.storage.value(forKey: key) else  {
-            self.value = value
-            return
-        }
+        self.value = value
     }
-    init(key:String,store: UserDefaults? = nil) where Value == Int?{
+    init(key: String, store: UserDefaults? = nil) where Value == Int?{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
-        self.getDataFromStorage = { () ->Value in
-            if let _ = tempStorage.value(forKey: key){
+        self.getDataFromStorage = { () -> Value in
+            if tempStorage.value(forKey: key) != nil {
                 return tempStorage.integer(forKey: key)
-            }else{
-                return Optional<Int>.none
             }
+            return nil
         }
         self.setDataInStorage = { (value) in
-            if value == Optional<Int>.none {
-                return
-            }
             tempStorage.set(value, forKey: key)
         }
     }
-    init(value: Value , key:String,store: UserDefaults? = nil) where Value == Double{
+    init(value: Value, key: String,store: UserDefaults? = nil) where Value == Double{
         self.key = key
         if let _store = store {
             self.storage = _store
@@ -109,69 +112,55 @@ class AppStorageValueHolder<Value>{
         self.setDataInStorage = { (value) in
             tempStorage.set(value, forKey: key)
         }
-        guard  let _ = self.storage.value(forKey: key) else  {
-            self.value = value
-            return
-        }
+        self.value = value
     }
-    init(key:String,store: UserDefaults? = nil) where Value == Double?{
+    init(key: String, store: UserDefaults? = nil) where Value == Double?{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
-        self.getDataFromStorage = { () ->Value in
-            if let _ = tempStorage.value(forKey: key){
+        self.getDataFromStorage = { () -> Value in
+            if tempStorage.value(forKey: key) != nil {
                 return tempStorage.double(forKey: key)
-            }else{
-                return Optional<Double>.none
             }
+            return nil
         }
         self.setDataInStorage = { (value) in
-            if value == Optional<Double>.none {
-                return
-            }
             tempStorage.set(value, forKey: key)
         }
     }
-    init(value: Value , key:String,store: UserDefaults? = nil) where Value == String{
+    init(value: Value, key: String,store: UserDefaults? = nil) where Value == String{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
-        self.getDataFromStorage = { () ->Value in
-            return (tempStorage.string(forKey: key)!)
+        self.getDataFromStorage = { () -> Value in
+            return tempStorage.string(forKey: key)!
         }
         self.setDataInStorage = { (value) in
             tempStorage.set(value, forKey: key)
         }
-        guard  let _ = self.storage.value(forKey: key) else  {
-            self.value = value
-            return
-        }
+        self.value = value
     }
-    init(key:String,store: UserDefaults? = nil) where Value == String?{
+    init(key: String, store: UserDefaults? = nil) where Value == String?{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
-        self.getDataFromStorage = { () ->Value in
-            if let _ = tempStorage.value(forKey: key){
+        self.getDataFromStorage = { () -> Value in
+            if tempStorage.value(forKey: key) != nil {
                 return tempStorage.string(forKey: key)
-            }else{
-                return Optional<String>.none
             }
+            return nil
         }
         self.setDataInStorage = { (value) in
-            if value == Optional<String>.none {
-                return
-            }
             tempStorage.set(value, forKey: key)
         }
     }
-    init(value: Value , key:String,store: UserDefaults? = nil) where Value == URL{
+    init(value: Value, key: String, store: UserDefaults? = nil) where Value == URL{
         self.key = key
         if let _store = store {
             self.storage = _store
@@ -183,69 +172,55 @@ class AppStorageValueHolder<Value>{
         self.setDataInStorage = { (value) in
             tempStorage.set(value, forKey: key)
         }
-        guard  let _ = self.storage.value(forKey: key) else  {
-            self.value = value
-            return
-        }
+        self.value = value
     }
-    init(key:String,store: UserDefaults? = nil) where Value == URL?{
+    init(key: String, store: UserDefaults? = nil) where Value == URL?{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
         self.getDataFromStorage = { () ->Value in
-            if let _ = tempStorage.value(forKey: key){
+            if tempStorage.value(forKey: key) != nil {
                 return tempStorage.url(forKey: key)
-            }else{
-                return Optional<URL>.none
             }
+            return nil
         }
         self.setDataInStorage = { (value) in
-            if value == Optional<URL>.none {
-                return
-            }
             tempStorage.set(value, forKey: key)
         }
     }
-    init(value: Value , key:String,store: UserDefaults? = nil) where Value == Data{
+    init(value: Value, key: String, store: UserDefaults? = nil) where Value == Data{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
-        self.getDataFromStorage = { () ->Value in
+        self.getDataFromStorage = { () -> Value in
             return tempStorage.data(forKey: key)!
         }
         self.setDataInStorage = { (value) in
             tempStorage.set(value, forKey: key)
         }
-        guard  let _ = self.storage.value(forKey: key) else  {
-            self.value = value
-            return
-        }
+        self.value = value
     }
-    init(key:String,store: UserDefaults? = nil) where Value == Data?{
+    init(key: String, store: UserDefaults? = nil) where Value == Data?{
         self.key = key
         if let _store = store {
             self.storage = _store
         }
         let tempStorage = self.storage
-        self.getDataFromStorage = { () ->Value in
-            if let _ = tempStorage.value(forKey: key){
+        self.getDataFromStorage = { () -> Value in
+            if tempStorage.value(forKey: key) != nil {
                 return tempStorage.data(forKey: key)
-            }else{
-                return Optional<Data>.none
             }
+            return nil
         }
         self.setDataInStorage = { (value) in
-            if value == Optional<Data>.none {
-                return
-            }
             tempStorage.set(value, forKey: key)
         }
     }
-    init(value: Value , key:String ,store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == Int{
+    init(value: Value, key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == Int{
         self.key = key
         if let _store = store {
             self.storage = _store
@@ -257,12 +232,9 @@ class AppStorageValueHolder<Value>{
         self.setDataInStorage = { (value) in
             tempStorage.set(value.rawValue, forKey: key)
         }
-        guard  let _ = self.storage.value(forKey: key) else  {
-            self.value = value
-            return
-        }
+        self.value = value
     }
-    init(value: Value , key:String ,store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == String{
+    init(value: Value, key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == String{
         self.key = key
         if let _store = store {
             self.storage = _store
@@ -274,28 +246,37 @@ class AppStorageValueHolder<Value>{
         self.setDataInStorage = { (value) in
             tempStorage.set(value.rawValue, forKey: key)
         }
-        guard  let _ = self.storage.value(forKey: key) else  {
-            self.value = value
-            return
-        }
+        self.value = value
     }
     
 }
-@propertyWrapper public struct AppStorage<Value> : DynamicProperty {
-    func update(context: Context) {
-        _wrappedValue.value = _wrappedValue.value
-    }
+@propertyWrapper public struct AppStorage<Value> {
     var _wrappedValue: AppStorageValueHolder<Value>
-     public var wrappedValue: Value{
+    let id: UUID = UUID()
+    private func generateNotificationName() -> String {
+        return "\(AppStorageDefaultKey.defautPrefixDomainKey).\(id)"
+    }
+    
+    public var wrappedValue: Value{
         get{
-            EnvironmentHolder.currentBodyViewBinderStack.last?.registerStateNotification(origin: _wrappedValue)
+            let origins = AppStorageNotificationOrigins.origins.filter { (origin) -> Bool in
+                if generateNotificationName() == origin.Name.rawValue {
+                    return true
+                }
+                return false
+            }
+            if origins.isEmpty {
+                let origin = NotificationOrigin(id: self.id, value: _wrappedValue)
+                AppStorageNotificationOrigins.origins.append(origin)
+                EnvironmentHolder.currentBodyViewBinderStack.last?.registerAppStorageNotification(origin: origin)
+            }else{
+                EnvironmentHolder.currentBodyViewBinderStack.last?.registerAppStorageNotification(origin: origins.first!)
+            }
             return _wrappedValue.value
         }
         nonmutating set{
             _wrappedValue.value = newValue
-            if EnvironmentHolder.notifyStateChanges {
-                sendStateChangeNotification()
-            }
+            sendStateChangeNotification()
         }
     }
     public var projectedValue: Binding<Value> {
@@ -306,7 +287,11 @@ class AppStorageValueHolder<Value>{
     }
     private func sendStateChangeNotification() {
         let userInfo = EnvironmentHolder.notificationUserInfo
-        NotificationCenter.default.post(name: ViewBinder.StateNotification.name, object: _wrappedValue, userInfo: userInfo)
+        let _ = AppStorageNotificationOrigins.origins.map { origin in
+            if generateNotificationName() == origin.Name.rawValue {
+                NotificationCenter.default.post(name: origin.Name, object: origin, userInfo: userInfo)
+            }
+        }
     }
 }
 
@@ -320,12 +305,12 @@ extension AppStorage{
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public  init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Bool{
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Bool{
         
         self._wrappedValue = AppStorageValueHolder<Bool>(value: wrappedValue, key: key, store: store)
         
     }
-
+    
     /// Creates a property that can read and write to an integer user default.
     ///
     /// - Parameters:
@@ -338,7 +323,7 @@ extension AppStorage{
     public  init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Int{
         self._wrappedValue = AppStorageValueHolder<Int>(value: wrappedValue, key: key, store: store)
     }
-
+    
     /// Creates a property that can read and write to a double user default.
     ///
     /// - Parameters:
@@ -348,10 +333,10 @@ extension AppStorage{
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public  init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Double{
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Double{
         self._wrappedValue = AppStorageValueHolder<Double>(value: wrappedValue, key: key, store: store)
     }
-
+    
     /// Creates a property that can read and write to a string user default.
     ///
     /// - Parameters:
@@ -361,10 +346,10 @@ extension AppStorage{
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public  init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == String{
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == String{
         self._wrappedValue = AppStorageValueHolder<String>(value: wrappedValue, key: key, store: store)
     }
-
+    
     /// Creates a property that can read and write to a url user default.
     ///
     /// - Parameters:
@@ -374,10 +359,10 @@ extension AppStorage{
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public  init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == URL{
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == URL{
         self._wrappedValue = AppStorageValueHolder<URL>(value: wrappedValue, key: key, store: store)
     }
-
+    
     /// Creates a property that can read and write to a user default as data.
     ///
     /// Avoid storing large data blobs in user defaults, such as image data,
@@ -392,7 +377,7 @@ extension AppStorage{
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public  init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Data{
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Data{
         self._wrappedValue = AppStorageValueHolder<Data>(value: wrappedValue, key: key, store: store)
     }
     
@@ -476,7 +461,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     public init(_ key: String, store: UserDefaults? = nil) where Value == Int?{
         self._wrappedValue = AppStorageValueHolder<Int?>(key: key, store: store)
     }
-
+    
     /// Creates a property that can read and write an Optional double user
     /// default.
     ///
@@ -503,7 +488,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     public init(_ key: String, store: UserDefaults? = nil) where Value == String?{
         self._wrappedValue = AppStorageValueHolder<String?>( key: key, store: store)
     }
-
+    
     /// Creates a property that can read and write an Optional URL user
     /// default.
     ///
@@ -517,7 +502,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     public init(_ key: String, store: UserDefaults? = nil) where Value == URL?{
         self._wrappedValue = AppStorageValueHolder<URL?>(key: key, store: store)
     }
-
+    
     /// Creates a property that can read and write an Optional data user
     /// default.
     ///

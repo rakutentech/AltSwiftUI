@@ -48,6 +48,10 @@ class ViewBinder {
         NotificationCenter.default.removeObserver(self, name: Self.StateNotification.name, object: origin)
         NotificationCenter.default.addObserver(self, selector: #selector(handleStateNotification(notification:)), name: Self.StateNotification.name, object: origin)
     }
+    func registerAppStorageNotification(origin: NotificationOrigin){
+        NotificationCenter.default.removeObserver(self, name: origin.Name, object: origin)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAppStoreNotification(notification:)), name: origin.Name, object: origin)
+    }
     
     // MARK: - Private methods
     
@@ -81,6 +85,12 @@ class ViewBinder {
             })
             
             postRenderQueue.drainRecursively()
+        }
+    }
+    @objc private func handleAppStoreNotification(notification: Notification) {
+        if notification.name.rawValue.hasPrefix(AppStorageDefaultKey.defautPrefixDomainKey){
+            let transaction = notification.userInfo?[Self.StateNotification.transactionKey] as? Transaction
+            updateView(transaction: transaction)
         }
     }
     @objc private func handleStateNotification(notification: Notification) {
