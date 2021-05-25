@@ -1014,6 +1014,20 @@ extension View {
         view.viewStore.accessibilityIdentifier = identifier
         return view
     }
+    
+    // MARK: - Label
+    /// Sets the labelStyle of this view.
+    ///
+    /// Apply labelStyle to labels views
+    ///
+    /// - Parameter opacity: A value between 0 (fully transparent) and 1
+    ///     (fully opaque).
+    @available(iOS 14.0, *)
+    public func labelStyle(_ labelStyle: LabelStyle) -> Self {
+        var view = self
+        view.viewStore.labelStyle = labelStyle
+        return view
+    }
 }
 
 /// Returns the result of executing `body` with `animation` installed

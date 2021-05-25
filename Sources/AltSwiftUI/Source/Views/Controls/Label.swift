@@ -12,14 +12,9 @@ public typealias LocalizedStringKey = String
 @available(iOS 14.0, *)
 /// A view that display icon with text.
 public struct Label<Title: View, Icon: View>: View {
-    public enum LebelStyle {
-        case DefaultLabelStyle, TitleAndIconLabelStyle, TitleOnlyLabelStyle, IconOnlyLabelStyle
-    }
-    
     public var viewStore = ViewValues()
-    var title: [View]
-    var icon: [View]
-    var style: LebelStyle = .DefaultLabelStyle
+    var title: [View] = []
+    var icon: [View] = []
     var viewContent: [View] = []
     
     /// Creates an instance that disaly an `icon` with a `title`.
@@ -33,13 +28,9 @@ public struct Label<Title: View, Icon: View>: View {
         self.viewContent.append(contentsOf: self.icon)
         self.viewContent.append(contentsOf: self.title)
     }
-    
+
     public var body: View {
         self
-    }
-    
-    public mutating func setLabelStyle(style: LebelStyle) {
-        self.style = style
     }
 }
 
@@ -109,12 +100,14 @@ extension Label: Renderable {
     }
     
     private func setupView(_ view: UIStackView, context: Context) {
+        guard let labelStyleType = context.viewValues?.labelStyle?.labelStyleType else { return }
+        
         context.viewOperationQueue.addOperation {
             for i in 0..<view.arrangedSubviews.count {
                 if i < self.icon.count {
-                    view.arrangedSubviews[i].isHidden = (self.style == .TitleOnlyLabelStyle)
+                    view.arrangedSubviews[i].isHidden = (labelStyleType == .TitleOnly)
                 } else {
-                    view.arrangedSubviews[i].isHidden = (self.style == .IconOnlyLabelStyle)
+                    view.arrangedSubviews[i].isHidden = (labelStyleType == .IconOnly)
                 }
             }
         }
