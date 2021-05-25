@@ -22,6 +22,9 @@ struct LabelExampleView: View {
                     Text("fullName")
                         .font(.body)
                         .foregroundColor(.primary)
+                    Text("(nickName)")
+                        .font(.body)
+                        .foregroundColor(.primary)
                 } icon: {
                     Circle()
                         .fill(.blue)
