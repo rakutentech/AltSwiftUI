@@ -366,6 +366,7 @@
 				2CD19FEB2512066D00E2CCBA /* Picker.swift */,
 				2CD19FEC2512066D00E2CCBA /* Spacer.swift */,
 				2CD19FEF2512066D00E2CCBA /* Text.swift */,
+				EAB11530265B437700E11F25 /* Label.swift */,
 			);
 			path = ReadOnly;
 			sourceTree = "<group>";
@@ -380,7 +381,6 @@
 				2CD19FF72512066D00E2CCBA /* Slider.swift */,
 				2CD19FF62512066D00E2CCBA /* TextField.swift */,
 				2CD19FF52512066D00E2CCBA /* Toggle.swift */,
-				EAB11530265B437700E11F25 /* Label.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
