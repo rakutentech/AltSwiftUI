@@ -13,9 +13,8 @@ public typealias LocalizedStringKey = String
 /// A view that display icon with text.
 public struct Label<Title: View, Icon: View>: View {
     public var viewStore = ViewValues()
-    var title: [View] = []
-    var icon: [View] = []
-    var viewContent: [View] = []
+    var title: Title
+    var icon: Icon
     
     /// Creates an instance that disaly an `icon` with a `title`.
     ///
@@ -23,10 +22,8 @@ public struct Label<Title: View, Icon: View>: View {
     ///     - title: The visual representation of right part text of the label
     ///     - icon: The visual representation of left part image of the label
     public init(@ViewBuilder title: () -> Title, icon: () -> Icon) {
-        self.title = title().subViews
-        self.icon = icon().subViews
-        self.viewContent.append(contentsOf: self.icon)
-        self.viewContent.append(contentsOf: self.title)
+        self.title = title()
+        self.icon = icon()
     }
 
     public var body: View {
@@ -42,10 +39,8 @@ extension Label where Title == Text, Icon == Image {
     ///     - title: The string of right part text of the label
     ///     - icon: The visual representation of left part image of the label
     public init<S: StringProtocol>(_ title: S, image: String) {
-        self.title = [Text(title)]
-        self.icon = [Image(image)]
-        self.viewContent.append(contentsOf: self.icon)
-        self.viewContent.append(contentsOf: self.title)
+        self.title = Text(title)
+        self.icon = Image(image)
     }
     
     /// Creates an instance that disaly an `icon` with a `title`.
@@ -54,10 +49,8 @@ extension Label where Title == Text, Icon == Image {
     ///     - title: The LocalizedStringKey of right part text of the label
     ///     - icon: The visual representation of left part image of the label
     public init(_ title: LocalizedStringKey, image: String) {
-        self.title = [Text(NSLocalizedString(title, comment: ""))]
-        self.icon = [Image(image)]
-        self.viewContent.append(contentsOf: self.icon)
-        self.viewContent.append(contentsOf: self.title)
+        self.title = Text(NSLocalizedString(title, comment: ""))
+        self.icon = Image(image)
     }
     
     /// Creates an instance that disaly an `icon` with a `title`.
@@ -66,10 +59,8 @@ extension Label where Title == Text, Icon == Image {
     ///     - title: The string of right part text of the label
     ///     - icon: The system icon name of left part image of the label
     public init<S: StringProtocol>(_ title: S, systemImage: String) {
-        self.title = [Text(title)]
-        self.icon = [Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())]
-        self.viewContent.append(contentsOf: self.icon)
-        self.viewContent.append(contentsOf: self.title)
+        self.title = Text(title)
+        self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
     }
     
     /// Creates an instance that disaly an `icon` with a `title`.
@@ -78,25 +69,29 @@ extension Label where Title == Text, Icon == Image {
     ///     - title: The LocalizedStringKey of right part text of the label
     ///     - icon: The system icon name of left part image of the label
     public init(_ title: LocalizedStringKey, systemImage: String) {
-        self.title = [Text(NSLocalizedString(title, comment: ""))]
-        self.icon = [Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())]
-        self.viewContent.append(contentsOf: self.icon)
-        self.viewContent.append(contentsOf: self.title)
+        self.title = Text(NSLocalizedString(title, comment: ""))
+        self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
     }
 }
 
 @available(iOS 14.0, *)
 extension Label: Renderable {
     public func updateView(_ view: UIView, context: Context) {
-        guard let stackView = view as? UIStackView else { return }
+        guard let stackView = view as? SwiftUIStackView else { return }
         setupView(stackView, context: context)
     }
     
     public func createView(context: Context) -> UIView {
-        let stack = SwiftUIStackView().noAutoresizingMask()
-        stack.addViews(viewContent, context: context, isEquallySpaced: subviewIsEquallySpaced, setEqualDimension: setSubviewEqualDimension)
-        setupView(stack, context: context)
-        return stack
+        let hstack = HStack {
+            self.icon
+            self.title
+        }
+        if let stackView = hstack.createView(context: context) as? SwiftUIStackView {
+            setupView(stackView, context: context)
+            return stackView
+        }
+        
+        return UIView()
     }
     
     private func setupView(_ view: UIStackView, context: Context) {
@@ -104,7 +99,7 @@ extension Label: Renderable {
         
         context.viewOperationQueue.addOperation {
             for i in 0..<view.arrangedSubviews.count {
-                if i < self.icon.count {
+                if i < self.icon.subViews.count {
                     view.arrangedSubviews[i].isHidden = (labelStyleType == .TitleOnly)
                 } else {
                     view.arrangedSubviews[i].isHidden = (labelStyleType == .IconOnly)
