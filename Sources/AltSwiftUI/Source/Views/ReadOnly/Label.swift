@@ -7,9 +7,9 @@
 
 import UIKit
 
+@available(iOS 14.0, *)
 public typealias LocalizedStringKey = String
 
-@available(iOS 14.0, *)
 /// A view that display icon with text.
 public struct Label<Title: View, Icon: View>: View {
     public var viewStore = ViewValues()
@@ -31,7 +31,6 @@ public struct Label<Title: View, Icon: View>: View {
     }
 }
 
-@available(iOS 14.0, *)
 extension Label where Title == Text, Icon == Image {
     /// Creates an instance that disaly an `icon` with a `title`.
     ///
@@ -48,6 +47,7 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///     - title: The LocalizedStringKey of right part text of the label
     ///     - icon: The visual representation of left part image of the label
+    @available(iOS 14.0, *)
     public init(_ title: LocalizedStringKey, image: String) {
         self.title = Text(NSLocalizedString(title, comment: ""))
         self.icon = Image(image)
@@ -58,6 +58,7 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///     - title: The string of right part text of the label
     ///     - icon: The system icon name of left part image of the label
+    @available(iOS 14.0, *)
     public init<S: StringProtocol>(_ title: S, systemImage: String) {
         self.title = Text(title)
         self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
@@ -68,13 +69,13 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///     - title: The LocalizedStringKey of right part text of the label
     ///     - icon: The system icon name of left part image of the label
+    @available(iOS 14.0, *)
     public init(_ title: LocalizedStringKey, systemImage: String) {
         self.title = Text(NSLocalizedString(title, comment: ""))
         self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
     }
 }
 
-@available(iOS 14.0, *)
 extension Label: Renderable {
     public func updateView(_ view: UIView, context: Context) {
         guard let stackView = view as? SwiftUIStackView else { return }
@@ -83,8 +84,12 @@ extension Label: Renderable {
     
     public func createView(context: Context) -> UIView {
         let hstack = HStack {
+            Spacer()
+                .frame(height: 0)
             self.icon
             self.title
+            Spacer()
+                .frame(height: 0)
         }
         if let stackView = hstack.createView(context: context) as? SwiftUIStackView {
             setupView(stackView, context: context)
@@ -98,8 +103,8 @@ extension Label: Renderable {
         guard let labelStyleType = context.viewValues?.labelStyle?.labelStyleType else { return }
         
         context.viewOperationQueue.addOperation {
-            for i in 0..<view.arrangedSubviews.count {
-                if i < self.icon.subViews.count {
+            for i in 1..<view.arrangedSubviews.count {
+                if i < self.icon.subViews.count + 1 {
                     view.arrangedSubviews[i].isHidden = (labelStyleType == .TitleOnly)
                 } else {
                     view.arrangedSubviews[i].isHidden = (labelStyleType == .IconOnly)
