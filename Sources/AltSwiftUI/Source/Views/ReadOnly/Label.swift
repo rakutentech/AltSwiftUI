@@ -103,8 +103,8 @@ extension Label: Renderable {
         guard let labelStyleType = context.viewValues?.labelStyle?.labelStyleType else { return }
         
         context.viewOperationQueue.addOperation {
-            for i in 1..<view.arrangedSubviews.count {
-                if i < self.icon.subViews.count + 1 {
+            for i in 1..<(view.arrangedSubviews.count - 1) {
+                if i <= self.icon.subViews.count {
                     view.arrangedSubviews[i].isHidden = (labelStyleType == .TitleOnly)
                 } else {
                     view.arrangedSubviews[i].isHidden = (labelStyleType == .IconOnly)
