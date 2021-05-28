@@ -1020,9 +1020,7 @@ extension View {
     ///
     /// Apply labelStyle to labels views
     ///
-    /// - Parameter opacity: A value between 0 (fully transparent) and 1
-    ///     (fully opaque).
-    @available(iOS 14.0, *)
+    /// - Parameter labelStyle: DefaultLabelStyle / TitleAndIconLabelStyle / TitleOnlyLabelStyle / IconOnlyLabelStyle.
     public func labelStyle(_ labelStyle: LabelStyle) -> Self {
         var view = self
         view.viewStore.labelStyle = labelStyle
