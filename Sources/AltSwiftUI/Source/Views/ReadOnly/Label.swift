@@ -108,4 +108,3 @@ extension Label: Renderable {
         }
     }
 }
-
