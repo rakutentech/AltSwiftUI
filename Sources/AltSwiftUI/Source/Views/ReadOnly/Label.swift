@@ -107,22 +107,4 @@ extension Label: Renderable {
             }
         }
     }
-    
-    private var subviewIsEquallySpaced: (View) -> Bool { { view in
-           if (view is Spacer &&
-               view.viewStore.viewDimensions?.width == nil)
-               ||
-               (view.viewStore.viewDimensions?.maxWidth == CGFloat.limitForUI) {
-               return true
-           } else {
-               return false
-           }
-        }
-    }
-    
-    private var setSubviewEqualDimension: (UIView, UIView) -> Void { { firstView, secondView in
-            firstView.widthAnchor.constraint(equalTo: secondView.widthAnchor).isActive = true
-        }
-    }
 }
-
