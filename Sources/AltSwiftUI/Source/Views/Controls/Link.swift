@@ -8,23 +8,21 @@
 import UIKit
 
 @available(iOS 14.0, *)
-/// A view that can be tapped by the user to open a menu.
-public struct Link: View {
+/// A view that can be tapped by the user to open a url link.
+public struct Link<Title: View, Icon: View>: View {
     public var viewStore = ViewValues()
-    var label: View
-    var destination: URL
+    var label: Label<Title, Icon>
+    var url: URL
+    var labelStyle: LabelStyle?
     
-    /// Creates an instance that triggers an `action`.
+    /// Creates an instance with a `Text` visual representation.
     ///
     /// - Parameters:
-    ///     - content: A view builder that creates the content of menu options.
-    ///     Content can only support two specific types of view:
-    ///         1. Button with Text inside
-    ///         2. Menu
-    ///     - label: The visual representation of the menu button
-    public init<S>(_ title: S, destination: URL) where S : StringProtocol {
-        self.label = Text(title)
-        self.destination = destination
+    ///     - label: The visual representation of the label
+    ///     - destination: The url for the web site
+    public init(destination url: URL, label: () -> Label<Title, Icon>) {
+        self.label = label()
+        self.url = url
     }
     
     public var body: View {
@@ -33,18 +31,27 @@ public struct Link: View {
 }
 
 @available(iOS 14.0, *)
-extension Link {
-    /// Creates an instance with a `Text` visual representation.
+extension Link where Title == Text, Icon == Image  {
+    /// Creates an instance that triggers an `action`.
     ///
     /// - Parameters:
-    ///     - title: The title of the button.
-    ///     - content: A view builder that creates the content of menu options.
-    ///     Content can only support two specific types of view:
-    ///         1. Button with Text inside
-    ///         2. Menu
-    public init(destination: URL, label: () -> View) {
-        self.label = label()
-        self.destination = destination
+    ///     - title: the string of the title lebel
+    ///     - destination: The url for the web site
+    public init<S>(_ title: S, destination url: URL) where S : StringProtocol {
+        self.label = Label(title, image: "")
+        self.url = url
+        self.labelStyle = TitleOnlyLabelStyle()
+    }
+    
+    /// Creates an instance that triggers an `action`.
+    ///
+    /// - Parameters:
+    ///     - title: the localizedStringKey of the title lebel
+    ///     - destination: The url for the web site
+    public init(_ title: LocalizedStringKey, destination url: URL) {
+        self.label = Label(title, image: "")
+        self.url = url
+        self.labelStyle = TitleOnlyLabelStyle()
     }
 }
 
@@ -72,28 +79,12 @@ extension Link: Renderable {
     
     public func createView(context: Context) -> UIView {
         let button = Button {
-            
+            UIApplication.shared.open(url)
         } label: { () -> View in
             label
+                .labelStyle(labelStyle ?? DefaultLabelStyle())
         }
-        if let uiButton = button.createView(context: context) as? SwiftUIButton {
-            return uiButton
-        }
-        
-        return UIView()
-    }
-    
-    private func modifiedContext(_ context: Context) -> Context {
-        var customContext = context
-        customContext.isInsideButton = true
-        
-        // Set a default accentColor since SwiftUIButton subviews won't
-        // take the button's tint color.
-        if context.viewValues?.accentColor == nil {
-            customContext.viewValues?.accentColor = Color.systemAccentColor.color
-        }
-        
-        return customContext
+        return button.createView(context: context)
     }
 }
 

@@ -29,6 +29,7 @@
 		682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */; };
 		EAB11538265B6C2E00E11F25 /* LebelExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB11537265B6C2E00E11F25 /* LebelExampleView.swift */; };
 		EACD577925EC689200FEF5A1 /* MenuExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD577825EC689200FEF5A1 /* MenuExampleView.swift */; };
+		EAD483AD266086E200CBDA06 /* LinkExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD483AC266086E200CBDA06 /* LinkExampleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFieldExampleView.swift; sourceTree = "<group>"; };
 		EAB11537265B6C2E00E11F25 /* LebelExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LebelExampleView.swift; sourceTree = "<group>"; };
 		EACD577825EC689200FEF5A1 /* MenuExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuExampleView.swift; sourceTree = "<group>"; };
+		EAD483AC266086E200CBDA06 /* LinkExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				2C74075D262833D600FF4380 /* ScrollViewTextFieldExample.swift */,
 				2C7407632628365100FF4380 /* ListTextFieldExampleView.swift */,
 				EAB11537265B6C2E00E11F25 /* LebelExampleView.swift */,
+				EAD483AC266086E200CBDA06 /* LinkExampleView.swift */,
 			);
 			path = ExampleViews;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */,
 				EAB11538265B6C2E00E11F25 /* LebelExampleView.swift in Sources */,
 				35D1A58825C7EDA100861DC4 /* AlertsExampleView.swift in Sources */,
+				EAD483AD266086E200CBDA06 /* LinkExampleView.swift in Sources */,
 				2C83ED522554E50400C378DC /* NavigationExampleView.swift in Sources */,
 				2C74075E262833D600FF4380 /* ScrollViewTextFieldExample.swift in Sources */,
 				2CADC30F251CA0DF00EA3F17 /* RamenExampleView.swift in Sources */,
