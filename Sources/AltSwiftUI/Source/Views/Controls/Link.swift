@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 14.0, *)
 /// A view that can be tapped by the user to open a url link.
 public struct Link<Title: View, Icon: View>: View {
     public var viewStore = ViewValues()
@@ -20,6 +19,7 @@ public struct Link<Title: View, Icon: View>: View {
     /// - Parameters:
     ///     - label: The visual representation of the label
     ///     - destination: The url for the web site
+    @available(iOS 14.0, *)
     public init(destination url: URL, label: () -> Label<Title, Icon>) {
         self.label = label()
         self.url = url
@@ -30,7 +30,6 @@ public struct Link<Title: View, Icon: View>: View {
     }
 }
 
-@available(iOS 14.0, *)
 extension Link where Title == Text, Icon == Image {
     /// Creates an instance that triggers an `action`.
     ///
@@ -48,6 +47,7 @@ extension Link where Title == Text, Icon == Image {
     /// - Parameters:
     ///     - title: the localizedStringKey of the title lebel
     ///     - destination: The url for the web site
+    @available(iOS 14.0, *)
     public init(_ title: LocalizedStringKey, destination url: URL) {
         self.label = Label(title, image: "")
         self.url = url
@@ -55,7 +55,6 @@ extension Link where Title == Text, Icon == Image {
     }
 }
 
-@available(iOS 14.0, *)
 extension Link: Renderable {
     public func updateView(_ view: UIView, context: Context) {
         guard let view = view as? SwiftUIButton,
