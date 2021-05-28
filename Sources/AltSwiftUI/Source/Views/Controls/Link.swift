@@ -31,13 +31,13 @@ public struct Link<Title: View, Icon: View>: View {
 }
 
 @available(iOS 14.0, *)
-extension Link where Title == Text, Icon == Image  {
+extension Link where Title == Text, Icon == Image {
     /// Creates an instance that triggers an `action`.
     ///
     /// - Parameters:
     ///     - title: the string of the title lebel
     ///     - destination: The url for the web site
-    public init<S>(_ title: S, destination url: URL) where S : StringProtocol {
+    public init<S>(_ title: S, destination url: URL) where S: StringProtocol {
         self.label = Label(title, image: "")
         self.url = url
         self.labelStyle = TitleOnlyLabelStyle()
@@ -87,4 +87,3 @@ extension Link: Renderable {
         return button.createView(context: context)
     }
 }
-
