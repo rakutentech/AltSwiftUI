@@ -30,6 +30,7 @@ struct ExampleView: View {
         ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
         ExampleViewData(title: "Stack Update", destination: StackUpdateExample()),
         ExampleViewData(title: "Texts", destination: TextExampleView()),
+        ExampleViewData(title: "ProgressView", destination: ProgressViewExampleView()),
         ExampleViewData(title: "Ramen Example", destination: RamenExampleView())
         
     ]

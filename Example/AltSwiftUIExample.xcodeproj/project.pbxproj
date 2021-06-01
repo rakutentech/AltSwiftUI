@@ -27,6 +27,7 @@
 		2CFE2AC025AD487800C925FC /* ScrollView2AxisExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */; };
 		35D1A58825C7EDA100861DC4 /* AlertsExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */; };
 		682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */; };
+		714D6C8B265F69CD003F2682 /* ProgressViewExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714D6C8A265F69CD003F2682 /* ProgressViewExampleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView2AxisExampleView.swift; sourceTree = "<group>"; };
 		35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertsExampleView.swift; sourceTree = "<group>"; };
 		682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFieldExampleView.swift; sourceTree = "<group>"; };
+		714D6C8A265F69CD003F2682 /* ProgressViewExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				2C83ED512554E50400C378DC /* NavigationExampleView.swift */,
 				2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */,
 				682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */,
+				714D6C8A265F69CD003F2682 /* ProgressViewExampleView.swift */,
 				2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */,
 				2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */,
 				2C49E3CB2535382F00543E7D /* TextExampleView.swift */,
@@ -384,6 +387,7 @@
 				2CE5E28B231398D70072F907 /* AppDelegate.swift in Sources */,
 				2CDCE7F325C40D2500BB52D1 /* StackUpdateExample.swift in Sources */,
 				2C0BE74C2521CEE800B37BA9 /* ListExampleView.swift in Sources */,
+				714D6C8B265F69CD003F2682 /* ProgressViewExampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
