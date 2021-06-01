@@ -53,16 +53,15 @@ extension ProgressView: Renderable {
                 titleView.text = title
                 titleView.isScrollEnabled = false
                 titleView.textColor = .gray
-                let progressView = UIProgressView(progressViewStyle: UIProgressView.Style.default)
+                let progressView = UIProgressView(progressViewStyle: .default)
                 updateView(progressView, context: context)
                 let view = UIStackView()
                 view.axis = .vertical
                 view.alignment = .leading
                 view.addArrangedSubview(titleView)
                 view.addArrangedSubview(progressView)
-//                updateView(view, context: context)
+                progressView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
                 return view
-//                return progressView
             } else {
                 let view = UIProgressView(progressViewStyle: UIProgressView.Style.default)
                 updateView(view, context: context)
@@ -95,14 +94,13 @@ extension ProgressView: Renderable {
     }
     
     public func updateView(_ view: UIView, context: Context) {
-        print("updateView")
         if let progressView = view as? UIProgressView {
             progressView.setProgress(progress ?? 0, animated: true)
         }
         
         if let uiStackView = view as? UIStackView {
             if let progressView = uiStackView.subviews.last as? UIProgressView {
-                progressView.setProgress(progress ?? 0, animated: false)
+                progressView.setProgress(progress ?? 0, animated: true)
             }
         }
     }

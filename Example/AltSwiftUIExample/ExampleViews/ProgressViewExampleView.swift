@@ -13,13 +13,22 @@ struct ProgressViewExampleView: View {
     @State private var progressValue: Float = 0.7
     
     var body: View {
-        VStack {
+        VStack() {
+            Spacer()
+            
             HStack {
+                Spacer()
                 ProgressView()
+                Spacer()
                 ProgressView("Now loading...")
+                Spacer()
             }
             
+            Spacer()
+            
             Divider()
+            
+            Spacer()
             
             Button {
                 progressValue = Float.random(in: 0..<1)
@@ -27,12 +36,16 @@ struct ProgressViewExampleView: View {
                 Text("Set a random progress value")
             }
             
-            Text(String(progressValue))
+            Text(String(floor(progressValue * 100)) + "%")
+                .padding(.bottom, 16)
 
             ProgressView(progressValue)
                 .frame(maxWidth: .infinity)
+            
             ProgressView("Downloading...", value: progressValue, total: 1.0)
                 .frame(maxWidth: .infinity)
+            
+            Spacer()
         }
         .frame(maxWidth: .infinity)
     }
