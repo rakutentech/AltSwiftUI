@@ -82,6 +82,11 @@ public struct Font {
         Font(UIFont.systemFont(ofSize: size, weight: uiweightForWeight(weight)), weight: weight)
     }
 
+    /// Create a system font with the given `textStyle`.
+    public static func system(textStyle: UIFont.TextStyle) -> Font {
+        Font(UIFont.preferredFont(forTextStyle: textStyle))
+    }
+
     /// Create a custom font with the given `name` and `size`.
     public static func custom(_ name: String, size: CGFloat) -> Font {
         Font(UIFont(name: name, size: size) ?? UIFont.systemFont(ofSize: size))
