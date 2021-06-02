@@ -1021,9 +1021,9 @@ extension View {
     /// Apply labelStyle to labels views
     ///
     /// - Parameter labelStyle: DefaultLabelStyle / TitleAndIconLabelStyle / TitleOnlyLabelStyle / IconOnlyLabelStyle.
-    public func labelStyle(_ labelStyle: LabelStyle) -> Self {
+    public func labelStyle<S>(_ style: S) -> Self where S: LabelStyle {
         var view = self
-        view.viewStore.labelStyle = labelStyle
+        view.viewStore.labelStyle = style
         return view
     }
 }

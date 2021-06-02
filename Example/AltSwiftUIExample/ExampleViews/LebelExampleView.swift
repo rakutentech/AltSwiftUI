@@ -10,15 +10,13 @@ import AltSwiftUI
 
 struct LabelExampleView: View {
     var viewStore = ViewValues()
+
     var body: View {
         VStack(spacing: 20) {
             Label("Lamen", image: "icon")
-            
+
             Label {
                 Text("fullName")
-                    .font(.body)
-                    .foregroundColor(.primary)
-                Text("(nickName)")
                     .font(.body)
                     .foregroundColor(.primary)
             } icon: {
@@ -26,11 +24,8 @@ struct LabelExampleView: View {
                     .fill(.blue)
                     .frame(width: 44, height: 44)
             }
-            
+
             Label {
-                Text("fullName")
-                    .font(.body)
-                    .foregroundColor(.primary)
                 Text("(nickName)")
                     .font(.body)
                     .foregroundColor(.primary)
@@ -41,11 +36,11 @@ struct LabelExampleView: View {
             }
             .labelStyle(TitleOnlyLabelStyle())
             
-            if #available(iOS 14.0, *) {
+            if #available(iOS 13.0, *) {
                 Label("Rain", systemImage: "cloud.rain")
             }
-        
-            if #available(iOS 14.0, *) {
+
+            if #available(iOS 13.0, *) {
                 VStack {
                     Label("Rain", systemImage: "cloud.rain")
                     Label("Snow", systemImage: "snow")

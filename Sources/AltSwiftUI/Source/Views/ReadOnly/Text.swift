@@ -149,6 +149,7 @@ extension Text: Renderable {
         let label = SwiftUILabel().noAutoresizingMask()
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.baselineAdjustment = .alignCenters
+        label.adjustsFontForContentSizeCategory = true
         updateView(label, context: context)
         return label
     }

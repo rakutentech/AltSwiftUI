@@ -92,6 +92,7 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         updateOnTraitChange(previousTrait: previousTraitCollection)
     }
     override var intrinsicContentSize: CGSize {

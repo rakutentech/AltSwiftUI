@@ -24,19 +24,22 @@ struct ExampleView: View {
         ExampleViewData(title: "Alerts", destination: AlertsExampleView()),
         ExampleViewData(title: "List", destination: ListExampleView()),
         ExampleViewData(title: "List + TextField", destination: ListTextFieldExampleView()),
+        ExampleViewData(title: "Menu", destination: MenuExampleView()),
         ExampleViewData(title: "Navigation", destination: NavigationExampleView()),
+        ExampleViewData(title: "Ramen Example", destination: RamenExampleView()),
         ExampleViewData(title: "ScrollView + TextField", destination: ScrollViewTextFieldExampleView()),
         ExampleViewData(title: "SecureField", destination: SecureFieldExampleView()),
         ExampleViewData(title: "Stack Update", destination: StackUpdateExample()),
-        ExampleViewData(title: "Menu", destination: MenuExampleView()),
         ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
         ExampleViewData(title: "Stack Update", destination: StackUpdateExample()),
         ExampleViewData(title: "Texts", destination: TextExampleView()),
         ExampleViewData(title: "Label", destination: LabelExampleView()),
         ExampleViewData(title: "Link", destination: LinkExampleView()),
-        ExampleViewData(title: "Ramen Example", destination: RamenExampleView())
+        ExampleViewData(title: "Ramen Example", destination: RamenExampleView()),
+        ExampleViewData(title: "Ramen Example", destination: RamenExampleView()),
+        ExampleViewData(title: "TextField", destination: TextFieldExampleView())
     ]
-    
+
     var body: View {
         NavigationView {
             List(views, id: \ExampleViewData.title) { view in
