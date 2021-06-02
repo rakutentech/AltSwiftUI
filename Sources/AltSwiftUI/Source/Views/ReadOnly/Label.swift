@@ -1,4 +1,4 @@
-//
+///
 //  Label.swift
 //  AltSwiftUI
 //
@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 14.0, *)
 public typealias LocalizedStringKey = String
 
 /// A view that display icon with text.
@@ -21,7 +20,7 @@ public struct Label<Title: View, Icon: View>: View {
     /// - Parameters:
     ///     - title: The visual representation of right part text of the label
     ///     - icon: The visual representation of left part image of the label
-    public init(@ViewBuilder title: () -> Title, icon: () -> Icon) {
+    public init(title: () -> Title, icon: () -> Icon) {
         self.title = title()
         self.icon = icon()
     }
@@ -47,7 +46,6 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///     - title: The LocalizedStringKey of right part text of the label
     ///     - icon: The visual representation of left part image of the label
-    @available(iOS 14.0, *)
     public init(_ title: LocalizedStringKey, image: String) {
         self.title = Text(NSLocalizedString(title, comment: ""))
         self.icon = Image(image)
@@ -58,7 +56,7 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///     - title: The string of right part text of the label
     ///     - icon: The system icon name of left part image of the label
-    @available(iOS 14.0, *)
+    @available(iOS 13.0, *)
     public init<S: StringProtocol>(_ title: S, systemImage: String) {
         self.title = Text(title)
         self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
@@ -69,7 +67,7 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///     - title: The LocalizedStringKey of right part text of the label
     ///     - icon: The system icon name of left part image of the label
-    @available(iOS 14.0, *)
+    @available(iOS 13.0, *)
     public init(_ title: LocalizedStringKey, systemImage: String) {
         self.title = Text(NSLocalizedString(title, comment: ""))
         self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
@@ -78,38 +76,55 @@ extension Label where Title == Text, Icon == Image {
 
 extension Label: Renderable {
     public func updateView(_ view: UIView, context: Context) {
-        guard let stackView = view as? SwiftUIStackView else { return }
-        setupView(stackView, context: context)
+        guard let concreteStackView = view as? UIStackView else { return }
+        
+        if let oldHStack = view.lastRenderableView?.view as? Self {
+            concreteStackView.updateViews(
+                getViewContent(context, title, icon),
+                oldViews: getViewContent(context, oldHStack.title, oldHStack.icon),
+                context: context,
+                isEquallySpaced: subviewIsEquallySpaced,
+                setEqualDimension: setSubviewEqualDimension)
+        }
     }
     
     public func createView(context: Context) -> UIView {
-        let hstack = HStack {
-            Spacer()
-                .frame(height: 0)
-            self.icon
-            self.title
-            Spacer()
-                .frame(height: 0)
-        }
-        if let stackView = hstack.createView(context: context) as? SwiftUIStackView {
-            setupView(stackView, context: context)
-            return stackView
-        }
+        let stack = SwiftUIStackView().noAutoresizingMask()
         
-        return UIView()
+        stack.addViews(getViewContent(context, title, icon), context: context, isEquallySpaced: subviewIsEquallySpaced, setEqualDimension: setSubviewEqualDimension)
+        
+        return stack
     }
     
-    private func setupView(_ view: UIStackView, context: Context) {
-        guard let labelStyleType = context.viewValues?.labelStyle?.labelStyleType else { return }
+    private func getViewContent(_ context: Context, _ title: Title, _ icon: Icon) -> [View] {
+        let labelStyle = context.viewValues?.labelStyle?.labelStyleType ?? .titleAndIcon
+        var viewContent = [View]()
         
-        context.viewOperationQueue.addOperation {
-            for i in 1..<(view.arrangedSubviews.count - 1) {
-                if i <= self.icon.subViews.count {
-                    view.arrangedSubviews[i].isHidden = (labelStyleType == .TitleOnly)
-                } else {
-                    view.arrangedSubviews[i].isHidden = (labelStyleType == .IconOnly)
-                }
-            }
+        if labelStyle != .titleOnly {
+            viewContent.append(icon)
+        }
+        
+        if labelStyle != .iconOnly {
+            viewContent.append(title)
+        }
+        
+        return viewContent
+    }
+    
+    private var subviewIsEquallySpaced: (View) -> Bool { { view in
+           if (view is Spacer &&
+               view.viewStore.viewDimensions?.width == nil)
+               ||
+               (view.viewStore.viewDimensions?.maxWidth == CGFloat.limitForUI) {
+               return true
+           } else {
+               return false
+           }
+        }
+    }
+    
+    private var setSubviewEqualDimension: (UIView, UIView) -> Void { { firstView, secondView in
+            firstView.widthAnchor.constraint(equalTo: secondView.widthAnchor).isActive = true
         }
     }
 }

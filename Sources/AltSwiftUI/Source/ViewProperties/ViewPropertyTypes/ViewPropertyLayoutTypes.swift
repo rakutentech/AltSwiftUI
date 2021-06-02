@@ -307,7 +307,7 @@ public struct DefaultLabelStyle: LabelStyle {
     public var labelStyleType: LabelStyleType
     
     public init() {
-        labelStyleType = .TitleAndIcon
+        labelStyleType = .titleAndIcon
     }
 }
 
@@ -315,7 +315,7 @@ public struct TitleAndIconLabelStyle: LabelStyle {
     public var labelStyleType: LabelStyleType
     
     public init() {
-        labelStyleType = .TitleAndIcon
+        labelStyleType = .titleAndIcon
     }
 }
 
@@ -323,7 +323,7 @@ public struct TitleOnlyLabelStyle: LabelStyle {
     public var labelStyleType: LabelStyleType
     
     public init() {
-        labelStyleType = .TitleOnly
+        labelStyleType = .titleOnly
     }
 }
 
@@ -331,11 +331,11 @@ public struct IconOnlyLabelStyle: LabelStyle {
     public var labelStyleType: LabelStyleType
     
     public init() {
-        labelStyleType = .IconOnly
+        labelStyleType = .iconOnly
     }
 }
 
 /// A type that represents the label style of label
 public enum LabelStyleType {
-    case TitleAndIcon, TitleOnly, IconOnly
+    case titleAndIcon, titleOnly, iconOnly
 }
