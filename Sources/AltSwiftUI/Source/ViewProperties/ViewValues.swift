@@ -71,6 +71,7 @@ public struct ViewValues: AnimatedViewValuesHolder {
     var skipOnHighPerformance: Bool?
     var navigationAccentColor: UIColor?
     var accessibilityIdentifier: String?
+    var labelStyle: LabelStyle?
     
     private var skOverlayPresentationObject: Any? // Workaround as SKOverlayPresentation is only available from iOS 14.0+
     @available(iOS 14.0, *)
@@ -141,7 +142,7 @@ extension ViewValues {
             mergedValues.parentViewEventHandler = defaultValues.parentViewEventHandler }
         if textContentType == nil { mergedValues.textContentType = defaultValues.textContentType }
         if navigationAccentColor == nil { mergedValues.navigationAccentColor = defaultValues.navigationAccentColor }
-        
+        if labelStyle == nil { mergedValues.labelStyle = defaultValues.labelStyle }
         return mergedValues
     }
     

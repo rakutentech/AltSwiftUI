@@ -82,6 +82,7 @@
 		7D2D4D6E25148269000F5DDC /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6825148269000F5DDC /* Rectangle.swift */; };
 		7D2D4D6F25148269000F5DDC /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6925148269000F5DDC /* Shapes.swift */; };
 		7D2D4D7025148269000F5DDC /* RoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */; };
+		EAB11531265B437700E11F25 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB11530265B437700E11F25 /* Label.swift */; };
 		EACD577F25EC694800FEF5A1 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD577E25EC694800FEF5A1 /* Menu.swift */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +175,7 @@
 		7D2D4D6825148269000F5DDC /* Rectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		7D2D4D6925148269000F5DDC /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRectangle.swift; sourceTree = "<group>"; };
+		EAB11530265B437700E11F25 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		EACD577E25EC694800FEF5A1 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -364,6 +366,7 @@
 				2CD19FEB2512066D00E2CCBA /* Picker.swift */,
 				2CD19FEC2512066D00E2CCBA /* Spacer.swift */,
 				2CD19FEF2512066D00E2CCBA /* Text.swift */,
+				EAB11530265B437700E11F25 /* Label.swift */,
 			);
 			path = ReadOnly;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				2CD1A00E2512066D00E2CCBA /* View.swift in Sources */,
 				2CD1A0492512066D00E2CCBA /* FoundationExtensions.swift in Sources */,
 				2CD1A0392512066D00E2CCBA /* Toggle.swift in Sources */,
+				EAB11531265B437700E11F25 /* Label.swift in Sources */,
 				2CD1A0352512066D00E2CCBA /* Color.swift in Sources */,
 				2CD1A0452512066D00E2CCBA /* HStack.swift in Sources */,
 				2CD1A0162512066D00E2CCBA /* StateTypes.swift in Sources */,

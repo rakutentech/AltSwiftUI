@@ -297,3 +297,45 @@ struct ViewDimensions: Hashable {
         self.maxHeight = maxHeight
     }
 }
+
+/// A protocol and basic class of label style
+public protocol LabelStyle {
+    var labelStyleType: LabelStyleType { get set }
+}
+
+public struct DefaultLabelStyle: LabelStyle {
+    public var labelStyleType: LabelStyleType
+    
+    public init() {
+        labelStyleType = .titleAndIcon
+    }
+}
+
+public struct TitleAndIconLabelStyle: LabelStyle {
+    public var labelStyleType: LabelStyleType
+    
+    public init() {
+        labelStyleType = .titleAndIcon
+    }
+}
+
+public struct TitleOnlyLabelStyle: LabelStyle {
+    public var labelStyleType: LabelStyleType
+    
+    public init() {
+        labelStyleType = .titleOnly
+    }
+}
+
+public struct IconOnlyLabelStyle: LabelStyle {
+    public var labelStyleType: LabelStyleType
+    
+    public init() {
+        labelStyleType = .iconOnly
+    }
+}
+
+/// A type that represents the label style of label
+public enum LabelStyleType {
+    case titleAndIcon, titleOnly, iconOnly
+}

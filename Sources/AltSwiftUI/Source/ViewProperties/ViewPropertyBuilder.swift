@@ -1014,6 +1014,18 @@ extension View {
         view.viewStore.accessibilityIdentifier = identifier
         return view
     }
+    
+    // MARK: - Label
+    /// Sets the labelStyle of this view.
+    ///
+    /// Apply labelStyle to labels views
+    ///
+    /// - Parameter labelStyle: DefaultLabelStyle / TitleAndIconLabelStyle / TitleOnlyLabelStyle / IconOnlyLabelStyle.
+    public func labelStyle<S>(_ style: S) -> Self where S: LabelStyle {
+        var view = self
+        view.viewStore.labelStyle = style
+        return view
+    }
 }
 
 /// Returns the result of executing `body` with `animation` installed

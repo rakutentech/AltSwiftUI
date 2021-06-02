@@ -28,6 +28,7 @@
 		35D1A58825C7EDA100861DC4 /* AlertsExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */; };
 		3ED3C29525F9CE5700F0F602 /* TextFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3C29425F9CE5700F0F602 /* TextFieldExampleView.swift */; };
 		682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */; };
+		EAB11538265B6C2E00E11F25 /* LebelExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB11537265B6C2E00E11F25 /* LebelExampleView.swift */; };
 		EACD577925EC689200FEF5A1 /* MenuExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD577825EC689200FEF5A1 /* MenuExampleView.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertsExampleView.swift; sourceTree = "<group>"; };
 		3ED3C29425F9CE5700F0F602 /* TextFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExampleView.swift; sourceTree = "<group>"; };
 		682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFieldExampleView.swift; sourceTree = "<group>"; };
+		EAB11537265B6C2E00E11F25 /* LebelExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LebelExampleView.swift; sourceTree = "<group>"; };
 		EACD577825EC689200FEF5A1 /* MenuExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +155,10 @@
 				682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */,
 				2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */,
 				2CDCE7F225C40D2500BB52D1 /* StackUpdateExample.swift */,
+				EACD577825EC689200FEF5A1 /* MenuExampleView.swift */,
+				2C74075D262833D600FF4380 /* ScrollViewTextFieldExample.swift */,
+				2C7407632628365100FF4380 /* ListTextFieldExampleView.swift */,
+				EAB11537265B6C2E00E11F25 /* LebelExampleView.swift */,
 				2C49E3CB2535382F00543E7D /* TextExampleView.swift */,
 				3ED3C29425F9CE5700F0F602 /* TextFieldExampleView.swift */,
 			);
@@ -380,6 +386,7 @@
 				2C49E3CC2535382F00543E7D /* TextExampleView.swift in Sources */,
 				2C7407642628365100FF4380 /* ListTextFieldExampleView.swift in Sources */,
 				682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */,
+				EAB11538265B6C2E00E11F25 /* LebelExampleView.swift in Sources */,
 				35D1A58825C7EDA100861DC4 /* AlertsExampleView.swift in Sources */,
 				2C83ED522554E50400C378DC /* NavigationExampleView.swift in Sources */,
 				2C74075E262833D600FF4380 /* ScrollViewTextFieldExample.swift in Sources */,
