@@ -26,6 +26,7 @@
 		2CE5E2AD231398DA0072F907 /* AltSwiftUIExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5E2AC231398DA0072F907 /* AltSwiftUIExampleUITests.swift */; };
 		2CFE2AC025AD487800C925FC /* ScrollView2AxisExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */; };
 		35D1A58825C7EDA100861DC4 /* AlertsExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */; };
+		3ED3C29525F9CE5700F0F602 /* TextFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3C29425F9CE5700F0F602 /* TextFieldExampleView.swift */; };
 		682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */; };
 		EAB11538265B6C2E00E11F25 /* LebelExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB11537265B6C2E00E11F25 /* LebelExampleView.swift */; };
 		EACD577925EC689200FEF5A1 /* MenuExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD577825EC689200FEF5A1 /* MenuExampleView.swift */; };
@@ -101,6 +102,7 @@
 		2CE5E2AE231398DA0072F907 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView2AxisExampleView.swift; sourceTree = "<group>"; };
 		35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertsExampleView.swift; sourceTree = "<group>"; };
+		3ED3C29425F9CE5700F0F602 /* TextFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExampleView.swift; sourceTree = "<group>"; };
 		682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFieldExampleView.swift; sourceTree = "<group>"; };
 		EAB11537265B6C2E00E11F25 /* LebelExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LebelExampleView.swift; sourceTree = "<group>"; };
 		EACD577825EC689200FEF5A1 /* MenuExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuExampleView.swift; sourceTree = "<group>"; };
@@ -144,17 +146,21 @@
 			children = (
 				35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */,
 				2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */,
+				2C7407632628365100FF4380 /* ListTextFieldExampleView.swift */,
+				EACD577825EC689200FEF5A1 /* MenuExampleView.swift */,
 				2C83ED512554E50400C378DC /* NavigationExampleView.swift */,
 				2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */,
-				682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */,
 				2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */,
+				2C74075D262833D600FF4380 /* ScrollViewTextFieldExample.swift */,
+				682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */,
 				2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */,
-				2C49E3CB2535382F00543E7D /* TextExampleView.swift */,
 				2CDCE7F225C40D2500BB52D1 /* StackUpdateExample.swift */,
 				EACD577825EC689200FEF5A1 /* MenuExampleView.swift */,
 				2C74075D262833D600FF4380 /* ScrollViewTextFieldExample.swift */,
 				2C7407632628365100FF4380 /* ListTextFieldExampleView.swift */,
 				EAB11537265B6C2E00E11F25 /* LebelExampleView.swift */,
+				2C49E3CB2535382F00543E7D /* TextExampleView.swift */,
+				3ED3C29425F9CE5700F0F602 /* TextFieldExampleView.swift */,
 			);
 			path = ExampleViews;
 			sourceTree = "<group>";
@@ -390,6 +396,7 @@
 				2CE5E28F231398D70072F907 /* ViewController.swift in Sources */,
 				EACD577925EC689200FEF5A1 /* MenuExampleView.swift in Sources */,
 				2CE5E28B231398D70072F907 /* AppDelegate.swift in Sources */,
+				3ED3C29525F9CE5700F0F602 /* TextFieldExampleView.swift in Sources */,
 				2CDCE7F325C40D2500BB52D1 /* StackUpdateExample.swift in Sources */,
 				2C0BE74C2521CEE800B37BA9 /* ListExampleView.swift in Sources */,
 			);
