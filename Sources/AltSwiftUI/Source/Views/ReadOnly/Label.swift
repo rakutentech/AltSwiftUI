@@ -12,8 +12,8 @@ public typealias LocalizedStringKey = String
 /// A view that display icon with text.
 public struct Label<Title: View, Icon: View>: View {
     public var viewStore = ViewValues()
-    var title: Title
-    var icon: Icon
+    var title: Title?
+    var icon: Icon?
     
     /// Creates an instance that disaly an `icon` with a `title`.
     ///
@@ -37,8 +37,12 @@ extension Label where Title == Text, Icon == Image {
     ///     - title: The string of right part text of the label
     ///     - icon: The visual representation of left part image of the label
     public init<S: StringProtocol>(_ title: S, image: String) {
-        self.title = Text(title)
-        self.icon = Image(image)
+        if !title.isEmpty {
+            self.title = Text(title)
+        }
+        if !image.isEmpty {
+            self.icon = Image(image)
+        }
     }
     
     /// Creates an instance that disaly an `icon` with a `title`.
@@ -47,8 +51,12 @@ extension Label where Title == Text, Icon == Image {
     ///     - title: The LocalizedStringKey of right part text of the label
     ///     - icon: The visual representation of left part image of the label
     public init(_ title: LocalizedStringKey, image: String) {
-        self.title = Text(NSLocalizedString(title, comment: ""))
-        self.icon = Image(image)
+        if !title.isEmpty {
+            self.title = Text(NSLocalizedString(title, comment: ""))
+        }
+        if !image.isEmpty {
+            self.icon = Image(image)
+        }
     }
     
     /// Creates an instance that disaly an `icon` with a `title`.
@@ -58,8 +66,12 @@ extension Label where Title == Text, Icon == Image {
     ///     - icon: The system icon name of left part image of the label
     @available(iOS 13.0, *)
     public init<S: StringProtocol>(_ title: S, systemImage: String) {
-        self.title = Text(title)
-        self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
+        if !title.isEmpty {
+            self.title = Text(title)
+        }
+        if !systemImage.isEmpty {
+            self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
+        }
     }
     
     /// Creates an instance that disaly an `icon` with a `title`.
@@ -69,8 +81,12 @@ extension Label where Title == Text, Icon == Image {
     ///     - icon: The system icon name of left part image of the label
     @available(iOS 13.0, *)
     public init(_ title: LocalizedStringKey, systemImage: String) {
-        self.title = Text(NSLocalizedString(title, comment: ""))
-        self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
+        if !title.isEmpty {
+            self.title = Text(NSLocalizedString(title, comment: ""))
+        }
+        if !systemImage.isEmpty {
+            self.icon = Image(uiImage: UIImage(systemName: systemImage) ?? UIImage())
+        }
     }
 }
 
@@ -96,15 +112,15 @@ extension Label: Renderable {
         return stack
     }
     
-    private func getViewContent(_ context: Context, _ title: Title, _ icon: Icon) -> [View] {
+    private func getViewContent(_ context: Context, _ title: Title?, _ icon: Icon?) -> [View] {
         let labelStyle = context.viewValues?.labelStyle?.labelStyleType ?? .titleAndIcon
         var viewContent = [View]()
         
-        if labelStyle != .titleOnly {
+        if let icon = icon, labelStyle != .titleOnly {
             viewContent.append(icon)
         }
         
-        if labelStyle != .iconOnly {
+        if let title = title, labelStyle != .iconOnly {
             viewContent.append(title)
         }
         
