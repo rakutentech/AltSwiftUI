@@ -49,46 +49,16 @@ extension ProgressView: Renderable {
         if (progress != nil) {
             /// Determinate Progress View
             if (title != nil) {
-                let titleView = UITextView()
-                titleView.text = title
-                titleView.isScrollEnabled = false
-                titleView.textColor = .gray
-                let progressView = UIProgressView(progressViewStyle: .default)
-                updateView(progressView, context: context)
-                let view = UIStackView()
-                view.axis = .vertical
-                view.alignment = .leading
-                view.addArrangedSubview(titleView)
-                view.addArrangedSubview(progressView)
-                progressView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-                return view
+                return makeDeterminateProgressViewWithTitle(title: title!, context: context)
             } else {
-                let view = UIProgressView(progressViewStyle: UIProgressView.Style.default)
-                updateView(view, context: context)
-                return view
+                return makeDeterminateProgressView(context: context)
             }
-            
         } else {
             /// Indeterminate Progress View
             if (title != nil) {
-                let indicatorView = UIActivityIndicatorView(style: .whiteLarge)
-                indicatorView.color = .gray
-                indicatorView.startAnimating()
-                let titleView = UITextView()
-                titleView.text = title
-                titleView.isScrollEnabled = false
-                titleView.textColor = .gray
-                let view = UIStackView()
-                view.axis = .vertical
-                view.alignment = .center
-                view.addArrangedSubview(indicatorView)
-                view.addArrangedSubview(titleView)
-                return view
+                return makeIndeterminateProgressViewWithTitle(title: title!)
             } else {
-                let view = UIActivityIndicatorView(style: .whiteLarge)
-                view.color = .gray
-                view.startAnimating()
-                return view
+                return makeIndeterminateProgressView()
             }
         }
     }
@@ -96,12 +66,55 @@ extension ProgressView: Renderable {
     public func updateView(_ view: UIView, context: Context) {
         if let progressView = view as? UIProgressView {
             progressView.setProgress(progress ?? 0, animated: true)
-        }
-        
-        if let uiStackView = view as? UIStackView {
+        } else if let uiStackView = view as? UIStackView {
             if let progressView = uiStackView.subviews.last as? UIProgressView {
                 progressView.setProgress(progress ?? 0, animated: true)
             }
         }
+    }
+    
+    func makeDeterminateProgressViewWithTitle(title: String, context: Context) -> UIStackView {
+        let titleView = UILabel()
+        titleView.text = title
+        titleView.textColor = .gray
+        titleView.font = .systemFont(ofSize: 14)
+        let progressView = UIProgressView(progressViewStyle: .default)
+        updateView(progressView, context: context)
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .leading
+        view.addArrangedSubview(titleView)
+        view.addArrangedSubview(progressView)
+        progressView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        return view
+    }
+    
+    func makeDeterminateProgressView(context: Context) -> UIProgressView {
+        let view = UIProgressView(progressViewStyle: .default)
+        updateView(view, context: context)
+        return view
+    }
+    
+    func makeIndeterminateProgressViewWithTitle(title: String) -> UIStackView {
+        let indicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        indicatorView.color = .gray
+        indicatorView.startAnimating()
+        let titleView = UILabel()
+        titleView.text = title
+        titleView.font = .systemFont(ofSize: 14)
+        titleView.textColor = .gray
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .center
+        view.addArrangedSubview(indicatorView)
+        view.addArrangedSubview(titleView)
+        return view
+    }
+    
+    func makeIndeterminateProgressView() -> UIActivityIndicatorView {
+        let view = UIActivityIndicatorView(style: .whiteLarge)
+        view.color = .gray
+        view.startAnimating()
+        return view
     }
 }
