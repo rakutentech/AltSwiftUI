@@ -17,6 +17,7 @@ public struct ViewValues: AnimatedViewValuesHolder {
     // to make sure view values are inherited in the right scenarios.
     
     var background: UIColor?
+    var path: CGPath?
     var direction: Direction?
     var viewDimensions: ViewDimensions?
     var buttonStyle: ButtonStyle?
@@ -156,6 +157,9 @@ extension ViewValues {
         var mergedValues = merge(defaultValues: defaultValues)
         
         if background == nil { mergedValues.background = defaultValues.background }
+        if path == nil  {
+            mergedValues.path = defaultValues.path
+        }
         if viewDimensions == nil { mergedValues.viewDimensions = defaultValues.viewDimensions }
         if overlay == nil { mergedValues.overlay = defaultValues.overlay }
         if border == nil { mergedValues.border = defaultValues.border }

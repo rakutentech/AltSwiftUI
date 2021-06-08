@@ -13,7 +13,22 @@ import UIKit
 /// By default, a `Color` that is directly rendered in a view hierarchy
 /// will expand both horizontally and vertically infinitely as much as
 /// its parent view allows it to.
-public struct Color: View {
+public struct Color: View, Equatable {
+    public static func == (lhs: Color, rhs: Color) -> Bool {
+        var lhsRed: CGFloat = 0
+        var lhsGreen: CGFloat = 0
+        var lhsBlue: CGFloat = 0
+        var lhsAlpha: CGFloat = 0
+        
+        var rhsRed: CGFloat = 0
+        var rhsGreen: CGFloat = 0
+        var rhsBlue: CGFloat = 0
+        var rhsAphpa: CGFloat = 0
+        lhs.rawColor.getRed(&lhsRed, green: &lhsGreen, blue: &lhsBlue, alpha: &lhsAlpha)
+        rhs.rawColor.getRed(&rhsRed, green: &rhsGreen, blue: &rhsBlue, alpha: &rhsAphpa)
+        return lhsRed == rhsRed && lhsGreen == rhsGreen && lhsBlue == rhsBlue && lhsAlpha == rhsAphpa
+    }
+    
     public var viewStore = ViewValues()
     
     /// Stores the original color held by this view

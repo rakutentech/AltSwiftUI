@@ -15,7 +15,47 @@ extension View {
         view.viewStore.background = color?.color
         return view
     }
-    
+    public func background(_ Background: View?) -> View {
+        var view = self
+        if let color = Background as? Color {
+            view.viewStore.background = color.color
+            return view
+        }
+        if let gradient = Background as? LinearGradient {
+            return GradientView<LinearGradient>(contentView: self, gradient: gradient)
+        }
+        if let gradient = Background as? RadialGradient {
+            return GradientView<RadialGradient>(contentView: self, gradient: gradient)
+        }
+        return view
+    }
+    public func clipShape(_ shape: Shape?) -> View {
+        var view = self
+        let dimension =  view.viewStore.viewDimensions
+        guard  let width = dimension?.width, let height = dimension?.height else {
+            return view
+        }
+        if let _ =  shape as? Circle {
+            view.viewStore.path = UIBezierPath(arcCenter: CGPoint(x: width / 2, y: height / 2), radius: min(width / 2, height / 2), startAngle: 0, endAngle: .pi * 2, clockwise: false).cgPath
+        }
+        if let _ =  shape as? Capsule {
+            view.viewStore.path = UIBezierPath(
+                roundedRect: CGRect(x: 0, y: 0, width: width, height: height),
+                cornerRadius: min(width, height)/2).cgPath
+        }
+        if let _ =  shape as? Ellipse {
+            view.viewStore.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: width, height: height)).cgPath
+        }
+        if let _ =  shape as? Rectangle {
+            view.viewStore.path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: height)).cgPath
+        }
+        if let roundRect =  shape as? RoundedRectangle {
+            view.viewStore.path = UIBezierPath(
+                roundedRect: CGRect(x: 0, y: 0, width: width, height: height),
+                cornerRadius: roundRect.cornerRadius).cgPath
+        }
+        return view
+    }
     /// Creates a view that pads this view using the specified
     /// edge instets with a specified value.
     ///

@@ -55,6 +55,49 @@ extension Animation {
             }
     }
     
+    func performCALayerCustomAnimation(layer: CALayer, keyPath: String, newValue: Any?, animation: CABasicAnimation){
+        switch curve {
+        case .easeInOut(duration: let duration):
+            animation.duration = duration
+            animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        case .easeIn(duration: let duration):
+            animation.duration = duration
+            animation.timingFunction = CAMediaTimingFunction(name: .easeIn)
+        case .easeOut(duration: let duration):
+            animation.duration = duration
+            animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        case .linear(duration: let duration):
+            animation.duration = duration
+            animation.timingFunction = CAMediaTimingFunction(name: .linear)
+        case .spring(response: let response, dampingFraction: let dampingFraction, _):
+            let anim = CASpringAnimation(keyPath: keyPath)
+            let springParams = SpringParameters(dampingRatio: CGFloat(dampingFraction), response: CGFloat(response))
+            anim.mass = springParams.mass
+            anim.stiffness = springParams.stiffness
+            anim.damping = springParams.damping
+            anim.initialVelocity = 0
+            anim.duration = 0.6
+            
+        }
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        if delay != 0 {
+            animation.beginTime = CACurrentMediaTime() + delay
+        }
+        if let count = repeatCount?.count {
+            animation.repeatCount = Float(count)
+        }
+        if repeatCount?.autoReverse == true {
+            animation.autoreverses = true
+        }
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            layer.setValue(newValue, forKey: keyPath)
+            layer.removeAnimation(forKey: keyPath)
+        }
+        layer.add(animation, forKey: keyPath)
+        CATransaction.commit()
+    }
     func performCALayerAnimation(layer: CALayer, keyPath: String, newValue: Any?) {
         var animation: CABasicAnimation?
         switch curve {
