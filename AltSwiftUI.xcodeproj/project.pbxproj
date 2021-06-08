@@ -75,6 +75,10 @@
 		2CD1A04C2512066D00E2CCBA /* ViewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A00B2512066D00E2CCBA /* ViewEnvironment.swift */; };
 		2CD1A04E2512066D00E2CCBA /* AltSwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CD1A056251206C200E2CCBA /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1A054251206C200E2CCBA /* ViewTests.swift */; };
+		306E5231266F2FF60030FEA9 /* LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306E5230266F2FF60030FEA9 /* LinearGradient.swift */; };
+		306E5235266F30060030FEA9 /* RadialGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306E5234266F30060030FEA9 /* RadialGradient.swift */; };
+		306E5239266F300D0030FEA9 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306E5238266F300D0030FEA9 /* Gradients.swift */; };
+		306E523D266F30150030FEA9 /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306E523C266F30150030FEA9 /* GradientLayer.swift */; };
 		68CBD3E12578AADB00A3F033 /* SecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CBD3E02578AADB00A3F033 /* SecureField.swift */; };
 		7D2D4D6B25148269000F5DDC /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6525148269000F5DDC /* Capsule.swift */; };
 		7D2D4D6C25148269000F5DDC /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6625148269000F5DDC /* Circle.swift */; };
@@ -166,6 +170,10 @@
 		2CD1A00D2512066D00E2CCBA /* AltSwiftUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AltSwiftUI.h; sourceTree = "<group>"; };
 		2CD1A054251206C200E2CCBA /* ViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
 		2CD1A055251206C200E2CCBA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		306E5230266F2FF60030FEA9 /* LinearGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearGradient.swift; sourceTree = "<group>"; };
+		306E5234266F30060030FEA9 /* RadialGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradient.swift; sourceTree = "<group>"; };
+		306E5238266F300D0030FEA9 /* Gradients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
+		306E523C266F30150030FEA9 /* GradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		68CBD3E02578AADB00A3F033 /* SecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureField.swift; sourceTree = "<group>"; };
 		7D2D4D6525148269000F5DDC /* Capsule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
 		7D2D4D6625148269000F5DDC /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
@@ -362,6 +370,10 @@
 				2CD19FEB2512066D00E2CCBA /* Picker.swift */,
 				2CD19FEC2512066D00E2CCBA /* Spacer.swift */,
 				2CD19FEF2512066D00E2CCBA /* Text.swift */,
+				306E5238266F300D0030FEA9 /* Gradients.swift */,
+				306E5230266F2FF60030FEA9 /* LinearGradient.swift */,
+				306E5234266F30060030FEA9 /* RadialGradient.swift */,
+				306E523C266F30150030FEA9 /* GradientLayer.swift */,
 			);
 			path = ReadOnly;
 			sourceTree = "<group>";
@@ -582,7 +594,9 @@
 				2CD1A02B2512066D00E2CCBA /* ViewPropertyTransitionTypes.swift in Sources */,
 				7D2D4D6E25148269000F5DDC /* Rectangle.swift in Sources */,
 				2CD1A0432512066D00E2CCBA /* List.swift in Sources */,
+				306E5239266F300D0030FEA9 /* Gradients.swift in Sources */,
 				2CD1A01F2512066D00E2CCBA /* UIKitNavigationViews.swift in Sources */,
+				306E5231266F2FF60030FEA9 /* LinearGradient.swift in Sources */,
 				2CD1A0112512066D00E2CCBA /* UIHostingController.swift in Sources */,
 				2CD1A02D2512066D00E2CCBA /* ViewBuilder.swift in Sources */,
 				2CD1A0172512066D00E2CCBA /* Binding.swift in Sources */,
@@ -596,6 +610,7 @@
 				2CD1A04B2512066D00E2CCBA /* UIApplicationExtensions.swift in Sources */,
 				68CBD3E12578AADB00A3F033 /* SecureField.swift in Sources */,
 				2CD1A01D2512066D00E2CCBA /* Published.swift in Sources */,
+				306E5235266F30060030FEA9 /* RadialGradient.swift in Sources */,
 				7D2D4D6F25148269000F5DDC /* Shapes.swift in Sources */,
 				2CD1A0122512066D00E2CCBA /* ScreenViewController.swift in Sources */,
 				2CD1A03B2512066D00E2CCBA /* Slider.swift in Sources */,
@@ -606,6 +621,7 @@
 				2CD1A0322512066D00E2CCBA /* Image.swift in Sources */,
 				2CD1A0312512066D00E2CCBA /* Spacer.swift in Sources */,
 				7D2D4D6D25148269000F5DDC /* Ellipse.swift in Sources */,
+				306E523D266F30150030FEA9 /* GradientLayer.swift in Sources */,
 				2CD1A0382512066D00E2CCBA /* DatePicker.swift in Sources */,
 				2CD1A0222512066D00E2CCBA /* UIKitCollections.swift in Sources */,
 				2CD1A0282512066D00E2CCBA /* ViewPropertyRenderingTypes.swift in Sources */,
