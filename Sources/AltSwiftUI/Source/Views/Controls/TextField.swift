@@ -19,6 +19,8 @@ public struct TextField<T>: View {
     var value: Binding<T>?
     var isFirstResponder: Binding<Bool>?
     var isSecureTextEntry: Bool?
+    var autocorrect: Bool
+    var autocapitalize: Bool
     
     public var body: View {
         EmptyView()
@@ -39,12 +41,14 @@ public struct TextField<T>: View {
     ///     or not.
     ///   - onCommit: The action to perform when the user performs an action
     ///     (usually the return key) while the `TextField` has focus.
-    public init(_ title: String, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) {
+    public init(_ title: String, value: Binding<T>, formatter: Formatter, autocorrect: Bool = false, autocapitalize: Bool = true, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) {
         self.title = title
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
         self.value = value
         self.formatter = formatter
+        self.autocorrect = autocorrect
+        self.autocapitalize = autocapitalize
     }
     
     /// Sets if this view is the first responder or not.
@@ -75,12 +79,14 @@ extension TextField where T == String {
     ///     or not.
     ///     - onCommit: The action to perform when the user performs an action
     ///     (usually the return key) while the `TextField` has focus.
-    public init(_ title: String, text: Binding<String>, isSecureTextEntry: Bool = false, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) {
+    public init(_ title: String, text: Binding<String>, isSecureTextEntry: Bool, autocorrect: Bool = false, autocapitalize: Bool = true, = false, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) {
         self.title = title
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
         self.text = text
         self.isSecureTextEntry = isSecureTextEntry
+        self.autocorrect = autocorrect
+        self.autocapitalize = autocapitalize
     }
 }
 
@@ -102,6 +108,15 @@ extension TextField: Renderable {
         view.firstResponder = isFirstResponder
         view.placeholder = title
         view.textContentType = viewStore.textContentType
+        
+        if view.keyboardType == .emailAddress {
+            view.autocorrectionType = .no
+            view.autocapitalizationType = .none
+        } else {
+            view.autocapitalizationType = autocapitalize ? .sentences : .none
+            view.autocorrectionType = autocorrect ? .yes : .no
+        }
+        
         if let text = text?.wrappedValue, view.lastWrittenText != text {
             view.text = text
         }
