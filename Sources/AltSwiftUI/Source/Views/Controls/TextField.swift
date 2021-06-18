@@ -79,7 +79,7 @@ extension TextField where T == String {
     ///     or not.
     ///     - onCommit: The action to perform when the user performs an action
     ///     (usually the return key) while the `TextField` has focus.
-    public init(_ title: String, text: Binding<String>, isSecureTextEntry: Bool, autocorrect: Bool = false, autocapitalize: Bool = true, = false, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) {
+    public init(_ title: String, text: Binding<String>, isSecureTextEntry: Bool, autocorrect: Bool = false, autocapitalize: Bool = true, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) {
         self.title = title
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
