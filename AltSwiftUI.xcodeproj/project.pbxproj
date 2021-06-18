@@ -82,6 +82,7 @@
 		7D2D4D6E25148269000F5DDC /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6825148269000F5DDC /* Rectangle.swift */; };
 		7D2D4D6F25148269000F5DDC /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6925148269000F5DDC /* Shapes.swift */; };
 		7D2D4D7025148269000F5DDC /* RoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */; };
+		7DEA1BEB2668D38500FE86E0 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA1BEA2668D38500FE86E0 /* Path.swift */; };
 		EACD577F25EC694800FEF5A1 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD577E25EC694800FEF5A1 /* Menu.swift */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +175,7 @@
 		7D2D4D6825148269000F5DDC /* Rectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		7D2D4D6925148269000F5DDC /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRectangle.swift; sourceTree = "<group>"; };
+		7DEA1BEA2668D38500FE86E0 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		EACD577E25EC694800FEF5A1 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -438,6 +440,7 @@
 				7D2D4D6725148269000F5DDC /* Ellipse.swift */,
 				7D2D4D6825148269000F5DDC /* Rectangle.swift */,
 				7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */,
+				7DEA1BEA2668D38500FE86E0 /* Path.swift */,
 				7D2D4D6925148269000F5DDC /* Shapes.swift */,
 			);
 			path = Shapes;
@@ -633,6 +636,7 @@
 				2CD1A0252512066D00E2CCBA /* ViewPropertyGestureTypes.swift in Sources */,
 				2CD1A01A2512066D00E2CCBA /* State.swift in Sources */,
 				2CD1A0482512066D00E2CCBA /* NavigationViews.swift in Sources */,
+				7DEA1BEB2668D38500FE86E0 /* Path.swift in Sources */,
 				7D2D4D6B25148269000F5DDC /* Capsule.swift in Sources */,
 				2CD1A0242512066D00E2CCBA /* ViewPropertyBuilder.swift in Sources */,
 				2CD1A0292512066D00E2CCBA /* ViewPropertyAnimationTypes.swift in Sources */,
