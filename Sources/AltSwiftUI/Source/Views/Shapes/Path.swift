@@ -23,7 +23,9 @@ public struct Path: Shape {
         EmptyView()
     }
     
-    public init(_ callback: (inout Path) -> Void) {
+    public init() {}
+    
+    public init(_ callback: @escaping (inout Path) -> Void) {
         callback(&self)
     }
     
