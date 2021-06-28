@@ -26,8 +26,8 @@ public struct ScrollView: View {
     var interactiveScrollEnabled = true
     var keyboardDismissMode: UIScrollView.KeyboardDismissMode?
     
-    public init(_ axis: Axis = .vertical, showsIndicators: Bool = true, @ViewBuilder content: () -> View) {
-        contentView = content().subViews.first
+    public init(_ axis: Axis = .vertical, showsIndicators: Bool = true, content: () -> View) {
+        contentView = content()
         self.axis = axis
         self.showsIndicators = showsIndicators
     }
@@ -176,6 +176,97 @@ extension ScrollView: Renderable {
         let keyboardDismissModeValue = keyboardDismissMode ?? .interactive
         if view.keyboardDismissMode != keyboardDismissModeValue {
             view.keyboardDismissMode = keyboardDismissModeValue
+        }
+    }
+}
+
+public struct LazyGridView: View, Renderable {
+    public var viewStore = ViewValues()
+    public var body: View {
+        EmptyView()
+    }
+    
+    var baseSubview: View
+    var views: [View]
+    var axis: Axis
+    public init(_ axis: Axis = .vertical, @ViewBuilder items: () -> View) {
+        baseSubview = items()
+        views = baseSubview.subViews
+        self.axis = axis
+    }
+    
+    public func createView(context: Context) -> UIView {
+        let view = SwiftUICollectionView(orientation: axis == .horizontal ? .horizontal : .vertical).noAutoresizingMask();
+        setupViewConfig(view: view, context: context);
+        
+        return view
+    }
+    
+    public func updateView(_ view: UIView, context: Context) {
+        guard let view = view as? SwiftUICollectionView else { return }
+        
+        setupViewConfig(view: view, context: context)
+        
+        if let oldView = view.lastRenderableView?.view as? LazyGridView {
+            if context.transaction?.animation != nil {
+                var indexReduce = 0
+                view.performBatchUpdates {
+                    views.iterateFullViewDiff(oldList: oldView.views) { index, operation in
+                        let index = index - indexReduce
+                        let indexPaths = [IndexPath(row: index, section: 0)]
+                        switch operation {
+                        case .insert(_):
+                            view.insertItems(at: indexPaths)
+                            //reloadIndexPaths.insert(IndexPath(row: index, section: 0))
+                        case .delete(_):
+                            view.deleteItems(at: indexPaths)
+                            indexReduce += 1
+                        case .update(_):
+                            view.reloadItems(at: indexPaths)
+                        }
+                    }
+                }
+            } else {
+                var needsReload = false
+                views.iterateFullViewDiff(oldList: oldView.views) { index, operation in
+                    switch operation {
+                    case .insert(_), .delete(_):
+                        needsReload = true
+                    default: break
+                    }
+                }
+                if needsReload {
+                    view.reloadData()
+                } else {
+                    for cell in view.visibleCells {
+                        guard let cell = cell as? SwiftUICollectionViewCell,
+                              let indexPath = view.indexPath(for: cell),
+                              indexPath.row < views.count,
+                              let cellUIView = cell.contentViewRoot else {
+                            continue
+                        }
+
+                        let cellView = views[indexPath.row]
+                        context.viewOperationQueue.addOperation {
+                            cellView.updateRender(uiView: cellUIView, parentContext: context, drainRenderQueue: false)
+                            if let animation = context.transaction?.animation {
+                                animation.performAnimation {
+                                    cell.updateRendering()
+                                }
+                            } else {
+                                cell.updateRendering()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func setupViewConfig(view: SwiftUICollectionView, context: Context) {
+        let updateViews = baseSubview.totallyFlatSubViews
+        view.updateItems(itemCount: updateViews.count) { index in
+            updateViews[index].renderableView(parentContext: context) ?? UIView()
         }
     }
 }
