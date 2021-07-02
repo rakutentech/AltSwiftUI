@@ -427,6 +427,57 @@ extension View {
         view.viewStore.keyboardType = type
         return view
     }
+    
+    /// Sets whether to disable autocorrection for this view.
+    ///
+    /// Use `disableAutocorrection(_:)` when the effect of autocorrection would
+    /// make it more difficult for the user to input information. The entry of
+    /// proper names and street addresses are examples where autocorrection can
+    /// negatively affect the user's ability complete a data entry task.
+    ///
+    /// In the example below configures a ``TextField`` with the `.default`
+    /// keyboard. Disabling autocorrection allows the user to enter arbitrary
+    /// text without the autocorrection system offering suggestions or
+    /// attempting to override their input.
+    ///
+    ///     TextField("1234 Main St.", text: $address)
+    ///         .keyboardType(.default)
+    ///         .disableAutocorrection(true)
+    ///
+    /// - Parameter enabled: A Boolean value that indicates whether
+    ///   autocorrection is disabled for this view.
+    @available(watchOS, unavailable)
+    public func disableAutocorrection(_ disable: Bool?) -> Self {
+        var view = self
+        view.viewStore.disableAutocorrection = disable
+        return view
+    }
+    
+    /// Sets whether to apply auto-capitalization to this view.
+    ///
+    /// Use `autocapitalization(_:)` when you need to automatically capitalize
+    /// words, sentences, or other text like proper nouns.
+    ///
+    /// In example below, as the user enters text each word is automatically
+    /// capitalized:
+    ///
+    ///     TextField("Last, First", text: $fullName)
+    ///         .autocapitalization(UITextAutocapitalizationType.words)
+    ///
+    /// The <doc://com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType>
+    /// enumeration defines the available capitalization modes. The default is
+    /// <doc://com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType/sentences>.
+    ///
+    /// - Parameter style: One of the autocapitalization modes defined in the
+    /// <doc://com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType>
+    /// enumeration.
+    @available(macOS, unavailable)
+    @available(watchOS, unavailable)
+    public func autocapitalization(_ style: UITextAutocapitalizationType) -> Self {
+        var view = self
+        view.viewStore.autocapitalization = style
+        return view
+    }
      
     /// Hides the navigation bar for this view.
     ///

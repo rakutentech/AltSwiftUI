@@ -102,6 +102,17 @@ extension TextField: Renderable {
         view.firstResponder = isFirstResponder
         view.placeholder = title
         view.textContentType = viewStore.textContentType
+        
+        if view.keyboardType == .emailAddress {
+            view.autocorrectionType = .no
+            view.autocapitalizationType = .none
+        }
+        if let autocapitalization = context.viewValues?.autocapitalization {
+            view.autocapitalizationType = autocapitalization
+        }
+        if let disableAutocorrection = context.viewValues?.disableAutocorrection {
+            view.autocorrectionType = disableAutocorrection ? .no : .yes
+        }
         if let text = text?.wrappedValue, view.lastWrittenText != text {
             view.text = text
         }
