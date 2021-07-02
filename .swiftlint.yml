@@ -41,4 +41,14 @@ custom_rules:
     name: "Verb Prefixed Getter Function" 
     regex: '(?<=func\s)(get|calculate|fetch|retrieve|generate)\w+\([^\)]*\)[\n\t\s]+\-\>[\n\t\s]+\w+\??[\n\t\s]+\{'
     message: "Avoid the use of verbs on getter methods unless its a mutating/nonmutating method pair or a factory method."
+  travel_danger_dictionary_function:
+    name: "Dictionary initializer is error prone"
+    regex: 'Dictionary\(uniqueKeysWithValues'
+    message: "Avoid use of uniqueKeysWithValues initializer as it is crash prone."
+    severity: error
+  # Uncomment to find closure assignments to non-self variables and possible harder to find retain cycles
+  # find_non_self_stored_closures:
+  #   name: "Stored closure in variable"
+  #   regex: '[A-z0-1\_\-]+\.[A-z0-1\_\-]+\ \=\ \{'
+  #   message: "Found assignment of stored closure of variable"
   

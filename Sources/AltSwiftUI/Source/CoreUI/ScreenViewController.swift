@@ -22,7 +22,7 @@ class ScreenViewController: UIViewController {
     var insertOnAppearHandlers: NSMapTable<UIView, EventCodeHandler> = NSMapTable(keyOptions: .weakMemory, valueOptions: .strongMemory)
     var statusBarHidden = false
     var customStatusBarStyle: UIStatusBarStyle?
-    var isPushed: Bool = false
+    var isPushed = false
     var background: UIColor?
     lazy var lazyLayoutConstraints: [NSLayoutConstraint] = []
     var navigationBarTint: UIColor?
@@ -280,6 +280,7 @@ extension UIViewController {
         if sheetPresentation.isFullScreen {
             hostingVc.modalPresentationStyle = .fullScreen
         }
+        
         present(hostingVc, animated: true)
     }
     func dismissPresentedView(sheetPresentation: SheetPresentation) {
@@ -304,13 +305,18 @@ extension UIViewController {
         }
         (alert.displayOnForegroundView ? foregroundViewController() : self).present(controller, animated: true)
     }
-    func presentActionSheet(_ actionSheet: ActionSheet) {
+    func presentActionSheet(_ actionSheet: ActionSheet, _ sourceView: UIView) {
         if !actionSheet.displayOnForegroundView && presentedViewController != nil {
             return
         }
         let controller = UIAlertController(title: actionSheet.title, message: actionSheet.message, preferredStyle: .actionSheet)
         for button in actionSheet.buttons {
             controller.addAction(alertAction(alertButton: button, alertIsPresented: actionSheet.actionSheetIsPresented))
+        }
+        if UIDevice.current.userInterfaceIdiom == .pad, controller.popoverPresentationController != nil {
+            controller.popoverPresentationController?.permittedArrowDirections = .any
+            controller.popoverPresentationController?.sourceView = sourceView
+            controller.popoverPresentationController?.sourceRect = sourceView.bounds
         }
         (actionSheet.displayOnForegroundView ? foregroundViewController() : self).present(controller, animated: true)
     }

@@ -36,6 +36,16 @@ public struct Font {
     public static var title: Font {
         Font(UIFont.preferredFont(forTextStyle: .title1))
     }
+    
+    /// Create a font with the title 2 text style.
+    public static var title2: Font {
+        Font(UIFont.preferredFont(forTextStyle: .title2))
+    }
+    
+    /// Create a font with the title 3 text style.
+    public static var title3: Font {
+        Font(UIFont.preferredFont(forTextStyle: .title3))
+    }
 
     /// Create a font with the headline text style.
     public static var headline: Font {
@@ -70,6 +80,11 @@ public struct Font {
     /// Create a system font with the given `size`, `weight` and `design`.
     public static func system(size: CGFloat, weight: Font.Weight = .regular) -> Font {
         Font(UIFont.systemFont(ofSize: size, weight: uiweightForWeight(weight)), weight: weight)
+    }
+
+    /// Create a system font with the given `textStyle`.
+    public static func system(textStyle: UIFont.TextStyle) -> Font {
+        Font(UIFont.preferredFont(forTextStyle: textStyle))
     }
 
     /// Create a custom font with the given `name` and `size`.

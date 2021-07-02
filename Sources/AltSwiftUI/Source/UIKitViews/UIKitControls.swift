@@ -92,6 +92,7 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         updateOnTraitChange(previousTrait: previousTraitCollection)
     }
     override var intrinsicContentSize: CGSize {
@@ -128,6 +129,13 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
         onEditingChanged?(true)
     }
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        // ios 12 will not call shouldChangeCharactersIn func when select word candidate.
+        // so make sure update binding text here
+        if let text = text, textBinding?.wrappedValue != text {
+            lastWrittenText = text
+            setBindingText(text)
+        }
+        
         firstResponder?.wrappedValue = false
         onEditingChanged?(false)
     }
@@ -141,7 +149,7 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
     }
 }
 
-class SwiftUIButton: UIControl, UIKitViewHandler {
+class SwiftUIButton: UIButton, UIKitViewHandler {
     var contentView: UIView
     var action: () -> Void
     var animates = true
@@ -165,6 +173,9 @@ class SwiftUIButton: UIControl, UIKitViewHandler {
         super.layoutSubviews()
         notifyGeometryListener(frame: frame)
     }
+    override var intrinsicContentSize: CGSize {
+        contentView.intrinsicContentSize
+    }
     func updateContentView(_ contentView: UIView) {
         contentView.isUserInteractionEnabled = false
         self.contentView.removeFromSuperview()
@@ -174,6 +185,8 @@ class SwiftUIButton: UIControl, UIKitViewHandler {
         setNeedsLayout()
     }
     private func setupView() {
+        contentView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        contentView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         contentView.isUserInteractionEnabled = false
         addSubview(contentView)
         contentView.edgesAnchorEqualTo(destinationView: self).activate()

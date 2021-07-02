@@ -87,6 +87,7 @@ extension TextField where T == String {
 extension TextField: Renderable {
     public func createView(context: Context) -> UIView {
         let view = SwiftUITextField<T>().noAutoresizingMask()
+        view.adjustsFontForContentSizeCategory = true
         updateView(view, context: context)
         return view
     }

@@ -82,6 +82,7 @@
 		7D2D4D6E25148269000F5DDC /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6825148269000F5DDC /* Rectangle.swift */; };
 		7D2D4D6F25148269000F5DDC /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6925148269000F5DDC /* Shapes.swift */; };
 		7D2D4D7025148269000F5DDC /* RoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */; };
+		EACD577F25EC694800FEF5A1 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD577E25EC694800FEF5A1 /* Menu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +174,7 @@
 		7D2D4D6825148269000F5DDC /* Rectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		7D2D4D6925148269000F5DDC /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		7D2D4D6A25148269000F5DDC /* RoundedRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRectangle.swift; sourceTree = "<group>"; };
+		EACD577E25EC694800FEF5A1 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,6 +371,7 @@
 		2CD19FF32512066D00E2CCBA /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				EACD577E25EC694800FEF5A1 /* Menu.swift */,
 				2CD19FF82512066D00E2CCBA /* Button.swift */,
 				2CD19FF42512066D00E2CCBA /* DatePicker.swift */,
 				68CBD3E02578AADB00A3F033 /* SecureField.swift */,
@@ -615,6 +618,7 @@
 				2CD1A02F2512066D00E2CCBA /* UIKitCompat.swift in Sources */,
 				2CD1A02A2512066D00E2CCBA /* ViewPropertyLayoutTypes.swift in Sources */,
 				2CD1A0302512066D00E2CCBA /* Picker.swift in Sources */,
+				EACD577F25EC694800FEF5A1 /* Menu.swift in Sources */,
 				2CD1A00F2512066D00E2CCBA /* ViewBinder.swift in Sources */,
 				2CD1A0262512066D00E2CCBA /* ViewPropertyNavigationTypes.swift in Sources */,
 				2CD1A0462512066D00E2CCBA /* VStack.swift in Sources */,

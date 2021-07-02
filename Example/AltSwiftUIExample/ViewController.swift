@@ -20,17 +20,22 @@ struct ExampleView: View {
     var viewStore = ViewValues()
 
     var views: [ExampleViewData] = [
-        ExampleViewData(title: "Ramen Example", destination: RamenExampleView()),
-        ExampleViewData(title: "List", destination: ListExampleView()),
         ExampleViewData(title: "2 Axis Scroll", destination: ScrollView2AxisExampleView()),
-        ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
         ExampleViewData(title: "Alerts", destination: AlertsExampleView()),
-        ExampleViewData(title: "Texts", destination: TextExampleView()),
+        ExampleViewData(title: "List", destination: ListExampleView()),
+        ExampleViewData(title: "List + TextField", destination: ListTextFieldExampleView()),
+        ExampleViewData(title: "Menu", destination: MenuExampleView()),
         ExampleViewData(title: "Navigation", destination: NavigationExampleView()),
+        ExampleViewData(title: "Ramen Example", destination: RamenExampleView()),
+        ExampleViewData(title: "ScrollView + TextField", destination: ScrollViewTextFieldExampleView()),
         ExampleViewData(title: "SecureField", destination: SecureFieldExampleView()),
-        ExampleViewData(title: "Stack Update", destination: StackUpdateExample())
+        ExampleViewData(title: "Stack Update", destination: StackUpdateExample()),
+        ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
+        ExampleViewData(title: "Stack Update", destination: StackUpdateExample()),
+        ExampleViewData(title: "Texts", destination: TextExampleView()),
+        ExampleViewData(title: "TextField", destination: TextFieldExampleView())
     ]
-    
+
     var body: View {
         NavigationView {
             List(views, id: \ExampleViewData.title) { view in

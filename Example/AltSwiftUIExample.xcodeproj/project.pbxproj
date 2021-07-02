@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2C0BE74C2521CEE800B37BA9 /* ListExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */; };
 		2C49E3CC2535382F00543E7D /* TextExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49E3CB2535382F00543E7D /* TextExampleView.swift */; };
+		2C74075E262833D600FF4380 /* ScrollViewTextFieldExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74075D262833D600FF4380 /* ScrollViewTextFieldExample.swift */; };
+		2C7407642628365100FF4380 /* ListTextFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7407632628365100FF4380 /* ListTextFieldExampleView.swift */; };
 		2C83ED522554E50400C378DC /* NavigationExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83ED512554E50400C378DC /* NavigationExampleView.swift */; };
 		2CADC30F251CA0DF00EA3F17 /* RamenExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */; };
 		2CADC317251CA15400EA3F17 /* ShapesExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */; };
@@ -24,7 +26,9 @@
 		2CE5E2AD231398DA0072F907 /* AltSwiftUIExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5E2AC231398DA0072F907 /* AltSwiftUIExampleUITests.swift */; };
 		2CFE2AC025AD487800C925FC /* ScrollView2AxisExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */; };
 		35D1A58825C7EDA100861DC4 /* AlertsExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */; };
+		3ED3C29525F9CE5700F0F602 /* TextFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3C29425F9CE5700F0F602 /* TextFieldExampleView.swift */; };
 		682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */; };
+		EACD577925EC689200FEF5A1 /* MenuExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD577825EC689200FEF5A1 /* MenuExampleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +79,8 @@
 /* Begin PBXFileReference section */
 		2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExampleView.swift; sourceTree = "<group>"; };
 		2C49E3CB2535382F00543E7D /* TextExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExampleView.swift; sourceTree = "<group>"; };
+		2C74075D262833D600FF4380 /* ScrollViewTextFieldExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewTextFieldExample.swift; sourceTree = "<group>"; };
+		2C7407632628365100FF4380 /* ListTextFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTextFieldExampleView.swift; sourceTree = "<group>"; };
 		2C83ED512554E50400C378DC /* NavigationExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExampleView.swift; sourceTree = "<group>"; };
 		2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamenExampleView.swift; sourceTree = "<group>"; };
 		2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesExampleView.swift; sourceTree = "<group>"; };
@@ -95,7 +101,9 @@
 		2CE5E2AE231398DA0072F907 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView2AxisExampleView.swift; sourceTree = "<group>"; };
 		35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertsExampleView.swift; sourceTree = "<group>"; };
+		3ED3C29425F9CE5700F0F602 /* TextFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExampleView.swift; sourceTree = "<group>"; };
 		682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFieldExampleView.swift; sourceTree = "<group>"; };
+		EACD577825EC689200FEF5A1 /* MenuExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,13 +144,17 @@
 			children = (
 				35D1A58525C7EDA100861DC4 /* AlertsExampleView.swift */,
 				2C0BE74B2521CEE800B37BA9 /* ListExampleView.swift */,
+				2C7407632628365100FF4380 /* ListTextFieldExampleView.swift */,
+				EACD577825EC689200FEF5A1 /* MenuExampleView.swift */,
 				2C83ED512554E50400C378DC /* NavigationExampleView.swift */,
 				2CADC30E251CA0DF00EA3F17 /* RamenExampleView.swift */,
-				682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */,
 				2CFE2ABF25AD487800C925FC /* ScrollView2AxisExampleView.swift */,
+				2C74075D262833D600FF4380 /* ScrollViewTextFieldExample.swift */,
+				682C3A7B2594B18A005E798E /* SecureFieldExampleView.swift */,
 				2CADC316251CA15400EA3F17 /* ShapesExampleView.swift */,
-				2C49E3CB2535382F00543E7D /* TextExampleView.swift */,
 				2CDCE7F225C40D2500BB52D1 /* StackUpdateExample.swift */,
+				2C49E3CB2535382F00543E7D /* TextExampleView.swift */,
+				3ED3C29425F9CE5700F0F602 /* TextFieldExampleView.swift */,
 			);
 			path = ExampleViews;
 			sourceTree = "<group>";
@@ -366,14 +378,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C49E3CC2535382F00543E7D /* TextExampleView.swift in Sources */,
+				2C7407642628365100FF4380 /* ListTextFieldExampleView.swift in Sources */,
 				682C3A7C2594B18A005E798E /* SecureFieldExampleView.swift in Sources */,
 				35D1A58825C7EDA100861DC4 /* AlertsExampleView.swift in Sources */,
 				2C83ED522554E50400C378DC /* NavigationExampleView.swift in Sources */,
+				2C74075E262833D600FF4380 /* ScrollViewTextFieldExample.swift in Sources */,
 				2CADC30F251CA0DF00EA3F17 /* RamenExampleView.swift in Sources */,
 				2CADC317251CA15400EA3F17 /* ShapesExampleView.swift in Sources */,
 				2CFE2AC025AD487800C925FC /* ScrollView2AxisExampleView.swift in Sources */,
 				2CE5E28F231398D70072F907 /* ViewController.swift in Sources */,
+				EACD577925EC689200FEF5A1 /* MenuExampleView.swift in Sources */,
 				2CE5E28B231398D70072F907 /* AppDelegate.swift in Sources */,
+				3ED3C29525F9CE5700F0F602 /* TextFieldExampleView.swift in Sources */,
 				2CDCE7F325C40D2500BB52D1 /* StackUpdateExample.swift in Sources */,
 				2C0BE74C2521CEE800B37BA9 /* ListExampleView.swift in Sources */,
 			);
