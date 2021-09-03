@@ -13,13 +13,15 @@ public struct Button: View {
     public var viewStore = ViewValues()
     var labels: [View]
     var action: () -> Void
+    var identifier: String?
     
     /// Creates an instance that triggers an `action`.
     ///
     /// - Parameters:
     ///     - action: The action to perform when the button is triggered.
     ///     - label: The visual representation of the button
-    public init(action: @escaping () -> Void, @ViewBuilder label: () -> View) {
+    public init(identifier: String? = nil, action: @escaping () -> Void, @ViewBuilder label: () -> View) {
+        self.identifier = identifier
         self.labels = label().subViews
         self.action = action
     }
@@ -40,7 +42,8 @@ extension Button {
     /// - Parameters:
     ///     - title: The title of the button.
     ///     - action: The action to perform when the button is triggered.
-    public init(_ title: String, action: @escaping () -> Void) {
+    public init(_ title: String, identifier: String? = nil, action: @escaping () -> Void) {
+        self.identifier = identifier
         labels = [Text(title)]
         self.action = action
     }
@@ -80,6 +83,10 @@ extension Button: Renderable {
             button.animates = false
             let styledContentView = buttonStyle.makeBody(configuration: ButtonStyleConfiguration(label: labels[0], isPressed: false))
             styledContentView.updateRender(uiView: contentView, parentContext: customContext)
+        }
+        
+        if let identifier = self.identifier {
+            button.accessibilityIdentifier = identifier
         }
         
         return button
