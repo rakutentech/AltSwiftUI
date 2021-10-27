@@ -25,11 +25,18 @@ public struct ScrollView: View {
     var scrollEnabled = true
     var interactiveScrollEnabled = true
     var keyboardDismissMode: UIScrollView.KeyboardDismissMode?
+    var lazyStackInformation: LazyStackInformation?
     
     public init(_ axis: Axis = .vertical, showsIndicators: Bool = true, content: () -> View) {
-        contentView = content()
         self.axis = axis
         self.showsIndicators = showsIndicators
+        if var lazyStackInfo = content() as? LazyStackInformation & View {
+            lazyStackInfo.isStandaloneCreation = false
+            lazyStackInformation = lazyStackInfo
+            contentView = lazyStackInfo
+        } else {
+            contentView = content()
+        }
     }
     
     /// Listen to changes in the ScrollView's content offset.
@@ -141,6 +148,19 @@ extension ScrollView: Renderable {
                 } else if self.axis == .vertical {
                     scrollView.widthAnchor.constraint(equalTo: renderView.widthAnchor).isActive = true
                 }
+                
+                let insertSubviews = { [weak scrollView] in
+                    guard let lazyStackInfo = lazyStackInformation,
+                          let scrollView = scrollView,
+                          let firstSubView = scrollView.firstChildView else {
+                        return
+                    }
+                    
+                    lazyStackInfo.insertViews(contentOffset: scrollView.contentOffset, containerSize: scrollView.bounds.size, view: firstSubView)
+                }
+                
+                scrollView.executeAfterFirstLayout(insertSubviews)
+                scrollView.onScroll = insertSubviews
             }
         }
         setupView(scrollView, context: context)
@@ -158,6 +178,15 @@ extension ScrollView: Renderable {
         setupView(view, context: context)
         if let subView = view.contentView {
             contentView?.scheduleUpdateRender(uiView: subView, parentContext: updatedContext)
+            // TODO: Consider update time after layout if there is layout changes
+//            updatedContext.viewOperationQueue.addOperation {
+//                guard let lazyStackInfo = lazyStackInformation,
+//                      let firstSubView = view.subviews.first else {
+//                    return
+//                }
+//
+//                lazyStackInfo.updateLoadedViews(contentOffset: view.contentOffset, containerSize: view.bounds.size, view: firstSubView)
+//            }
         }
     }
     
@@ -197,7 +226,7 @@ public struct LazyGridView: View, Renderable {
     
     public func createView(context: Context) -> UIView {
         let view = SwiftUICollectionView(orientation: axis == .horizontal ? .horizontal : .vertical).noAutoresizingMask();
-        setupViewConfig(view: view, context: context);
+        setupViewConfig(view: view, context: context, flatViews: baseSubview.totallyFlatSubViews);
         
         return view
     }
@@ -205,20 +234,29 @@ public struct LazyGridView: View, Renderable {
     public func updateView(_ view: UIView, context: Context) {
         guard let view = view as? SwiftUICollectionView else { return }
         
-        setupViewConfig(view: view, context: context)
+        let flatViews = baseSubview.totallyFlatSubViews
+        setupViewConfig(view: view, context: context, flatViews: flatViews)
         
         if let oldView = view.lastRenderableView?.view as? LazyGridView {
             if context.transaction?.animation != nil {
                 var indexReduce = 0
                 view.performBatchUpdates {
+                    var resettedCache = false
                     views.iterateFullViewDiff(oldList: oldView.views) { index, operation in
                         let index = index - indexReduce
                         let indexPaths = [IndexPath(row: index, section: 0)]
                         switch operation {
                         case .insert(_):
+                            if !resettedCache {
+                                resettedCache = true
+                                view.resetCellCache()
+                            }
                             view.insertItems(at: indexPaths)
-                            //reloadIndexPaths.insert(IndexPath(row: index, section: 0))
                         case .delete(_):
+                            if !resettedCache {
+                                resettedCache = true
+                                view.resetCellCache()
+                            }
                             view.deleteItems(at: indexPaths)
                             indexReduce += 1
                         case .update(_):
@@ -236,25 +274,29 @@ public struct LazyGridView: View, Renderable {
                     }
                 }
                 if needsReload {
+                    view.resetCellCache()
                     view.reloadData()
                 } else {
                     for cell in view.visibleCells {
                         guard let cell = cell as? SwiftUICollectionViewCell,
                               let indexPath = view.indexPath(for: cell),
-                              indexPath.row < views.count,
+                              indexPath.row < flatViews.count,
                               let cellUIView = cell.contentViewRoot else {
                             continue
                         }
 
-                        let cellView = views[indexPath.row]
+                        let cellView = flatViews[indexPath.row]
+                        let previousProjectedSize = cellUIView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
                         context.viewOperationQueue.addOperation {
                             cellView.updateRender(uiView: cellUIView, parentContext: context, drainRenderQueue: false)
-                            if let animation = context.transaction?.animation {
-                                animation.performAnimation {
+                        }
+                        
+                        context.postRenderOperationQueue.addOperation {
+                            cellUIView.layoutIfNeeded()
+                            if previousProjectedSize != cellUIView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize) {
+                                UIView.performWithoutAnimation {
                                     cell.updateRendering()
                                 }
-                            } else {
-                                cell.updateRendering()
                             }
                         }
                     }
@@ -263,10 +305,115 @@ public struct LazyGridView: View, Renderable {
         }
     }
     
-    func setupViewConfig(view: SwiftUICollectionView, context: Context) {
-        let updateViews = baseSubview.totallyFlatSubViews
-        view.updateItems(itemCount: updateViews.count) { index in
-            updateViews[index].renderableView(parentContext: context) ?? UIView()
+    func setupViewConfig(view: SwiftUICollectionView, context: Context, flatViews: [View]) {
+        view.updateItems(itemCount: flatViews.count) { index in
+            flatViews[index].renderableView(parentContext: context) ?? UIView()
         }
     }
 }
+
+protocol LazyStackInformation {
+    var viewContent: [View] { get }
+    var isStandaloneCreation: Bool { get set }
+    func insertViews(contentOffset: CGPoint, containerSize: CGSize, view: UIView)
+    func updateLoadedViews(contentOffset: CGPoint, containerSize: CGSize, view: UIView)
+}
+
+public struct LazyVStack: View, LazyStackInformation {
+    public var viewStore = ViewValues()
+    
+    let viewContent: [View]
+    let alignment: HorizontalAlignment
+    let spacing: CGFloat
+    var isStandaloneCreation = true
+    var noPropertiesVStack: VStack
+    
+    public var body: View {
+        EmptyView()
+    }
+    
+    public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> View) {
+        noPropertiesVStack = VStack(alignment: alignment, spacing: spacing, content: content)
+        viewContent = noPropertiesVStack.viewContent
+        self.alignment = alignment
+        self.spacing = spacing ?? 0
+        viewStore.direction = .vertical
+    }
+    
+    func insertViews(contentOffset: CGPoint, containerSize: CGSize, view: UIView) {
+        guard let view = view as? SwiftUIStackView else {
+            return
+        }
+        view.insertViews(visibleLength: containerSize.height, offset: contentOffset.y, views: viewContent)
+    }
+    
+    func updateLoadedViews(contentOffset: CGPoint, containerSize: CGSize, view: UIView) {
+        guard let view = view as? SwiftUIStackView else {
+            return
+        }
+        if let oldView = view.lastRenderableView?.view as? LazyVStack {
+            view.updateViews(
+                visibleLength: containerSize.height,
+                offset: contentOffset.y,
+                views: viewContent,
+                oldViews: oldView.viewContent,
+                isEquallySpaced: noPropertiesVStack.subviewIsEquallySpaced,
+                setEqualDimension: noPropertiesVStack.setSubviewEqualDimension)
+        }
+    }
+}
+
+extension LazyVStack: Renderable {
+    public func createView(context: Context) -> UIView {
+        if !isStandaloneCreation {
+            let stackView = SwiftUIStackView().noAutoresizingMask()
+            stackView.axis = .vertical
+            stackView.setStackAlignment(alignment: alignment)
+            stackView.spacing = spacing
+            stackView.lastContext = context
+            return stackView
+        } else {
+            return updatedVStack.createView(context: context)
+        }
+    }
+    
+    public func updateView(_ view: UIView, context: Context) {
+        if let scrollView = view.parentScrollView,
+           let stackView = view as? SwiftUIStackView {
+            stackView.lastContext = context
+            updateLoadedViews(contentOffset: scrollView.contentOffset, containerSize: scrollView.bounds.size, view: stackView)
+        } else {
+            // Abstract vstack functions and use helper instead of vstack proxy state to prevent update failure due to oldviews lookup failure.
+            updatedVStack.updateView(view, context: context)
+        }
+    }
+    
+    var updatedVStack: VStack {
+        var stack = noPropertiesVStack
+        stack.viewStore = viewStore
+        return stack
+    }
+}
+
+/*
+ Scroll with lazy stack root::
+ ------
+ render:
+ contentOffset -> detect row with size collection -> load next
+ load + insert -> calculate size -> collect size
+ 
+ update:
+ Stack:detectDiff -> currentRow -> update/insert/delete prev/next -> update size collection -> pending update rows
+ 
+ scroll:
+ scroll -> pending update rows (no animation) -> update -> update size collection
+ 
+ Stack::
+ -------
+ create:
+ collect all Views
+ 
+ detectDiff:
+ return diff + row
+ 
+ */

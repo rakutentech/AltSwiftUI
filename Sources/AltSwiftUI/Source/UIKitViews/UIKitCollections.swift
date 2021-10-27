@@ -24,6 +24,10 @@ class SwiftUIScrollView: UIScrollView, UIKitViewHandler {
     var previousInteractiveScrollOffset: CGPoint = .zero
     var fixBouncingScroll = false
     let axis: Axis
+    var onScroll: (() -> Void)?
+    private var isPendingFirstLayout = true
+    private var onFirstLayoutOperationQueue = [() -> Void]()
+    
     init(axis: Axis) {
         self.axis = axis
         super.init(frame: .zero)
@@ -48,6 +52,20 @@ class SwiftUIScrollView: UIScrollView, UIKitViewHandler {
     override func layoutSubviews() {
         super.layoutSubviews()
         notifyGeometryListener(frame: frame)
+        if onFirstLayoutOperationQueue.count > 0 {
+            for operation in onFirstLayoutOperationQueue {
+                operation()
+            }
+            onFirstLayoutOperationQueue.removeAll()
+        }
+        isPendingFirstLayout = false
+    }
+    func executeAfterFirstLayout(_ operation: @escaping () -> Void) {
+        if isPendingFirstLayout {
+            onFirstLayoutOperationQueue.append(operation)
+        } else {
+            operation()
+        }
     }
     private func setupView() {
         if axis == .vertical || axis == .both {
@@ -80,6 +98,7 @@ extension SwiftUIScrollView: UIScrollViewDelegate {
         withHighPerformance {
             self.contentOffsetBinding?.wrappedValue = scrollView.contentOffset
         }
+        onScroll?()
     }
 }
 
@@ -115,6 +134,16 @@ class SwiftUITableView: UITableView, UIKitViewHandler {
 }
 
 class SwiftUIStackView: UIStackView, UIKitViewHandler {
+    var viewsLength: [CGFloat] = []
+    var maxViewsLengthSum: CGFloat {
+        viewsLength.reduce(0, +)
+    }
+    var updatedViewsIndexes = Set<Int>()
+    var lastContext: Context?
+    var lastInsertedIndex: Int {
+        viewsLength.count - 1
+    }
+    
     deinit {
         executeDisappearHandler()
     }
@@ -138,6 +167,114 @@ class SwiftUIStackView: UIStackView, UIKitViewHandler {
     override func layoutSubviews() {
         super.layoutSubviews()
         notifyGeometryListener(frame: frame)
+    }
+    
+    /// Inserts views since the last inserted index until the last view of the visible area
+    func insertViews(visibleLength: CGFloat, offset: CGFloat, views: [View]) {
+        guard let lastContext = lastContext else {
+            return
+        }
+        
+        let lastEdge = visibleLength + offset
+        var maxCurrentLength = maxViewsLengthSum
+        while maxCurrentLength < lastEdge {
+            guard let viewToInsert = views[safe: lastInsertedIndex + 1],
+                  let uiView = viewToInsert.renderableView(parentContext: lastContext) else {
+                return
+            }
+            let uiViewLength = viewLength(for: uiView)
+            insertView(uiView, viewLength: uiViewLength)
+            maxCurrentLength += uiViewLength
+        }
+    }
+    
+    /// Updates all loaded views. If views are missing before the start of the visible area, or
+    /// after the last inserted view until the end of the visible area, these view are inserted.
+    func updateViews(visibleLength: CGFloat, offset: CGFloat, views: [View], oldViews: [View], isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
+        guard let lastContext = lastContext else {
+            return
+        }
+        
+        // Update all loaded views
+        let numberOfLoadedViews = arrangedSubviews.count
+        let loadedViews = Array(views.prefix(numberOfLoadedViews))
+        let loadedOldViews = Array(oldViews.prefix(numberOfLoadedViews))
+        // update numberOfLoadediews only
+        updateViews(loadedViews, oldViews: loadedOldViews, context: lastContext, isEquallySpaced: isEquallySpaced, setEqualDimension: setEqualDimension)
+        
+        // Insert missing views until end of visible area
+        insertViews(visibleLength: visibleLength, offset: offset, views: views)
+    }
+    
+//    /// If views are missing before the start of the visible area, or
+//    /// after the last inserted view until the end of the visible area, these view are inserted.
+//    func setVisibleOffset(visibleLength: CGFloat, offset: CGFloat, viewForIndex: (_ index: Int) -> View?) {
+//        guard let lastContext = lastContext else {
+//            return
+//        }
+//
+//        let maxCurrentLength = maxViewsLengthSum
+//        if maxCurrentLength <= offset {
+//            // Views are missing before the start of the visible area.
+//            // Insert only.
+//            insertViews(visibleLength: visibleLength, offset: offset, viewForIndex: viewForIndex)
+//        } else {
+//            updatedViewsIndexes.removeAll()
+//            var iterationIndex = 0
+//            var viewLengthSum: CGFloat = 0
+//
+//            // find the first index of visible area
+//            for viewLength in viewsLength {
+//                viewLengthSum += viewLength
+//                if viewLengthSum > offset {
+//                    break
+//                }
+//                iterationIndex += 1
+//            }
+//
+//            // iterate visible views
+//            let lastEdge = visibleLength + offset
+//            while viewLengthSum < lastEdge {
+//                let viewToUpdate = viewForIndex(iterationIndex)
+//                guard viewToUpdate != nil else {
+//                    break
+//                }
+//
+//                if arrangedSubviews.count <= iterationIndex {
+//                    // Insert view
+//                    guard let uiviewToInsert = viewToUpdate?.renderableView(parentContext: lastContext) else {
+//                        break
+//                    }
+//                    let insertedViewLength = viewLength(for: uiviewToInsert)
+//                    insertView(uiviewToInsert, viewLength: insertedViewLength)
+//
+//                    // add to total length
+//                    viewLengthSum += insertedViewLength
+//                }
+//
+//                iterationIndex += 1
+//            }
+//        }
+//    }
+    
+    private func insertView(_ view: UIView, viewLength: CGFloat) {
+        let index = arrangedSubviews.count
+        addArrangedSubview(view)
+        viewsLength.append(viewLength)
+        updatedViewsIndexes.insert(index)
+    }
+    
+    private func viewLength(for view: UIView) -> CGFloat {
+        switch axis {
+        case .horizontal:
+            let targetSize = CGSize(width: 0, height: bounds.height)
+            return view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .defaultLow, verticalFittingPriority: .required).width
+        case .vertical:
+            let targetSize = CGSize(width: bounds.width, height: 0)
+            return view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow).height
+        @unknown default:
+            return 1
+        }
     }
 }
 
@@ -192,6 +329,7 @@ class SwiftUICollectionView: UICollectionView {
     var itemViewBuilder: ((Int) -> UIView)?
     var itemCount: Int = 0
     let cellReuseIdentifier = "SwiftUICollectionCellReuseId";
+    var cells = [Int: SwiftUICollectionViewCell]()
     
     init(orientation: Orientation) {
         self.orientation = orientation
@@ -234,6 +372,10 @@ class SwiftUICollectionView: UICollectionView {
         self.itemCount = itemCount
         self.itemViewBuilder = itemViewBuilder
     }
+    
+    func resetCellCache() {
+        cells = [:]
+    }
 }
 
 extension SwiftUICollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -242,14 +384,23 @@ extension SwiftUICollectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? SwiftUICollectionViewCell else {
-            return UICollectionViewCell();
+        if let cachedCell = cells[indexPath.row] {
+            return cachedCell
         }
+        
+        guard let cell = dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? SwiftUICollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        if cells[indexPath.row] == nil {
+            cells[indexPath.row] = cell
+        }
+        
         if let itemViewBuilder = itemViewBuilder {
             cell.setupContent(
                 view: itemViewBuilder(indexPath.row).noAutoresizingMask(),
                 orientation: orientation) { [weak self] in
-                self?.performBatchUpdates(nil)
+                self?.reloadItems(at: [indexPath])
             }
         }
         return cell;
@@ -274,6 +425,10 @@ class SwiftUICollectionViewCell: UICollectionViewCell {
         return autoLayoutAttributes
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
     func setupContent(
         view: UIView,
         orientation: SwiftUICollectionView.Orientation,
@@ -283,7 +438,11 @@ class SwiftUICollectionViewCell: UICollectionViewCell {
         contentViewRoot = view
         cleanContent()
         contentView.addSubview(view)
-        view.edgesAnchorEqualTo(view: contentView, rightPriority: .required - 1, bottomPriority: .required - 1).activate()
+        if orientation == .horizontal {
+            view.edgesAnchorEqualTo(view: contentView, rightPriority: .required - 1).activate()
+        } else {
+            view.edgesAnchorEqualTo(view: contentView, bottomPriority: .required - 1).activate()
+        }
     }
     
     func cleanContent() {
@@ -295,11 +454,14 @@ class SwiftUICollectionViewCell: UICollectionViewCell {
     }
     
     func updateRendering() {
-        if let lastLayoutSize = lastLayoutSize,
-           let lastTargetSize = lastTargetSize,
-           layoutSize(targetSize: lastTargetSize) != lastLayoutSize {
-            onResizeRequested?()
-        }
+//        if let lastLayoutSize = lastLayoutSize,
+//           let lastTargetSize = lastTargetSize,
+//           layoutSize(targetSize: lastTargetSize) != lastLayoutSize {
+//            onResizeRequested?()
+//            print("yay")
+//        }
+        print("yay")
+        onResizeRequested?()
     }
     
     private func layoutSize(targetSize: CGSize) -> CGSize {

@@ -70,7 +70,7 @@ extension VStack: Renderable {
         view.spacing = spacing ?? 0
     }
     
-    private var subviewIsEquallySpaced: (View) -> Bool { { view in
+    var subviewIsEquallySpaced: (View) -> Bool { { view in
            if (view is Spacer ||
                view.viewStore.viewDimensions?.maxHeight == CGFloat.limitForUI
                )
@@ -83,7 +83,7 @@ extension VStack: Renderable {
         }
     }
     
-    private var setSubviewEqualDimension: (UIView, UIView) -> Void { { firstView, secondView in
+    var setSubviewEqualDimension: (UIView, UIView) -> Void { { firstView, secondView in
             firstView.heightAnchor.constraint(equalTo: secondView.heightAnchor).isActive = true
         }
     }
