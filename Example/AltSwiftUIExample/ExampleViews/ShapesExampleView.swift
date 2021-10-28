@@ -11,7 +11,7 @@ import UIKit
 
 struct ShapesExampleView: View {
     var viewStore = ViewValues()
-    @State private var goBig: Bool = false
+    @State private var goBig = false
     @State private var progress: CGFloat = 0.5
     
     var body: View {

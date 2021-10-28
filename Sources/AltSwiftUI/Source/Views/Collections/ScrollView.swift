@@ -25,18 +25,11 @@ public struct ScrollView: View {
     var scrollEnabled = true
     var interactiveScrollEnabled = true
     var keyboardDismissMode: UIScrollView.KeyboardDismissMode?
-    var lazyStackInformation: LazyStackInformation?
     
     public init(_ axis: Axis = .vertical, showsIndicators: Bool = true, content: () -> View) {
+        contentView = content()
         self.axis = axis
         self.showsIndicators = showsIndicators
-        if var lazyStackInfo = content() as? LazyStackInformation & View {
-            lazyStackInfo.isStandaloneCreation = false
-            lazyStackInformation = lazyStackInfo
-            contentView = lazyStackInfo
-        } else {
-            contentView = content()
-        }
     }
     
     /// Listen to changes in the ScrollView's content offset.
@@ -135,7 +128,10 @@ extension ScrollView: Renderable {
             scrollView.showsHorizontalScrollIndicator = false
         }
         context.viewOperationQueue.addOperation {
-            if let renderView = self.contentView?.renderableView(parentContext: context, drainRenderQueue: false) {
+            var subviewContext = context
+            subviewContext.parentScrollView = scrollView
+            
+            if let renderView = self.contentView?.renderableView(parentContext: subviewContext, drainRenderQueue: false) {
                 let container = UIView().noAutoresizingMask()
                 container.addSubview(renderView)
                 scrollView.addSubview(container)
@@ -148,19 +144,6 @@ extension ScrollView: Renderable {
                 } else if self.axis == .vertical {
                     scrollView.widthAnchor.constraint(equalTo: renderView.widthAnchor).isActive = true
                 }
-                
-                let insertSubviews = { [weak scrollView] in
-                    guard let lazyStackInfo = lazyStackInformation,
-                          let scrollView = scrollView,
-                          let firstSubView = scrollView.firstChildView else {
-                        return
-                    }
-                    
-                    lazyStackInfo.insertViews(contentOffset: scrollView.contentOffset, containerSize: scrollView.bounds.size, view: firstSubView)
-                }
-                
-                scrollView.executeAfterFirstLayout(insertSubviews)
-                scrollView.onScroll = insertSubviews
             }
         }
         setupView(scrollView, context: context)
@@ -178,15 +161,6 @@ extension ScrollView: Renderable {
         setupView(view, context: context)
         if let subView = view.contentView {
             contentView?.scheduleUpdateRender(uiView: subView, parentContext: updatedContext)
-            // TODO: Consider update time after layout if there is layout changes
-//            updatedContext.viewOperationQueue.addOperation {
-//                guard let lazyStackInfo = lazyStackInformation,
-//                      let firstSubView = view.subviews.first else {
-//                    return
-//                }
-//
-//                lazyStackInfo.updateLoadedViews(contentOffset: view.contentOffset, containerSize: view.bounds.size, view: firstSubView)
-//            }
         }
     }
     
@@ -225,8 +199,8 @@ public struct LazyGridView: View, Renderable {
     }
     
     public func createView(context: Context) -> UIView {
-        let view = SwiftUICollectionView(orientation: axis == .horizontal ? .horizontal : .vertical).noAutoresizingMask();
-        setupViewConfig(view: view, context: context, flatViews: baseSubview.totallyFlatSubViews);
+        let view = SwiftUICollectionView(orientation: axis == .horizontal ? .horizontal : .vertical).noAutoresizingMask()
+        setupViewConfig(view: view, context: context, flatViews: baseSubview.totallyFlatSubViews)
         
         return view
     }
@@ -246,29 +220,29 @@ public struct LazyGridView: View, Renderable {
                         let index = index - indexReduce
                         let indexPaths = [IndexPath(row: index, section: 0)]
                         switch operation {
-                        case .insert(_):
+                        case .insert:
                             if !resettedCache {
                                 resettedCache = true
                                 view.resetCellCache()
                             }
                             view.insertItems(at: indexPaths)
-                        case .delete(_):
+                        case .delete:
                             if !resettedCache {
                                 resettedCache = true
                                 view.resetCellCache()
                             }
                             view.deleteItems(at: indexPaths)
                             indexReduce += 1
-                        case .update(_):
+                        case .update:
                             view.reloadItems(at: indexPaths)
                         }
                     }
                 }
             } else {
                 var needsReload = false
-                views.iterateFullViewDiff(oldList: oldView.views) { index, operation in
+                views.iterateFullViewDiff(oldList: oldView.views) { _, operation in
                     switch operation {
-                    case .insert(_), .delete(_):
+                    case .insert, .delete:
                         needsReload = true
                     default: break
                     }
@@ -314,12 +288,11 @@ public struct LazyGridView: View, Renderable {
 
 protocol LazyStackInformation {
     var viewContent: [View] { get }
-    var isStandaloneCreation: Bool { get set }
-    func insertViews(contentOffset: CGPoint, containerSize: CGSize, view: UIView)
-    func updateLoadedViews(contentOffset: CGPoint, containerSize: CGSize, view: UIView)
+    func insertViews(contentOffset: CGPoint, containerSize: CGSize, viewOffsetInContainer: CGPoint, view: UIView)
+    func updateLoadedViews(view: UIView)
 }
 
-public struct LazyVStack: View, LazyStackInformation {
+public struct LazyVStack: LazyStackInformation, View {
     public var viewStore = ViewValues()
     
     let viewContent: [View]
@@ -340,21 +313,19 @@ public struct LazyVStack: View, LazyStackInformation {
         viewStore.direction = .vertical
     }
     
-    func insertViews(contentOffset: CGPoint, containerSize: CGSize, view: UIView) {
+    func insertViews(contentOffset: CGPoint, containerSize: CGSize, viewOffsetInContainer: CGPoint, view: UIView) {
         guard let view = view as? SwiftUIStackView else {
             return
         }
-        view.insertViews(visibleLength: containerSize.height, offset: contentOffset.y, views: viewContent)
+        view.insertViews(visibleLength: containerSize.height, offset: contentOffset.y, viewOffsetInContainer: viewOffsetInContainer.y, views: viewContent)
     }
     
-    func updateLoadedViews(contentOffset: CGPoint, containerSize: CGSize, view: UIView) {
+    func updateLoadedViews(view: UIView) {
         guard let view = view as? SwiftUIStackView else {
             return
         }
         if let oldView = view.lastRenderableView?.view as? LazyVStack {
             view.updateViews(
-                visibleLength: containerSize.height,
-                offset: contentOffset.y,
                 views: viewContent,
                 oldViews: oldView.viewContent,
                 isEquallySpaced: noPropertiesVStack.subviewIsEquallySpaced,
@@ -365,26 +336,48 @@ public struct LazyVStack: View, LazyStackInformation {
 
 extension LazyVStack: Renderable {
     public func createView(context: Context) -> UIView {
-        if !isStandaloneCreation {
+        if let scrollView = context.parentScrollView {
             let stackView = SwiftUIStackView().noAutoresizingMask()
             stackView.axis = .vertical
             stackView.setStackAlignment(alignment: alignment)
             stackView.spacing = spacing
             stackView.lastContext = context
-            return stackView
+            
+            // TODO: P3 insert subviews only if root stack in scroll
+            let insertSubviews = { [weak scrollView] in
+                guard let scrollView = scrollView,
+                      let containerView = scrollView.subviews.first else {
+                    return
+                }
+                
+                let viewOffset = stackView.superview?.convert(stackView.frame, to: containerView) ?? .zero
+                insertViews(contentOffset: scrollView.contentOffset, containerSize: scrollView.bounds.size, viewOffsetInContainer: viewOffset.origin, view: stackView)
+            }
+            scrollView.executeAfterFirstLayout(insertSubviews)
+            scrollView.onScroll = insertSubviews
+            
+            if context.viewValues?.background != nil || context.viewValues?.border != nil {
+                return BackgroundView(content: stackView).noAutoresizingMask()
+            } else {
+                return stackView
+            }
         } else {
             return updatedVStack.createView(context: context)
         }
     }
     
     public func updateView(_ view: UIView, context: Context) {
-        if let scrollView = view.parentScrollView,
-           let stackView = view as? SwiftUIStackView {
+        var stackView = view
+        if let bgView = view as? BackgroundView {
+            stackView = bgView.content
+        }
+        
+        if let stackView = stackView as? SwiftUIStackView {
             stackView.lastContext = context
-            updateLoadedViews(contentOffset: scrollView.contentOffset, containerSize: scrollView.bounds.size, view: stackView)
+            updateLoadedViews(view: stackView)
         } else {
-            // Abstract vstack functions and use helper instead of vstack proxy state to prevent update failure due to oldviews lookup failure.
-            updatedVStack.updateView(view, context: context)
+            // TODO: P2 Abstract vstack functions and use helper instead of vstack proxy state to prevent update failure due to oldviews lookup failure.
+            updatedVStack.updateView(stackView, context: context)
         }
     }
     

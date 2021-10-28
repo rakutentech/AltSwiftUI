@@ -52,13 +52,16 @@ class SwiftUIScrollView: UIScrollView, UIKitViewHandler {
     override func layoutSubviews() {
         super.layoutSubviews()
         notifyGeometryListener(frame: frame)
-        if onFirstLayoutOperationQueue.count > 0 {
+        if !onFirstLayoutOperationQueue.isEmpty {
             for operation in onFirstLayoutOperationQueue {
                 operation()
             }
             onFirstLayoutOperationQueue.removeAll()
         }
         isPendingFirstLayout = false
+        // TODO: P2 detect layout change in container view and Insert views in main child
+        // TODO: P2 detect layout change in scrollview and insert views in main child
+        // TODO: P3 lock tree
     }
     func executeAfterFirstLayout(_ operation: @escaping () -> Void) {
         if isPendingFirstLayout {
@@ -134,15 +137,26 @@ class SwiftUITableView: UITableView, UIKitViewHandler {
 }
 
 class SwiftUIStackView: UIStackView, UIKitViewHandler {
-    var viewsLength: [CGFloat] = []
-    var maxViewsLengthSum: CGFloat {
-        viewsLength.reduce(0, +)
+    class LazyStackTreeLock {
+        var locked = false
     }
+    
+    var viewsLength: [CGFloat] = [] {
+        didSet {
+            maxViewsLengthSum = viewsLength.reduce(0, +)
+        }
+    }
+    var maxViewsLengthSum: CGFloat = 0
     var updatedViewsIndexes = Set<Int>()
     var lastContext: Context?
     var lastInsertedIndex: Int {
         viewsLength.count - 1
     }
+    // TODO: P3 Set lazy direction and current tree node in context from scroll view. Build tree in lazyStack: View createView method.
+    weak var lazyStackTreeParent: SwiftUIStackView?
+    var lazyStackTreeChildren: [WeakObject<SwiftUIStackView>] = []
+    var lazyStackTreeLock = LazyStackTreeLock()
+    weak var lazyStackScrollView: UIScrollView?
     
     deinit {
         executeDisappearHandler()
@@ -165,17 +179,35 @@ class SwiftUIStackView: UIStackView, UIKitViewHandler {
         return false
     }
     override func layoutSubviews() {
+        // TODO: P3 Lock lazy tree
+        let locker = !lazyStackTreeLock.locked
+        if locker {
+            lazyStackTreeLock.locked = true
+        }
+        
         super.layoutSubviews()
         notifyGeometryListener(frame: frame)
+        
+        // TODO: P2 Detect if size has changed since last time. Update sizes, remove extra lengths.
+        
+        if locker {
+            // TODO:  P3 If locker, insert remaining views.
+            lazyStackTreeLock.locked = false
+            if let scrollView = lazyStackScrollView {
+                
+            }
+        }
     }
     
     /// Inserts views since the last inserted index until the last view of the visible area
-    func insertViews(visibleLength: CGFloat, offset: CGFloat, views: [View]) {
+    func insertViews(visibleLength: CGFloat, offset: CGFloat, viewOffsetInContainer: CGFloat, views: [View]) {
         guard let lastContext = lastContext else {
             return
         }
         
-        let lastEdge = visibleLength + offset
+        // TODO: P3 Insert in last child and use updated size for sum in maxLength
+        // TODO: [P1 One lazy stack per scroll in anywhere] Remove vstack offset in scroll content view from lastEdge
+        let lastEdge = visibleLength + offset - viewOffsetInContainer
         var maxCurrentLength = maxViewsLengthSum
         while maxCurrentLength < lastEdge {
             guard let viewToInsert = views[safe: lastInsertedIndex + 1],
@@ -184,13 +216,14 @@ class SwiftUIStackView: UIStackView, UIKitViewHandler {
             }
             let uiViewLength = viewLength(for: uiView)
             insertView(uiView, viewLength: uiViewLength)
+            // TODO: P3 Insert in new child and update uiViewLength
             maxCurrentLength += uiViewLength
         }
     }
     
     /// Updates all loaded views. If views are missing before the start of the visible area, or
     /// after the last inserted view until the end of the visible area, these view are inserted.
-    func updateViews(visibleLength: CGFloat, offset: CGFloat, views: [View], oldViews: [View], isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
+    func updateViews(views: [View], oldViews: [View], isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
         guard let lastContext = lastContext else {
             return
         }
@@ -203,7 +236,14 @@ class SwiftUIStackView: UIStackView, UIKitViewHandler {
         updateViews(loadedViews, oldViews: loadedOldViews, context: lastContext, isEquallySpaced: isEquallySpaced, setEqualDimension: setEqualDimension)
         
         // Insert missing views until end of visible area
-        insertViews(visibleLength: visibleLength, offset: offset, views: views)
+        // insertViews(visibleLength: visibleLength, offset: offset, views: views)
+    }
+    
+    func appendToLazyStackTreeParent(_ parent: SwiftUIStackView) {
+        lazyStackTreeParent = parent
+        parent.lazyStackTreeChildren.append(WeakObject(object: self))
+        lazyStackTreeLock = parent.lazyStackTreeLock
+        lazyStackScrollView = parent.lazyStackScrollView
     }
     
 //    /// If views are missing before the start of the visible area, or
@@ -285,7 +325,7 @@ class SwiftUICollectionView: UICollectionView {
     class FlowLayout: UICollectionViewFlowLayout {
         let orientation: Orientation
         init(orientation: Orientation) {
-            self.orientation = orientation;
+            self.orientation = orientation
             super.init()
         }
         required init?(coder: NSCoder) {
@@ -306,7 +346,7 @@ class SwiftUICollectionView: UICollectionView {
         
         override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
             guard let collectionView = collectionView else {
-                return nil;
+                return nil
             }
             guard let layoutAttributes = super.layoutAttributesForItem(at: indexPath) else {
                 return nil
@@ -328,7 +368,7 @@ class SwiftUICollectionView: UICollectionView {
     let orientation: Orientation
     var itemViewBuilder: ((Int) -> UIView)?
     var itemCount: Int = 0
-    let cellReuseIdentifier = "SwiftUICollectionCellReuseId";
+    let cellReuseIdentifier = "SwiftUICollectionCellReuseId"
     var cells = [Int: SwiftUICollectionViewCell]()
     
     init(orientation: Orientation) {
@@ -403,7 +443,7 @@ extension SwiftUICollectionView: UICollectionViewDelegate, UICollectionViewDataS
                 self?.reloadItems(at: [indexPath])
             }
         }
-        return cell;
+        return cell
     }
 }
 
@@ -446,8 +486,8 @@ class SwiftUICollectionViewCell: UICollectionViewCell {
     }
     
     func cleanContent() {
-        lastLayoutSize = nil;
-        lastTargetSize = nil;
+        lastLayoutSize = nil
+        lastTargetSize = nil
         for subview in contentView.subviews {
             subview.removeFromSuperview()
         }

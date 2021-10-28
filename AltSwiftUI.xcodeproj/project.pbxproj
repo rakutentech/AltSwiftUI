@@ -11,7 +11,6 @@
 		2CA33E51252E964C005A7C96 /* IterationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA33E4B252E95B8005A7C96 /* IterationTests.swift */; };
 		2CA33E5C252E96BF005A7C96 /* ViewBinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA33E56252E96BA005A7C96 /* ViewBinderTests.swift */; };
 		2CA33E65252E9731005A7C96 /* OperationQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA33E61252E9718005A7C96 /* OperationQueueTests.swift */; };
-		2CC2D036272916AE00B9F90D /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2D035272916AE00B9F90D /* UIScrollViewExtensions.swift */; };
 		2CD1A00E2512066D00E2CCBA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FBF2512066D00E2CCBA /* View.swift */; };
 		2CD1A00F2512066D00E2CCBA /* ViewBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FC02512066D00E2CCBA /* ViewBinder.swift */; };
 		2CD1A0102512066D00E2CCBA /* LayoutSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FC12512066D00E2CCBA /* LayoutSolver.swift */; };
@@ -102,7 +101,6 @@
 		2CA33E4B252E95B8005A7C96 /* IterationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IterationTests.swift; sourceTree = "<group>"; };
 		2CA33E56252E96BA005A7C96 /* ViewBinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBinderTests.swift; sourceTree = "<group>"; };
 		2CA33E61252E9718005A7C96 /* OperationQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueueTests.swift; sourceTree = "<group>"; };
-		2CC2D035272916AE00B9F90D /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		2CD19FBF2512066D00E2CCBA /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		2CD19FC02512066D00E2CCBA /* ViewBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewBinder.swift; sourceTree = "<group>"; };
 		2CD19FC12512066D00E2CCBA /* LayoutSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutSolver.swift; sourceTree = "<group>"; };
@@ -407,7 +405,6 @@
 				2CD1A0082512066D00E2CCBA /* AutolayoutExtensions.swift */,
 				2CD1A0072512066D00E2CCBA /* FoundationExtensions.swift */,
 				2CD1A0092512066D00E2CCBA /* UIApplicationExtensions.swift */,
-				2CC2D035272916AE00B9F90D /* UIScrollViewExtensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -631,7 +628,6 @@
 				2CD1A0272512066D00E2CCBA /* ViewPropertyViewTypes.swift in Sources */,
 				2CD1A0132512066D00E2CCBA /* UIViewBuilder.swift in Sources */,
 				2CD1A0192512066D00E2CCBA /* ObservableObject.swift in Sources */,
-				2CC2D036272916AE00B9F90D /* UIScrollViewExtensions.swift in Sources */,
 				2CD1A0332512066D00E2CCBA /* Divider.swift in Sources */,
 				2CD1A04C2512066D00E2CCBA /* ViewEnvironment.swift in Sources */,
 				2CD1A0252512066D00E2CCBA /* ViewPropertyGestureTypes.swift in Sources */,

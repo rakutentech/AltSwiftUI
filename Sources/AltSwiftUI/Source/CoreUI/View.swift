@@ -156,7 +156,8 @@ extension View {
                 rootController: mergedContext.rootController,
                 bodyLevel: bodyLevel,
                 isInsideButton: mergedContext.isInsideButton,
-                overwriteTransaction: overwriteTransaction(from: mergedContext.transaction))
+                overwriteTransaction: overwriteTransaction(from: mergedContext.transaction),
+                parentScrollView: mergedContext.parentScrollView)
             EnvironmentHolder.currentBodyViewBinderStack.append(binder)
             setupDynamicProperties(context: mergedContext)
             view = body.renderableView(parentContext: mergedContext, completeMerge: true, bodyLevel: bodyLevel + 1, renderProperties: renderProperties, drainRenderQueue: drainRenderQueue)

@@ -20,36 +20,39 @@ struct LazyStackExampleView: View {
                 }
             }
             ScrollView {
-                LazyVStack {
-                    Text("First")
-                    Text("First Sec sdfusdfk jsdf isdjfosi asdasd asdasd asd asdasd asdas dasdasd asd a")
-        //                .frame(height: 50)
-                    Text("First")
-                        .frame(height: expand ? 200 : 100)
-                        .background(.red)
-                    Text("First")
-                    Text("First")
-                        .frame(height: 200)
-                        .background(.blue)
-                    Text("First2")
-                        .frame(height: 200)
-                        .background(.blue)
-                    Group {
-                        Text("Second")
-                            .frame(height: 200)
-                            .background(.green)
-                        Text("Second2")
+                VStack {
+                    Text("Outside lazy stack")
+                    LazyVStack {
+                        Text("First")
+                        Text("First Sec sdfusdfk jsdf isdjfosi asdasd asdasd asd asdasd asdas dasdasd asd a")
+            //                .frame(height: 50)
+                        Text("First")
+                            .frame(height: expand ? 30 : 400)
+                            .background(.red)
+                        Text("First")
+                        Text("First")
                             .frame(height: 200)
                             .background(.blue)
-                        Text("Second3")
-                            .frame(height: 200)
-                            .background(.green)
-                        Text("Second4")
+                        Text("First2")
                             .frame(height: 200)
                             .background(.blue)
-                        Text("Second5")
-                            .frame(height: 200)
-                            .background(.green)
+                        Group {
+                            Text("Second")
+                                .frame(height: 200)
+                                .background(.green)
+                            Text("Second2")
+                                .frame(height: 200)
+                                .background(.blue)
+                            Text("Second3")
+                                .frame(height: 200)
+                                .background(.green)
+                            Text("Second4")
+                                .frame(height: 200)
+                                .background(.blue)
+                            Text("Second5")
+                                .frame(height: 200)
+                                .background(.green)
+                        }
                     }
                 }
             }

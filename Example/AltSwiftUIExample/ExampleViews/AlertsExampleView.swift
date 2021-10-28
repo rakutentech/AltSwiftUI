@@ -11,10 +11,10 @@ import UIKit
 
 struct AlertsExampleView: View {
     var viewStore = ViewValues()
-    @State var foregroundDisplayNeeded: Bool = false
-    @State var showAlert: Bool = false
-    @State var showActionSheet: Bool = false
-    @State var showSheet: Bool = false
+    @State var foregroundDisplayNeeded = false
+    @State var showAlert = false
+    @State var showActionSheet = false
+    @State var showSheet = false
     
     var body: View {
         VStack(spacing: 8) {
