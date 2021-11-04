@@ -86,6 +86,14 @@ public struct Context {
     var isStrictUpdate: Bool {
         transaction?.isHighPerformance == true && viewValues?.strictOnHighPerformance == true
     }
+    
+    /// Should be called at the end of any root render operation to
+    /// finalize any pending view setup.
+    func executePostRender(preventExecutionInNextAppear: Bool = false) {
+        rootController?.executeLazyConstraints()
+        rootController?.executeInsertAppearHandlers(preventExecutionInNextAppear: preventExecutionInNextAppear)
+        postRenderOperationQueue.drainRecursively()
+    }
 }
 
 extension Context {

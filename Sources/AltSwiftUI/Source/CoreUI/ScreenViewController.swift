@@ -128,8 +128,7 @@ class ScreenViewController: UIViewController {
         
         view.addSubview(renderView)
         LayoutSolver.solveLayout(parentView: view, contentView: renderView, content: contentView, parentContext: context, expand: false)
-        executeLazyConstraints()
-        executeInsertAppearHandlers(preventExecutionInNextAppear: true)
+        context.executePostRender(preventExecutionInNextAppear: true)
     }
     
     func setNavigationBarHidden(_ hidden: Bool) {

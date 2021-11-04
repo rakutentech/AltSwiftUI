@@ -11,6 +11,10 @@
 		2CA33E51252E964C005A7C96 /* IterationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA33E4B252E95B8005A7C96 /* IterationTests.swift */; };
 		2CA33E5C252E96BF005A7C96 /* ViewBinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA33E56252E96BA005A7C96 /* ViewBinderTests.swift */; };
 		2CA33E65252E9731005A7C96 /* OperationQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA33E61252E9718005A7C96 /* OperationQueueTests.swift */; };
+		2CC2D03927337C8900B9F90D /* LazyVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2D03827337C8800B9F90D /* LazyVStack.swift */; };
+		2CC2D03B27337D0B00B9F90D /* LazyHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2D03A27337D0B00B9F90D /* LazyHStack.swift */; };
+		2CC2D03E27337DF400B9F90D /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2D03D27337DF400B9F90D /* Stack.swift */; };
+		2CC2D04027337DFC00B9F90D /* LazyStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2D03F27337DFC00B9F90D /* LazyStack.swift */; };
 		2CD1A00E2512066D00E2CCBA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FBF2512066D00E2CCBA /* View.swift */; };
 		2CD1A00F2512066D00E2CCBA /* ViewBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FC02512066D00E2CCBA /* ViewBinder.swift */; };
 		2CD1A0102512066D00E2CCBA /* LayoutSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD19FC12512066D00E2CCBA /* LayoutSolver.swift */; };
@@ -101,6 +105,10 @@
 		2CA33E4B252E95B8005A7C96 /* IterationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IterationTests.swift; sourceTree = "<group>"; };
 		2CA33E56252E96BA005A7C96 /* ViewBinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBinderTests.swift; sourceTree = "<group>"; };
 		2CA33E61252E9718005A7C96 /* OperationQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueueTests.swift; sourceTree = "<group>"; };
+		2CC2D03827337C8800B9F90D /* LazyVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyVStack.swift; sourceTree = "<group>"; };
+		2CC2D03A27337D0B00B9F90D /* LazyHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyHStack.swift; sourceTree = "<group>"; };
+		2CC2D03D27337DF400B9F90D /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		2CC2D03F27337DFC00B9F90D /* LazyStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyStack.swift; sourceTree = "<group>"; };
 		2CD19FBF2512066D00E2CCBA /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		2CD19FC02512066D00E2CCBA /* ViewBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewBinder.swift; sourceTree = "<group>"; };
 		2CD19FC12512066D00E2CCBA /* LayoutSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutSolver.swift; sourceTree = "<group>"; };
@@ -212,6 +220,16 @@
 				2C7A7C40250F2AE5001A8613 /* AltSwiftUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2CC2D03C27337D8B00B9F90D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2CD19FFB2512066D00E2CCBA /* CollectionProtocols.swift */,
+				2CC2D03D27337DF400B9F90D /* Stack.swift */,
+				2CC2D03F27337DFC00B9F90D /* LazyStack.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		2CD19FBC2512066D00E2CCBA /* AltSwiftUI */ = {
@@ -385,7 +403,7 @@
 		2CD19FFA2512066D00E2CCBA /* Collections */ = {
 			isa = PBXGroup;
 			children = (
-				2CD19FFB2512066D00E2CCBA /* CollectionProtocols.swift */,
+				2CC2D03C27337D8B00B9F90D /* Protocols */,
 				2CD1A0042512066D00E2CCBA /* ForEach.swift */,
 				2CD1A0012512066D00E2CCBA /* Group.swift */,
 				2CD1A0022512066D00E2CCBA /* HStack.swift */,
@@ -395,6 +413,8 @@
 				2CD19FFD2512066D00E2CCBA /* ViewCollectionIteration.swift */,
 				2CD1A0032512066D00E2CCBA /* VStack.swift */,
 				2CD19FFE2512066D00E2CCBA /* ZStack.swift */,
+				2CC2D03827337C8800B9F90D /* LazyVStack.swift */,
+				2CC2D03A27337D0B00B9F90D /* LazyHStack.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -620,8 +640,10 @@
 				2CD1A0302512066D00E2CCBA /* Picker.swift in Sources */,
 				EACD577F25EC694800FEF5A1 /* Menu.swift in Sources */,
 				2CD1A00F2512066D00E2CCBA /* ViewBinder.swift in Sources */,
+				2CC2D03927337C8900B9F90D /* LazyVStack.swift in Sources */,
 				2CD1A0262512066D00E2CCBA /* ViewPropertyNavigationTypes.swift in Sources */,
 				2CD1A0462512066D00E2CCBA /* VStack.swift in Sources */,
+				2CC2D03B27337D0B00B9F90D /* LazyHStack.swift in Sources */,
 				2CD1A01B2512066D00E2CCBA /* EnvironmentObject.swift in Sources */,
 				2CD1A0422512066D00E2CCBA /* ScrollView.swift in Sources */,
 				2CD1A0442512066D00E2CCBA /* Group.swift in Sources */,
@@ -632,6 +654,7 @@
 				2CD1A04C2512066D00E2CCBA /* ViewEnvironment.swift in Sources */,
 				2CD1A0252512066D00E2CCBA /* ViewPropertyGestureTypes.swift in Sources */,
 				2CD1A01A2512066D00E2CCBA /* State.swift in Sources */,
+				2CC2D03E27337DF400B9F90D /* Stack.swift in Sources */,
 				2CD1A0482512066D00E2CCBA /* NavigationViews.swift in Sources */,
 				7D2D4D6B25148269000F5DDC /* Capsule.swift in Sources */,
 				2CD1A0242512066D00E2CCBA /* ViewPropertyBuilder.swift in Sources */,
@@ -639,6 +662,7 @@
 				2CD1A0182512066D00E2CCBA /* Environment.swift in Sources */,
 				2CD1A04A2512066D00E2CCBA /* AutolayoutExtensions.swift in Sources */,
 				2CD1A0142512066D00E2CCBA /* CoreTypes.swift in Sources */,
+				2CC2D04027337DFC00B9F90D /* LazyStack.swift in Sources */,
 				2CD1A01C2512066D00E2CCBA /* StateObject.swift in Sources */,
 				2CD1A03F2512066D00E2CCBA /* TabView.swift in Sources */,
 				2CD1A0372512066D00E2CCBA /* GeometryReader.swift in Sources */,
