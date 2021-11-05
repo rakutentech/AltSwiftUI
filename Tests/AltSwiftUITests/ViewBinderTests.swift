@@ -81,7 +81,7 @@ class ViewBinderTests: XCTestCase {
         executeTestViewBinder(view)
     }
     func executeTestViewBinder(_ view: View) {
-        let binder = ViewBinderMock(view: view, rootController: nil, bodyLevel: 0, isInsideButton: false, overwriteTransaction: nil)
+        let binder = ViewBinderMock(view: view, rootController: nil, bodyLevel: 0, isInsideButton: false, overwriteTransaction: nil, parentScrollView: nil)
         EnvironmentHolder.currentBodyViewBinderStack.append(binder)
         _ = view.body
         EnvironmentHolder.currentBodyViewBinderStack.removeLast()

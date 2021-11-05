@@ -64,6 +64,17 @@ extension Array where Element == View {
         }
     }
     
+    /// Iterates through all direct and indirect views and maintains optional view info.
+    /// Iterated views have their parent properties merged. If iterated views are part of an
+    /// `OptionalView`, a new `OptionalView` with same information will be created
+    /// to host each view.
+    ///
+    /// This is useful when you want to iterate through all final subviews, even if they
+    /// exist in `ForEach` loops or marked as optional.
+    func totallyFlatIterateWithOptionalViewInfo(viewValues: ViewValues = ViewValues(), action: (View) -> Void) {
+        totallyFlatIterateWithOptionalViewInfo(viewValues: viewValues, action: action, optionalIfBlockId: nil, optionalElseBlockId: nil)
+    }
+    
     /// Groups all views in sections.
     ///
     /// If a view is a `Section`, it won't
@@ -141,6 +152,61 @@ extension Array where Element == View {
                 oldView = oldList[index]
             }
             iterateFullSubviewDiff(subView: subView, oldView: oldView, iteration: iteration, displayIndex: &displayIndex)
+        }
+    }
+    
+    private func totallyFlatIterateWithOptionalViewInfo(viewValues: ViewValues = ViewValues(), action: (View) -> Void, optionalIfBlockId: Int?, optionalElseBlockId: Int?, ifElseType: OptionalView.IfElseType? = nil) {
+        var optionalIfBlockId = optionalIfBlockId
+        var optionalElseBlockId = optionalElseBlockId
+        var ifElseType = ifElseType
+        for view in self {
+            let mergedValues = view.viewStore.merge(defaultValues: viewValues)
+            if let group = view as? (ViewGrouper & View) {
+                group.viewContent.totallyFlatIterateWithOptionalViewInfo(
+                    viewValues: mergedValues,
+                    action: action,
+                    optionalIfBlockId: optionalIfBlockId,
+                    optionalElseBlockId: optionalElseBlockId)
+            } else if let group = view as? OptionalView {
+                if group.ifElseType == .if {
+                    var ifIdValue = 0
+                    if let optionalIfIdValue = optionalIfBlockId {
+                        ifIdValue = optionalIfIdValue + 1
+                    } else {
+                        ifIdValue = 0
+                    }
+                    optionalIfBlockId = ifIdValue
+                    ifElseType = .flattenedIf(ifIdValue)
+                } else if group.ifElseType == .else {
+                    var elseIdValue = 0
+                    if let optionalElseIdValue = optionalElseBlockId {
+                        elseIdValue = optionalElseIdValue + 1
+                    } else {
+                        elseIdValue = 0
+                    }
+                    optionalElseBlockId = elseIdValue
+                    ifElseType = .flattenedElse(elseIdValue)
+                }
+                group.content?.totallyFlatIterateWithOptionalViewInfo(
+                    viewValues: mergedValues,
+                    action: action,
+                    optionalIfBlockId: optionalIfBlockId,
+                    optionalElseBlockId: optionalElseBlockId,
+                    ifElseType: ifElseType)
+            } else if let group = view as? ComparableViewGrouper {
+                group.viewContent.totallyFlatIterateWithOptionalViewInfo(
+                    viewValues: mergedValues,
+                    action: action,
+                    optionalIfBlockId: optionalIfBlockId,
+                    optionalElseBlockId: optionalElseBlockId)
+            } else {
+                var view = view
+                view.viewStore = mergedValues
+                if let ifElseType = ifElseType {
+                    view = OptionalView(content: [view], ifElseType: ifElseType)
+                }
+                action(view)
+            }
         }
     }
     

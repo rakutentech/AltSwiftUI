@@ -193,38 +193,24 @@ extension View {
         }
     }
     
-    /// Returns all direct subviews flattened in a single array. This is useful
+    /// Returns all grouped subviews flattened in a single array. This is useful
     /// when handling the result of `ViewBuilder` or Groups.
     /// If the view doesn't group subviews, returns an array with the current view.
     var subViews: [View] {
-        var views: [View]
-        if let viewGroup = self as? ViewGrouper {
-            views = viewGroup.viewContent
-        } else {
-            views = [self]
-        }
-        
         var flatViews = [View]()
-        views.flatIterate(viewValues: viewStore) { view in
+        firstLevelSubViews.flatIterate(viewValues: viewStore) { view in
             flatViews.append(view)
         }
         return flatViews
     }
     
-    /// Returns all direct subviews flattened in a single array, mapped by the
+    /// Returns all grouped subviews flattened in a single array, mapped by the
     /// `map` closure. This is useful when handling the result of `ViewBuilder`
     /// or Groups.
     /// If the view doesn't group subviews, returns an array with the current view.
     func mappedSubViews(_ map: (View) -> View) -> [View] {
-        var views: [View]
-        if let viewGroup = self as? ViewGrouper {
-            views = viewGroup.viewContent
-        } else {
-            views = [self]
-        }
-        
         var flatViews = [View]()
-        views.flatIterate(viewValues: viewStore) { view in
+        firstLevelSubViews.flatIterate(viewValues: viewStore) { view in
             flatViews.append(map(view))
         }
         return flatViews
@@ -234,16 +220,28 @@ extension View {
     /// This is useful when you want access to all final subviews, even if they
     /// exist in `ForEach` loops or marked as optional.
     /// If the view doesn't group subviews, returns an array with the current view.
+    ///
+    /// __important__: By totally flattening, some view builder information will
+    /// be lost. Not suitable for direct rendering.
     var totallyFlatSubViews: [View] {
-        var views: [View]
-        if let viewGroup = self as? ViewGrouper {
-            views = viewGroup.viewContent
-        } else {
-            views = [self]
-        }
-        
         var flatViews = [View]()
-        views.totallyFlatIterate(viewValues: viewStore) { view in
+        firstLevelSubViews.totallyFlatIterate(viewValues: viewStore) { view in
+            flatViews.append(view)
+        }
+        return flatViews
+    }
+    
+    /// Returns all direct and indirect subviews flattened in a single array by keeping optional
+    /// information.
+    /// This is useful when you want sequential access to all final subviews, even if they
+    /// exist in `ForEach` loops or marked as optional.
+    /// If the view doesn't group subviews, returns an array with the current view.
+    ///
+    /// Views inside an `OptionalView` will be flattened and then each added to a separate
+    /// `OptionalView` that copies the original `OptionalView` information.
+    var totallyFlatSubViewsWithOptionalViewInfo: [View] {
+        var flatViews = [View]()
+        firstLevelSubViews.totallyFlatIterateWithOptionalViewInfo(viewValues: viewStore) { view in
             flatViews.append(view)
         }
         return flatViews
@@ -251,6 +249,14 @@ extension View {
     
     /// Returns only the directly immediate subviews.
     var originalSubViews: [View] {
+        if let viewGroup = self as? ViewGrouper {
+            return viewGroup.viewContent
+        } else {
+            return [self]
+        }
+    }
+    
+    private var firstLevelSubViews: [View] {
         if let viewGroup = self as? ViewGrouper {
             return viewGroup.viewContent
         } else {

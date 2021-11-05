@@ -69,7 +69,6 @@ class SwiftUIScrollView: UIScrollView, UIKitViewHandler {
         }
         
         isPendingFirstLayout = false
-        // TODO: P3 lock tree
     }
     func addMainSubview(_ view: UIView) {
         containerView.addSubview(view)
@@ -184,19 +183,12 @@ class SwiftUIStackView: UIStackView, UIKitViewHandler {
 }
 
 class SwiftUILazyStackView: SwiftUIStackView {
-    class LazyStackTreeLock {
-        var locked = false
-    }
-    
     var isPendingFirstLayout = true
     var viewsLengthSum: CGFloat = 0
     var lastContext: Context?
-    // TODO: P3 Set lazy direction and current tree node in context from scroll view. Build tree in lazyStack: View createView method.
-    weak var lazyStackTreeParent: SwiftUIStackView?
-    var lazyStackTreeChildren: [WeakObject<SwiftUIStackView>] = []
-    var lazyStackTreeLock = LazyStackTreeLock()
     weak var lazyStackScrollView: UIScrollView?
-    var lazyStackContentViews: [View] = []
+    /// Content views totally flattened with optional view information
+    var lazyStackFlattenedContentViews: [View] = []
     var insertLazyContentOnFirstLayout = false
     var lastInsertedIndex: Int {
         arrangedSubviews.count - 1
@@ -220,26 +212,12 @@ class SwiftUILazyStackView: SwiftUIStackView {
     }
     
     override func layoutSubviews() {
-        // TODO: P3 Lock lazy tree
-        let locker = !lazyStackTreeLock.locked
-        if locker {
-            lazyStackTreeLock.locked = true
-        }
-        
         super.layoutSubviews()
         
         if isPendingFirstLayout {
             isPendingFirstLayout = false
             if insertLazyContentOnFirstLayout {
                 insertLazyViews()
-            }
-        }
-        
-        if locker {
-            // TODO:  P3 If locker, insert remaining views.
-            lazyStackTreeLock.locked = false
-            if let scrollView = lazyStackScrollView {
-                
             }
         }
     }
@@ -267,20 +245,25 @@ class SwiftUILazyStackView: SwiftUIStackView {
             return
         }
         
-        // TODO: P3 Insert in last child and use updated size for sum in maxLength
         let lastEdge = lazyStackLastEdge
         var maxCurrentLength = viewsLengthSum
         if maxCurrentLength < lastEdge && bounds.size == .zero {
             layoutIfNeeded()
         }
         while maxCurrentLength < lastEdge {
-            guard let viewToInsert = lazyStackContentViews[safe: lastInsertedIndex + 1],
-                  let uiView = viewToInsert.renderableView(parentContext: lastContext) else {
+            guard var viewToInsert = lazyStackFlattenedContentViews[safe: lastInsertedIndex + 1] else {
                 break
             }
+            if let optionalView = viewToInsert as? OptionalView,
+               let optionalViewFirstContent = optionalView.content?.first {
+                viewToInsert = optionalViewFirstContent
+            }
+            guard let uiView = viewToInsert.renderableView(parentContext: lastContext) else {
+                break
+            }
+            
             let uiViewLength = viewLength(for: uiView)
             addArrangedSubview(uiView)
-            // TODO: P3 Insert in new child and update uiViewLength
             maxCurrentLength += uiViewLength
         }
         viewsLengthSum = maxCurrentLength
@@ -295,23 +278,24 @@ class SwiftUILazyStackView: SwiftUIStackView {
         // Update all loaded views
         let numberOfLoadedViews = arrangedSubviews.count
         let loadedViews = Array(newViews.prefix(numberOfLoadedViews))
-        let loadedOldViews = Array(lazyStackContentViews.prefix(numberOfLoadedViews))
+        let loadedOldViews = Array(lazyStackFlattenedContentViews.prefix(numberOfLoadedViews))
         // update numberOfLoadediews only
         updateViews(loadedViews, oldViews: loadedOldViews, context: lastContext, isEquallySpaced: isEquallySpaced, setEqualDimension: setEqualDimension)
+        
+        lazyStackFlattenedContentViews = newViews
+        
         // Update views length after update
         lastContext.viewOperationQueue.addOperation { [weak self] in
             guard let `self` = self else { return }
+            let previousViewsLength = self.viewsLengthSum
             self.viewsLengthSum = self.viewLength(for: self)
+            
+            // Insert lazy views if there are no layout changes
+            // Layout changes insertion will be handled by the scroll view.
+            if previousViewsLength == self.viewsLengthSum {
+                self.insertLazyViews()
+            }
         }
-        
-        lazyStackContentViews = newViews
-    }
-    
-    func appendToLazyStackTreeParent(_ parent: SwiftUILazyStackView) {
-        lazyStackTreeParent = parent
-        parent.lazyStackTreeChildren.append(WeakObject(object: self))
-        lazyStackTreeLock = parent.lazyStackTreeLock
-        lazyStackScrollView = parent.lazyStackScrollView
     }
     
     private func viewLength(for view: UIView) -> CGFloat {

@@ -18,7 +18,7 @@ import UIKit
 /// It's not recommended to use this view outside a `ScrollView` as there is no
 /// lazy loading benefit and there will be some extra overhead as compared to using a
 /// `VStack`.
-public struct LazyVStack: LazyStack {
+public struct LazyVStack: LazyStack, View {
     public var viewStore = ViewValues()
     
     let viewContentBuilder: () -> View

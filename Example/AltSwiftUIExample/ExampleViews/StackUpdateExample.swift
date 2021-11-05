@@ -42,6 +42,7 @@ struct StackUpdateExample: View {
                     Text("First text")
                 } else {
                     Text("Pre: First text")
+                        .background(.blue)
                 }
                 if update {
                     Button("First button") {

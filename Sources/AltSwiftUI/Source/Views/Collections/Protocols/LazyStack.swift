@@ -25,7 +25,7 @@ extension LazyStack {
     
     func updateLoadedViews(view: SwiftUILazyStackView) {
         view.updateLazyViews(
-            newViews: viewContentBuilder().totallyFlatSubViews,
+            newViews: viewContentBuilder().totallyFlatSubViewsWithOptionalViewInfo,
             isEquallySpaced: noPropertiesStack.subviewIsEquallySpaced,
             setEqualDimension: noPropertiesStack.setSubviewEqualDimension)
     }
@@ -43,11 +43,9 @@ extension LazyStack {
             updateStackAlignment(stack: stackView)
             stackView.spacing = spacing
             stackView.lastContext = context
-            stackView.lazyStackContentViews = viewContentBuilder().totallyFlatSubViews
+            stackView.lazyStackFlattenedContentViews = viewContentBuilder().totallyFlatSubViewsWithOptionalViewInfo
             stackView.lazyStackScrollView = scrollView
             
-            // TODO: P3 insert subviews only if root stack in scroll
-            // Make sure insertRemainingViews is called after rendering
             context.postRenderOperationQueue.addOperation {
                 let insertSubviews = { [weak stackView] in
                     guard let stackView = stackView else { return }
