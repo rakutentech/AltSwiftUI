@@ -13,7 +13,7 @@ import Foundation
 ///
 /// ViewBuilder is used when passing children views as parameter to a parent
 /// view.
-@resultBuilder
+@_functionBuilder
 public enum ViewBuilder {
     public static func buildBlock() -> EmptyView {
         EmptyView()
