@@ -58,7 +58,7 @@ extension VStack: Renderable {
             stackView = bgView.content
         }
         
-        guard let concreteStackView = stackView as? UIStackView else { return }
+        guard let concreteStackView = stackView as? SwiftUIStackView else { return }
         setupView(concreteStackView, context: context)
         
         if let oldViewContent = oldViewContent {
@@ -70,7 +70,7 @@ extension VStack: Renderable {
         }
     }
     
-    private func setupView(_ view: UIStackView, context: Context) {
+    private func setupView(_ view: SwiftUIStackView, context: Context) {
         view.setStackAlignment(alignment: alignment)
         view.spacing = spacing ?? 0
     }

@@ -156,6 +156,8 @@ class SwiftUITableView: UITableView, UIKitViewHandler {
 }
 
 class SwiftUIStackView: UIStackView, UIKitViewHandler {
+    var hiddenSubviewsCount = 0
+    
     deinit {
         executeDisappearHandler()
     }
@@ -180,6 +182,145 @@ class SwiftUIStackView: UIStackView, UIKitViewHandler {
         super.layoutSubviews()
         notifyGeometryListener(frame: frame)
     }
+    
+    var nonHiddenSubviewsCount: Int {
+        arrangedSubviews.count - hiddenSubviewsCount
+    }
+    
+    func addViews(_ views: [View], context: Context, isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
+        context.viewOperationQueue.addOperation { [weak self] in
+            guard let `self` = self else { return }
+            var equalViews = [UIView]()
+            views.iterateFullViewInsert { view in
+                if let renderView = view.renderableView(parentContext: context, drainRenderQueue: false) {
+                    if isEquallySpaced(view) {
+                        equalViews.append(renderView)
+                    }
+                    self.addArrangedSubview(renderView)
+                }
+            }
+            if equalViews.count > 1 {
+                for i in 1..<equalViews.count {
+                    setEqualDimension(equalViews[i - 1], equalViews[i])
+                }
+            }
+        }
+    }
+    func updateFirstView(view: View, context: Context) {
+        guard let firstUIView = arrangedSubviews.first else { return }
+        view.scheduleUpdateRender(uiView: firstUIView, parentContext: context)
+    }
+    func updateViews(_ views: [View], oldViews: [View], context: Context, isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
+        context.viewOperationQueue.addOperation { [weak self] in
+            guard let `self` = self else { return }
+            
+            var equalViews = [UIView]()
+            var equalViewReference: UIView?
+            
+            var indexSkip = 0
+            views.iterateFullViewDiff(oldList: oldViews) { i, operation in
+                let index = i + indexSkip
+                switch operation {
+                case .insert(let view):
+                    if let uiView = view.renderableView(parentContext: context, drainRenderQueue: false) {
+                        self.insertArrangedSubview(uiView, at: index)
+                        if isEquallySpaced(view) {
+                            equalViews.append(uiView)
+                        }
+                        if let animation = context.transaction?.animation {
+                            uiView.isHidden = true
+                            animation.performAnimation({
+                                uiView.isHidden = false
+                            })
+                        }
+                        view.performInsertTransition(view: uiView, animation: context.transaction?.animation) {}
+                    }
+                case .delete(let view):
+                    guard let nonHiddenSubView = self.firstNonHiddenSubview(index: index) else {
+                        break
+                    }
+                    
+                    let uiView = nonHiddenSubView.uiView
+                    indexSkip += nonHiddenSubView.skippedSubViews
+                    let removeGroup = DispatchGroup()
+                    
+                    let viewAnim = context.viewValues?.animatedValues?.first?.animation
+                    if let animation = viewAnim ?? context.transaction?.animation {
+                        removeGroup.enter()
+                        animation.performAnimation({
+                            uiView.isHidden = true
+                        }) {
+                            removeGroup.leave()
+                        }
+                    } else {
+                        uiView.isHidden = true
+                    }
+                    self.hiddenSubviewsCount += 1
+                    
+                    removeGroup.enter()
+                    view.performRemovalTransition(view: uiView, animation: context.transaction?.animation, completion: {
+                        removeGroup.leave()
+                    })
+                    
+                    removeGroup.notify(queue: .main) {
+                        uiView.removeFromSuperview()
+                        self.hiddenSubviewsCount -= 1
+                    }
+                case .update(let view):
+                    guard let nonHiddenSubView = self.firstNonHiddenSubview(index: index) else {
+                        break
+                    }
+                    
+                    let uiView = nonHiddenSubView.uiView
+                    indexSkip += nonHiddenSubView.skippedSubViews
+                    view.updateRender(uiView: uiView, parentContext: context, drainRenderQueue: false)
+                    if equalViewReference == nil && isEquallySpaced(view) {
+                        equalViewReference = uiView
+                    }
+                }
+            }
+            if let equalViewReference = equalViewReference {
+                equalViews.insert(equalViewReference, at: 0)
+            }
+            
+            if equalViews.count > 1 {
+                for i in 1..<equalViews.count {
+                    setEqualDimension(equalViews[i - 1], equalViews[i])
+                }
+            }
+        }
+    }
+    func firstNonHiddenSubview(index: Int) -> (uiView: UIView, skippedSubViews: Int)? {
+        var movingIndex = index
+        while arrangedSubviews.count > movingIndex {
+            let uiView = arrangedSubviews[movingIndex]
+            if !uiView.isHidden {
+                return (uiView: uiView, skippedSubViews: movingIndex - index)
+            }
+            movingIndex += 1
+        }
+        return nil
+    }
+    func setStackAlignment(alignment: HorizontalAlignment) {
+        switch alignment {
+        case .leading:
+            self.alignment = .leading
+        case .center:
+            self.alignment = .center
+        case .trailing:
+            self.alignment = .trailing
+        }
+    }
+    func setStackAlignment(alignment: VerticalAlignment) {
+        switch alignment {
+        case .top:
+            self.alignment = .top
+        case .center:
+            self.alignment = .center
+        case .bottom:
+            self.alignment = .bottom
+        }
+    }
 }
 
 class SwiftUILazyStackView: SwiftUIStackView {
@@ -191,7 +332,7 @@ class SwiftUILazyStackView: SwiftUIStackView {
     var lazyStackFlattenedContentViews: [View] = []
     var insertLazyContentOnFirstLayout = false
     var lastInsertedIndex: Int {
-        arrangedSubviews.count - 1
+        nonHiddenSubviewsCount - 1
     }
     var lazyStackLastEdge: CGFloat {
         if axis == .horizontal {
@@ -267,6 +408,8 @@ class SwiftUILazyStackView: SwiftUIStackView {
             maxCurrentLength += uiViewLength
         }
         viewsLengthSum = maxCurrentLength
+        
+        lastContext.executePostRender()
     }
     
     /// Updates only loaded views
@@ -276,7 +419,7 @@ class SwiftUILazyStackView: SwiftUIStackView {
         }
         
         // Update all loaded views
-        let numberOfLoadedViews = arrangedSubviews.count
+        let numberOfLoadedViews = nonHiddenSubviewsCount
         let loadedViews = Array(newViews.prefix(numberOfLoadedViews))
         let loadedOldViews = Array(lazyStackFlattenedContentViews.prefix(numberOfLoadedViews))
         // update numberOfLoadediews only

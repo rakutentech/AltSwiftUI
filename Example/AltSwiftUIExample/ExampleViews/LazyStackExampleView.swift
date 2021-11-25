@@ -78,6 +78,9 @@ struct LazyStackContentView: View {
                     Text("Yolo")
                 }
                 Text("First")
+                    .onAppear {
+                        print("First lazy view appear")
+                    }
                 Text("First Sec sdfusdfk jsdf isdjfosi asdasd asdasd asd asdasd asdas dasdasd asd a")
                 Text("First")
                     .frame(height: expand ? 30 : 250)
@@ -147,6 +150,9 @@ struct LazyStackContentView: View {
                     Text("Second5")
                         .frame(height: 200)
                         .background(.green)
+                        .onAppear {
+                            print("Last lazy view appear")
+                        }
                 }
             } else {
                 newDataViews

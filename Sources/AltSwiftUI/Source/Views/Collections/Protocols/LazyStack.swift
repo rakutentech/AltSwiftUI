@@ -52,7 +52,6 @@ extension LazyStack {
                     // Render operation initiated by UIKit layout
                     // calls rather than AltSwiftUI render cycle.
                     insertRemainingViews(view: stackView)
-                    stackView.lastContext?.executePostRender()
                 }
                 scrollView.executeOnNewLayout(insertSubviews)
             }
