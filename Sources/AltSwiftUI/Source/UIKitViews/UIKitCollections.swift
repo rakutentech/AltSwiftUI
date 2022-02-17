@@ -358,7 +358,7 @@ class SwiftUILazyStackView: SwiftUIStackView {
         if isPendingFirstLayout {
             isPendingFirstLayout = false
             if insertLazyContentOnFirstLayout {
-                insertLazyViews()
+                insertViewsUntilVisibleArea()
             }
         }
     }
@@ -377,7 +377,7 @@ class SwiftUILazyStackView: SwiftUIStackView {
     }
     
     /// Inserts views since the last inserted index until the last view of the visible area
-    func insertLazyViews() {
+    func insertViewsUntilVisibleArea() {
         guard let lastContext = lastContext else {
             return
         }
@@ -412,8 +412,9 @@ class SwiftUILazyStackView: SwiftUIStackView {
         lastContext.executePostRender()
     }
     
-    /// Updates only loaded views
-    func updateLazyViews(newViews: [View], isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
+    /// Updates loaded views and insert views if resulting content size
+    /// is less than the content size + visible area.
+    func updateLazyStack(newViews: [View], isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
         guard let lastContext = lastContext else {
             return
         }
@@ -436,7 +437,7 @@ class SwiftUILazyStackView: SwiftUIStackView {
             // Insert lazy views if there are no layout changes
             // Layout changes insertion will be handled by the scroll view.
             if previousViewsLength == self.viewsLengthSum {
-                self.insertLazyViews()
+                self.insertViewsUntilVisibleArea()
             }
         }
     }

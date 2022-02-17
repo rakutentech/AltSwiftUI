@@ -20,11 +20,11 @@ extension LazyStack {
     /// Insert latest updated view content. Should be called outside of actual
     /// create and update operations
     func insertRemainingViews(view: SwiftUILazyStackView) {
-        view.insertLazyViews()
+        view.insertViewsUntilVisibleArea()
     }
     
     func updateLoadedViews(view: SwiftUILazyStackView) {
-        view.updateLazyViews(
+        view.updateLazyStack(
             newViews: viewContentBuilder().totallyFlatSubViewsWithOptionalViewInfo,
             isEquallySpaced: noPropertiesStack.subviewIsEquallySpaced,
             setEqualDimension: noPropertiesStack.setSubviewEqualDimension)
