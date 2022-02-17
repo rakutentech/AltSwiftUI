@@ -85,8 +85,19 @@ extension PaddingView: Renderable {
 // MARK: - Builder Views
 
 public struct OptionalView: View {
-    enum IfElseType {
-        case `if`, `else`
+    enum IfElseType: Equatable {
+        /// Views inside 'if' statement
+        case `if`
+        /// Views inside 'else' statement
+        case `else`
+        /// View inside if statements. Used when views in multiple if/else levels
+        /// are flattened. The `Int` value is used to uniquely identify each if/else block after
+        /// flattening.
+        case flattenedIf(Int)
+        /// View inside else statements. Used when views in multiple if/else levels
+        /// are flattened. The `Int` value is used to uniquely identify each if/else block after
+        /// flattening.
+        case flattenedElse(Int)
     }
     
     public var viewStore = ViewValues()

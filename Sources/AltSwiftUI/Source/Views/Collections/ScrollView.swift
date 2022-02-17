@@ -26,8 +26,8 @@ public struct ScrollView: View {
     var interactiveScrollEnabled = true
     var keyboardDismissMode: UIScrollView.KeyboardDismissMode?
     
-    public init(_ axis: Axis = .vertical, showsIndicators: Bool = true, @ViewBuilder content: () -> View) {
-        contentView = content().subViews.first
+    public init(_ axis: Axis = .vertical, showsIndicators: Bool = true, content: () -> View) {
+        contentView = content()
         self.axis = axis
         self.showsIndicators = showsIndicators
     }
@@ -128,19 +128,11 @@ extension ScrollView: Renderable {
             scrollView.showsHorizontalScrollIndicator = false
         }
         context.viewOperationQueue.addOperation {
-            if let renderView = self.contentView?.renderableView(parentContext: context, drainRenderQueue: false) {
-                let container = UIView().noAutoresizingMask()
-                container.addSubview(renderView)
-                scrollView.addSubview(container)
-                scrollView.contentView = renderView
-                
-                renderView.edgesAnchorEqualTo(destinationView: container).activate()
-                container.edgesAnchorEqualTo(destinationView: scrollView).activate()
-                if self.axis == .horizontal {
-                    scrollView.heightAnchor.constraint(equalTo: renderView.heightAnchor).isActive = true
-                } else if self.axis == .vertical {
-                    scrollView.widthAnchor.constraint(equalTo: renderView.widthAnchor).isActive = true
-                }
+            var subviewContext = context
+            subviewContext.parentScrollView = scrollView
+            
+            if let renderView = self.contentView?.renderableView(parentContext: subviewContext, drainRenderQueue: false) {
+                scrollView.addMainSubview(renderView)
             }
         }
         setupView(scrollView, context: context)
@@ -153,11 +145,11 @@ extension ScrollView: Renderable {
                 ignoresHighPerformance
         else { return }
         
-        let updatedContext = context
-        
         setupView(view, context: context)
         if let subView = view.contentView {
-            contentView?.scheduleUpdateRender(uiView: subView, parentContext: updatedContext)
+            var subviewContext = context
+            subviewContext.parentScrollView = view
+            contentView?.scheduleUpdateRender(uiView: subView, parentContext: subviewContext)
         }
     }
     

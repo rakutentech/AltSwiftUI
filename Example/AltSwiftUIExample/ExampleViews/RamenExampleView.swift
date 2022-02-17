@@ -54,7 +54,7 @@ struct RamenExampleView: View {
     var viewStore = ViewValues()
     
     @StateObject var ramenModel = RamenModel()
-    @State private var ramenInOrder: Bool = false
+    @State private var ramenInOrder = false
     @State private var offset: CGPoint = .zero
     @State private var imageGeometry: GeometryProxy = .default
     @State private var appliedRect: CGRect?

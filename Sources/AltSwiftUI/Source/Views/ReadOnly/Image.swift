@@ -27,7 +27,7 @@ public struct Image: View {
         EmptyView()
     }
     private(set) var image: UIImage
-    var isResizable: Bool = false
+    var isResizable = false
     var renderingMode: Image.TemplateRenderingMode?
     
     /// Initializes an `Image` with a `UIImage`.

@@ -9,7 +9,7 @@
 import UIKit
 
 /// This view arranges subviews vertically.
-public struct VStack: View {
+public struct VStack: View, Stack {
     public var viewStore = ViewValues()
     let viewContent: [View]
     let alignment: HorizontalAlignment
@@ -36,21 +36,8 @@ public struct VStack: View {
 
 extension VStack: Renderable {
     public func updateView(_ view: UIView, context: Context) {
-        var stackView = view
-        if let bgView = view as? BackgroundView {
-            stackView = bgView.content
-        }
-        
-        guard let concreteStackView = stackView as? UIStackView else { return }
-        setupView(concreteStackView, context: context)
-        
-        if let oldVStack = view.lastRenderableView?.view as? VStack {
-            concreteStackView.updateViews(viewContent,
-                             oldViews: oldVStack.viewContent,
-                             context: context,
-                             isEquallySpaced: subviewIsEquallySpaced,
-                             setEqualDimension: setSubviewEqualDimension)
-        }
+        let oldVStackViewContent = (view.lastRenderableView?.view as? VStack)?.viewContent
+        updateView(view, context: context, oldViewContent: oldVStackViewContent)
     }
     
     public func createView(context: Context) -> UIView {
@@ -65,12 +52,30 @@ extension VStack: Renderable {
         }
     }
     
-    private func setupView(_ view: UIStackView, context: Context) {
+    func updateView(_ view: UIView, context: Context, oldViewContent: [View]? = nil) {
+        var stackView = view
+        if let bgView = view as? BackgroundView {
+            stackView = bgView.content
+        }
+        
+        guard let concreteStackView = stackView as? SwiftUIStackView else { return }
+        setupView(concreteStackView, context: context)
+        
+        if let oldViewContent = oldViewContent {
+            concreteStackView.updateViews(viewContent,
+                             oldViews: oldViewContent,
+                             context: context,
+                             isEquallySpaced: subviewIsEquallySpaced,
+                             setEqualDimension: setSubviewEqualDimension)
+        }
+    }
+    
+    private func setupView(_ view: SwiftUIStackView, context: Context) {
         view.setStackAlignment(alignment: alignment)
         view.spacing = spacing ?? 0
     }
     
-    private var subviewIsEquallySpaced: (View) -> Bool { { view in
+    var subviewIsEquallySpaced: (View) -> Bool { { view in
            if (view is Spacer ||
                view.viewStore.viewDimensions?.maxHeight == CGFloat.limitForUI
                )
@@ -83,7 +88,7 @@ extension VStack: Renderable {
         }
     }
     
-    private var setSubviewEqualDimension: (UIView, UIView) -> Void { { firstView, secondView in
+    var setSubviewEqualDimension: (UIView, UIView) -> Void { { firstView, secondView in
             firstView.heightAnchor.constraint(equalTo: secondView.heightAnchor).isActive = true
         }
     }

@@ -16,7 +16,7 @@ enum EnvironmentHolder {
     static var environmentObjects: [String: ObservableObject] = [:]
     static var globalAnimation: Animation?
     static var coordinateSpaceNames = [String: WeakObject<UIView>]()
-    static var highPerformanceMode: Bool = false
+    static var highPerformanceMode = false
     static var notifyStateChanges = true
     
     static var notificationUserInfo: [AnyHashable: Any] {
@@ -66,6 +66,9 @@ public struct Context {
     var viewOperationQueue = ViewOperationQueue()
     var postRenderOperationQueue = ViewOperationQueue()
     
+    /// If current context is inside a scroll view, the reference is stored here.
+    weak var parentScrollView: SwiftUIScrollView?
+    
     /// True when the current view context is inside a button. Use this
     /// to handle special View behavior when inside buttons.
     var isInsideButton = false
@@ -83,13 +86,21 @@ public struct Context {
     var isStrictUpdate: Bool {
         transaction?.isHighPerformance == true && viewValues?.strictOnHighPerformance == true
     }
+    
+    /// Should be called at the end of any root render operation to
+    /// finalize any pending view setup.
+    func executePostRender(preventExecutionInNextAppear: Bool = false) {
+        rootController?.executeLazyConstraints()
+        rootController?.executeInsertAppearHandlers(preventExecutionInNextAppear: preventExecutionInNextAppear)
+        postRenderOperationQueue.drainRecursively()
+    }
 }
 
 extension Context {
     /// Merges values that can be inherited and takes priority from `viewValues`.
     func merge(viewValues: ViewValues?) -> Context {
         if let viewValues = viewValues {
-            return Context(viewValues: viewValues.merge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, postRenderOperationQueue: postRenderOperationQueue, isInsideButton: isInsideButton)
+            return Context(viewValues: viewValues.merge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, postRenderOperationQueue: postRenderOperationQueue, parentScrollView: parentScrollView, isInsideButton: isInsideButton)
         } else {
             return self
         }
@@ -98,7 +109,7 @@ extension Context {
     /// Merges all values and takes priority from `viewValues`.
     func completeMerge(viewValues: ViewValues?) -> Context {
         if let viewValues = viewValues {
-            return Context(viewValues: viewValues.completeMerge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, postRenderOperationQueue: postRenderOperationQueue, isInsideButton: isInsideButton)
+            return Context(viewValues: viewValues.completeMerge(defaultValues: self.viewValues), rootController: rootController, overwriteRootController: overwriteRootController, transaction: transaction, viewOperationQueue: viewOperationQueue, postRenderOperationQueue: postRenderOperationQueue, parentScrollView: parentScrollView, isInsideButton: isInsideButton)
         } else {
             return self
         }
@@ -156,9 +167,9 @@ public struct Transaction {
     }
     var animation: Animation?
 
-    var disablesAnimations: Bool = false
+    var disablesAnimations = false
     
-    var isHighPerformance: Bool = false
+    var isHighPerformance = false
     
     /// When the animation in this transaction takes priority over other transactions.
     /// Usually when animating with `View.animation()`.

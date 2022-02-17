@@ -30,18 +30,20 @@ class ViewBinder {
     var isQueuingStandardUpdate = false
     var isInsideButton: Bool
     var overwriteTransaction: OverwriteTransaction?
+    weak var parentScrollView: SwiftUIScrollView?
     
     /// The body level describes how many parent views the current view
     /// has to traverse to reach the topmost View in the hierarchy associated
     /// to the same `UIView`.
     var bodyLevel: Int
     
-    init(view: View, rootController: ScreenViewController?, bodyLevel: Int, isInsideButton: Bool, overwriteTransaction: OverwriteTransaction?) {
+    init(view: View, rootController: ScreenViewController?, bodyLevel: Int, isInsideButton: Bool, overwriteTransaction: OverwriteTransaction?, parentScrollView: SwiftUIScrollView?) {
         self.view = view
         self.rootController = rootController
         self.bodyLevel = bodyLevel
         self.isInsideButton = isInsideButton
         self.overwriteTransaction = overwriteTransaction
+        self.parentScrollView = parentScrollView
     }
 
     func registerStateNotification(origin: Any) {
@@ -68,6 +70,7 @@ class ViewBinder {
                     overwriteRootController: overwriteRootController,
                     transaction: overwriteTransaction?.transaction ?? transaction,
                     postRenderOperationQueue: postRenderQueue,
+                    parentScrollView: parentScrollView,
                     isInsideButton: isInsideButton),
                 bodyLevel: bodyLevel)
             rootController?.executeLazyConstraints()
@@ -89,7 +92,7 @@ class ViewBinder {
             // TODO: Improves view update performance,
             // but causes small delay. Need to find better way
             // to queue without delay, before render happens.
-            //queueRenderUpdate(transaction: transaction)
+            // queueRenderUpdate(transaction: transaction)
             updateView(transaction: transaction)
         }
     }

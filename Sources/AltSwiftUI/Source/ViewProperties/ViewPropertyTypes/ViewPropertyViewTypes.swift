@@ -20,7 +20,7 @@ public struct Alert {
     let secondaryButton: Alert.Button?
     var alertIsPresented: Binding<Bool>?
     ///  Whether the alert should be displayed from the foremost view or not. This is not a native SwiftUI feature
-    var displayOnForegroundView: Bool = false
+    var displayOnForegroundView = false
 
     /// Creates an alert with one button.
     public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil) {
@@ -78,7 +78,7 @@ public struct ActionSheet {
     let buttons: [Button]
     var actionSheetIsPresented: Binding<Bool>?
     ///  Whether the alert should be displayed from the foremost view or not. This is not a native SwiftUI feature
-    var displayOnForegroundView: Bool = false
+    var displayOnForegroundView = false
 
     /// Creates an action sheet with the provided buttons.
     ///

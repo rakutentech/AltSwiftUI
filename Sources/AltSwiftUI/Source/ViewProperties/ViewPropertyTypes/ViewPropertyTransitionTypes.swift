@@ -17,7 +17,7 @@ public struct AnyTransition {
         var transform: CGAffineTransform?
         var opacity: CGFloat?
         var animation: Animation?
-        var replaceTransform: Bool = false
+        var replaceTransform = false
         
         func combining(_ transition: InternalTransition) -> InternalTransition {
             var base = self

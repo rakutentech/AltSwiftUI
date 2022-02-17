@@ -64,6 +64,17 @@ extension Array where Element == View {
         }
     }
     
+    /// Iterates through all direct and indirect views and maintains optional view info.
+    /// Iterated views have their parent properties merged. If iterated views are part of an
+    /// `OptionalView`, a new `OptionalView` with same information will be created
+    /// to host each view.
+    ///
+    /// This is useful when you want to iterate through all final subviews, even if they
+    /// exist in `ForEach` loops or marked as optional.
+    func totallyFlatIterateWithOptionalViewInfo(viewValues: ViewValues = ViewValues(), action: (View) -> Void) {
+        totallyFlatIterateWithOptionalViewInfo(viewValues: viewValues, action: action, optionalIfBlockId: nil, optionalElseBlockId: nil)
+    }
+    
     /// Groups all views in sections.
     ///
     /// If a view is a `Section`, it won't
@@ -141,6 +152,61 @@ extension Array where Element == View {
                 oldView = oldList[index]
             }
             iterateFullSubviewDiff(subView: subView, oldView: oldView, iteration: iteration, displayIndex: &displayIndex)
+        }
+    }
+    
+    private func totallyFlatIterateWithOptionalViewInfo(viewValues: ViewValues = ViewValues(), action: (View) -> Void, optionalIfBlockId: Int?, optionalElseBlockId: Int?, ifElseType: OptionalView.IfElseType? = nil) {
+        var optionalIfBlockId = optionalIfBlockId
+        var optionalElseBlockId = optionalElseBlockId
+        var ifElseType = ifElseType
+        for view in self {
+            let mergedValues = view.viewStore.merge(defaultValues: viewValues)
+            if let group = view as? (ViewGrouper & View) {
+                group.viewContent.totallyFlatIterateWithOptionalViewInfo(
+                    viewValues: mergedValues,
+                    action: action,
+                    optionalIfBlockId: optionalIfBlockId,
+                    optionalElseBlockId: optionalElseBlockId)
+            } else if let group = view as? OptionalView {
+                if group.ifElseType == .if {
+                    var ifIdValue = 0
+                    if let optionalIfIdValue = optionalIfBlockId {
+                        ifIdValue = optionalIfIdValue + 1
+                    } else {
+                        ifIdValue = 0
+                    }
+                    optionalIfBlockId = ifIdValue
+                    ifElseType = .flattenedIf(ifIdValue)
+                } else if group.ifElseType == .else {
+                    var elseIdValue = 0
+                    if let optionalElseIdValue = optionalElseBlockId {
+                        elseIdValue = optionalElseIdValue + 1
+                    } else {
+                        elseIdValue = 0
+                    }
+                    optionalElseBlockId = elseIdValue
+                    ifElseType = .flattenedElse(elseIdValue)
+                }
+                group.content?.totallyFlatIterateWithOptionalViewInfo(
+                    viewValues: mergedValues,
+                    action: action,
+                    optionalIfBlockId: optionalIfBlockId,
+                    optionalElseBlockId: optionalElseBlockId,
+                    ifElseType: ifElseType)
+            } else if let group = view as? ComparableViewGrouper {
+                group.viewContent.totallyFlatIterateWithOptionalViewInfo(
+                    viewValues: mergedValues,
+                    action: action,
+                    optionalIfBlockId: optionalIfBlockId,
+                    optionalElseBlockId: optionalElseBlockId)
+            } else {
+                var view = view
+                view.viewStore = mergedValues
+                if let ifElseType = ifElseType {
+                    view = OptionalView(content: [view], ifElseType: ifElseType)
+                }
+                action(view)
+            }
         }
     }
     
@@ -328,146 +394,6 @@ extension RandomAccessCollection {
     
     func containsId<ID: Hashable>(_ id: ID, idFetcher: (Element) -> ID) -> Bool {
         contains { idFetcher($0) == id }
-    }
-}
-
-extension UIStackView {
-    func addViews(_ views: [View], context: Context, isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
-        context.viewOperationQueue.addOperation { [weak self] in
-            guard let `self` = self else { return }
-            var equalViews = [UIView]()
-            views.iterateFullViewInsert { view in
-                if let renderView = view.renderableView(parentContext: context, drainRenderQueue: false) {
-                    if isEquallySpaced(view) {
-                        equalViews.append(renderView)
-                    }
-                    self.addArrangedSubview(renderView)
-                }
-            }
-            if equalViews.count > 1 {
-                for i in 1..<equalViews.count {
-                    setEqualDimension(equalViews[i - 1], equalViews[i])
-                }
-            }
-        }
-    }
-    func updateFirstView(view: View, context: Context) {
-        guard let firstUIView = arrangedSubviews.first else { return }
-        view.scheduleUpdateRender(uiView: firstUIView, parentContext: context)
-    }
-    func updateViews(_ views: [View], oldViews: [View], context: Context, isEquallySpaced: @escaping (View) -> Bool, setEqualDimension: @escaping (UIView, UIView) -> Void) {
-        context.viewOperationQueue.addOperation { [weak self] in
-            guard let `self` = self else { return }
-            
-            var equalViews = [UIView]()
-            var equalViewReference: UIView?
-            
-            var indexSkip = 0
-            views.iterateFullViewDiff(oldList: oldViews) { i, operation in
-                let index = i + indexSkip
-                switch operation {
-                case .insert(let view):
-                    if let uiView = view.renderableView(parentContext: context, drainRenderQueue: false) {
-                        self.insertArrangedSubview(uiView, at: index)
-                        if isEquallySpaced(view) {
-                            equalViews.append(uiView)
-                        }
-                        if let animation = context.transaction?.animation {
-                            uiView.isHidden = true
-                            animation.performAnimation({
-                                uiView.isHidden = false
-                            })
-                        }
-                        view.performInsertTransition(view: uiView, animation: context.transaction?.animation) {}
-                    }
-                case .delete(let view):
-                    guard let nonHiddenSubView = self.firstNonHiddenSubview(index: index) else {
-                        break
-                    }
-                    
-                    let uiView = nonHiddenSubView.uiView
-                    indexSkip += nonHiddenSubView.skippedSubViews
-                    let removeGroup = DispatchGroup()
-                    
-                    let viewAnim = context.viewValues?.animatedValues?.first?.animation
-                    if let animation = viewAnim ?? context.transaction?.animation {
-                        removeGroup.enter()
-                        animation.performAnimation({
-                            uiView.isHidden = true
-                        }) {
-                            removeGroup.leave()
-                        }
-                    } else {
-                        uiView.isHidden = true
-                    }
-                    
-                    removeGroup.enter()
-                    view.performRemovalTransition(view: uiView, animation: context.transaction?.animation, completion: {
-                        removeGroup.leave()
-                    })
-                    
-                    removeGroup.notify(queue: .main) {
-                        uiView.removeFromSuperview()
-                    }
-                case .update(let view):
-                    guard let nonHiddenSubView = self.firstNonHiddenSubview(index: index) else {
-                        break
-                    }
-                    
-                    let uiView = nonHiddenSubView.uiView
-                    indexSkip += nonHiddenSubView.skippedSubViews
-                    view.updateRender(uiView: uiView, parentContext: context, drainRenderQueue: false)
-                    if equalViewReference == nil && isEquallySpaced(view) {
-                        equalViewReference = uiView
-                    }
-                }
-            }
-            if let equalViewReference = equalViewReference {
-                equalViews.insert(equalViewReference, at: 0)
-            }
-            
-            if equalViews.count > 1 {
-                for i in 1..<equalViews.count {
-                    setEqualDimension(equalViews[i - 1], equalViews[i])
-                }
-            }
-        }
-    }
-    func firstNonHiddenSubview(index: Int) -> (uiView: UIView, skippedSubViews: Int)? {
-        var movingIndex = index
-        while arrangedSubviews.count > movingIndex {
-            let uiView = arrangedSubviews[movingIndex]
-            if !uiView.isHidden {
-                return (uiView: uiView, skippedSubViews: movingIndex - index)
-            }
-            movingIndex += 1
-        }
-        return nil
-    }
-    func setStackAlignment(alignment: HorizontalAlignment) {
-        switch alignment {
-        case .leading:
-            self.alignment = .leading
-        case .center:
-            self.alignment = .center
-        case .trailing:
-            self.alignment = .trailing
-        }
-    }
-    func setStackAlignment(alignment: VerticalAlignment) {
-        switch alignment {
-        case .top:
-            self.alignment = .top
-        case .center:
-            self.alignment = .center
-        case .bottom:
-            self.alignment = .bottom
-        }
-    }
-    private func removeAllSubviews() {
-        for view in arrangedSubviews {
-            view.removeFromSuperview()
-        }
     }
 }
 

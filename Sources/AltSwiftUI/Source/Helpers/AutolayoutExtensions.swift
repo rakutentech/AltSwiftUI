@@ -216,6 +216,22 @@ extension UIView {
          rightAnchor.constraint(equalTo: safeRight ? view.safeAreaLayoutGuide.rightAnchor : view.rightAnchor)]
     }
     
+    func edgesAnchorEqualTo(
+        view: UIView,
+        safeLeft: Bool = false,
+        safeTop: Bool = false,
+        safeRight: Bool = false,
+        safeBottom: Bool = false,
+        leftPriority: UILayoutPriority = .required,
+        topPriority: UILayoutPriority = .required,
+        rightPriority: UILayoutPriority = .required,
+        bottomPriority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
+        [topAnchor.constraint(equalTo: safeTop ? view.safeTopAnchor : view.topAnchor).withPriority(topPriority),
+         leftAnchor.constraint(equalTo: safeLeft ? view.safeAreaLayoutGuide.leftAnchor : view.leftAnchor).withPriority(leftPriority),
+         bottomAnchor.constraint(equalTo: safeBottom ? view.safeBottomAnchor : view.bottomAnchor).withPriority(bottomPriority),
+         rightAnchor.constraint(equalTo: safeRight ? view.safeAreaLayoutGuide.rightAnchor : view.rightAnchor).withPriority(rightPriority)]
+    }
+    
     func leftAnchorEquals(_ view: UIView, safe: Bool = false) -> NSLayoutConstraint {
         leftAnchor.constraint(equalTo: !safe ? view.leftAnchor : view.safeAreaLayoutGuide.leftAnchor)
     }

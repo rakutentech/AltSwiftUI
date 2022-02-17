@@ -22,6 +22,7 @@ struct ExampleView: View {
     var views: [ExampleViewData] = [
         ExampleViewData(title: "2 Axis Scroll", destination: ScrollView2AxisExampleView()),
         ExampleViewData(title: "Alerts", destination: AlertsExampleView()),
+        ExampleViewData(title: "LazyStack", destination: LazyStackExampleView()),
         ExampleViewData(title: "List", destination: ListExampleView()),
         ExampleViewData(title: "List + TextField", destination: ListTextFieldExampleView()),
         ExampleViewData(title: "Menu", destination: MenuExampleView()),
@@ -29,7 +30,6 @@ struct ExampleView: View {
         ExampleViewData(title: "Ramen Example", destination: RamenExampleView()),
         ExampleViewData(title: "ScrollView + TextField", destination: ScrollViewTextFieldExampleView()),
         ExampleViewData(title: "SecureField", destination: SecureFieldExampleView()),
-        ExampleViewData(title: "Stack Update", destination: StackUpdateExample()),
         ExampleViewData(title: "Shapes", destination: ShapesExampleView()),
         ExampleViewData(title: "Stack Update", destination: StackUpdateExample()),
         ExampleViewData(title: "Texts", destination: TextExampleView()),
