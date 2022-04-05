@@ -89,6 +89,8 @@ public struct Context {
     
     /// Should be called at the end of any root render operation to
     /// finalize any pending view setup.
+    /// __Important__: Prevent calling it in every update render cycle as appear operations
+    /// in the client can cause recursive updates.
     func executePostRender(preventExecutionInNextAppear: Bool = false) {
         rootController?.executeLazyConstraints()
         rootController?.executeInsertAppearHandlers(preventExecutionInNextAppear: preventExecutionInNextAppear)

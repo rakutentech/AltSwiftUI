@@ -386,6 +386,7 @@ class SwiftUILazyStackView: SwiftUIStackView {
             return
         }
         
+        let initialSubviewsCount = arrangedSubviews.count
         let lastEdge = lazyStackLastEdge
         var maxCurrentLength = viewsLengthSum
         if maxCurrentLength < lastEdge && bounds.size == .zero {
@@ -409,7 +410,9 @@ class SwiftUILazyStackView: SwiftUIStackView {
         }
         viewsLengthSum = maxCurrentLength
         
-        lastContext.executePostRender()
+        if initialSubviewsCount != arrangedSubviews.count {
+            lastContext.executePostRender()
+        }
     }
     
     /// Updates loaded views and insert views if resulting content size
