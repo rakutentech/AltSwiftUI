@@ -358,6 +358,9 @@ extension List: Renderable {
             view.estimatedRowHeight = rowHeight
         }
         view.showsVerticalScrollIndicator = showsIndicators
+        if #available(iOS 15.0, *) {
+            view.sectionHeaderTopPadding = 0.0
+        }
         return delegate
     }
     
