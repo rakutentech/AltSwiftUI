@@ -16,6 +16,8 @@ class AltShapeView: UIView {
     var lastSizeFromViewUpdate: CGSize = .zero
     var strokeColor: UIColor?
     var fillColor: UIColor?
+    var overrideIntrinsicContentSize = false
+    var pathBoundingBox = CGRect.zero
     
     init() {
         super.init(frame: .zero)
@@ -44,6 +46,17 @@ class AltShapeView: UIView {
     
     private func setupLayer() {
         layer.addSublayer(caShapeLayer)
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        if overrideIntrinsicContentSize {
+            return CGSize(
+                width: pathBoundingBox.width + (2 * pathBoundingBox.origin.x),
+                height: pathBoundingBox.height + (2 * pathBoundingBox.origin.y)
+            )
+        }
+        return super.intrinsicContentSize
+        
     }
 }
 
