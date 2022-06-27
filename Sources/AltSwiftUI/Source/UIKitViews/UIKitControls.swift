@@ -82,6 +82,9 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
     init() {
         super.init(frame: .zero)
         self.delegate = self
+        
+        addTarget(self, action: #selector(Self.textFieldDidChange(_:)), for: .editingChanged)
+        
         setupView()
     }
     required init?(coder: NSCoder) {
@@ -143,9 +146,15 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
         let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
         if let text = newText, textBinding?.wrappedValue != text {
             lastWrittenText = text
-            setBindingText(text)
         }
-        return textBinding?.wrappedValue == newText
+        return true
+    }
+    
+    // MARK: Text change handling
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        setBindingText(text)
     }
 }
 
