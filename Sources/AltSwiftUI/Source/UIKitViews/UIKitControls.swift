@@ -82,6 +82,9 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
     init() {
         super.init(frame: .zero)
         self.delegate = self
+        
+        addTarget(self, action: #selector(Self.textFieldDidChange(_:)), for: .editingChanged)
+        
         setupView()
     }
     required init?(coder: NSCoder) {
@@ -107,6 +110,10 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
     private func setBindingText(_ text: String) {
+        guard lastWrittenText != text else { return }
+        
+        lastWrittenText = textBinding?.wrappedValue ?? ""
+        
         if let value = value, let formatter = formatter {
             var object: AnyObject?
             formatter.getObjectValue(&object, for: text, errorDescription: nil)
@@ -124,28 +131,20 @@ class SwiftUITextField<T>: UITextField, UITextFieldDelegate, UIKitViewHandler {
         onCommit?()
         return true
     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         firstResponder?.wrappedValue = true
         onEditingChanged?(true)
     }
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        // ios 12 will not call shouldChangeCharactersIn func when select word candidate.
-        // so make sure update binding text here
-        if let text = text, textBinding?.wrappedValue != text {
-            lastWrittenText = text
-            setBindingText(text)
-        }
-        
         firstResponder?.wrappedValue = false
         onEditingChanged?(false)
     }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-        if let text = newText, textBinding?.wrappedValue != text {
-            lastWrittenText = text
-            setBindingText(text)
-        }
-        return textBinding?.wrappedValue == newText
+    
+    // MARK: Text change handling
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        setBindingText(textField.text ?? "")
     }
 }
 
@@ -246,7 +245,7 @@ class SwiftUISegmentedControl: UISegmentedControl, UIKitViewHandler {
     
     @objc private func valueChanged() {
         selectionBinding.wrappedValue = selectedSegmentIndex
-    } 
+    }
 }
 
 class SwiftUIDatePicker: UIDatePicker, UIKitViewHandler {
